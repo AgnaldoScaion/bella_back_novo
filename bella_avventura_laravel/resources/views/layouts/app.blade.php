@@ -1,80 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <title>@yield('title') - Bella Avventura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @yield('styles')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+    <div class="wrapper">
+        <!-- Header -->
+        <div class="top-header">
+            <div class="menu-icon">☰</div>
+            <div class="user-header">
+                <span>👤</span> {{ auth()->check() ? auth()->user()->nome_perfil : 'Visitante' }}
             </div>
-        </nav>
+        </div>
 
-        <main class="py-4">
+        <div class="header">
+            <div class="header-img">
+                <a href="{{ route('home') }}">
+                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating"/>
+                </a>
+            </div>
+        </div>
+
+        <!-- Menu -->
+        @if(auth()->check())
+            @include('components.menu-logado')
+        @else
+            @include('components.menu-nao-logado')
+        @endif
+
+        <!-- Notificação -->
+        <div id="notification" class="notification {{ session('success') ? 'success' : ($errors->any() ? 'error' : '') }} {{ session('success') || $errors->any() ? 'show' : '' }}">
+            @if(session('success'))
+                {{ session('success') }}
+            @elseif($errors->any())
+                @foreach($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
+            @endif
+        </div>
+
+        <!-- Conteúdo -->
+        <main class="main-content">
             @yield('content')
         </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-top">
+                <a href="https://www.bellaavventura.com.br/">
+                    <img src="https://i.ibb.co/j9vGknyy/image.png" alt="Bella Avventura">
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-left">
+                    <a href="mailto:bella.avventura@gmail.com">📧 bella.avventura@gmail.com</a>
+                </div>
+                <div class="footer-center">© 2025 Bella Avventura</div>
+                <div class="footer-right">
+                    <a href="{{ route('termos') }}">Termos e condições</a>
+                </div>
+            </div>
+        </footer>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle menu
+            const menuIcon = document.querySelector('.menu-icon');
+            const menu = document.querySelector('.menu-box');
+            if (menu && menuIcon) {
+                menuIcon.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                    menu.classList.toggle('visible');
+                });
+            }
+
+            // Exibir notificação por 3 segundos
+            const notification = document.getElementById('notification');
+            if (notification && notification.textContent.trim()) {
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+    @yield('scripts')
 </body>
 </html>

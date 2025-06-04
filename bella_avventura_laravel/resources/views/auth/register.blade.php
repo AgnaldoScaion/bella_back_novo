@@ -444,60 +444,71 @@
         </footer>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Máscara para CPF
-            const cpfInput = document.getElementById('cpf');
-            if (cpfInput) {
-                cpfInput.addEventListener('input', function (e) {
-                    let value = e.target.value.replace(/\D/g, '');
-                    if (value.length > 11) {
-                        value = value.substring(0, 11);
-                    }
-                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                    e.target.value = value;
-                });
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cpfInput = document.getElementById('cpf');
+        const cpfErrorMsg = document.getElementById('cpf-error-msg');
 
-                cpfInput.addEventListener('blur', function (e) {
-                    const errorMsgId = 'cpf-error-msg';
-                    let errorMsg = document.getElementById(errorMsgId);
-                    if (!errorMsg) {
-                        errorMsg = document.createElement('span');
-                        errorMsg.id = errorMsgId;
-                        errorMsg.className = 'error';
-                        cpfInput.parentNode.appendChild(errorMsg);
-                    }
-                    const digits = cpfInput.value.replace(/\D/g, '');
-                    if (digits.length > 0 && digits.length < 11) {
-                        errorMsg.textContent = 'O CPF deve conter 11 números.';
-                    } else {
-                        errorMsg.textContent = '';
-                    }
-                });
+        if (cpfInput) {
+            // Aplicar máscara
+            cpfInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.substring(0, 11);
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = value;
+
+                // Validar em tempo real
+                validateCPF(value);
+            });
+
+            // Validação ao perder foco
+            cpfInput.addEventListener('blur', function (e) {
+                validateCPF(e.target.value);
+            });
+
+            function validateCPF(value) {
+                const digits = value.replace(/\D/g, '');
+                if (digits.length === 0) {
+                    cpfErrorMsg.textContent = 'O CPF é obrigatório.';
+                    return false;
+                }
+                if (digits.length !== 11) {
+                    cpfErrorMsg.textContent = 'O CPF deve conter 11 números.';
+                    return false;
+                }
+                if (!isValidCPF(digits)) {
+                    cpfErrorMsg.textContent = 'CPF inválido.';
+                    return false;
+                }
+                cpfErrorMsg.textContent = '';
+                return true;
             }
 
-            // Toggle menu
-            const menuIcon = document.querySelector('.menu-icon');
-            const menu = document.getElementById('menu-nao-logado');
+            function isValidCPF(cpf) {
+                if (/^(\d)\1{10}$/.test(cpf)) return false; // Evita CPFs como 11111111111
 
-            if (menu && menuIcon) {
-                menuIcon.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                    menu.classList.toggle('visible');
-                });
-            }
+                // Primeiro dígito verificador
+                let sum = 0;
+                for (let i = 0; i < 9; i++) {
+                    sum += parseInt(cpf[i]) * (10 - i);
+                }
+                let digit1 = (sum * 10) % 10;
+                digit1 = digit1 === 10 ? 0 : digit1;
+                if (digit1 !== parseInt(cpf[9])) return false;
 
-            // Exibir notificação
-            const notification = document.getElementById('notification');
-            if (notification && notification.textContent.trim()) {
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
+                // Segundo dígito verificador
+                sum = 0;
+                for (let i = 0; i < 10; i++) {
+                    sum += parseInt(cpf[i]) * (11 - i);
+                }
+                let digit2 = (sum * 10) % 10;
+                digit2 = digit2 === 10 ? 0 : digit2;
+                return digit2 === parseInt(cpf[10]);
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>

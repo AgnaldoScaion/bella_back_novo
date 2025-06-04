@@ -1,11 +1,11 @@
 <div id="menu-nao-logado" class="menu-box hidden">
     <div class="menu-lateral"></div>
     <div class="menu-conteudo">
-        <h2>MENU</h2>
+        <h2>Menu</h2>
         <ul>
-            <li><a href="{{ route('register') }}">Fazer cadastro</a></li>
-            <li><a href="{{ route('login') }}">Logar na conta</a></li>
-            <li><a href="{{ route('sobre-nos') }}">Sobre nós</a></li>
+            <li><a href="{{ route('login') }}">Login</a></li>
+            <li><a href="{{ route('register') }}">Cadastro</a></li>
+            <li><a href="{{ route('home') }}">Início</a></li>
         </ul>
     </div>
 </div>
