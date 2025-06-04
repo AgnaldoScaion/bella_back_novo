@@ -7,8 +7,8 @@ class Usuario {
     public $id_usuario;
     public $nome_completo;
     public $data_nascimento;
-    public $CPF;
-    public $e_mail;
+    public $cpf;
+    public $email;
     public $senha;
     public $nome_perfil;
 
@@ -19,13 +19,12 @@ class Usuario {
 
     public function save() {
         try {
-            $query = "INSERT INTO " . $this->table_name . " (nome_completo, data_nascimento, CPF, e_mail, senha, nome_perfil) 
-                      VALUES (:nome_completo, :data_nascimento, :CPF, :e_mail, :senha, :nome_perfil)";
+            $query = "INSERT INTO {$this->table_name} (nome_completo, data_nascimento, cpf, email, senha, nome_perfil) \r\n                      VALUES (:nome_completo, :data_nascimento, :cpf, :email, :senha, :nome_perfil)";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':nome_completo', $this->nome_completo);
             $stmt->bindParam(':data_nascimento', $this->data_nascimento);
-            $stmt->bindParam(':CPF', $this->CPF);
-            $stmt->bindParam(':e_mail', $this->e_mail);
+            $stmt->bindParam(':cpf', $this->cpf);
+            $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':senha', $this->senha);
             $stmt->bindParam(':nome_perfil', $this->nome_perfil);
             return $stmt->execute();

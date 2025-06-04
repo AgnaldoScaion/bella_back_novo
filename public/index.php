@@ -37,25 +37,24 @@ foreach ($controllers as $controller) {
 }
 
 // Função para gerar e verificar tokens CSRF
-function generateCsrfToken() {
+function generateCsrfToken()
+{
     if (!isset($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
     return $_SESSION['csrf_token'];
 }
 
-function verifyCsrfToken($token) {
+function verifyCsrfToken($token)
+{
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
 
-// Depurar URL
-$rawRequest = $_SERVER['REQUEST_URI'];
-error_log("Raw REQUEST_URI: $rawRequest");
-
 // Normalizar URL
 $basePath = '/bella_back_novo/public/';
+$rawRequest = $_SERVER['REQUEST_URI'];
 $request = parse_url($rawRequest, PHP_URL_PATH);
-$request = str_replace($basePath, '/', $request);
+$request = str_replace($basePath, '', $request);
 $request = rtrim($request, '/') . '/';
 error_log("Normalized Request: $request");
 
@@ -69,20 +68,18 @@ if (!$database->getConnection()) {
 // Roteamento
 try {
     switch ($request) {
-        // Página inicial
         case '/':
-        case '/bella_back_novo/public/':
             error_log("Rota: Página inicial (UsuarioController::showForm)");
             $controller = new UsuarioController();
             $controller->showForm();
             break;
 
-        // Usuário
         case '/usuario_form/':
             error_log("Rota: usuario_form");
             $controller = new UsuarioController();
             $controller->showForm();
             break;
+
         case '/save-usuario/':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 error_log("Rota: save-usuario");
@@ -96,6 +93,7 @@ try {
                 throw new Exception("Método HTTP inválido para save-usuario: " . $_SERVER['REQUEST_METHOD']);
             }
             break;
+
         case '/list-usuario/':
             error_log("Rota: list-usuario");
             $controller = new UsuarioController();
@@ -390,4 +388,4 @@ try {
     error_log("Erro no index.php: " . $e->getMessage());
     http_response_code(500);
     echo "Erro interno do servidor: " . htmlspecialchars($e->getMessage());
-}   
+}
