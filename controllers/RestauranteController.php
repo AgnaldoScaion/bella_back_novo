@@ -1,6 +1,13 @@
 <?php
 require_once '../models/restaurante.php';
 
+class RestauranteController {
+    public function showForm() {
+        session_start();
+        require_once '../views/restaurante.php';
+    }
+}
+
 // Listar restaurantes
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listar') {
     $restaurante = new Restaurante();
