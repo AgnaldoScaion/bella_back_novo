@@ -1,55 +1,53 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Usuario;
-use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
+    use AuthenticatesUsers;
+
+    protected $redirectTo = '/';
+
+    public function __construct()
     {
-        return view('auth.login');
+        $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
+    protected function validateLogin(Request $request)
     {
         $request->validate([
-            'cpf' => 'required|string|max:14',
-            'senha' => 'required|string',
+            'cpf' => 'required|string',
+            'password' => 'required|string',
         ], [
-            'cpf.required' => 'O CPF é obrigatório.',
-            'senha.required' => 'A senha é obrigatória.',
+            'cpf.required' => 'O campo CPF é obrigatório.',
+            'password.required' => 'O campo senha é obrigatório.',
         ]);
-
-        $cpf = preg_replace('/\D/', '', $request->cpf);
-        Log::debug('Tentativa de login com CPF: ' . $cpf);
-
-        if (strlen($cpf) !== 11) {
-            Log::warning('CPF com tamanho inválido: ' . $cpf);
-            return back()->withErrors(['cpf' => 'O CPF deve conter 11 dígitos.']);
-        }
-
-        $user = Usuario::where('CPF', $cpf)->first();
-
-        if ($user && Hash::check($request->senha, $user->senha)) {
-            Auth::login($user);
-            Log::info('Login bem-sucedido para usuário: ' . $user->e_mail);
-            return redirect()->route('home')->with('success', 'Login realizado com sucesso!');
-        }
-
-        Log::warning('Falha no login para CPF: ' . $cpf);
-        return back()->withErrors(['cpf' => 'CPF ou senha incorretos.']);
     }
 
-    public function logout(Request $request)
+    protected function credentials(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('home')->with('success', 'Logout realizado com sucesso!');
+        return [
+            'cpf' => $request->cpf,
+            'password' => $request->password,
+        ];
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $user = \App\Models\User::where('cpf', $request->cpf)->first();
+
+        $error = $user
+            ? 'Senha incorreta.'
+            : 'CPF inexistente.';
+
+        return redirect()->route('login')
+            ->withInput($request->only('cpf'))
+            ->withErrors([
+                'cpf' => $error,
+            ]);
     }
 }

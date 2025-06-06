@@ -19,6 +19,11 @@ Route::get('/termos', function () {
     return view('termos');
 })->name('termos');
 
+Route::get('/sobre-nos', function () {
+    return view('sobre-nos');
+})->name('sobre-nos');
+
 Route::get('/password/reset', function () {
     return view('auth.passwords.email');
 })->name('password.request');
+

@@ -1,0 +1,5 @@
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+
+basta copiar e colar no terminal para executar uma "rapida" limpeza para melhor atribuição dos arquivos

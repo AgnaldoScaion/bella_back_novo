@@ -6,7 +6,7 @@
     <title>Sobre Nós - Bella Avventura</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzjv/image.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
     <style>
         * {
             margin: 0;
@@ -267,7 +267,7 @@
         <div class="header">
             <div class="header-img">
                 <a href="{{ route('home') }}">
-                    <img src="https://i.ibb.co/Q7T008b/image.png" alt="Logo" class="floating" />
+                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating"/>
                 </a>
             </div>
         </div>
@@ -339,7 +339,7 @@
         <footer class="footer">
             <div class="footer-top">
                 <a href="https://www.bellaavventura.com.br/">
-                    <img src="https://i.ibb.co/j9vGkny/image.png" alt="Logo">
+                    <img src="https://i.ibb.co/j9vGknyy/image.png" alt="Bella Avventura" border="0">
                 </a>
             </div>
             <div class="footer-bottom">

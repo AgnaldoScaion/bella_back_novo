@@ -5,6 +5,7 @@
         <ul>
             <li><a href="{{ route('login') }}">Login</a></li>
             <li><a href="{{ route('register') }}">Cadastro</a></li>
+            <li><a href="{{ route('sobre-nos') }}">Sobre nós</a></li>
             <li><a href="{{ route('home') }}">Início</a></li>
         </ul>
     </div>
