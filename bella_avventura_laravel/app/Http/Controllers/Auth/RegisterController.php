@@ -38,11 +38,12 @@ class RegisterController extends Controller
                     // Primeiro dígito verificador
                     $sum = 0;
                     for ($i = 0; $i < 9; $i++) {
-                        $sum += (int)$digits[$i] * (10 - i);
+                        $sum += (int)$digits[$i] * (10 - $i);
                     }
                     $remainder = (10 * $sum) % 11;
-                    $digit1 = ($remainder >= 10) ? 0 : $remainder;
-                    if ($digit1 != $digits[9]) {
+                    if ($remainder === 10) $remainder = 0;
+                    Log::debug('Primeiro dígito verificador: ' . $remainder . ', Esperado: ' . $digits[9]);
+                    if ($remainder != $digits[9]) {
                         Log::warning('Primeiro dígito inválido: ' . $digits);
                         $fail('CPF inválido.');
                         return;
@@ -53,8 +54,9 @@ class RegisterController extends Controller
                         $sum += (int)$digits[$i] * (11 - $i);
                     }
                     $remainder = (10 * $sum) % 11;
-                    $digit2 = ($remainder >= 10) ? 0 : $remainder;
-                    if ($digit2 != $digits[10]) {
+                    if ($remainder === 10) $remainder = 0;
+                    Log::debug('Segundo dígito verificador: ' . $remainder . ', Esperado: ' . $digits[10]);
+                    if ($remainder != $digits[10]) {
                         Log::warning('Segundo dígito inválido: ' . $digits);
                         $fail('CPF inválido.');
                         return;
@@ -93,7 +95,7 @@ class RegisterController extends Controller
             ]);
 
             Log::info('Usuário cadastrado com sucesso: ' . $request->email);
-            return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso!');
+            return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Faça login.');
         } catch (\Exception $e) {
             Log::error('Erro ao cadastrar usuário: ' . $e->getMessage());
             return back()->withErrors(['cpf' => 'Erro ao salvar o cadastro. Tente novamente.']);
