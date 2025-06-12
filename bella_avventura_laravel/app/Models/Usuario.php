@@ -10,7 +10,7 @@ class Usuario extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'nome_completo', 'CPF', 'e_mail', 'senha', 'nome_perfil'
+        'nome_completo', 'cpf', 'e_mail', 'senha', 'nome_perfil'
     ];
 
     protected $hidden = [
@@ -21,4 +21,4 @@ class Usuario extends Authenticatable
     {
         return $this->senha;
     }
-}   
+}

@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
 
     public function __construct()
     {
@@ -19,35 +20,55 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
+        Log::debug('Dados recebidos no login: ' . json_encode($request->all()));
+
         $request->validate([
-            'cpf' => 'required|string',
+            'CPF' => 'required|string',
             'password' => 'required|string',
         ], [
-            'cpf.required' => 'O campo CPF é obrigatório.',
+            'CPF.required' => 'O campo CPF é obrigatório.',
             'password.required' => 'O campo senha é obrigatório.',
         ]);
     }
 
     protected function credentials(Request $request)
     {
+        $cpf = preg_replace('/\D/', '', $request->CPF); // Remove pontos e traços
+        Log::debug('CPF formatado para autenticação: ' . $cpf);
         return [
-            'cpf' => $request->cpf,
+            'CPF' => $cpf,
             'password' => $request->password,
         ];
     }
 
     protected function sendFailedLoginResponse(Request $request)
     {
-        $user = \App\Models\User::where('cpf', $request->cpf)->first();
+        $cpf = preg_replace('/\D/', '', $request->CPF);
+        Log::debug('Tentativa de login com CPF: ' . $cpf);
+        $user = \App\Models\Usuario::where('CPF', $cpf)->first();
 
         $error = $user
             ? 'Senha incorreta.'
             : 'CPF inexistente.';
 
+        Log::warning('Falha no login: ' . $error . ' para CPF: ' . $cpf);
+
         return redirect()->route('login')
-            ->withInput($request->only('cpf'))
+            ->withInput($request->only('CPF'))
             ->withErrors([
-                'cpf' => $error,
+                'CPF' => $error,
             ]);
+    }
+
+    public function username()
+    {
+        Log::debug('Campo de autenticação definido como: CPF');
+        return 'CPF';
+    }
+
+    protected function redirectTo()
+    {
+        Log::debug('Redirecionando após login para: /home');
+        return '/home';
     }
 }
