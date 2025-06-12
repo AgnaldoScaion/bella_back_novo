@@ -16,9 +16,11 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        Log::debug('Dados recebidos no request: ' . json_encode($request->all()));
+
         $request->validate([
             'nome_completo' => 'required|string|max:100',
-            'cpf' => [
+            'CPF' => [
                 'required',
                 'string',
                 'max:14',
@@ -72,7 +74,7 @@ class RegisterController extends Controller
             'senha' => 'required|string|min:8|confirmed',
         ], [
             'nome_completo.required' => 'O nome completo é obrigatório.',
-            'cpf.required' => 'O CPF é obrigatório.',
+            'CPF.required' => 'O CPF é obrigatório.',
             'email.required' => 'O email é obrigatório.',
             'email.email' => 'O email deve ser válido.',
             'email.unique' => 'Este email já está cadastrado.',
@@ -84,7 +86,7 @@ class RegisterController extends Controller
         $nome_perfil = explode(' ', $request->nome_completo)[0];
 
         try {
-            $cpfDigits = preg_replace('/\D/', '', $request->cpf);
+            $cpfDigits = preg_replace('/\D/', '', $request->CPF);
             Log::info('Tentando salvar usuário com CPF: ' . $cpfDigits);
             Usuario::create([
                 'nome_completo' => $request->nome_completo,
@@ -98,7 +100,7 @@ class RegisterController extends Controller
             return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Faça login.');
         } catch (\Exception $e) {
             Log::error('Erro ao cadastrar usuário: ' . $e->getMessage());
-            return back()->withErrors(['cpf' => 'Erro ao salvar o cadastro. Tente novamente.']);
+            return back()->withErrors(['CPF' => 'Erro ao salvar o cadastro. Tente novamente.']);
         }
     }
 }

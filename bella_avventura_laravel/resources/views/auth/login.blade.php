@@ -245,21 +245,21 @@
             <form method="POST" action="{{ route('login') }}" id="login-form">
                 @csrf
                 <div class="form-group">
-                    <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" name="cpf" value="{{ old('cpf') }}" placeholder="000.000.000-00" maxlength="14" required>
-                    @error('cpf')
+                    <label for="CPF">CPF</label>
+                    <input type="text" id="CPF" name="CPF" value="{{ old('CPF') }}" placeholder="000.000.000-00" maxlength="14" required>
+                    @error('CPF')
                         <span class="error">{{ $message }}</span>
                     @enderror
                     <span id="cpf_error" class="error"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
-                    @error('senha')
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                    @error('password')
                         <span class="error">{{ $message }}</span>
                     @enderror
-                    <span id="senha_error" class="error"></span>
+                    <span id="password_error" class="error"></span>
                 </div>
 
                 <a href="{{ route('password.request') }}" class="forgot-password">Esqueci minha senha</a>
@@ -275,7 +275,7 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const cpfInput = document.getElementById('cpf');
+        const cpfInput = document.getElementById('CPF');
         const cpfError = document.getElementById('cpf_error');
 
         if (cpfInput) {
