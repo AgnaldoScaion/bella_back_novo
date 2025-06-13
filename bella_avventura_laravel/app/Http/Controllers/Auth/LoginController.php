@@ -71,4 +71,24 @@ class LoginController extends Controller
         Log::debug('Redirecionando após login para: /home');
         return '/home';
     }
+
+    public function logout(Request $request)
+    {
+        Log::debug('Iniciando processo de logout para usuário: ' . (auth()->check() ? auth()->user()->CPF : 'Nenhum usuário autenticado'));
+
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        Log::info('Logout realizado com sucesso, redirecionando para: /');
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+    protected function loggedOut(Request $request)
+    {
+        // Método opcional para personalizar o redirecionamento após logout
+        Log::debug('Método loggedOut chamado');
+        return null;
+    }
 }

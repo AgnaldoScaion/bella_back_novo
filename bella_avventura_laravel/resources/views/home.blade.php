@@ -104,69 +104,67 @@
     /* Menu Styles */
     .menu-box {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 300px;
-        height: 100vh;
-        background: linear-gradient(135deg, var(--primary-bg) 0%, var(--border-color) 100%);
-        box-shadow: var(--shadow-strong);
-        z-index: 1000;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: translateX(-100%);
-        display: flex;
-        flex-direction: column;
+        top: 50px;
+        left: 20px;
+        background-color: #d6e3d6;
+        border-radius: 8px;
         padding: 20px;
-    }
-
-    .menu-box.visible {
-        transform: translateX(0);
-    }
-
-    .menu-logo {
-        text-align: center;
-        padding: 20px 0;
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 20px;
-    }
-
-    .menu-logo img {
-        max-width: 80px;
-        height: auto;
-    }
-
-    .menu-content {
-        flex: 1;
-        overflow-y: auto;
-    }
-
-    .menu-list {
-        list-style: none;
-    }
-
-    .menu-list li {
-        margin-bottom: 10px;
-    }
-
-    .menu-list a {
+        width: 260px;
         display: flex;
-        align-items: center;
-        padding: 12px 15px;
-        color: var(--text-dark);
+        gap: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-family: 'Garamond', serif;
+        z-index: 1000;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .menu-lateral {
+        background-color: #88b68b;
+        width: 24px;
+        border-radius: 8px;
+    }
+
+    .menu-conteudo {
+        flex: 1;
+    }
+
+    .menu-conteudo h2 {
+        font-size: 20px;
+        margin: 0;
+        border-bottom: 1px solid #999;
+        padding-bottom: 10px;
+    }
+
+    .menu-conteudo ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+    }
+
+    .menu-conteudo li {
+        margin: 15px 0;
+    }
+
+    .menu-conteudo a {
         text-decoration: none;
-        border-radius: var(--border-radius-small);
-        transition: var(--transition-smooth);
+        color: black;
+        transition: color 0.2s;
     }
 
-    .menu-list a:hover {
-        background-color: var(--accent-color);
-        color: var(--text-dark);
-        transform: translateX(5px);
+    .menu-conteudo a:hover {
+        color: #3a6545;
     }
 
-    .menu-list a i {
-        margin-right: 12px;
-        width: 20px;
-        text-align: center;
+    .hidden {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     /* Main Content */
@@ -593,10 +591,6 @@
             padding: 2rem;
         }
 
-        .menu-box {
-            width: 280px;
-        }
-
         .footer-bottom {
             flex-direction: column;
             text-align: center;
@@ -649,7 +643,7 @@
             <h1>Planeje sua viagem perfeita</h1>
             <p>Descubra os melhores restaurantes e pontos turísticos baseados na sua localização, avalie suas experiências e ganhe descontos para suas próximas aventuras!</p>
             @auth
-                <a href="{{ route('destinations') }}" class="btn">
+                <a href="{{ route('destinos') }}" class="btn">
                     <i class="fas fa-compass"></i>
                     Explorar Destinos
                 </a>

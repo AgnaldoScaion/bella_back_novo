@@ -278,7 +278,7 @@
 
                 <button type="submit" class="cadastro-button">Cadastrar</button>
             </form>
-            <a href="{{ route('login') }}" class="back-button">Voltar para o Login</a>
+            <a href="{{ route('login') }}" class="back-button">Avançar para Login</a>
         </div>
     </div>
 </div>
