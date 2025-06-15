@@ -5,3 +5,9 @@ php artisan view:clear
 
 
 basta copiar e colar no terminal para executar uma "rapida" limpeza para melhor atribuição dos arquivos
+
+php artisan view:clear
+php artisan cache:clear
+composer dump-autoload
+
+limpar o cache

@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -16,9 +17,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        Log::debug('Dados recebidos no request: ' . json_encode($request->all()));
-
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome_completo' => 'required|string|max:100',
             'CPF' => [
                 'required',
@@ -26,81 +25,78 @@ class RegisterController extends Controller
                 'max:14',
                 function ($attribute, $value, $fail) {
                     $digits = preg_replace('/\D/', '', $value);
-                    Log::debug('CPF recebido: ' . $value . ', Dígitos: ' . $digits);
+
                     if (strlen($digits) !== 11) {
-                        Log::warning('CPF com tamanho inválido: ' . $digits);
                         $fail('O CPF deve conter 11 dígitos.');
                         return;
                     }
+
                     if (preg_match('/^(\d)\1{10}$/', $digits)) {
-                        Log::warning('CPF repetitivo: ' . $digits);
                         $fail('CPF inválido.');
                         return;
                     }
-                    // Primeiro dígito verificador
+
+                    // Cálculo do primeiro dígito verificador
                     $sum = 0;
                     for ($i = 0; $i < 9; $i++) {
                         $sum += (int)$digits[$i] * (10 - $i);
                     }
-                    $remainder = (10 * $sum) % 11;
+                    $remainder = ($sum * 10) % 11;
                     if ($remainder === 10) $remainder = 0;
-                    Log::debug('Primeiro dígito verificador: ' . $remainder . ', Esperado: ' . $digits[9]);
+
                     if ($remainder != $digits[9]) {
-                        Log::warning('Primeiro dígito inválido: ' . $digits);
                         $fail('CPF inválido.');
                         return;
                     }
-                    // Segundo dígito verificador
+
+                    // Cálculo do segundo dígito verificador
                     $sum = 0;
                     for ($i = 0; $i < 10; $i++) {
                         $sum += (int)$digits[$i] * (11 - $i);
                     }
-                    $remainder = (10 * $sum) % 11;
+                    $remainder = ($sum * 10) % 11;
                     if ($remainder === 10) $remainder = 0;
-                    Log::debug('Segundo dígito verificador: ' . $remainder . ', Esperado: ' . $digits[10]);
+
                     if ($remainder != $digits[10]) {
-                        Log::warning('Segundo dígito inválido: ' . $digits);
                         $fail('CPF inválido.');
                         return;
                     }
-                    // Verificar unicidade
-                    if (Usuario::where('CPF', $digits)->exists()) {
-                        Log::warning('CPF já cadastrado: ' . $digits);
+
+                    if (User::where('CPF', $digits)->exists()) {
                         $fail('Este CPF já está cadastrado.');
                     }
                 },
             ],
-            'email' => 'required|email|max:100|unique:usuario,e_mail',
-            'senha' => 'required|string|min:8|confirmed',
+            'email' => 'required|email|max:100|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
         ], [
             'nome_completo.required' => 'O nome completo é obrigatório.',
             'CPF.required' => 'O CPF é obrigatório.',
             'email.required' => 'O email é obrigatório.',
             'email.email' => 'O email deve ser válido.',
             'email.unique' => 'Este email já está cadastrado.',
-            'senha.required' => 'A senha é obrigatória.',
-            'senha.min' => 'A senha deve ter pelo menos 8 caracteres.',
-            'senha.confirmed' => 'As senhas não coincidem.',
+            'password.required' => 'A senha é obrigatória.',
+            'password.min' => 'A senha deve ter pelo menos 8 caracteres.',
+            'password.confirmed' => 'As senhas não coincidem.',
         ]);
 
-        $nome_perfil = explode(' ', $request->nome_completo)[0];
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         try {
-            $cpfDigits = preg_replace('/\D/', '', $request->CPF);
-            Log::info('Tentando salvar usuário com CPF: ' . $cpfDigits);
-            Usuario::create([
+            User::create([
                 'nome_completo' => $request->nome_completo,
-                'CPF' => $cpfDigits,
-                'e_mail' => $request->email,
-                'senha' => Hash::make($request->senha),
-                'nome_perfil' => $nome_perfil,
+                'CPF' => $request->CPF,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
             ]);
 
-            Log::info('Usuário cadastrado com sucesso: ' . $request->email);
             return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Faça login.');
         } catch (\Exception $e) {
-            Log::error('Erro ao cadastrar usuário: ' . $e->getMessage());
-            return back()->withErrors(['CPF' => 'Erro ao salvar o cadastro. Tente novamente.']);
+            return back()->with('error', 'Erro ao cadastrar usuário: ' . $e->getMessage());
         }
     }
 }

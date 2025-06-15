@@ -321,27 +321,14 @@
     }
 
     @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
     @keyframes fadeOut {
-        0% {
-            opacity: 1;
-        }
-
-        80% {
-            opacity: 1;
-        }
-
-        100% {
-            opacity: 0;
-        }
+        0% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { opacity: 0; }
     }
 
     @keyframes fadeInUp {
@@ -349,7 +336,6 @@
             opacity: 0;
             transform: translateY(20px);
         }
-
         to {
             opacity: 1;
             transform: translateY(0);
@@ -411,47 +397,47 @@
     <!-- Filtros -->
     <div class="filtros-container">
         <h3>Filtros</h3>
-        <form class="filtros-form">
+        <form class="filtros-form" id="filtros-form">
             <div class="filtro-grupo">
                 <label for="tipo-cozinha">Tipo de Cozinha</label>
-                <select id="tipo-cozinha">
+                <select id="tipo-cozinha" name="tipo">
                     <option value="">Todas</option>
                     @foreach($tiposCozinha as $tipo)
-                        <option value="{{ $tipo }}">{{ $tipo }}</option>
+                        <option value="{{ $tipo }}" {{ request('tipo') == $tipo ? 'selected' : '' }}>{{ $tipo }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="filtro-grupo">
                 <label for="preco">Faixa de Preço</label>
-                <select id="preco">
+                <select id="preco" name="preco">
                     <option value="">Todos</option>
-                    <option value="$">$ - Econômico</option>
-                    <option value="$$">$$ - Moderado</option>
-                    <option value="$$$">$$$ - Premium</option>
+                    <option value="$" {{ request('preco') == '$' ? 'selected' : '' }}>$ - Econômico</option>
+                    <option value="$$" {{ request('preco') == '$$' ? 'selected' : '' }}>$$ - Moderado</option>
+                    <option value="$$$" {{ request('preco') == '$$$' ? 'selected' : '' }}>$$$ - Premium</option>
                 </select>
             </div>
             <div class="filtro-grupo">
                 <label for="avaliacao">Avaliação Mínima</label>
-                <select id="avaliacao">
+                <select id="avaliacao" name="avaliacao">
                     <option value="">Qualquer</option>
-                    <option value="3">3+ Estrelas</option>
-                    <option value="4">4+ Estrelas</option>
-                    <option value="4.5">4.5+ Estrelas</option>
+                    <option value="3" {{ request('avaliacao') == '3' ? 'selected' : '' }}>3+ Estrelas</option>
+                    <option value="4" {{ request('avaliacao') == '4' ? 'selected' : '' }}>4+ Estrelas</option>
+                    <option value="4.5" {{ request('avaliacao') == '4.5' ? 'selected' : '' }}>4.5+ Estrelas</option>
                 </select>
             </div>
             <div class="filtro-grupo">
                 <label for="localizacao">Cidade</label>
-                <select id="localizacao">
+                <select id="localizacao" name="cidade">
                     <option value="">Todas</option>
                     @foreach($cidades as $cidade)
-                        <option value="{{ $cidade }}">{{ $cidade }}</option>
+                        <option value="{{ $cidade }}" {{ request('cidade') == $cidade ? 'selected' : '' }}>{{ $cidade }}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="filtro-botoes">
-                <button type="button" class="btn-filtrar">Aplicar Filtros</button>
-                <button type="button" class="btn-limpar">Limpar</button>
+                <button type="submit" class="btn-filtrar">Aplicar Filtros</button>
+                <a href="{{ route('restaurante') }}" class="btn-limpar">Limpar</a>
             </div>
         </form>
     </div>
@@ -488,7 +474,7 @@
                     </div>
                     <div class="restaurante-footer">
                         <a href="{{ route('reservas.create', $restaurante->id) }}" class="btn-reservar">Reservar Mesa</a>
-                        <a href="{{ route('restaurantes.show', $restaurante->id) }}" class="btn-ver-mais">Ver Detalhes</a>
+                        <a href="{{ route('restaurante', $restaurante->id) }}" class="btn-ver-mais">Ver Detalhes</a>
                     </div>
                 </div>
             </div>
@@ -543,9 +529,13 @@
                 .bindPopup(`<b>{{ $restaurante->nome }}</b><br>{{ $restaurante->endereco }}`);
         @endforeach
 
-        // Configura os botões de filtro
-        document.querySelector('.btn-filtrar').addEventListener('click', aplicarFiltros);
-        document.querySelector('.btn-limpar').addEventListener('click', limparFiltros);
+        // Configura o formulário de filtros
+        document.getElementById('filtros-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const params = new URLSearchParams(formData);
+            window.location.href = "{{ route('restaurante') }}?" + params.toString();
+        });
 
         // Verifica mensagem de sucesso
         @if(session('success'))
@@ -553,35 +543,11 @@
         @endif
     });
 
-    // Função para aplicar os filtros
-    function aplicarFiltros() {
-        const tipoCozinha = document.getElementById('tipo-cozinha').value;
-        const preco = document.getElementById('preco').value;
-        const avaliacao = document.getElementById('avaliacao').value;
-        const localizacao = document.getElementById('localizacao').value;
-
-        // Constrói a URL com os parâmetros de filtro
-        let url = new URL(window.location.href);
-        let params = new URLSearchParams(url.search);
-
-        if (tipoCozinha) params.set('tipo', tipoCozinha);
-        if (preco) params.set('preco', preco);
-        if (avaliacao) params.set('avaliacao', avaliacao);
-        if (localizacao) params.set('cidade', localizacao);
-
-        window.location.href = url.pathname + '?' + params.toString();
-    }
-
-    // Função para limpar os filtros
-    function limparFiltros() {
-        window.location.href = "{{ route('restaurantes.index') }}";
-    }
-
     // Função para mostrar notificações
     function showNotification(message, type) {
         const notificacao = document.getElementById('notification');
         notificacao.textContent = message;
-        notificacao.className = `notificacao ${type} show`;
+        notificacao.className = `notification ${type} show`;
 
         setTimeout(() => {
             notificacao.classList.remove('show');

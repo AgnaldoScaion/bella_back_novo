@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class RestauranteController extends Controller
 {
-    public function index(Request $request)
+    public function listar(Request $request)
     {
         $query = Restaurante::query();
 
@@ -21,18 +21,26 @@ class RestauranteController extends Controller
         }
 
         $restaurantes = $query->paginate(6);
-        $tiposCozinha = Restaurante::select('tipos')->distinct()->get()->flatMap(function($item) {
-            return json_decode($item->tipos, true);
-        })->unique()->sort();
 
-        $cidades = Restaurante::select('cidade')->distinct()->pluck('cidade');
+        $tiposCozinha = Restaurante::select('tipos')
+            ->distinct()
+            ->get()
+            ->flatMap(function($item) {
+                return json_decode($item->tipos, true);
+            })
+            ->unique()
+            ->sort();
 
-        return view('restaurantes.index', compact('restaurantes', 'tiposCozinha', 'cidades'));
+        $cidades = Restaurante::select('cidade')
+            ->distinct()
+            ->pluck('cidade');
+
+        return view('restaurante.lista', compact('restaurantes', 'tiposCozinha', 'cidades'));
     }
 
-    public function show($id)
+    public function detalhes($id)
     {
         $restaurante = Restaurante::findOrFail($id);
-        return view('restaurantes.show', compact('restaurante'));
+        return view('restaurante.detalhes', compact('restaurante'));
     }
 }

@@ -386,39 +386,43 @@
 @endsection
 
 @section('content')
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="login-container">
-            <h1 class="login-title">Login</h1>
-            <div class="login-box">
-                <form method="POST" action="{{ route('login') }}" id="login-form">
-                    @csrf
-                    <div class="form-group">
-                        <label for="CPF">CPF</label>
-                        <input type="text" id="CPF" name="CPF" value="{{ old('CPF') }}" placeholder="000.000.000-00" maxlength="14" required>
-                        @error('CPF')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                        <span id="cpf_error" class="error"></span>
-                    </div>
+<div class="main-content">
+    <div class="login-container">
+        <h1 class="login-title">Login</h1>
 
-                    <div class="form-group">
-                        <label for="password">Senha</label>
-                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-                        @error('password')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                        <span id="password_error" class="error"></span>
-                    </div>
+        @if(session('error'))
+        <div class="notification error show">
+            {{ session('error') }}
+        </div>
+        @endif
 
-                    <a href="{{ route('password.request') }}" class="forgot-password">Esqueci minha senha</a>
+        <div class="login-box">
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group">
+                    <label for="CPF">CPF</label>
+                    <input type="text" id="CPF" name="CPF" value="{{ old('CPF') }}"
+                           placeholder="000.000.000-00" maxlength="14" required>
+                    @error('CPF')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
 
-                    <button type="submit" class="login-button">Entrar</button>
-                </form>
-                <a href="{{ route('register') }}" class="back-button">Voltar para a página de Cadastro</a>
-            </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password"
+                           placeholder="Digite sua senha" required>
+                    @error('password')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <button type="submit" class="login-button">Entrar</button>
+            </form>
+            <a href="{{ route('register') }}" class="back-button">Não tem conta? Cadastre-se</a>
         </div>
     </div>
+</div>
 @endsection
 
 @section('scripts')

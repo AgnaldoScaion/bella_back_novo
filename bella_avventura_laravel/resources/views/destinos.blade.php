@@ -636,7 +636,7 @@
                         </div>
                     </div>
                     <div class="destino-action">
-                        <a href="{{ route('restaurantes.index') }}" class="btn-destino">Explorar Restaurantes</a>
+                        <a href="{{ route('restaurante.lista') }}" class="btn-destino">Explorar Restaurantes</a>
                     </div>
                 </div>
             </div>
@@ -793,7 +793,7 @@ function setupCardOverlays() {
     const overlayButtons = document.querySelectorAll('.destino-overlay-btn');
     const destinations = {
         'hoteis': '{{ route('hoteis') }}',
-        'restaurantes': '{{ route('restaurantes.index') }}',
+        'restaurantes': '{{ route('restaurante.lista') }}',
         'pontos-turisticos': '{{ route('pontos-turisticos') }}'
     };
 

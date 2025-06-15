@@ -228,6 +228,19 @@
 <div class="main-content">
     <div class="cadastro-container">
         <h1 class="cadastro-title">Cadastre-se</h1>
+
+        @if(session('success'))
+        <div class="notification success show">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="notification error show">
+            {{ session('error') }}
+        </div>
+        @endif
+
         <div class="cadastro-box">
             <form method="POST" action="{{ route('register') }}" id="registerForm">
                 @csrf
@@ -237,7 +250,6 @@
                     @error('nome_completo')
                         <span class="error">{{ $message }}</span>
                     @enderror
-                    <span id="nome_error" class="error"></span>
                 </div>
 
                 <div class="form-group">
@@ -246,7 +258,6 @@
                     @error('CPF')
                         <span class="error">{{ $message }}</span>
                     @enderror
-                    <span id="cpf_error" class="error"></span>
                 </div>
 
                 <div class="form-group">
@@ -255,25 +266,19 @@
                     @error('email')
                         <span class="error">{{ $message }}</span>
                     @enderror
-                    <span id="email_error" class="error"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required>
-                    @error('senha')
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Crie uma senha" required>
+                    @error('password')
                         <span class="error">{{ $message }}</span>
                     @enderror
-                    <span id="senha_error" class="error"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="senha_confirmation">Confirmar Senha</label>
-                    <input type="password" id="senha_confirmation" name="senha_confirmation" placeholder="Confirme a senha" required>
-                    @error('senha_confirmation')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                    <span id="senha_confirmation_error" class="error"></span>
+                    <label for="password_confirmation">Confirmar Senha</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirme a senha" required>
                 </div>
 
                 <button type="submit" class="cadastro-button">Cadastrar</button>

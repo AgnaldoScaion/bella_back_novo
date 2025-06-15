@@ -11,11 +11,15 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     protected $fillable = [
-        'name',
+        'nome_completo',
+        'CPF',
+        'nome_perfil',
         'email',
-        'cpf',
         'password',
+        'data_nascimento'
     ];
 
     protected $hidden = [
@@ -25,15 +29,16 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'CPF' => 'string',
     ];
 
-    public function getAuthIdentifierName()
+    protected static function boot()
     {
-        return 'cpf';
-    }
+        parent::boot();
 
-    public function getAuthIdentifier()
-    {
-        return $this->cpf;
+        static::creating(function ($user) {
+            $user->nome_perfil = explode(' ', $user->nome_completo)[0];
+            $user->CPF = preg_replace('/\D/', '', $user->CPF);
+        });
     }
 }

@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Restaurante extends Model
 {
+    protected $table = 'restaurante'; // Especifica o nome da tabela no singular
+    
     protected $fillable = [
         'nome',
         'tipos',

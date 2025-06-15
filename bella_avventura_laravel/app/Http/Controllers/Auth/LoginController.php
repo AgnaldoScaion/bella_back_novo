@@ -20,10 +20,8 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
-        Log::debug('Dados recebidos no login: ' . json_encode($request->all()));
-
         $request->validate([
-            'CPF' => 'required|string',
+            $this->username() => 'required|string',
             'password' => 'required|string',
         ], [
             'CPF.required' => 'O campo CPF é obrigatório.',
@@ -33,62 +31,32 @@ class LoginController extends Controller
 
     protected function credentials(Request $request)
     {
-        $cpf = preg_replace('/\D/', '', $request->CPF); // Remove pontos e traços
-        Log::debug('CPF formatado para autenticação: ' . $cpf);
         return [
-            'CPF' => $cpf,
+            'CPF' => preg_replace('/\D/', '', $request->CPF),
             'password' => $request->password,
         ];
     }
 
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        $cpf = preg_replace('/\D/', '', $request->CPF);
-        Log::debug('Tentativa de login com CPF: ' . $cpf);
-        $user = \App\Models\Usuario::where('CPF', $cpf)->first();
-
-        $error = $user
-            ? 'Senha incorreta.'
-            : 'CPF inexistente.';
-
-        Log::warning('Falha no login: ' . $error . ' para CPF: ' . $cpf);
-
-        return redirect()->route('login')
-            ->withInput($request->only('CPF'))
-            ->withErrors([
-                'CPF' => $error,
-            ]);
-    }
-
     public function username()
     {
-        Log::debug('Campo de autenticação definido como: CPF');
         return 'CPF';
     }
 
-    protected function redirectTo()
+    protected function sendFailedLoginResponse(Request $request)
     {
-        Log::debug('Redirecionando após login para: /home');
-        return '/home';
-    }
+        $errors = [$this->username() => trans('auth.failed')];
 
-    public function logout(Request $request)
-    {
-        Log::debug('Iniciando processo de logout para usuário: ' . (auth()->check() ? auth()->user()->CPF : 'Nenhum usuário autenticado'));
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
 
-        $this->guard()->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        Log::info('Logout realizado com sucesso, redirecionando para: /');
-
-        return $this->loggedOut($request) ?: redirect('/');
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
     }
 
     protected function loggedOut(Request $request)
     {
-        // Método opcional para personalizar o redirecionamento após logout
-        Log::debug('Método loggedOut chamado');
-        return null;
+        return redirect('/home'); // Redireciona para a rota raiz após logout
     }
 }
