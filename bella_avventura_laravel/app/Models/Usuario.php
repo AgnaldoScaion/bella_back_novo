@@ -1,24 +1,39 @@
 <?php
+
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Usuario extends Authenticatable
 {
-    protected $table = 'usuario';
-    protected $primaryKey = 'id_usuario';
-    public $timestamps = false;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
-        'nome_completo', 'cpf', 'e_mail', 'senha', 'nome_perfil'
+        'name',
+        'email',
+        'cpf',
+        'password',
     ];
 
     protected $hidden = [
-        'senha',
+        'password',
+        'remember_token',
     ];
 
-    public function getAuthPassword()
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function getAuthIdentifierName()
     {
-        return $this->senha;
+        return 'cpf';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->cpf;
     }
 }

@@ -5,7 +5,7 @@
         <h2>MENU <span class="user-name">{{ auth()->user()->nome_completo }}</span></h2>
         <ul>
             <li><a href="{{ route('profile.show') }}">Meu Perfil</a></li>
-            <li><a href="{{ route('restaurantes') }}">Restaurantes</a></li>
+            <li><a href="{{ route('restaurantes.index') }}">Ver Restaurantes</a></li>
             <li><a href="{{ route('hoteis') }}">Hotéis</a></li>
             <li><a href="{{ route('pontos-turisticos') }}">Pontos Turísticos</a></li>
             <li><a href="{{ route('feedbacks') }}">Meus Feedbacks</a></li>

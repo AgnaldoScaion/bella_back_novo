@@ -11,27 +11,41 @@
     }
 
     :root {
-        --primary-color: #5a8f3d;
-        --primary-light: #A7D096;
+        --primary-color: #2d5016;
+        --primary-light: #5a8f3d;
         --primary-bg: #f3f7f3;
         --accent-color: #A7D096;
-        --border-color: #D8E6D9;
-        --text-dark: #333;
-        --text-light: #fff;
-        --shadow-default: 0 4px 15px rgba(0,0,0,0.1);
-        --transition-default: all 0.3s ease;
-        --border-radius: 12px;
+        --border-color: #E5F2E5;
+        --text-dark: #1a1a1a;
+        --text-medium: #4a4a4a;
+        --text-light: #ffffff;
+        --shadow-soft: 0 2px 15px rgba(45, 80, 22, 0.08);
+        --shadow-medium: 0 8px 30px rgba(45, 80, 22, 0.12);
+        --shadow-strong: 0 15px 40px rgba(45, 80, 22, 0.18);
+        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --border-radius: 16px;
+        --border-radius-small: 8px;
     }
 
-    html, body {
+    * {
         margin: 0;
         padding: 0;
-        height: 100%;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
         font-family: 'Inter', sans-serif;
-        font-weight: 700;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: var(--primary-bg);
+        overflow-x: hidden;
         display: flex;
         flex-direction: column;
-        background-color: var(--primary-bg);
+        min-height: 100vh;
     }
 
     .wrapper {
@@ -40,6 +54,7 @@
         flex-direction: column;
     }
 
+    /* Header Styles */
     .header {
         background-color: var(--accent-color);
         position: relative;
@@ -55,7 +70,7 @@
         position: absolute;
         top: -50px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-5%);
         z-index: 1;
     }
 
@@ -83,10 +98,12 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        font-weight: 700;
     }
 
+    /* Menu Styles */
     .menu-box {
-        position: absolute;
+        position: fixed;
         top: 50px;
         left: 20px;
         background-color: #d6e3d6;
@@ -97,7 +114,7 @@
         gap: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         font-family: 'Garamond', serif;
-        z-index: 10;
+        z-index: 1000;
         transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
@@ -150,6 +167,7 @@
         pointer-events: auto;
     }
 
+    /* Main Content */
     .main-content {
         padding: 2rem;
         max-width: 1200px;
@@ -189,8 +207,8 @@
         overflow: hidden;
         width: 300px;
         border: 3px solid var(--border-color);
-        box-shadow: var(--shadow-default);
-        transition: var(--transition-default);
+        box-shadow: var(--shadow-soft);
+        transition: var(--transition-smooth);
         display: flex;
         flex-direction: column;
         animation: fadeInUp 0.8s ease forwards;
@@ -204,7 +222,7 @@
 
     .destino-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--shadow-medium);
     }
 
     .destino-img {
@@ -250,7 +268,7 @@
         border-radius: 5px;
         font-weight: bold;
         cursor: pointer;
-        transition: var(--transition-default);
+        transition: var(--transition-smooth);
         transform: translateY(20px);
         opacity: 0;
     }
@@ -320,7 +338,7 @@
         border-radius: 5px;
         font-size: 1rem;
         cursor: pointer;
-        transition: var(--transition-default);
+        transition: var(--transition-smooth);
         text-decoration: none;
         font-weight: bold;
         display: inline-block;
@@ -338,7 +356,7 @@
         background-color: white;
         border-radius: var(--border-radius);
         padding: 2rem;
-        box-shadow: var(--shadow-default);
+        box-shadow: var(--shadow-soft);
         border: 3px solid var(--border-color);
         max-width: 900px;
         margin-left: auto;
@@ -526,8 +544,8 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition: var(--transition-default);
+        box-shadow: var(--shadow-soft);
+        transition: var(--transition-smooth);
         opacity: 0;
         visibility: hidden;
         z-index: 999;
@@ -618,7 +636,7 @@
                         </div>
                     </div>
                     <div class="destino-action">
-                        <a href="{{ route('restaurantes') }}" class="btn-destino">Explorar Restaurantes</a>
+                        <a href="{{ route('restaurantes.index') }}" class="btn-destino">Explorar Restaurantes</a>
                     </div>
                 </div>
             </div>
@@ -676,7 +694,6 @@
             </ol>
         </div>
     </main>
-
 @endsection
 
 @section('scripts')
@@ -776,7 +793,7 @@ function setupCardOverlays() {
     const overlayButtons = document.querySelectorAll('.destino-overlay-btn');
     const destinations = {
         'hoteis': '{{ route('hoteis') }}',
-        'restaurantes': '{{ route('restaurantes') }}',
+        'restaurantes': '{{ route('restaurantes.index') }}',
         'pontos-turisticos': '{{ route('pontos-turisticos') }}'
     };
 
@@ -803,4 +820,3 @@ function showNotification(message, type) {
 }
 </script>
 @endsection
-

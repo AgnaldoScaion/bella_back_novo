@@ -1,7 +1,16 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RestauranteController;
+use App\Http\Controllers\DestinosController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\PontosTuristicosController;
+use App\Http\Controllers\HoteisController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UsuarioController;
 
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -46,6 +55,8 @@ Route::get('/feedbacks', function () {
 Route::get('/profile', function () {
     return view('profile.show');
 })->name('profile.show');
+
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::get('/password/reset', function () {
     return view('auth.passwords.email');
