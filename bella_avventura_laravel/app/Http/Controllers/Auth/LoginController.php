@@ -3,79 +3,39 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers;
-
-    protected $redirectTo = '/home';
-
-    public function __construct()
+    public function showLoginForm()
     {
-        $this->middleware('guest')->except('logout');
+        return view('auth.login');
     }
 
-    protected function validateLogin(Request $request)
+    public function login(Request $request)
     {
-        $request->validate([
-            $this->username() => 'required|string',
-            'password' => 'required|string',
-        ], [
-            'CPF.required' => 'O campo CPF é obrigatório.',
-            'password.required' => 'O campo senha é obrigatório.',
-        ]);
-    }
-
-    protected function credentials(Request $request)
-    {
-        return [
-            'CPF' => preg_replace('/\D/', '', $request->CPF),
-            'password' => $request->password,
-        ];
-    }
-
-    public function username()
-    {
-        return 'CPF';
-    }
-
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-
-        $this->clearLoginAttempts($request);
-
-        $user = $this->guard()->user();
-        $user->loadMissing([]); // Força o carregamento do modelo
-
-        // Armazena dados do usuário na sessão
-        $request->session()->put([
-            'user_name' => $user->nome,
-            'user_first_name' => $user->firstName
+        $credentials = $request->validate([
+            'e_mail' => 'required|email',
+            'senha' => 'required',
         ]);
 
-        return $this->authenticated($request, $user)
-                ?: redirect()->intended($this->redirectPath());
-    }
-
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        $errors = [$this->username() => trans('auth.failed')];
-
-        if ($request->expectsJson()) {
-            return response()->json($errors, 422);
+        // Autenticação personalizada
+        if (Auth::attempt(['e_mail' => $credentials['e_mail'], 'senha' => $credentials['senha']])) {
+            $request->session()->regenerate();
+            return redirect()->intended('/destinos');
         }
 
-        return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors($errors);
+        return back()->withErrors([
+            'e_mail' => 'As credenciais fornecidas não correspondem aos nossos registros.',
+        ]);
     }
 
-    protected function loggedOut(Request $request)
+    public function logout(Request $request)
     {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('/');
     }
 }

@@ -1,14 +1,42 @@
+@font-face {
+    font-family: "GaramondBold";
+    src: local("Garamond"), serif;
+    font-weight: bold;
+}
 
 @font-face {
-    font-family: 'GaramondBold';
-    src: local('Garamond'), serif;
+    font-family: "GaramondBold";
+    src: local("Garamond"), serif;
     font-weight: bold;
+}
+
+:root {
+    --primary-color: #2d5016;
+    --primary-light: #5a8f3d;
+    --primary-bg: #f3f7f3;
+    --accent-color: #a7d096;
+    --border-color: #e5f2e5;
+    --text-dark: #1a1a1a;
+    --text-medium: #4a4a4a;
+    --text-light: #ffffff;
+    --shadow-soft: 0 2px 15px rgba(45, 80, 22, 0.08);
+    --shadow-medium: 0 8px 30px rgba(45, 80, 22, 0.12);
+    --shadow-strong: 0 15px 40px rgba(45, 80, 22, 0.18);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 16px;
+    --border-radius-small: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 700;
     background-color: #f3f7f3;
 }
@@ -30,7 +58,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
-    background-color: #A7D096;
+    background-color: #a7d096;
 }
 
 .menu-icon {
@@ -43,15 +71,30 @@ body {
     transform: scale(1.1);
 }
 
+/* Adiciona estilos para o user header */
 .user-header {
-    font-size: 14px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: var(--transition-smooth);
 }
 
+.user-header:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.user-header i {
+    font-size: 16px;
+}
 .header {
-    background-color: #A7D096;
+    background-color: #a7d096;
     position: relative;
     height: 86px;
 }
@@ -73,13 +116,19 @@ body {
 }
 
 @keyframes float {
-    0% { transform: translate(-50%, 0px); }
-    50% { transform: translate(-50%, -5px); }
-    100% { transform: translate(-50%, 0px); }
+    0% {
+        transform: translate(-50%, 0px);
+    }
+    50% {
+        transform: translate(-50%, -5px);
+    }
+    100% {
+        transform: translate(-50%, 0px);
+    }
 }
 
 .footer {
-    background-color: #A7D096;
+    background-color: #a7d096;
     padding: 20px;
     color: #000;
     font-size: 14px;
@@ -109,13 +158,19 @@ body {
     gap: 10px;
 }
 
-.footer-left, .footer-center, .footer-right {
+.footer-left,
+.footer-center,
+.footer-right {
     flex: 1;
     text-align: center;
 }
 
-.footer-left { text-align: left; }
-.footer-right { text-align: right; }
+.footer-left {
+    text-align: left;
+}
+.footer-right {
+    text-align: right;
+}
 
 .footer-bottom a {
     text-decoration: underline;
@@ -146,11 +201,11 @@ body {
 }
 
 .notification.success {
-    background-color: #4CAF50;
+    background-color: #4caf50;
 }
 
 .notification.error {
-    background-color: #F44336;
+    background-color: #f44336;
 }
 
 .menu-box {
@@ -164,7 +219,7 @@ body {
     display: flex;
     gap: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: 'Garamond', serif;
+    font-family: "Garamond", serif;
     z-index: 10;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
@@ -229,7 +284,9 @@ body {
         text-align: center;
     }
 
-    .footer-left, .footer-center, .footer-right {
+    .footer-left,
+    .footer-center,
+    .footer-right {
         text-align: center;
     }
 }

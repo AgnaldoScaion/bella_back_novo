@@ -26,42 +26,32 @@ class RegisterController extends Controller
                 function ($attribute, $value, $fail) {
                     $digits = preg_replace('/\D/', '', $value);
 
+                    // Validação básica
                     if (strlen($digits) !== 11) {
                         $fail('O CPF deve conter 11 dígitos.');
                         return;
                     }
 
+                    // Verifica dígitos repetidos
                     if (preg_match('/^(\d)\1{10}$/', $digits)) {
                         $fail('CPF inválido.');
                         return;
                     }
 
-                    // Cálculo do primeiro dígito verificador
-                    $sum = 0;
-                    for ($i = 0; $i < 9; $i++) {
-                        $sum += (int)$digits[$i] * (10 - $i);
-                    }
-                    $remainder = ($sum * 10) % 11;
-                    if ($remainder === 10) $remainder = 0;
-
-                    if ($remainder != $digits[9]) {
-                        $fail('CPF inválido.');
-                        return;
-                    }
-
-                    // Cálculo do segundo dígito verificador
-                    $sum = 0;
-                    for ($i = 0; $i < 10; $i++) {
-                        $sum += (int)$digits[$i] * (11 - $i);
-                    }
-                    $remainder = ($sum * 10) % 11;
-                    if ($remainder === 10) $remainder = 0;
-
-                    if ($remainder != $digits[10]) {
-                        $fail('CPF inválido.');
-                        return;
+                    // Cálculo dos dígitos verificadores
+                    for ($t = 9; $t < 11; $t++) {
+                        $d = 0;
+                        for ($c = 0; $c < $t; $c++) {
+                            $d += $digits[$c] * (($t + 1) - $c);
+                        }
+                        $d = ((10 * $d) % 11) % 10;
+                        if ($digits[$c] != $d) {
+                            $fail('CPF inválido.');
+                            return;
+                        }
                     }
 
+                    // Verifica se CPF já existe
                     if (User::where('CPF', $digits)->exists()) {
                         $fail('Este CPF já está cadastrado.');
                     }
@@ -89,9 +79,12 @@ class RegisterController extends Controller
         try {
             User::create([
                 'nome_completo' => $request->nome_completo,
-                'CPF' => $request->CPF,
+                'CPF' => preg_replace('/\D/', '', $request->CPF), // Armazena apenas números
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'nome_perfil' => explode(' ', $request->nome_completo)[0], // Pega o primeiro nome
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
 
             return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Faça login.');

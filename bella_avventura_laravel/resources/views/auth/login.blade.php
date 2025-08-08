@@ -96,13 +96,28 @@
             transform: scale(1.1);
         }
 
-        .user-header {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 700;
-        }
+    /* Adiciona estilos para o user header */
+    .user-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--primary-color);
+        background: rgba(255,255,255,0.2);
+        padding: 6px 12px;
+        border-radius: 20px;
+        transition: var(--transition-smooth);
+    }
+
+    .user-header:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+    }
+
+    .user-header i {
+        font-size: 16px;
+    }
 
         /* Menu Styles */
         .menu-box {
@@ -497,108 +512,121 @@
 @endsection
 
 @section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Elementos do DOM
-        const cpfInput = document.getElementById('CPF');
-        const loginForm = document.getElementById('loginForm');
-        const loginButton = document.getElementById('loginButton');
-        const buttonText = document.getElementById('buttonText');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cpfInput = document.getElementById('CPF');
+            const cpfError = document.getElementById('cpf_error');
+            const menuToggle = document.getElementById('menuToggle');
+            const menuBox = document.getElementById('menuBox');
 
-        // Máscara e validação de CPF
-        if (cpfInput) {
-            cpfInput.addEventListener('input', formatCPF);
-            cpfInput.addEventListener('blur', validateCPF);
-        }
+            // Menu functionality
+            if (menuToggle && menuBox) {
+                menuToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    menuBox.classList.toggle('visible');
+                });
 
-        // Formatação do CPF
-        function formatCPF(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 11) value = value.substring(0, 11);
+                // Close menu when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (!menuBox.contains(e.target) && e.target !== menuToggle) {
+                        menuBox.classList.remove('visible');
+                    }
+                });
 
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-
-            e.target.value = value;
-        }
-
-        // Validação do CPF
-        function validateCPF() {
-            const cpf = cpfInput.value.replace(/\D/g, '');
-            const errorElement = cpfInput.nextElementSibling.nextElementSibling;
-
-            if (cpf.length === 0) {
-                if (errorElement) errorElement.textContent = 'O CPF é obrigatório.';
-                return false;
+                // Smooth scroll for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        if (this.getAttribute('href') !== '#') {
+                            e.preventDefault();
+                            const target = document.querySelector(this.getAttribute('href'));
+                            if (target) {
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                                // Close menu after navigation
+                                menuBox.classList.remove('visible');
+                            }
+                        }
+                    });
+                });
             }
 
-            if (cpf.length !== 11) {
-                if (errorElement) errorElement.textContent = 'CPF deve ter 11 dígitos.';
-                return false;
-            }
+            // CPF validation
+            if (cpfInput) {
+                // Máscara de CPF
+                cpfInput.addEventListener('input', function (e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 11) value = value.substring(0, 11);
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                    e.target.value = value;
+                    validateCPF(value);
+                });
 
-            if (!isValidCPF(cpf)) {
-                if (errorElement) errorElement.textContent = 'CPF inválido.';
-                return false;
-            }
+                // Validação ao perder foco
+                cpfInput.addEventListener('blur', function (e) {
+                    validateCPF(e.target.value);
+                });
 
-            if (errorElement) errorElement.textContent = '';
-            return true;
-        }
-
-        // Algoritmo de validação de CPF
-        function isValidCPF(cpf) {
-            if (/^(\d)\1{10}$/.test(cpf)) return false;
-
-            let sum = 0;
-            for (let i = 0; i < 9; i++) {
-                sum += parseInt(cpf[i]) * (10 - i);
-            }
-            let remainder = (sum * 10) % 11;
-            if (remainder === 10) remainder = 0;
-            if (remainder !== parseInt(cpf[9])) return false;
-
-            sum = 0;
-            for (let i = 0; i < 10; i++) {
-                sum += parseInt(cpf[i]) * (11 - i);
-            }
-            remainder = (sum * 10) % 11;
-            if (remainder === 10) remainder = 0;
-
-            return remainder === parseInt(cpf[10]);
-        }
-
-        // Envio do formulário
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                if (!validateCPF()) {
-                    e.preventDefault();
-                    return;
+                function validateCPF(value) {
+                    const digits = value.replace(/\D/g, '');
+                    console.log('Validando CPF:', digits);
+                    if (digits.length === 0) {
+                        cpfError.textContent = 'O CPF é obrigatório.';
+                        return false;
+                    }
+                    if (digits.length !== 11) {
+                        cpfError.textContent = 'O CPF deve conter 11 números.';
+                        return false;
+                    }
+                    if (!isValidCPF(digits)) {
+                        cpfError.textContent = 'CPF inválido.';
+                        return false;
+                    }
+                    cpfError.textContent = '';
+                    return true;
                 }
 
-                // Mostra estado de loading
-                loginButton.classList.add('loading');
-                buttonText.textContent = 'Autenticando...';
-                loginButton.disabled = true;
+                function isValidCPF(cpf) {
+                    console.log('Iniciando validação para:', cpf);
+                    // Rejeita CPFs com dígitos repetidos
+                    if (/^(\d)\1{10}$/.test(cpf)) {
+                        console.log('CPF rejeitado: dígitos repetidos');
+                        return false;
+                    }
 
-                // Simula delay para demonstração (remover em produção)
-                setTimeout(() => {
-                    loginButton.classList.remove('loading');
-                    buttonText.textContent = 'Entrar';
-                    loginButton.disabled = false;
-                }, 2000);
-            });
-        }
+                    // Calcula primeiro dígito verificador
+                    let sum = 0;
+                    for (let i = 0; i < 9; i++) {
+                        sum += parseInt(cpf[i]) * (10 - i);
+                    }
+                    let remainder = (sum * 10) % 11;
+                    if (remainder === 10) remainder = 0;
+                    console.log('Primeiro dígito verificador calculado:', remainder, 'Esperado:', cpf[9]);
+                    if (remainder !== parseInt(cpf[9])) {
+                        console.log('Primeiro dígito inválido');
+                        return false;
+                    }
 
-        // Fecha notificações após 5 segundos
-        const notifications = document.querySelectorAll('.notification.show');
-        notifications.forEach(notification => {
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                setTimeout(() => notification.remove(), 300);
-            }, 5000);
+                    // Calcula segundo dígito verificador
+                    sum = 0;
+                    for (let i = 0; i < 10; i++) {
+                        sum += parseInt(cpf[i]) * (11 - i);
+                    }
+                    remainder = (sum * 10) % 11;
+                    if (remainder === 10) remainder = 0;
+                    console.log('Segundo dígito verificador calculado:', remainder, 'Esperado:', cpf[10]);
+                    if (remainder !== parseInt(cpf[10])) {
+                        console.log('Segundo dígito inválido');
+                        return false;
+                    }
+
+                    console.log('CPF válido');
+                    return true;
+                }
+            }
         });
-    });
-</script>
+    </script>
 @endsection

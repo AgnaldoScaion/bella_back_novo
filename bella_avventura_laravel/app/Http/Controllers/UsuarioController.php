@@ -1,38 +1,52 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
-class UsuarioController extends Controller {
-    public function showForm() {
-        return view('usuario_form');
+class UsuarioController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['showRegistrationForm', 'register']);
     }
 
-    public function saveUsuario(Request $request) {
+    // Método para exibir formulário de cadastro (se ainda necessário)
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    // Método para registrar (compatível com auth padrão)
+    public function register(Request $request)
+    {
         $request->validate([
             'nome_completo' => 'required|string|max:100',
-            'data_nascimento' => 'required|date',
-            'CPF' => 'required|string|max:20',
+            'CPF' => 'required|string|max:20|unique:usuario,CPF',
             'e_mail' => 'required|email|max:100|unique:usuario,e_mail',
-            'senha' => 'required|string|max:100',
-            'nome_perfil' => 'nullable|string|max:50'
+            'senha' => 'required|string|min:8|confirmed',
         ]);
 
-        $usuario = new Usuario();
-        $usuario->nome_completo = $request->nome_completo;
-        $usuario->data_nascimento = $request->data_nascimento;
-        $usuario->CPF = $request->CPF;
-        $usuario->e_mail = $request->e_mail;
-        $usuario->senha = Hash::make($request->senha);
-        $usuario->nome_perfil = $request->nome_perfil;
-        $usuario->save();
+        $usuario = Usuario::create([
+            'nome_completo' => $request->nome_completo,
+            'CPF' => $request->CPF,
+            'e_mail' => $request->e_mail,
+            'senha' => Hash::make($request->senha),
+            'nome_perfil' => explode(' ', $request->nome_completo)[0],
+        ]);
 
-        return redirect()->route('usuarios.list')->with('success', 'Usuário cadastrado com sucesso!');
+        // Login automático após registro
+        Auth::login($usuario);
+
+        return redirect('/destinos')->with('success', 'Cadastro realizado com sucesso!');
     }
 
-    public function listUsuario() {
+    // Métodos para administração
+    public function listUsuario()
+    {
         $usuarios = Usuario::all();
         return view('usuario_list', compact('usuarios'));
     }

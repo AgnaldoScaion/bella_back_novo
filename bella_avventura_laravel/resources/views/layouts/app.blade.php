@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,20 +10,26 @@
     <link rel="stylesheet" href="{{ asset(path: 'css/app.css') }}">
     @yield('styles')
 </head>
+
 <body>
     <div class="wrapper">
         <!-- Header -->
         <div class="top-header">
             <div class="menu-icon">☰</div>
             <div class="user-header">
-                <span>👤</span> {{ auth()->check() ? auth()->user()->nome_perfil : 'Visitante' }}
+                <span>👤</span>
+                @auth
+                    {{ Auth::user()->nome_completo ?: Auth::user()->nome_perfil }}
+                @else
+                    Visitante
+                @endauth
             </div>
         </div>
 
         <div class="header">
             <div class="header-img">
                 <a href="{{ route('home') }}">
-                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating"/>
+                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating" />
                 </a>
             </div>
         </div>
@@ -35,7 +42,8 @@
         @endif
 
         <!-- Notificação -->
-        <div id="notification" class="notification {{ session('success') ? 'success' : ($errors->any() ? 'error' : '') }} {{ session('success') || $errors->any() ? 'show' : '' }}">
+        <div id="notification"
+            class="notification {{ session('success') ? 'success' : ($errors->any() ? 'error' : '') }} {{ session('success') || $errors->any() ? 'show' : '' }}">
             @if(session('success'))
                 {{ session('success') }}
             @elseif($errors->any())
@@ -92,4 +100,5 @@
     </script>
     @yield('scripts')
 </body>
+
 </html>
