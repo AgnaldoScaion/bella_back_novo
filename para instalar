@@ -1,0 +1,10 @@
+Ao instalar, redija estes comandos no terminal para evitar problemas.
+
+1- composer install
+
+2- copy .env.example .env
+E lembre de alterar o local do banco de dados e a porta e se tiver senha insira.
+
+3- php artisan key:generate
+
+4- php artisan migrate

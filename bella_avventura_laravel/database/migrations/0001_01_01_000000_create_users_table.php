@@ -8,9 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('usuario', function (Blueprint $table) {
             $table->id();
             $table->string('nome_completo');
+            $table->date('data_nascimento')->nullable();
             $table->string('CPF', 11)->unique();
             $table->string('nome_perfil');
             $table->string('email')->unique();
@@ -23,6 +24,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('usuario');
     }
 };
