@@ -6,7 +6,7 @@
     <title>@yield('title') - Bella Avventura</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
-    <link rel="stylesheet" href="{{ asset('/public/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset(path: 'css/app.css') }}">
     @yield('styles')
 </head>
 <body>

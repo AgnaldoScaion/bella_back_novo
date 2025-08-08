@@ -11,6 +11,15 @@ CREATE TABLE sessions (
     last_activity INT NOT NULL
 );
 
+CREATE TABLE `cache` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cache_key_unique` (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE usuario (
     id_usuario INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     nome_completo VARCHAR(100),

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -42,6 +42,25 @@ class LoginController extends Controller
         return 'CPF';
     }
 
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        $user = $this->guard()->user();
+        $user->loadMissing([]); // Força o carregamento do modelo
+
+        // Armazena dados do usuário na sessão
+        $request->session()->put([
+            'user_name' => $user->nome,
+            'user_first_name' => $user->firstName
+        ]);
+
+        return $this->authenticated($request, $user)
+                ?: redirect()->intended($this->redirectPath());
+    }
+
     protected function sendFailedLoginResponse(Request $request)
     {
         $errors = [$this->username() => trans('auth.failed')];
@@ -57,6 +76,6 @@ class LoginController extends Controller
 
     protected function loggedOut(Request $request)
     {
-        return redirect('/home'); // Redireciona para a rota raiz após logout
+        return redirect('/');
     }
 }

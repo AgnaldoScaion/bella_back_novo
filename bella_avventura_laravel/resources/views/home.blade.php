@@ -93,12 +93,27 @@
         transform: scale(1.1);
     }
 
+    /* Adiciona estilos para o user header */
     .user-header {
-        font-size: 14px;
         display: flex;
         align-items: center;
-        gap: 6px;
-        font-weight: 700;
+        gap: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--primary-color);
+        background: rgba(255,255,255,0.2);
+        padding: 6px 12px;
+        border-radius: 20px;
+        transition: var(--transition-smooth);
+    }
+
+    .user-header:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+    }
+
+    .user-header i {
+        font-size: 16px;
     }
 
     /* Menu Styles */
@@ -713,83 +728,99 @@
 
 @section('scripts')
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
+        // Verifica se os elementos existem antes de adicionar listeners
         const menuToggle = document.getElementById('menuToggle');
         const menuBox = document.getElementById('menuBox');
         const backToTopButton = document.getElementById('backToTop');
 
-        // Menu functionality
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            menuBox.classList.toggle('visible');
-        });
+        // Menu functionality - só executa se os elementos existirem
+        if (menuToggle && menuBox) {
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuBox.classList.toggle('visible');
+            });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!menuBox.contains(e.target) && e.target !== menuToggle) {
-                menuBox.classList.remove('visible');
-            }
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        // Close menu after navigation
-                        menuBox.classList.remove('visible');
-                    }
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!menuBox.contains(e.target) && e.target !== menuToggle) {
+                    menuBox.classList.remove('visible');
                 }
             });
-        });
-
-        // Back to top button functionality
-        function handleScroll() {
-            const scrollY = window.pageYOffset;
-
-            if (scrollY > 400) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
         }
 
-        window.addEventListener('scroll', handleScroll);
-
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        // Smooth scroll for anchor links
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        if (anchorLinks.length > 0) {
+            anchorLinks.forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            // Close menu if it exists
+                            if (menuBox) menuBox.classList.remove('visible');
+                        }
+                    }
+                });
             });
-        });
+        }
+
+        // Back to top button functionality - só executa se o botão existir
+        if (backToTopButton) {
+            function handleScroll() {
+                const scrollY = window.pageYOffset;
+                backToTopButton.classList.toggle('visible', scrollY > 400);
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Initial call
+            handleScroll();
+        }
 
         // Animate cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        const featureCards = document.querySelectorAll('.feature-card');
+        if (featureCards.length > 0) {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                }
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            featureCards.forEach(card => {
+                observer.observe(card);
             });
-        }, observerOptions);
+        }
 
-        // Observe feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            observer.observe(card);
+        // Atalho de teclado para depuração (Ctrl+Alt+D)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.altKey && e.key === 'd') {
+                const debugDiv = document.querySelector('div[style*="position: fixed; bottom: 20px; right: 20px;"]');
+                if (debugDiv) {
+                    debugDiv.style.display = debugDiv.style.display === 'none' ? 'block' : 'none';
+                }
+            }
         });
-
-        // Initial call
-        handleScroll();
     });
 </script>
 @endsection

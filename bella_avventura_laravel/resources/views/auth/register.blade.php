@@ -4,6 +4,11 @@
 
 @section('styles')
 <style>
+        @font-face {
+        font-family: 'GaramondBold';
+        src: local('Garamond'), serif;
+        font-weight: bold;
+    }
     /* Variáveis CSS */
     :root {
         --primary-color: #5a8f3d;
@@ -34,6 +39,120 @@
         background-color: var(--primary-bg);
         color: var(--text-dark);
     }
+
+        /* Header Styles */
+    .header {
+        background-color: var(--primary-light);
+        position: relative;
+        height: 86px;
+    }
+
+    .header-img img {
+        height: 126px;
+        transition: transform 0.5s ease;
+    }
+
+    .header-img {
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 30px;
+        background-color: var(--primary-light);
+        position: relative;
+    }
+
+    .menu-icon {
+        font-size: 24px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .menu-icon:hover {
+        transform: scale(1.1);
+    }
+
+    .user-header {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+    }
+
+    /* Menu Styles */
+    .menu-box {
+        position: fixed;
+        top: 50px;
+        left: 20px;
+        background-color: #d6e3d6;
+        border-radius: 8px;
+        padding: 20px;
+        width: 260px;
+        display: flex;
+        gap: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-family: 'Garamond', serif;
+        z-index: 1000;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .menu-lateral {
+        background-color: #88b68b;
+        width: 24px;
+        border-radius: 8px;
+    }
+
+    .menu-conteudo {
+        flex: 1;
+    }
+
+    .menu-conteudo h2 {
+        font-size: 20px;
+        margin: 0;
+        border-bottom: 1px solid #999;
+        padding-bottom: 10px;
+    }
+
+    .menu-conteudo ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+    }
+
+    .menu-conteudo li {
+        margin: 15px 0;
+    }
+
+    .menu-conteudo a {
+        text-decoration: none;
+        color: black;
+        transition: color 0.2s;
+    }
+
+    .menu-conteudo a:hover {
+        color: #3a6545;
+    }
+
+    .hidden {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
 
     /* Estrutura Principal */
     .wrapper {
@@ -220,6 +339,64 @@
         .cadastro-button {
             padding: 0.75rem;
         }
+    }
+    /* Footer Styles */
+    .footer {
+        background-color: var(--primary-light);
+        padding: 20px;
+        color: #000;
+        font-size: 14px;
+        text-align: center;
+        animation: fadeIn 1s ease;
+        margin-top: auto;
+    }
+
+    .footer-top {
+        margin-bottom: 15px;
+    }
+
+    .footer-top img {
+        width: 15%;
+        height: auto;
+        transition: transform 0.5s ease;
+    }
+
+    .footer-top:hover img {
+        transform: rotate(5deg) scale(1.05);
+    }
+
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+        flex: 1;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .footer-left:hover,
+    .footer-right:hover {
+        transform: translateY(-3px);
+    }
+
+    .footer-left { text-align: left; }
+    .footer-right { text-align: right; }
+
+    .footer-bottom a {
+        text-decoration: underline;
+        color: black;
+        transition: color 0.3s ease;
+    }
+
+    .footer-bottom a:hover {
+        color: var(--primary-color);
     }
 </style>
 @endsection
