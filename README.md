@@ -18,8 +18,8 @@ Antes de começar, certifique-se de ter instalado:
 
 ### 1️⃣ **Clone o Repositório**
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
-cd [NOME_DO_PROJETO]
+git clone https://github.com/AgnaldoScaion/bella_back_novo
+cd bella_back_novo
 ```
 
 ### 2️⃣ **Instale as Dependências**
@@ -36,8 +36,9 @@ Copie o arquivo de exemplo e configure as variáveis de ambiente:
 cp .env.example .env
 ```
 **Atenção:**
-- Altere as configurações do banco de dados (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+- Altere as configurações do banco de dados (`DB_bella_avventura`).
 - Certifique-se de que o banco de dados **já existe** antes de prosseguir.
+- E lembre de alterar a linguagem para mysql ou outra que ira usar.
 
 ---
 
@@ -92,7 +93,7 @@ composer dump-autoload
 ---
 
 ## 🚀 **Próximos Passos**
-- **Front-end:** Se o projeto usa assets (CSS/JS), instale as dependências com:
+- **Front-end:** Futuramente o projeto utilizará assets (CSS/JS), instale as dependências com:
   ```bash
   npm install && npm run dev
   ```
