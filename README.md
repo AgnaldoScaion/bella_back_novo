@@ -10,7 +10,7 @@ Antes de começar, certifique-se de ter instalado:
 - **PHP** (versão 8.0 ou superior)
 - **Composer** (gerenciador de dependências)
 - **Banco de dados** (MySQL, PostgreSQL, SQLite, etc.)
-- **Node.js** (opcional, para assets front-end)
+- **Vue CLI** (Futuramente sera adicionado.)
 
 ---
 
