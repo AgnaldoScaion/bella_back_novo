@@ -2,33 +2,38 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Usuario extends Authenticatable
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     protected $table = 'usuario';
+    protected $primaryKey = 'id_usuario';
+    public $timestamps = true;
 
     protected $fillable = [
         'nome_completo',
         'data_nascimento',
         'CPF',
-        'e_mail', // Mantido como está no banco
-        'senha',  // Mantido como está no banco
-        'nome_perfil'
+        'e_mail',
+        'password',
+        'nome_perfil',
     ];
 
-    // Configuração para usar e_mail no lugar de email
-    public function getEmailAttribute()
+    protected $hidden = [
+        'password',
+    ];
+
+    public function getAuthIdentifierName()
     {
-        return $this->attributes['e_mail'];
+        return 'CPF';
     }
 
-    // Configuração para usar senha no lugar de password
-    public function getAuthPassword()
+    public function getAuthIdentifier()
     {
-        return $this->senha;
+        return $this->CPF;
     }
 }
