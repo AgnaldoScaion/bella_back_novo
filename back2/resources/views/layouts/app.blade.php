@@ -7,7 +7,7 @@
     <title>@yield('title') - Bella Avventura</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
-    <link rel="stylesheet" href="{{ asset(path: 'css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('styles')
 </head>
 
@@ -19,7 +19,7 @@
             <div class="user-header">
                 <span>👤</span>
                 @auth
-                    {{ Auth::user()->nome_completo ?: Auth::user()->nome_perfil }}
+                    {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email }}
                 @else
                     Visitante
                 @endauth
@@ -35,7 +35,7 @@
         </div>
 
         <!-- Menu -->
-        @if(auth()->check())
+        @if(Auth::check())
             @include('components.menu-logado')
         @else
             @include('components.menu-nao-logado')

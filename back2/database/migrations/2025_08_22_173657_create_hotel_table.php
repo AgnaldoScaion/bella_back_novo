@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('restaurante', function (Blueprint $table) {
-            $table->id('id_restaurante');
-            $table->string('nome', 100);
-            $table->string('telefone', 20);
+        Schema::create('hotel', function (Blueprint $table) {
+            $table->id('id_hotel');
+            $table->string('nome_hotel', 50);
             $table->string('estado', 50);
             $table->string('cidade', 50);
-            $table->string('rua', 100);
             $table->string('bairro', 50);
+            $table->string('rua', 100);
             $table->integer('numero');
+            $table->string('telefone', 20);
             $table->string('horario_funcionamento', 100);
             $table->string('sobre', 255)->nullable();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('restaurante');
+        Schema::dropIfExists('hotel');
     }
 };

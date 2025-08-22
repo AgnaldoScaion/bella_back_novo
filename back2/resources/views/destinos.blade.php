@@ -59,6 +59,9 @@
         background-color: var(--accent-color);
         position: relative;
         height: 86px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .header-img img {
@@ -70,10 +73,9 @@
         position: absolute;
         top: -50px;
         left: 50%;
-        transform: translateX(-5%);
+        transform: translateX(-50%);
         z-index: 1;
     }
-
     .top-header {
         display: flex;
         justify-content: space-between;
@@ -492,6 +494,10 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
+        .floating {
+        animation: float 3s ease-in-out infinite;
+    }
+
     @media (max-width: 768px) {
         .destinos-container {
             flex-direction: column;
@@ -523,8 +529,8 @@
         }
 
         .header-img img {
-            height: 100px;
-            top: -30px;
+            height: 80px;
+            top: -20px;
         }
 
         .instrucoes-item {

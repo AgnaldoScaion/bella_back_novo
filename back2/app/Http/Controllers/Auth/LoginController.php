@@ -26,7 +26,7 @@ class LoginController extends Controller
         // Tenta autenticar com CPF e senha
         if (Auth::attempt(['CPF' => $cpf, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/destinos');
+            return redirect()->intended('/home');
         }
 
         return back()->withErrors([
