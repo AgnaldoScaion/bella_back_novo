@@ -41,12 +41,13 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
+        html,
+        body {
+            height: 100%;
+            margin: 0;
         }
 
         body {
-            height: 100%;
             font-family: var(--font-main);
             font-weight: 700;
             background-color: var(--primary-bg);
@@ -54,7 +55,6 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            margin: 0;
         }
 
         /* Header Styles */
@@ -185,10 +185,9 @@
             pointer-events: auto;
         }
 
-
         /* Main Content */
         .main-content {
-            flex: 1;
+            flex: 1 0 auto; /* Ocupa o espaço disponível e empurra o footer para baixo */
             padding: 1.5rem;
             display: flex;
             align-items: center;
@@ -331,11 +330,9 @@
             0% {
                 transform: translateY(0px);
             }
-
             50% {
                 transform: translateY(-5px);
             }
-
             100% {
                 transform: translateY(0px);
             }
@@ -350,20 +347,16 @@
             .main-content {
                 padding: 1rem;
             }
-
             .login-box {
                 padding: 1.5rem;
             }
-
             .top-header {
                 padding: 10px 20px;
             }
-
             .header-img img {
                 height: 100px;
                 top: -30px;
             }
-
             .menu-box {
                 width: 280px;
             }
@@ -373,15 +366,12 @@
             .login-title {
                 font-size: 1.6rem;
             }
-
             .login-box {
                 padding: 1.2rem;
             }
-
             .form-group input {
                 padding: 0.65rem;
             }
-
             .login-button {
                 padding: 0.75rem;
             }
@@ -391,21 +381,18 @@
             .login-box {
                 padding: 1.2rem;
             }
-
             .form-group input {
                 padding: 0.65rem;
             }
-
             .login-button {
                 padding: 0.75rem;
             }
-
             .top-header {
                 padding: 10px 15px;
             }
         }
 
-        /* Footer Styles */
+        /* Footer Styles - CORRIGIDO */
         .footer {
             background-color: var(--primary-light);
             padding: 20px;
@@ -413,8 +400,9 @@
             font-size: 14px;
             text-align: center;
             animation: fadeIn 1s ease;
-            margin-top: auto;
-            /* Garante que o footer fique no fundo */
+            flex-shrink: 0; /* Impede que o footer encolha */
+            width: 100%;
+            margin-top: auto; /* Empurra o footer para baixo */
         }
 
         .footer-top {
@@ -438,7 +426,6 @@
             width: 100%;
             padding: 10px 0;
         }
-
 
         .footer-left,
         .footer-center,
@@ -469,6 +456,15 @@
 
         .footer-bottom a:hover {
             color: var(--primary-color);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 @endsection
