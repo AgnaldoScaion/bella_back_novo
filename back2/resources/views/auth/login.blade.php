@@ -54,7 +54,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            margin: 0
+            margin: 0;
         }
 
         /* Header Styles */
@@ -96,28 +96,28 @@
             transform: scale(1.1);
         }
 
-    /* Adiciona estilos para o user header */
-    .user-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--primary-color);
-        background: rgba(255,255,255,0.2);
-        padding: 6px 12px;
-        border-radius: 20px;
-        transition: var(--transition-smooth);
-    }
+        /* Adiciona estilos para o user header */
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
 
-    .user-header:hover {
-        background: rgba(255,255,255,0.3);
-        transform: translateY(-2px);
-    }
+        .user-header:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
 
-    .user-header i {
-        font-size: 16px;
-    }
+        .user-header i {
+            font-size: 16px;
+        }
 
         /* Menu Styles */
         .menu-box {
@@ -414,6 +414,7 @@
             text-align: center;
             animation: fadeIn 1s ease;
             margin-top: auto;
+            /* Garante que o footer fique no fundo */
         }
 
         .footer-top {

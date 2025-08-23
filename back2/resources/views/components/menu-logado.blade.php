@@ -2,7 +2,7 @@
 <div id="menu-logado" class="menu-box hidden">
     <div class="menu-lateral"></div>
     <div class="menu-conteudo">
-        <h2>MENU <span class="user-name">{{ auth()->user()->nome_completo }}</span></h2>
+        <h2>Menu</h2>
         <ul>
             <li><a href="{{ route('profile.show') }}">Meu Perfil</a></li>
             <li><a href="{{ route('restaurante.lista') }}">Restaurantes</a></li>
