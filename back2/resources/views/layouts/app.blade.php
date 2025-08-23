@@ -9,6 +9,24 @@
     <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('styles')
+
+    <!-- Estilos inline para garantir o layout -->
+    <style>
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1 0 auto; /* Ocupa o espaço disponível */
+        }
+
+        .footer {
+            flex-shrink: 0; /* Impede que o footer encolha */
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -101,4 +119,4 @@
     @yield('scripts')
 </body>
 
-</html>
+</html> 
