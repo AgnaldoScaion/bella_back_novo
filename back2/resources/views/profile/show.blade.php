@@ -137,50 +137,10 @@
             width: 100%;
         }
     }
-
-    /* Notificação */
-    .notification {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 15px 25px;
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-        z-index: 1000;
-        opacity: 0;
-        transition: opacity 0.3s ease, top 0.3s ease;
-    }
-
-    .notification.show {
-        top: 30px;
-        opacity: 1;
-    }
-
-    .success {
-        background-color: #4CAF50;
-    }
-
-    .error {
-        background-color: #F44336;
-    }
-
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
-        100% { transform: translateY(0px); }
-    }
-
-    .floating {
-        animation: float 3s ease-in-out infinite;
-    }
 </style>
 @endsection
 
 @section('content')
-<div id="notification" class="notification"></div>
-
 <div class="main-content">
     <div class="profile-container">
         <div class="profile-header">
@@ -242,32 +202,23 @@
         const saveButton = document.getElementById('saveButton');
         const editForms = document.querySelectorAll('.edit-form');
         const infoValues = document.querySelectorAll('.info-value');
+        const notification = document.getElementById('notification');
 
         editButton.addEventListener('click', function() {
-            // Mostra formulários e esconde valores
             editForms.forEach(form => form.style.display = 'block');
             infoValues.forEach(value => value.style.display = 'none');
-
-            // Esconde grupo do CPF e mostra grupo da senha antiga em seu lugar
             document.getElementById('cpfGroup').style.display = 'none';
             document.getElementById('senhaAntigaGroup').style.display = 'block';
-
-            // Mostra botões de ação
             cancelButton.style.display = 'block';
             saveButton.style.display = 'block';
             editButton.style.display = 'none';
         });
 
         cancelButton.addEventListener('click', function() {
-            // Esconde formulários e mostra valores
             editForms.forEach(form => form.style.display = 'none');
             infoValues.forEach(value => value.style.display = 'block');
-
-            // Mostra grupo do CPF e esconde grupo da senha antiga
             document.getElementById('cpfGroup').style.display = 'block';
             document.getElementById('senhaAntigaGroup').style.display = 'none';
-
-            // Esconde botões de ação
             cancelButton.style.display = 'none';
             saveButton.style.display = 'none';
             editButton.style.display = 'block';
@@ -284,7 +235,6 @@
                 return;
             }
 
-            // Envia os dados para o servidor
             fetch('{{ route("profile.update") }}', {
                 method: 'POST',
                 headers: {
@@ -302,10 +252,8 @@
             .then(data => {
                 if (data.success) {
                     showNotification('Perfil atualizado com sucesso!', 'success');
-                    // Atualiza os valores exibidos
                     document.getElementById('nomeValue').textContent = newNome;
                     document.getElementById('emailValue').textContent = newEmail;
-                    // Volta para modo de visualização
                     cancelButton.click();
                 } else {
                     showNotification(data.message || 'Erro ao atualizar perfil!', 'error');
@@ -318,13 +266,10 @@
         });
 
         function showNotification(message, type) {
-            const notification = document.getElementById('notification');
+            if (!notification) return;
             notification.textContent = message;
             notification.className = `notification ${type} show`;
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            setTimeout(() => notification.classList.remove('show'), 3000);
         }
     });
 </script>

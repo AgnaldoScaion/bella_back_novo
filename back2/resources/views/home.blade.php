@@ -663,7 +663,7 @@
                     Explorar Destinos
                 </a>
             @else
-                <a href="{{ route('register') }}" class="btn">
+                <a href="{{ route('login') }}" class="btn">
                     <i class="fas fa-compass"></i>
                     Comece agora
                 </a>

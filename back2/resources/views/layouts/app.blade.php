@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('styles')
 
-    <!-- Estilos inline para garantir o layout -->
+    <!-- Estilos globais para layout e notificações -->
     <style>
         .wrapper {
             display: flex;
@@ -19,19 +19,60 @@
         }
 
         .main-content {
-            flex: 1 0 auto; /* Ocupa o espaço disponível */
+            flex: 1 0 auto;
         }
 
         .footer {
-            flex-shrink: 0; /* Impede que o footer encolha */
+            flex-shrink: 0;
             width: 100%;
+        }
+
+        /* Notificação */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease, top 0.3s ease;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .notification.show {
+            top: 30px;
+            opacity: 1;
+        }
+
+        .notification.success {
+            background-color: #4CAF50;
+        }
+
+        .notification.error {
+            background-color: #F44336;
+        }
+
+        /* Animação do logo */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <!-- Header -->
+        <!-- Header Superior -->
         <div class="top-header">
             <div class="menu-icon">☰</div>
             <div class="user-header">
@@ -44,6 +85,7 @@
             </div>
         </div>
 
+        <!-- Logo -->
         <div class="header">
             <div class="header-img">
                 <a href="{{ route('home') }}">
@@ -59,7 +101,7 @@
             @include('components.menu-nao-logado')
         @endif
 
-        <!-- Notificação -->
+        <!-- Notificação Global -->
         <div id="notification"
             class="notification {{ session('success') ? 'success' : ($errors->any() ? 'error' : '') }} {{ session('success') || $errors->any() ? 'show' : '' }}">
             @if(session('success'))
@@ -119,4 +161,4 @@
     @yield('scripts')
 </body>
 
-</html> 
+</html>
