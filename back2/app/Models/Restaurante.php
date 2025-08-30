@@ -4,29 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Restaurante extends Model
 {
-    protected $table = 'restaurante'; // Especifica o nome da tabela no singular
-    
+    protected $table = 'restaurante'; // Especifica o nome da tabela
+
+    protected $primaryKey = 'id_restaurante'; // Define a chave primária personalizada
+
     protected $fillable = [
         'nome',
-        'tipos',
-        'avaliacao',
-        'endereco',
-        'horario',
-        'preco',
-        'precoTexto',
+        'telefone',
+        'estado',
         'cidade',
-        'imagem',
-        'badge',
-        'promocao',
-        'lat',
-        'lng'
+        'rua',
+        'bairro',
+        'numero',
+        'horario_funcionamento',
+        'sobre',
     ];
 
     protected $casts = [
-        'tipos' => 'array',
-        'promocao' => 'boolean'
+        'sobre' => 'string', // Garante que 'sobre' seja tratado como string (nullable)
     ];
 }

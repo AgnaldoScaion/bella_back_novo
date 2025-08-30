@@ -21,7 +21,7 @@ class RestauranteController extends Controller
             ->distinct()
             ->pluck('cidade');
 
-        return view('restaurante', compact('restaurantes', 'cidades'));
+        return view('restaurante', compact('restaurantes', 'cidades')); // Alterado para 'restaurante' em vez de 'restaurante.lista'
     }
 
     public function detalhes($id)

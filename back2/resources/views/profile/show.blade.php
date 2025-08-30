@@ -10,8 +10,19 @@
         font-weight: bold;
     }
 
+    /* Sobrescrevendo e complementando estilos do .main-content */
+    .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        width: 100%;
+    }
+
     .profile-container {
         max-width: 800px;
+        min-width: 300px;
+        width: 90%;
         margin: 0 auto;
         background-color: white;
         border-radius: 12px;
@@ -128,13 +139,34 @@
         .profile-info {
             grid-template-columns: 1fr;
         }
-
         .profile-actions {
             flex-direction: column;
         }
-
         .action-button {
             width: 100%;
+        }
+        .profile-container {
+            padding: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .profile-title {
+            font-size: 1.5rem;
+        }
+        .info-label {
+            font-size: 0.9rem;
+        }
+        .info-value {
+            font-size: 1rem;
+            padding: 0.6rem;
+        }
+        .edit-form input {
+            font-size: 0.9rem;
+            padding: 0.6rem;
+        }
+        .profile-container {
+            padding: 1rem;
         }
     }
 </style>
@@ -147,7 +179,6 @@
             <h1 class="profile-title">Meu Perfil</h1>
             <button id="editButton" class="edit-button">Editar Perfil</button>
         </div>
-
         <div class="profile-info">
             <div class="info-group">
                 <span class="info-label">Nome Completo</span>
@@ -156,19 +187,16 @@
                     <input type="text" id="nomeInput" placeholder="Digite seu nome completo" value="{{ Auth::user()->name }}">
                 </div>
             </div>
-
             <div class="info-group" id="cpfGroup">
                 <span class="info-label">CPF</span>
                 <div id="cpfValue" class="info-value">{{ Auth::user()->cpf }}</div>
             </div>
-
             <div class="info-group" id="senhaAntigaGroup" style="display: none;">
                 <span class="info-label">Senha Atual</span>
                 <div class="edit-form" style="display: block;">
                     <input type="password" id="senhaAntigaInput" placeholder="Digite sua senha atual">
                 </div>
             </div>
-
             <div class="info-group">
                 <span class="info-label">E-mail</span>
                 <div id="emailValue" class="info-value">{{ Auth::user()->email }}</div>
@@ -176,7 +204,6 @@
                     <input type="email" id="emailInput" placeholder="Digite seu e-mail" value="{{ Auth::user()->email }}">
                 </div>
             </div>
-
             <div class="info-group" id="senhaGroup">
                 <span class="info-label">Senha</span>
                 <div class="info-value">••••••••</div>
@@ -185,7 +212,6 @@
                 </div>
             </div>
         </div>
-
         <div class="profile-actions">
             <button id="cancelButton" class="action-button cancel-button">Cancelar</button>
             <button id="saveButton" class="action-button save-button">Salvar Alterações</button>
@@ -203,7 +229,6 @@
         const editForms = document.querySelectorAll('.edit-form');
         const infoValues = document.querySelectorAll('.info-value');
         const notification = document.getElementById('notification');
-
         editButton.addEventListener('click', function() {
             editForms.forEach(form => form.style.display = 'block');
             infoValues.forEach(value => value.style.display = 'none');
@@ -213,7 +238,6 @@
             saveButton.style.display = 'block';
             editButton.style.display = 'none';
         });
-
         cancelButton.addEventListener('click', function() {
             editForms.forEach(form => form.style.display = 'none');
             infoValues.forEach(value => value.style.display = 'block');
@@ -223,18 +247,15 @@
             saveButton.style.display = 'none';
             editButton.style.display = 'block';
         });
-
         saveButton.addEventListener('click', function() {
             const newNome = document.getElementById('nomeInput').value;
             const newEmail = document.getElementById('emailInput').value;
             const senhaAntiga = document.getElementById('senhaAntigaInput').value;
             const novaSenha = document.getElementById('novaSenhaInput').value;
-
             if (!newNome || !newEmail) {
                 showNotification('Preencha todos os campos obrigatórios!', 'error');
                 return;
             }
-
             fetch('{{ route("profile.update") }}', {
                 method: 'POST',
                 headers: {
@@ -264,7 +285,6 @@
                 console.error('Error:', error);
             });
         });
-
         function showNotification(message, type) {
             if (!notification) return;
             notification.textContent = message;
