@@ -59,9 +59,17 @@
 
         /* Animação do logo */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .floating {
@@ -139,15 +147,109 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Toggle menu
+            // Toggle menu - usando suas variáveis existentes
             const menuIcon = document.querySelector('.menu-icon');
             const menu = document.querySelector('.menu-box');
-            if (menu && menuIcon) {
-                menuIcon.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                    menu.classList.toggle('visible');
-                });
+
+            // Verificar se os elementos existem antes de prosseguir
+            if (!menu || !menuIcon) {
+                console.warn('Menu ou ícone do menu não encontrado');
+                return;
             }
+
+            // Criar overlay se não existir
+            let overlay = document.querySelector('.menu-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'menu-overlay';
+                document.body.appendChild(overlay);
+            }
+
+            // Função para abrir o menu
+            function openMenu() {
+                menu.classList.remove('hidden');
+                menu.classList.add('visible');
+                overlay.classList.add('active');
+                menuIcon.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Previne scroll do body
+            }
+
+            // Função para fechar o menu
+            function closeMenu() {
+                menu.classList.remove('visible');
+                menu.classList.add('hidden');
+                overlay.classList.remove('active');
+                menuIcon.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restaura scroll do body
+            }
+
+            // Função toggle melhorada
+            function toggleMenu() {
+                if (menu.classList.contains('visible')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            }
+
+            // Event listener principal - usando seu código base
+            menuIcon.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            // Fechar menu ao clicar no overlay
+            overlay.addEventListener('click', function (e) {
+                e.preventDefault();
+                closeMenu();
+            });
+
+            // Fechar menu ao clicar fora dele
+            document.addEventListener('click', function (e) {
+                if (!menu.contains(e.target) && !menuIcon.contains(e.target) && menu.classList.contains('visible')) {
+                    closeMenu();
+                }
+            });
+
+            // Fechar menu com a tecla ESC
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menu.classList.contains('visible')) {
+                    closeMenu();
+                }
+            });
+
+            // Prevenir que cliques dentro do menu fechem o menu
+            menu.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+
+            // Adicionar animação suave nos links do menu
+            const menuLinks = menu.querySelectorAll('a');
+            menuLinks.forEach((link, index) => {
+                link.style.animationDelay = `${(index + 1) * 0.05}s`;
+            });
+
+            // Função para fechar o menu ao clicar em um link (opcional)
+            menuLinks.forEach(link => {
+                // Não fechar no logout pois ele tem um form
+                if (!link.querySelector('.logout-btn')) {
+                    link.addEventListener('click', function () {
+                        // Delay pequeno para ver a animação de hover
+                        setTimeout(() => {
+                            closeMenu();
+                        }, 150);
+                    });
+                }
+            });
+
+            // Expor funções globalmente para uso em outros scripts se necessário
+            window.toggleUserMenu = toggleMenu;
+            window.openUserMenu = openMenu;
+            window.closeUserMenu = closeMenu;
+
+            // Log para debug (remover em produção)
+            console.log('Menu de usuário inicializado com sucesso');
 
             // Exibir notificação por 3 segundos
             const notification = document.getElementById('notification');

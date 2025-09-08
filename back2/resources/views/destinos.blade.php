@@ -97,11 +97,25 @@
         }
 
         .user-header {
-            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 700;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .user-header:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .user-header i {
+            font-size: 16px;
         }
 
         /* Menu Styles */
