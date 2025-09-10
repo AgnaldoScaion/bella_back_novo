@@ -182,14 +182,14 @@
         <div class="profile-info">
             <div class="info-group">
                 <span class="info-label">Nome Completo</span>
-                <div id="nomeValue" class="info-value">{{ Auth::user()->name }}</div>
+                <div id="nomeValue" class="info-value">{{ Auth::user()->nome_completo }}</div>
                 <div class="edit-form">
-                    <input type="text" id="nomeInput" placeholder="Digite seu nome completo" value="{{ Auth::user()->name }}">
+                    <input type="text" id="nomeInput" placeholder="Digite seu nome completo" value="{{ Auth::user()->nome_completo }}">
                 </div>
             </div>
-            <div class="info-group" id="cpfGroup">
+            <div class="info-group" id="CPFGroup">
                 <span class="info-label">CPF</span>
-                <div id="cpfValue" class="info-value">{{ Auth::user()->cpf }}</div>
+                <div id="CPFValue" class="info-value">{{ Auth::user()->CPF }}</div>
             </div>
             <div class="info-group" id="senhaAntigaGroup" style="display: none;">
                 <span class="info-label">Senha Atual</span>
@@ -232,7 +232,7 @@
         editButton.addEventListener('click', function() {
             editForms.forEach(form => form.style.display = 'block');
             infoValues.forEach(value => value.style.display = 'none');
-            document.getElementById('cpfGroup').style.display = 'none';
+            document.getElementById('CPFGroup').style.display = 'none';
             document.getElementById('senhaAntigaGroup').style.display = 'block';
             cancelButton.style.display = 'block';
             saveButton.style.display = 'block';
@@ -241,7 +241,7 @@
         cancelButton.addEventListener('click', function() {
             editForms.forEach(form => form.style.display = 'none');
             infoValues.forEach(value => value.style.display = 'block');
-            document.getElementById('cpfGroup').style.display = 'block';
+            document.getElementById('CPFGroup').style.display = 'block';
             document.getElementById('senhaAntigaGroup').style.display = 'none';
             cancelButton.style.display = 'none';
             saveButton.style.display = 'none';
@@ -263,7 +263,7 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 body: JSON.stringify({
-                    name: newNome,
+                    nome_completo: newNome,
                     email: newEmail,
                     current_password: senhaAntiga,
                     new_password: novaSenha
@@ -288,7 +288,7 @@
         function showNotification(message, type) {
             if (!notification) return;
             notification.textContent = message;
-            notification.className = `notification ${type} show`;
+            notification.classnome_completo = `notification ${type} show`;
             setTimeout(() => notification.classList.remove('show'), 3000);
         }
     });

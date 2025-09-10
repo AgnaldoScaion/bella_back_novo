@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProfileController;
@@ -25,39 +24,29 @@ Route::middleware('auth')->group(function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
-
 Route::get('/termos', function () {
     return view('termos');
 })->name('termos');
-
 Route::get('/sobre-nos', function () {
     return view('sobre-nos');
 })->name('sobre-nos');
-
 Route::get('/destinos', function () {
     return view('destinos');
 })->name('destinos');
-
-Route::get('/restaurante', [RestauranteController::class, 'listar'])->name('restaurante.lista');
-Route::get('/restaurante/{id}', [RestauranteController::class, 'detalhes'])->name('restaurante.show')->where('id', '[0-9]+');
-
+Route::get('/restaurante', [
+    function () {
+        return view('restaurante');
+    }
+])->name('restaurante.lista');
 Route::get('/hoteis', function () {
     return view('hoteis');
 })->name('hoteis');
-
 Route::get('/pontos-turisticos', function () {
     return view('pontos-turisticos');
 })->name('pontos-turisticos');
-
 Route::get('/feedbacks', function () {
     return view('feedbacks');
 })->name('feedbacks');
-
 Route::get('/profile', function () {
     return view('profile.show');
 })->name('profile.show');
-
-// Removida temporariamente, pois você decidiu deixar de lado a redefinição de senha
-// Route::get('/password/reset', function () {
-//     return view('auth.passwords.email');
-// })->name('password.request');
