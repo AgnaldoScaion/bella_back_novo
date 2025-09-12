@@ -1,150 +1,16 @@
 @extends('layouts.app')
-@section('title', 'Restaurantes - Bella Avventura')
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurantes - Bella Avventura</title>
+@section('title', 'Restaurantes - Bella Avventura')
+
+@section('styles')
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
-    @section('styles')
-        <style>
-            @font-face {
-                font-family: 'GaramondBold';
+    <style>
+        @font-face {
+            font-family: 'GaramondBold';
             src: local('Garamond'), serif;
             font-weight: bold;
-        }
-
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            display: flex;
-            flex-direction: column;
-            background-color: #f3f7f3;
-        }
-
-        .wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            background-color: #A7D096;
-            position: relative;
-            height: 86px;
-        }
-
-        .header-img img {
-            height: 126px;
-            transition: transform 0.5s ease;
-        }
-
-        .header-img {
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
-            background-color: #A7D096;
-            position: relative;
-        }
-
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-icon:hover {
-            transform: scale(1.1);
-        }
-
-        .user-header {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .menu-box {
-            position: absolute;
-            top: 50px;
-            left: 20px;
-            background-color: #d6e3d6;
-            border-radius: 8px;
-            padding: 20px;
-            width: 260px;
-            display: flex;
-            gap: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-family: 'Garamond', serif;
-            z-index: 10;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .menu-lateral {
-            background-color: #88b68b;
-            width: 24px;
-            border-radius: 8px;
-        }
-
-        .menu-conteudo {
-            flex: 1;
-        }
-
-        .menu-conteudo h2 {
-            font-size: 20px;
-            margin: 0;
-            border-bottom: 1px solid #999;
-            padding-bottom: 10px;
-        }
-
-        .menu-conteudo ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 15px;
-        }
-
-        .menu-conteudo li {
-            margin: 15px 0;
-        }
-
-        .menu-conteudo a {
-            text-decoration: none;
-            color: black;
-            transition: color 0.2s;
-        }
-
-        .menu-conteudo a:hover {
-            color: #3a6545;
-        }
-
-        .hidden {
-            visibility: hidden;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .visible {
-            visibility: visible;
-            opacity: 1;
-            pointer-events: auto;
         }
 
         .main-content {
@@ -180,6 +46,8 @@
             border: 3px solid #D8E6D9;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             animation: fadeIn 0.8s ease;
+            max-width: 900px;
+            width: 100%;
         }
 
         .filtros-container h3 {
@@ -263,6 +131,9 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             min-height: 600px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .restaurante-card {
@@ -389,8 +260,10 @@
             padding-top: 1rem;
         }
 
-        .btn-reservar,
         .btn-ver-mais {
+            background-color: #f0f0f0;
+            color: #333;
+            width: 40%;
             padding: 0.6rem 1rem;
             border: none;
             border-radius: 5px;
@@ -399,14 +272,6 @@
             transition: all 0.3s ease;
             text-decoration: none;
             text-align: center;
-        }
-
-
-
-        .btn-ver-mais {
-            background-color: #f0f0f0;
-            color: #333;
-            width: 40%;
         }
 
         .btn-ver-mais:hover {
@@ -451,67 +316,19 @@
             font-size: 1.2rem;
         }
 
-        .footer {
-            background-color: #A7D096;
-            padding: 20px;
-            color: #000;
-            font-size: 14px;
+        .loading {
             text-align: center;
-            animation: fadeIn 1s ease;
+            padding: 2rem;
+            color: #666;
+            grid-column: 1/-1;
         }
 
-        .footer-top {
-            margin-bottom: 15px;
-            font-size: 33%;
-        }
-
-        .footer-top img {
-            width: 15%;
-            height: auto;
-            transition: transform 0.5s ease;
-        }
-
-        .footer-top:hover img {
-            transform: rotate(5deg) scale(1.05);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .footer-left,
-        .footer-center,
-        .footer-right {
-            flex: 1;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .footer-left:hover,
-        .footer-right:hover {
-            transform: translateY(-3px);
-        }
-
-        .footer-left {
-            text-align: left;
-        }
-
-        .footer-right {
-            text-align: right;
-        }
-
-        .footer-bottom a {
-            text-decoration: underline;
-            color: black;
-            transition: color 0.3s ease;
-        }
-
-        .footer-bottom a:hover {
-            color: #5a8f3d;
+        #map {
+            height: 300px;
+            width: 80%;
+            margin: 1rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .notificacao {
@@ -590,20 +407,6 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-        }
-
-        #map {
-            height: 300px;
-            width: 80%;
-            margin: 1rem auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
         @media (max-width: 768px) {
             .restaurantes-grid {
                 grid-template-columns: 1fr;
@@ -617,143 +420,94 @@
                 flex-direction: column;
             }
         }
-
-        @media (max-width: 600px) {
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-left,
-            .footer-center,
-            .footer-right {
-                text-align: center;
-            }
-
-            .header-img img {
-                height: 100px;
-                top: -30px;
-            }
-
-            .restaurante-footer {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .btn-ver-mais {
-                width: 100%;
-            }
-
-
-            .paginacao {
-                justify-content: center;
-            }
-        }
     </style>
-    @endsection
+@endsection
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <h1 class="page-title">Restaurantes</h1>
-            <p class="page-subtitle">Descubra os melhores sabores locais e internacionais. Filtre por tipo de cozinha,
-                preço e avaliações para encontrar o restaurante perfeito para sua experiência gastronômica.</p>
+@section('content')
+    <main class="main-content">
+        <h1 class="page-title">Restaurantes</h1>
+        <p class="page-subtitle">Descubra os melhores sabores locais e internacionais. Filtre por tipo de cozinha,
+            preço e avaliações para encontrar o restaurante perfeito para sua experiência gastronômica.</p>
 
-            <!-- Filtros -->
-            <div class="filtros-container">
-                <h3>Filtros</h3>
-                <form class="filtros-form">
-                    <div class="filtro-grupo">
-                        <label for="tipo-cozinha">Tipo de Cozinha</label>
-                        <select id="tipo-cozinha">
-                            <option value="">Todas</option>
-                            <option value="italiana">Italiana</option>
-                            <option value="japonesa">Japonesa</option>
-                            <option value="brasileira">Brasileira</option>
-                            <option value="francesa">Francesa</option>
-                            <option value="mexicana">Mexicana</option>
-                            <option value="arabe">Árabe</option>
-                            <option value="chinesa">Chinesa</option>
-                            <option value="indiana">Indiana</option>
-                        </select>
-                    </div>
-                    <div class="filtro-grupo">
-                        <label for="preco">Faixa de Preço</label>
-                        <select id="preco">
-                            <option value="">Todos</option>
-                            <option value="economico">$ - Econômico</option>
-                            <option value="medio">$$ - Médio</option>
-                            <option value="alto">$$$ - Alto</option>
-                            <option value="luxo">$$$$ - Luxo</option>
-                        </select>
-                    </div>
-                    <div class="filtro-grupo">
-                        <label for="avaliacao">Avaliação Mínima</label>
-                        <select id="avaliacao">
-                            <option value="">Qualquer</option>
-                            <option value="3">3+ Estrelas</option>
-                            <option value="4">4+ Estrelas</option>
-                            <option value="4.5">4.5+ Estrelas</option>
-                        </select>
-                    </div>
-                    <div class="filtro-grupo">
-                        <label for="localizacao">Cidade</label>
-                        <select id="localizacao">
-                            <option value="">Todas</option>
-                            <option value="sao-paulo">São Paulo</option>
-                            <option value="rio-de-janeiro">Rio de Janeiro</option>
-                            <option value="rio-grande-do-sul">Rio Grande do Sul</option>
-                            <option value="maranhao">Maranhão</option>
-                            <option value="minas-gerais">Minas Gerais</option>
-                            <option value="parana">Paraná</option>
-                            <option value="santa-catarina">Santa Catarina</option>
-                        </select>
-                    </div>
+        <!-- Filtros -->
+        <div class="filtros-container">
+            <h3>Filtros</h3>
+            <form class="filtros-form" id="filtros-form">
+                <div class="filtro-grupo">
+                    <label for="tipo-cozinha">Tipo de Cozinha</label>
+                    <select id="tipo-cozinha" name="tipo_cozinha">
+                        <option value="">Todas</option>
+                        <option value="italiana">Italiana</option>
+                        <option value="japonesa">Japonesa</option>
+                        <option value="brasileira">Brasileira</option>
+                        <option value="francesa">Francesa</option>
+                        <option value="mexicana">Mexicana</option>
+                        <option value="arabe">Árabe</option>
+                        <option value="chinesa">Chinesa</option>
+                        <option value="indiana">Indiana</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="preco">Faixa de Preço</label>
+                    <select id="preco" name="preco">
+                        <option value="">Todos</option>
+                        <option value="economico">$ - Econômico</option>
+                        <option value="medio">$$ - Médio</option>
+                        <option value="alto">$$$ - Alto</option>
+                        <option value="luxo">$$$$ - Luxo</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="avaliacao">Avaliação Mínima</label>
+                    <select id="avaliacao" name="avaliacao">
+                        <option value="">Qualquer</option>
+                        <option value="3">3+ Estrelas</option>
+                        <option value="4">4+ Estrelas</option>
+                        <option value="4.5">4.5+ Estrelas</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="localizacao">Cidade</label>
+                    <select id="localizacao" name="localizacao">
+                        <option value="">Todas</option>
+                        <option value="sao-paulo">São Paulo</option>
+                        <option value="rio-de-janeiro">Rio de Janeiro</option>
+                        <option value="rio-grande-do-sul">Rio Grande do Sul</option>
+                        <option value="maranhao">Maranhão</option>
+                        <option value="minas-gerais">Minas Gerais</option>
+                        <option value="parana">Paraná</option>
+                        <option value="santa-catarina">Santa Catarina</option>
+                    </select>
+                </div>
+                <div class="filtro-botoes">
+                    <button type="button" class="btn-filtrar" id="btn-filtrar">Aplicar Filtros</button>
+                    <button type="button" class="btn-limpar" id="btn-limpar">Limpar</button>
+                </div>
+            </form>
+        </div>
 
-                    <div class="filtro-botoes">
-                        <button type="button" class="btn-filtrar">Aplicar Filtros</button>
-                        <button type="button" class="btn-limpar">Limpar</button>
-                    </div>
-                </form>
-            </div>
+        <!-- Info da paginação -->
+        <div class="pagination-info" id="pagination-info">
+            Carregando restaurantes...
+        </div>
 
-            <!-- Info da paginação -->
-            <div class="pagination-info" id="pagination-info">
-                Carregando restaurantes...
-            </div>
+        <!-- Restaurantes Grid -->
+        <div class="restaurantes-grid" id="restaurantes-grid">
+            <div class="loading">Carregando restaurantes...</div>
+        </div>
 
-            <!-- Restaurantes Grid -->
-            <div class="restaurantes-grid" id="restaurantes-grid">
-                <div class="loading">Carregando restaurantes...</div>
-            </div>
-
-            <!-- Paginação -->
-            <div class="paginacao" id="paginacao">
-                <!-- Será gerada dinamicamente pelo JavaScript -->
-            </div>
-        </main>
+        <!-- Paginação -->
+        <div class="paginacao" id="paginacao"></div>
 
         <!-- Mapa -->
         <div id="map"></div>
 
-        <!-- Rodapé -->
-        <footer class="footer">
-            <div class="footer-top">
-                <a href="https://www.bellaavventura.com.br/">
-                    <img src="https://i.ibb.co/j9vGknyy/image.png" alt="image" border="0">
-                </a>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-left">
-                    <a href="mailto:bella.avventura@gmail.com">📧 bella.avventura@gmail.com</a>
-                </div>
-                <div class="footer-center">© 2025 Bella Avventura</div>
-                <div class="footer-right">
-                    <a href="../Paginas_principais/Termos_Condicoes.html">Termos e condições</a>
-                </div>
-            </div>
-        </footer>
-    </div>
+        <!-- Notificação -->
+        <div id="notificacao" class="notificacao"></div>
+    </main>
+@endsection
 
+@section('scripts')
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         // Base de dados de restaurantes
@@ -771,7 +525,7 @@
                 imagem: "https://i.ibb.co/wNDYyrGF/image.png",
                 badge: "Premium",
                 promocao: false,
-                link: "Restaurante - Jamile.html",
+                link: "Restaurante_Jamile.html",
                 lat: -23.5505,
                 lng: -46.6333
             },
@@ -1115,28 +869,28 @@
             const badgeText = restaurante.badge || (restaurante.promocao ? 'Promoção' : '');
 
             restauranteCard.innerHTML = `
-                <div class="restaurante-img">
-                    <img src="${restaurante.imagem}" alt="${restaurante.nome}">
-                    ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
-                </div>
-                <div class="restaurante-content">
-                    <div class="restaurante-header">
-                        <h3 class="restaurante-title">${restaurante.nome}</h3>
-                        <div class="restaurante-rating">
-                            <span class="star">★</span>${restaurante.avaliacao}
+                    <div class="restaurante-img">
+                        <img src="${restaurante.imagem}" alt="${restaurante.nome}">
+                        ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                    </div>
+                    <div class="restaurante-content">
+                        <div class="restaurante-header">
+                            <h3 class="restaurante-title">${restaurante.nome}</h3>
+                            <div class="restaurante-rating">
+                                <span class="star">★</span>${restaurante.avaliacao}
+                            </div>
+                        </div>
+                        <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
+                        <div class="restaurante-info">
+                            <p><span>📍</span> ${restaurante.endereco}</p>
+                            <p><span>⏰</span> ${restaurante.horario}</p>
+                            <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
+                        </div>
+                        <div class="restaurante-footer">
+                            <a href="${restaurante.link}" class="btn-ver-mais">Ver Detalhes</a>
                         </div>
                     </div>
-                    <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
-                    <div class="restaurante-info">
-                        <p><span>📍</span> ${restaurante.endereco}</p>
-                        <p><span>⏰</span> ${restaurante.horario}</p>
-                        <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
-                    </div>
-                    <div class="restaurante-footer">
-                        <a href="${restaurante.link}" class="btn-ver-mais">Ver Detalhes</a>
-                    </div>
-                </div>
-            `;
+                `;
 
             return restauranteCard;
         }
@@ -1149,6 +903,11 @@
             const startIndex = (paginaAtual - 1) * restaurantesPorPagina;
             const endIndex = startIndex + restaurantesPorPagina;
             const restaurantesPagina = restaurantesFiltrados.slice(startIndex, endIndex);
+
+            if (restaurantesPagina.length === 0) {
+                restaurantesGrid.innerHTML = '<div class="loading">Nenhum restaurante encontrado...</div>';
+                return;
+            }
 
             restaurantesPagina.forEach(restaurante => {
                 const restauranteCard = criarRestauranteCard(restaurante);
@@ -1167,6 +926,8 @@
         function atualizarPaginacao(totalPaginas) {
             const paginacao = document.getElementById('paginacao');
             paginacao.innerHTML = '';
+
+            if (totalPaginas <= 1) return;
 
             // Botão Anterior
             const btnAnterior = document.createElement('div');
@@ -1271,8 +1032,8 @@
         // Configura os eventos quando a página é carregada
         document.addEventListener('DOMContentLoaded', function () {
             // Configura os botões de filtro
-            document.querySelector('.btn-filtrar').addEventListener('click', aplicarFiltros);
-            document.querySelector('.btn-limpar').addEventListener('click', limparFiltros);
+            document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
+            document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
 
             // Exibe os restaurantes inicialmente
             exibirRestaurantes();
@@ -1281,86 +1042,15 @@
             map = L.map('map').setView([-23.5505, -46.6333], 4);
 
             // Adiciona uma camada de mapa
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}/.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
             // Adiciona marcadores para os restaurantes
             restaurantes.forEach(restaurante => {
                 L.marker([restaurante.lat, restaurante.lng]).addTo(map)
-                    .bindPopup(`<b>${restaurante.nome}</b><br>${restaurante.endereco}`)
-                    .openPopup();
-            });
-        });
-
-        // Verifica autenticação
-        function checkAuth() {
-            const userData = JSON.parse(localStorage.getItem('currentUser'));
-
-            if (userData) {
-                // Atualiza header
-                document.querySelector('.user-header').innerHTML = `
-                    <span>👤</span> ${userData.firstName}
-                `;
-
-                // Carrega menu logado
-                loadMenu('Menu_Logado.html');
-      } else {
-        // Carrega menu não logado
-        loadMenu('Menu_Nao_Logado.html');
-      }
-        }
-
-        // Carrega o menu
-        function loadMenu(menuFile) {
-            fetch(menuFile)
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById('menuContainer').innerHTML = html;
-                    setupMenu();
-                });
-        }
-
-        // Configura o menu
-        function setupMenu() {
-            const menuIcon = document.querySelector('.menu-icon');
-            const menu = document.querySelector('.menu-box');
-
-            if (menu && menuIcon) {
-                menuIcon.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                    menu.classList.toggle('visible');
-                });
-            }
-
-            // Configura logout se existir
-            const logoutBtn = document.getElementById('logout-link');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    localStorage.removeItem('currentUser');
-                    window.location.href = '../Paginas_principais/Entrada.html';
-                });
-            }
-        }
-
-        // Verifica autenticação e configura o menu
-        document.addEventListener('DOMContentLoaded', function () {
-            checkAuth();
-            setupMenu();
-
-            // Verifica mensagem de sucesso
-            const urlParams = new URLSearchParams(window.location.search);
-            const msg = urlParams.get('msg');
-
-            if (msg === 'login') {
-                showNotification('Login realizado com sucesso!', 'success');
-            } else if (msg === 'cadastro') {
-                showNotification('Cadastro realizado com sucesso!', 'success');
-            }
+                    .bindPopup(`<b>${restaurante.nome}</b><br>${restaurante.endereco}`);
+            })
         });
     </script>
-</body>
-
-</html>
 @endsection
