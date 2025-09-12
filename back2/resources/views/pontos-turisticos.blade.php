@@ -107,7 +107,7 @@
         }
 
         .btn-filtrar:hover {
-            background-color: край
+            background-color: #4a7d2d;
         }
 
         .btn-limpar {
@@ -309,7 +309,7 @@
 
         .pagina-btn.disabled {
             cursor: not-allowed;
-            opacity: 极
+            opacity: 0.5;
         }
 
         .pagina-seta {
@@ -474,41 +474,42 @@
             </div>
             <div class="filtro-grupo">
                 <label for="preco">Faixa de Preço</label>
-                <select id="preco" name="极
-                <option value="">Todos</option>
-                <option value="gratis">Gratuito</option>
-                <option value="economico">Econômico</option>
-                <option value="medio">Médio</option>
-                <option value="alto">Alto</option>
-            </select>
-        </div>
-        <div class="filtro-botoes">
-            <button type="button" class="btn-filtrar" id="btn-filtrar">Aplicar Filtros</button>
-            <button type="button" class="btn-limpar" id="btn-limpar">Limpar</button>
-        </div>
-    </form>
-</div>
+                <select id="preco" name="preco">
+                    <option value="">Todos</option>
+                    <option value="gratis">Gratuito</option>
+                    <option value="economico">Econômico</option>
+                    <option value="medio">Médio</option>
+                    <option value="alto">Alto</option>
+                </select>
+            </div>
+            <div class="filtro-botoes">
+                <button type="button" class="btn-filtrar" id="btn-filtrar">Aplicar Filtros</button>
+                <button type="button" class="btn-limpar" id="btn-limpar">Limpar</button>
+            </div>
+        </form>
+    </div>
 
-<!-- Info da paginação -->
-<div class="pagination-info" id="pagination-info">
-    Carregando pontos turísticos...
-</div>
+    <!-- Info da paginação -->
+    <div class="pagination-info" id="pagination-info">
+        Carregando pontos turísticos...
+    </div>
 
-<!-- Pontos Turísticos Grid -->
-<div class="pontos-grid" id="pontos-grid">
-    <div class="loading">Carregando pontos turísticos...</div>
-</div>
+    <!-- Pontos Turísticos Grid -->
+    <div class="pontos-grid" id="pontos-grid">
+        <div class="loading">Carregando pontos turísticos...</div>
+    </div>
 
-<!-- Paginação -->
-<div class="paginacao" id="paginacao"></div>
+    <!-- Paginação -->
+    <div class="paginacao" id="paginacao"></div>
 
-<!-- Mapa -->
-<div class="map-container">
-    <div id="map"></div>
-</div>
+    <!-- Mapa -->
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
 
-<!-- Notificação -->
-<div id="notificacao" class="notificacao"></div>
+    <!-- Notificação -->
+    <div id="notificacao" class="notificacao"></div>
+</main>
 @endsection
 
 @section('scripts')
@@ -616,7 +617,7 @@
                 precoTexto: "Alto",
                 cidade: "sp",
                 imagem: "https://i.ibb.co/5XLKDyhC/Catedral-da-S.png",
-                avaliacoes: 极
+                avaliacoes: 10200,
                 link: "pontos-turisticos/catedral-da-se",
                 lat: -23.5505,
                 lng: -46.6333
@@ -645,7 +646,7 @@
                 preco: "alto",
                 precoTexto: "Alto",
                 cidade: "sc",
-                imagem: "极
+                imagem: "https://i.ibb.co/ZRMkQCrw/Praia-da-Joaquina.png",
                 avaliacoes: 10200,
                 link: "pontos-turisticos/praia-joaquina",
                 lat: -27.6355,
@@ -688,7 +689,7 @@
                 avaliacao: 4.9,
                 localizacao: "Rio de Janeiro, RJ",
                 preco: "alto",
-                precoTexto: "极
+                precoTexto: "Alto",
                 cidade: "rj",
                 imagem: "https://i.ibb.co/tpFRvZ6Y/cristo-redentor-principal.jpg",
                 avaliacoes: 10200,
@@ -843,11 +844,11 @@
         // Função para criar um card de ponto turístico
         function criarPontoCard(ponto) {
             const pontoCard = document.createElement('div');
-            pontoCard.className = 'ponto-card show';
+            pontoCard.className = 'ponto-card';
 
             pontoCard.innerHTML = `
                 <div class="ponto-img">
-                    <img src="${ponto.imagem}" alt="${ponto.nome}">
+                    <img src="${ponto.imagem}" alt="${ponto.nome}" onerror="this.src='https://via.placeholder.com/300x180/5a8f3d/ffffff?text=Imagem+Indisponível'">
                 </div>
                 <div class="ponto-content">
                     <div class="ponto-header">
@@ -867,6 +868,11 @@
                 </div>
             `;
 
+            // Adiciona a animação após um pequeno delay
+            setTimeout(() => {
+                pontoCard.classList.add('show');
+            }, 100);
+
             return pontoCard;
         }
 
@@ -881,6 +887,8 @@
 
             if (pontosPagina.length === 0) {
                 pontosGrid.innerHTML = '<div class="loading">Nenhum ponto turístico encontrado...</div>';
+                atualizarPaginacao(0);
+                atualizarMapa();
                 return;
             }
 
@@ -915,6 +923,7 @@
                 if (paginaAtual > 1) {
                     paginaAtual--;
                     exibirPontosTuristicos();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
             paginacao.appendChild(btnAnterior);
@@ -927,6 +936,7 @@
                 paginaBtn.addEventListener('click', () => {
                     paginaAtual = i;
                     exibirPontosTuristicos();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
                 paginacao.appendChild(paginaBtn);
             }
@@ -939,6 +949,7 @@
                 if (paginaAtual < totalPaginas) {
                     paginaAtual++;
                     exibirPontosTuristicos();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
             paginacao.appendChild(btnProximo);
@@ -1021,15 +1032,21 @@
             document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
 
             // Inicializa o mapa
-            map = L.map('map').setView([-15.7797, -47.9297], 4);
+            try {
+                map = L.map('map').setView([-15.7797, -47.9297], 4);
 
-            // Adiciona uma camada de mapa
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+                // Adiciona uma camada de mapa
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
 
-            // Exibe os pontos turísticos inicialmente
-            exibirPontosTuristicos();
+                // Exibe os pontos turísticos inicialmente
+                exibirPontosTuristicos();
+            } catch (error) {
+                console.error('Erro ao inicializar o mapa:', error);
+                document.getElementById('pagination-info').textContent = 'Erro ao carregar o mapa.';
+                exibirPontosTuristicos(); // Ainda exibe os pontos mesmo com erro no mapa
+            }
         });
     </script>
 @endsection

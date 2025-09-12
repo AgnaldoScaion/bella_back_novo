@@ -76,6 +76,65 @@
         .floating {
             animation: float 3s ease-in-out infinite;
         }
+
+        /* ===== ESTILOS PARA CARREGAMENTO DE IMAGENS ===== */
+        .image-loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+        
+        .image-error {
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 14px;
+            border: 1px dashed #dee2e6;
+            min-height: 100px;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Estilo para imagens com carregamento otimizado */
+        img.lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        img.lazy-load.loaded {
+            opacity: 1;
+        }
+
+        /* Estilo para imagens de background com lazy loading */
+        .lazy-bg {
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Overlay para menu */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 
@@ -98,7 +157,8 @@
         <div class="header">
             <div class="header-img">
                 <a href="{{ route('home') }}">
-                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating" />
+                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating" 
+                         onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRTBFMEUwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZDNzU3RCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJlbGxhIEF2dmVudHVyYTwvdGV4dD48L3N2Zz4='"/>
                 </a>
             </div>
         </div>
@@ -131,7 +191,8 @@
         <footer class="footer">
             <div class="footer-top">
                 <a href="https://www.bellaavventura.com.br/">
-                    <img src="https://i.ibb.co/j9vGknyy/image.png" alt="Bella Avventura">
+                    <img src="https://i.ibb.co/j9vGknyy/image.png" alt="Bella Avventura" 
+                         onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNFMEUwRTAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNkM3NTdEIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+QmVsbGEgQXZ2ZW50dXJhPC90ZXh0Pjwvc3ZnPg=='"/>
                 </a>
             </div>
             <div class="footer-bottom">
@@ -147,7 +208,135 @@
     </div>
 
     <script>
+        // Sistema avançado de carregamento de imagens com retry
+        function initImageLoadingSystem() {
+            // Configuração
+            const MAX_RETRY_ATTEMPTS = 3;
+            const RETRY_DELAY = 5000; // 5 segundos
+            const COLD_STORAGE_DELAY = 30000; // 30 segundos para storage frio
+            
+            let observer;
+            
+            // Inicializar IntersectionObserver se disponível
+            if ('IntersectionObserver' in window) {
+                observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            loadImageWithRetry(img);
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '200px 0px',
+                    threshold: 0.01
+                });
+            }
+            
+            // Função principal para carregar imagens com sistema de retry
+            function loadImageWithRetry(imgElement, retryCount = 0) {
+                const src = imgElement.getAttribute('data-src') || imgElement.src;
+                if (!src) return;
+                
+                // Mostra placeholder de carregamento
+                imgElement.classList.add('image-loading');
+                imgElement.classList.remove('image-error', 'loaded');
+                
+                const img = new Image();
+                
+                img.onload = function() {
+                    // Sucesso no carregamento
+                    if (imgElement.hasAttribute('data-src')) {
+                        imgElement.src = src;
+                        imgElement.removeAttribute('data-src');
+                    }
+                    imgElement.classList.remove('image-loading');
+                    imgElement.classList.add('loaded');
+                    
+                    // Força o cache do navegador
+                    preloadImage(src);
+                };
+                
+                img.onerror = function() {
+                    imgElement.classList.remove('image-loading');
+                    
+                    if (retryCount < MAX_RETRY_ATTEMPTS) {
+                        // Tenta novamente após um delay
+                        const delay = retryCount === 0 ? COLD_STORAGE_DELAY : RETRY_DELAY;
+                        
+                        setTimeout(() => {
+                            console.log(`Tentativa ${retryCount + 1} para imagem: ${src}`);
+                            loadImageWithRetry(imgElement, retryCount + 1);
+                        }, delay);
+                    } else {
+                        // Todas as tentativas falharam
+                        imgElement.classList.add('image-error');
+                        console.warn(`Falha ao carregar imagem após ${MAX_RETRY_ATTEMPTS} tentativas: ${src}`);
+                    }
+                };
+                
+                // Inicia o carregamento com parâmetro único para evitar cache em retries
+                if (retryCount > 0) {
+                    img.src = `${src}${src.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+                } else {
+                    img.src = src;
+                }
+            }
+            
+            // Pré-carrega imagens para o cache do navegador
+            function preloadImage(url) {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = url;
+                document.head.appendChild(link);
+                
+                // Remove após um tempo para limpeza
+                setTimeout(() => {
+                    if (link.parentNode) {
+                        document.head.removeChild(link);
+                    }
+                }, 1000);
+            }
+            
+            // Inicializa o lazy loading para todas as imagens
+            function initImageLoading() {
+                const images = document.querySelectorAll('img[data-src], img:not([data-src])');
+                
+                images.forEach(img => {
+                    // Se já tem src, carrega normalmente
+                    if (img.src && !img.hasAttribute('data-src')) {
+                        loadImageWithRetry(img);
+                    } 
+                    // Se tem data-src, usa lazy loading
+                    else if (img.hasAttribute('data-src')) {
+                        if (observer) {
+                            observer.observe(img);
+                        } else {
+                            // Fallback para browsers sem IntersectionObserver
+                            loadImageWithRetry(img);
+                        }
+                    }
+                });
+            }
+            
+            // Inicializa quando o DOM estiver pronto
+            initImageLoading();
+            
+            // Sistema de retry para imagens que falharam
+            setInterval(() => {
+                document.querySelectorAll('img.image-error').forEach(img => {
+                    const src = img.getAttribute('data-src') || img.src;
+                    console.log(`Retentando imagem que falhou anteriormente: ${src}`);
+                    loadImageWithRetry(img);
+                });
+            }, 60000); // Tenta a cada 60 segundos
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar sistema de carregamento de imagens
+            initImageLoadingSystem();
+
             // Toggle menu - usando suas variáveis existentes
             const menuIcon = document.querySelector('.menu-icon');
             const menu = document.querySelector('.menu-box');
@@ -172,7 +361,7 @@
                 menu.classList.add('visible');
                 overlay.classList.add('active');
                 menuIcon.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Previne scroll do body
+                document.body.style.overflow = 'hidden';
             }
 
             // Função para fechar o menu
@@ -181,7 +370,7 @@
                 menu.classList.add('hidden');
                 overlay.classList.remove('active');
                 menuIcon.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Restaura scroll do body
+                document.body.style.overflow = 'auto';
             }
 
             // Função toggle melhorada
@@ -193,7 +382,7 @@
                 }
             }
 
-            // Event listener principal - usando seu código base
+            // Event listener principal
             menuIcon.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -231,12 +420,10 @@
                 link.style.animationDelay = `${(index + 1) * 0.05}s`;
             });
 
-            // Função para fechar o menu ao clicar em um link (opcional)
+            // Função para fechar o menu ao clicar em um link
             menuLinks.forEach(link => {
-                // Não fechar no logout pois ele tem um form
                 if (!link.querySelector('.logout-btn')) {
                     link.addEventListener('click', function () {
-                        // Delay pequeno para ver a animação de hover
                         setTimeout(() => {
                             closeMenu();
                         }, 150);
@@ -244,13 +431,10 @@
                 }
             });
 
-            // Expor funções globalmente para uso em outros scripts se necessário
+            // Expor funções globalmente
             window.toggleUserMenu = toggleMenu;
             window.openUserMenu = openMenu;
             window.closeUserMenu = closeMenu;
-
-            // Log para debug (remover em produção)
-            console.log('Menu de usuário inicializado com sucesso');
 
             // Exibir notificação por 3 segundos
             const notification = document.getElementById('notification');

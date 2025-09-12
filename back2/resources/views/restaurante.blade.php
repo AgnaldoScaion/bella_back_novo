@@ -1038,19 +1038,75 @@
             // Exibe os restaurantes inicialmente
             exibirRestaurantes();
 
-            // Inicializa o mapa
-            map = L.map('map').setView([-23.5505, -46.6333], 4);
+            // Inicializa o mapa com tratamento de erros
+            try {
+                map = L.map('map').setView([-15.7797, -47.9297], 4);
 
-            // Adiciona uma camada de mapa
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}/.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+                // CORREÇÃO: URL correto do tile layer (removida a barra extra)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19,
+                    detectRetina: true // Melhora a qualidade em displays retina
+                }).addTo(map);
 
-            // Adiciona marcadores para os restaurantes
-            restaurantes.forEach(restaurante => {
-                L.marker([restaurante.lat, restaurante.lng]).addTo(map)
-                    .bindPopup(`<b>${restaurante.nome}</b><br>${restaurante.endereco}`);
-            })
+                // Adiciona marcadores para os restaurantes
+                restaurantes.forEach(restaurante => {
+                    if (restaurante.lat && restaurante.lng) {
+                        L.marker([restaurante.lat, restaurante.lng])
+                            .addTo(map)
+                            .bindPopup(`<b>${restaurante.nome}</b><br>${restaurante.endereco}`);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Erro ao carregar o mapa:', error);
+                // Exibe uma mensagem de erro no container do mapa
+                document.getElementById('map').innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: #666;">
+                        <p>⚠️ Não foi possível carregar o mapa</p>
+                        <p>Verifique sua conexão com a internet</p>
+                    </div>
+                `;
+            }
         });
+
+        // Função para aplicar os filtros - ATUALIZADA para funcionar com o mapa
+        function aplicarFiltros() {
+            const tipoCozinha = document.getElementById('tipo-cozinha').value;
+            const preco = document.getElementById('preco').value;
+            const avaliacao = document.getElementById('avaliacao').value;
+            const localizacao = document.getElementById('localizacao').value;
+
+            restaurantesFiltrados = restaurantes.filter(restaurante => {
+                return (
+                    (tipoCozinha === '' || restaurante.tipos.includes(tipoCozinha)) &&
+                    (preco === '' || restaurante.preco === preco) &&
+                    (avaliacao === '' || restaurante.avaliacao >= parseFloat(avaliacao)) &&
+                    (localizacao === '' || restaurante.cidade === localizacao)
+                );
+            });
+
+            paginaAtual = 1;
+            exibirRestaurantes();
+
+            // Ajusta o mapa para a cidade selecionada
+            if (localizacao && map) {
+                const cidadeCoordenadas = {
+                    "sao-paulo": [-23.5505, -46.6333],
+                    "rio-de-janeiro": [-22.9068, -43.1729],
+                    "rio-grande-do-sul": [-30.0346, -51.2177],
+                    "maranhao": [-2.55, -44.3],
+                    "minas-gerais": [-19.9167, -43.9345],
+                    "parana": [-25.4296, -49.2713],
+                    "santa-catarina": [-27.5954, -48.5480]
+                };
+
+                if (cidadeCoordenadas[localizacao]) {
+                    map.setView(cidadeCoordenadas[localizacao], 12);
+                }
+            }
+
+            showNotification('Filtro aplicado com sucesso!', 'success');
+        }
     </script>
 @endsection
