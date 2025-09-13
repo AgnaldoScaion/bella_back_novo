@@ -38,6 +38,10 @@ Route::get('/restaurante', [
         return view('restaurante');
     }
 ])->name('restaurante.lista');
+Route::get('/restaurantes/cipriani', [RestauranteController::class, 'showCipriani'])->name('restaurante.cipriani');
+
+
+
 Route::get('/hoteis', function () {
     return view('hoteis');
 })->name('hoteis');
