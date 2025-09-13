@@ -5,20 +5,19 @@
 @section('styles')
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         @font-face {
             font-family: 'GaramondBold';
             src: local('Garamond'), serif;
             font-weight: bold;
         }
-
         .main-content {
             padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
             flex: 1;
         }
-
         .page-title {
             font-family: 'GaramondBold', serif;
             text-align: center;
@@ -26,7 +25,6 @@
             margin-bottom: 2rem;
             font-size: 2.5rem;
         }
-
         .page-subtitle {
             text-align: center;
             font-weight: 400;
@@ -36,7 +34,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .filtros-container {
             background-color: white;
             border-radius: 12px;
@@ -48,31 +45,26 @@
             max-width: 900px;
             width: 100%;
         }
-
         .filtros-container h3 {
             color: #5a8f3d;
             margin-top: 0;
             margin-bottom: 1rem;
         }
-
         .filtros-form {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-
         .filtro-grupo {
             flex: 1;
             min-width: 200px;
         }
-
         .filtro-grupo label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 400;
             color: #333;
         }
-
         .filtro-grupo select,
         .filtro-grupo input {
             width: 100%;
@@ -81,7 +73,6 @@
             border-radius: 5px;
             font-family: 'Inter', sans-serif;
         }
-
         .filtro-botoes {
             display: flex;
             gap: 1rem;
@@ -89,7 +80,6 @@
             justify-content: center;
             width: 100%;
         }
-
         .btn-filtrar,
         .btn-limpar {
             padding: 0.8rem 1.5rem;
@@ -99,32 +89,26 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .btn-filtrar {
             background-color: #5a8f3d;
             color: white;
         }
-
         .btn-filtrar:hover {
             background-color: #4a7d2d;
         }
-
         .btn-limpar {
             background-color: #f0f0f0;
             color: #333;
         }
-
         .btn-limpar:hover {
             background-color: #e0e0e0;
         }
-
         .pagination-info {
             text-align: center;
             margin-bottom: 1rem;
             color: #666;
             font-weight: 400;
         }
-
         .hoteis-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -134,7 +118,6 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .hotel-card {
             background: white;
             border-radius: 12px;
@@ -148,34 +131,28 @@
             opacity: 0;
             transform: translateY(20px);
         }
-
         .hotel-card.show {
             opacity: 1;
             transform: translateY(0);
         }
-
         .hotel-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-
         .hotel-img {
             height: 180px;
             overflow: hidden;
             position: relative;
         }
-
         .hotel-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-
         .hotel-card:hover .hotel-img img {
             transform: scale(1.1);
         }
-
         .hotel-badge {
             position: absolute;
             top: 10px;
@@ -187,70 +164,58 @@
             font-size: 0.8rem;
             font-weight: bold;
         }
-
         .hotel-promocao {
             background-color: #ff6b6b;
         }
-
         .hotel-content {
             padding: 1.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-
         .hotel-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 0.5rem;
         }
-
         .hotel-title {
             font-size: 1.3rem;
             color: #5a8f3d;
             margin: 0;
         }
-
         .hotel-rating {
             display: flex;
             align-items: center;
             font-weight: bold;
         }
-
         .star {
             color: #FFD700;
             margin-right: 3px;
         }
-
         .hotel-location {
             margin-bottom: 1rem;
             color: #666;
             font-size: 0.9rem;
             font-weight: 400;
         }
-
         .hotel-info {
             margin-bottom: 1rem;
             flex: 1;
         }
-
         .hotel-info p {
             margin: 0.5rem 0;
             font-weight: 400;
             display: flex;
             align-items: center;
         }
-
         .hotel-info p span {
             margin-right: 0.5rem;
         }
-
         .hotel-price {
             font-weight: bold;
             color: #5a8f3d;
         }
-
         .hotel-footer {
             display: flex;
             justify-content: space-between;
@@ -258,7 +223,6 @@
             border-top: 1px solid #D8E6D9;
             padding-top: 1rem;
         }
-
         .btn-ver-mais {
             background-color: #f0f0f0;
             color: #333;
@@ -272,11 +236,9 @@
             text-decoration: none;
             text-align: center;
         }
-
         .btn-ver-mais:hover {
             background-color: #e0e0e0;
         }
-
         .paginacao {
             display: flex;
             justify-content: center;
@@ -285,7 +247,6 @@
             gap: 0.5rem;
             flex-wrap: wrap;
         }
-
         .pagina-btn {
             width: 40px;
             height: 40px;
@@ -299,29 +260,31 @@
             background-color: white;
             font-weight: bold;
         }
-
         .pagina-btn:hover,
         .pagina-btn.active {
             background-color: #5a8f3d;
             color: white;
         }
-
         .pagina-btn.disabled {
             cursor: not-allowed;
             opacity: 0.5;
         }
-
         .pagina-seta {
             font-size: 1.2rem;
         }
-
         .loading {
             text-align: center;
             padding: 2rem;
             color: #666;
             grid-column: 1/-1;
         }
-
+        #map {
+            height: 300px;
+            width: 80%;
+            margin: 1rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
         .notificacao {
             background-color: #5a8f3d;
             color: white;
@@ -338,12 +301,10 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             min-width: 300px;
         }
-
         .notificacao.show {
             display: block;
             animation: fadeOut 4s forwards;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -352,7 +313,6 @@
                 opacity: 1;
             }
         }
-
         @keyframes fadeOut {
             0% {
                 opacity: 1;
@@ -364,7 +324,6 @@
                 opacity: 0;
             }
         }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -375,7 +334,6 @@
                 transform: translateY(0);
             }
         }
-
         @keyframes float {
             0% {
                 transform: translateY(0px);
@@ -387,11 +345,9 @@
                 transform: translateY(0px);
             }
         }
-
         .floating {
             animation: float 3s ease-in-out infinite;
         }
-
         @media (max-width: 768px) {
             .hoteis-grid {
                 grid-template-columns: 1fr;
@@ -410,14 +366,23 @@
 <main class="main-content">
     <h1 class="page-title">Hotéis</h1>
     <p class="page-subtitle">Encontre os melhores hotéis para sua estadia. Filtre por preço, localização e comodidades para uma experiência personalizada.</p>
-    
+
     <!-- Filtros -->
     <div class="filtros-container">
         <h3>Filtros</h3>
         <form class="filtros-form" id="filtros-form">
             <div class="filtro-grupo">
                 <label for="destino">Destino</label>
-                <input type="text" id="destino" placeholder="Para onde você vai?">
+                <select id="destino" name="destino">
+                    <option value="">Todas as Cidades</option>
+                    <option value="sp">São Paulo</option>
+                    <option value="rj">Rio de Janeiro</option>
+                    <option value="rs">Rio Grande do Sul</option>
+                    <option value="ma">Maranhão</option>
+                    <option value="mg">Minas Gerais</option>
+                    <option value="pr">Paraná</option>
+                    <option value="sc">Santa Catarina</option>
+                </select>
             </div>
             <div class="filtro-grupo">
                 <label for="hospedes">Hóspedes</label>
@@ -454,26 +419,30 @@
             </div>
         </form>
     </div>
-    
+
     <!-- Info da paginação -->
     <div class="pagination-info" id="pagination-info">
         Carregando hotéis...
     </div>
-    
+
     <!-- Hotéis Grid -->
     <div class="hoteis-grid" id="hoteis-grid">
         <div class="loading">Carregando hotéis...</div>
     </div>
-    
+
     <!-- Paginação -->
     <div class="paginacao" id="paginacao"></div>
-    
+
+    <!-- Mapa -->
+    <div id="map"></div>
+
     <!-- Notificação -->
     <div id="notificacao" class="notificacao"></div>
 </main>
 @endsection
 
 @section('scripts')
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         // Base de dados de hotéis
         const hoteis = [
@@ -485,10 +454,12 @@
                 preco: 650,
                 precoTexto: "R$ 650",
                 cidade: "sp",
-                imagem: "https://i.ibb.co/XXXXXXX/capsula-hotel.jpg",
+                imagem: "https://i.ibb.co/VYFJ1p3n/capsula-hotel.jpg",
                 avaliacoes: 2378,
                 link: "hoteis/capsula-hotel-sp",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -23.5505,
+                lng: -46.6333
             },
             {
                 id: 2,
@@ -498,10 +469,12 @@
                 preco: 850,
                 precoTexto: "R$ 850",
                 cidade: "rj",
-                imagem: "https://i.ibb.co/XXXXXXX/atlantico-business.jpg",
+                imagem: "https://i.ibb.co/7NYJH7rM/Hotel-atalntico.webp",
                 avaliacoes: 1975,
                 link: "hoteis/atlantico-business-rj",
-                categoria: "premium"
+                categoria: "premium",
+                lat: -22.9068,
+                lng: -43.1729
             },
             {
                 id: 3,
@@ -511,10 +484,12 @@
                 preco: 550,
                 precoTexto: "R$ 550",
                 cidade: "mg",
-                imagem: "https://i.ibb.co/XXXXXXX/minas-garden.jpg",
+                imagem: "https://i.ibb.co/3yLL6n1c/Minas-Garden-Hotel.jpg",
                 avaliacoes: 1526,
                 link: "hoteis/minas-garden-mg",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -21.7874,
+                lng: -46.5693
             },
             {
                 id: 4,
@@ -524,10 +499,12 @@
                 preco: 580,
                 precoTexto: "R$ 580",
                 cidade: "ma",
-                imagem: "https://i.ibb.co/XXXXXXX/blue-tree.jpg",
+                imagem: "https://i.ibb.co/tTWQd0GW/Blue-Tree-Towers.jpg",
                 avaliacoes: 3494,
                 link: "hoteis/blue-tree-ma",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -2.5307,
+                lng: -44.3068
             },
             {
                 id: 5,
@@ -537,10 +514,12 @@
                 preco: 980,
                 precoTexto: "R$ 980",
                 cidade: "sc",
-                imagem: "https://i.ibb.co/XXXXXXX/ingleses-palace.jpg",
+                imagem: "https://i.ibb.co/1YHgJM9K/ingleses-palace-hotel.jpg",
                 avaliacoes: 1550,
                 link: "hoteis/ingleses-palace-sc",
-                categoria: "premium"
+                categoria: "premium",
+                lat: -27.5954,
+                lng: -48.5480
             },
             {
                 id: 6,
@@ -550,10 +529,12 @@
                 preco: 480,
                 precoTexto: "R$ 480",
                 cidade: "rs",
-                imagem: "https://i.ibb.co/XXXXXXX/colline-france.jpg",
+                imagem: "https://i.ibb.co/VWH7mcc8/hotel-colline-france-gramado.jpg",
                 avaliacoes: 1526,
                 link: "hoteis/colline-france-rs",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -29.3739,
+                lng: -50.8811
             },
             {
                 id: 7,
@@ -563,10 +544,12 @@
                 preco: 880,
                 precoTexto: "R$ 880",
                 cidade: "rj",
-                imagem: "https://i.ibb.co/XXXXXXX/atlantico-copacabana.jpg",
+                imagem: "https://i.ibb.co/V0DXvrSj/hotel-atlantico-business.jpg",
                 avaliacoes: 6362,
                 link: "hoteis/atlantico-copacabana-rj",
-                categoria: "premium"
+                categoria: "premium",
+                lat: -22.9711,
+                lng: -43.1828
             },
             {
                 id: 8,
@@ -576,10 +559,12 @@
                 preco: 780,
                 precoTexto: "R$ 780",
                 cidade: "rj",
-                imagem: "https://i.ibb.co/XXXXXXX/atlantico-praia.jpg",
+                imagem: "https://i.ibb.co/NgCYTM38/praia-hotel.jpg",
                 avaliacoes: 3695,
                 link: "hoteis/atlantico-praia-rj",
-                categoria: "premium"
+                categoria: "premium",
+                lat: -22.9721,
+                lng: -43.1838
             },
             {
                 id: 9,
@@ -589,10 +574,12 @@
                 preco: 680,
                 precoTexto: "R$ 680",
                 cidade: "rs",
-                imagem: "https://i.ibb.co/XXXXXXX/continental.jpg",
+                imagem: "https://i.ibb.co/Pzj4B8sY/hotel-continental.jpg",
                 avaliacoes: 3281,
                 link: "hoteis/continental-rs",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -30.0346,
+                lng: -51.2177
             },
             {
                 id: 10,
@@ -602,10 +589,12 @@
                 preco: 680,
                 precoTexto: "R$ 680",
                 cidade: "pr",
-                imagem: "https://i.ibb.co/XXXXXXX/goldmen-express.jpg",
+                imagem: "https://i.ibb.co/5Xr5wYRn/hotel-gold.jpg",
                 avaliacoes: 58,
                 link: "hoteis/goldmen-express-pr",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -23.6633,
+                lng: -52.6108
             },
             {
                 id: 11,
@@ -615,10 +604,12 @@
                 preco: 980,
                 precoTexto: "R$ 980",
                 cidade: "sp",
-                imagem: "https://i.ibb.co/XXXXXXX/gran-villagio.jpg",
+                imagem: "https://i.ibb.co/CRj4cTP/Gran-Villagio-Hotel.png",
                 avaliacoes: 1425,
                 link: "hoteis/gran-villagio-sp",
-                categoria: "premium"
+                categoria: "premium",
+                lat: -23.5515,
+                lng: -46.6343
             },
             {
                 id: 12,
@@ -628,10 +619,12 @@
                 preco: 870,
                 precoTexto: "R$ 870",
                 cidade: "rs",
-                imagem: "https://i.ibb.co/XXXXXXX/life-infinity.jpg",
+                imagem: "https://i.ibb.co/1YkDLFzJ/infinity-hotel.jpg",
                 avaliacoes: 205,
                 link: "hoteis/life-infinity-rs",
-                categoria: "premium"
+                categoria: "premium",
+                lat: -29.3749,
+                lng: -50.8821
             },
             {
                 id: 13,
@@ -641,10 +634,12 @@
                 preco: 630,
                 precoTexto: "R$ 630",
                 cidade: "sc",
-                imagem: "https://i.ibb.co/XXXXXXX/oceania-park.jpg",
+                imagem: "https://i.ibb.co/qLp1GJFc/Hotel-oceania.jpg",
                 avaliacoes: 4103,
                 link: "hoteis/oceania-park-sc",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -27.4510,
+                lng: -48.5500
             },
             {
                 id: 14,
@@ -654,10 +649,12 @@
                 preco: 680,
                 precoTexto: "R$ 680",
                 cidade: "mg",
-                imagem: "https://i.ibb.co/XXXXXXX/por-do-sol.jpg",
+                imagem: "https://i.ibb.co/m5WpdDSv/hotel-sol.jpg",
                 avaliacoes: 247,
                 link: "hoteis/por-do-sol-mg",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -22.7497,
+                lng: -45.9911
             },
             {
                 id: 15,
@@ -667,10 +664,12 @@
                 preco: 650,
                 precoTexto: "R$ 650",
                 cidade: "pr",
-                imagem: "https://i.ibb.co/XXXXXXX/agua-marinha.jpg",
+                imagem: "https://i.ibb.co/fY0nGHmw/Hotel-Pousada-Agua-Marinha.jpg",
                 avaliacoes: 1182,
                 link: "hoteis/agua-marinha-pr",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -25.8800,
+                lng: -48.5833
             },
             {
                 id: 16,
@@ -680,10 +679,12 @@
                 preco: 580,
                 precoTexto: "R$ 580",
                 cidade: "sc",
-                imagem: "https://i.ibb.co/XXXXXXX/canto-vigia.jpg",
+                imagem: "https://i.ibb.co/HfPvqV9P/hotel-canto.jpg",
                 avaliacoes: 651,
                 link: "hoteis/canto-vigia-sc",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -26.7833,
+                lng: -48.6167
             },
             {
                 id: 17,
@@ -693,10 +694,12 @@
                 preco: 580,
                 precoTexto: "R$ 580",
                 cidade: "ma",
-                imagem: "https://i.ibb.co/XXXXXXX/pousada-universal.jpg",
+                imagem: "https://i.ibb.co/wNdvDFv4/hotel-universal.webp",
                 avaliacoes: 276,
                 link: "hoteis/pousada-universal-ma",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -7.3619,
+                lng: -46.6744
             },
             {
                 id: 18,
@@ -706,10 +709,12 @@
                 preco: 550,
                 precoTexto: "R$ 550",
                 cidade: "ma",
-                imagem: "https://i.ibb.co/XXXXXXX/hotel-rios.jpg",
+                imagem: "https://i.ibb.co/N4tRbrF/hotel-rios.jpg",
                 avaliacoes: 80,
                 link: "hoteis/hotel-rios-ma",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -7.5321,
+                lng: -46.0355
             },
             {
                 id: 19,
@@ -719,10 +724,12 @@
                 preco: 650,
                 precoTexto: "R$ 650",
                 cidade: "sp",
-                imagem: "https://i.ibb.co/XXXXXXX/san-michel.jpg",
+                imagem: "https://i.ibb.co/7Jr9J0NJ/michel-hotel.jpg",
                 avaliacoes: 2526,
                 link: "hoteis/san-michel-sp",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -23.5440,
+                lng: -46.6423
             },
             {
                 id: 20,
@@ -732,10 +739,12 @@
                 preco: 650,
                 precoTexto: "R$ 650",
                 cidade: "pr",
-                imagem: "https://i.ibb.co/XXXXXXX/viale-cataratas.jpg",
+                imagem: "https://i.ibb.co/5xnLP14N/Viale-Cataratas-Hotel.jpg",
                 avaliacoes: 1864,
                 link: "hoteis/viale-cataratas-pr",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -25.5478,
+                lng: -54.5873
             },
             {
                 id: 21,
@@ -745,10 +754,12 @@
                 preco: 550,
                 precoTexto: "R$ 550",
                 cidade: "mg",
-                imagem: "https://i.ibb.co/XXXXXXX/villa-lobos.jpg",
+                imagem: "https://i.ibb.co/SXsj4K6f/Hotel-spa.jpg",
                 avaliacoes: 13335,
                 link: "hoteis/villa-lobos-mg",
-                categoria: "medio"
+                categoria: "medio",
+                lat: -22.8548,
+                lng: -46.3186
             }
         ];
 
@@ -756,12 +767,12 @@
         const hoteisPorPagina = 6;
         let paginaAtual = 1;
         let hoteisFiltrados = [...hoteis];
+        let map;
 
         // Função para criar um card de hotel
         function criarHotelCard(hotel) {
             const hotelCard = document.createElement('div');
             hotelCard.className = 'hotel-card show';
-
             hotelCard.innerHTML = `
                 <div class="hotel-img">
                     <img src="${hotel.imagem}" alt="${hotel.nome}">
@@ -783,7 +794,6 @@
                     </div>
                 </div>
             `;
-
             return hotelCard;
         }
 
@@ -791,25 +801,20 @@
         function exibirHoteis() {
             const hoteisGrid = document.getElementById('hoteis-grid');
             hoteisGrid.innerHTML = '';
-
             const startIndex = (paginaAtual - 1) * hoteisPorPagina;
             const endIndex = startIndex + hoteisPorPagina;
             const hoteisPagina = hoteisFiltrados.slice(startIndex, endIndex);
-
             if (hoteisPagina.length === 0) {
                 hoteisGrid.innerHTML = '<div class="loading">Nenhum hotel encontrado...</div>';
                 return;
             }
-
             hoteisPagina.forEach(hotel => {
                 const hotelCard = criarHotelCard(hotel);
                 hoteisGrid.appendChild(hotelCard);
             });
-
             // Atualiza a informação de paginação
             const totalPaginas = Math.ceil(hoteisFiltrados.length / hoteisPorPagina);
             document.getElementById('pagination-info').textContent = `Mostrando ${startIndex + 1} a ${Math.min(endIndex, hoteisFiltrados.length)} de ${hoteisFiltrados.length} hotéis`;
-
             // Atualiza os botões de paginação
             atualizarPaginacao(totalPaginas);
         }
@@ -818,9 +823,7 @@
         function atualizarPaginacao(totalPaginas) {
             const paginacao = document.getElementById('paginacao');
             paginacao.innerHTML = '';
-
             if (totalPaginas <= 1) return;
-
             // Botão Anterior
             const btnAnterior = document.createElement('div');
             btnAnterior.className = `pagina-btn ${paginaAtual === 1 ? 'disabled' : ''}`;
@@ -832,7 +835,6 @@
                 }
             });
             paginacao.appendChild(btnAnterior);
-
             // Botões de Número
             for (let i = 1; i <= totalPaginas; i++) {
                 const paginaBtn = document.createElement('div');
@@ -844,7 +846,6 @@
                 });
                 paginacao.appendChild(paginaBtn);
             }
-
             // Botão Próximo
             const btnProximo = document.createElement('div');
             btnProximo.className = `pagina-btn ${paginaAtual === totalPaginas ? 'disabled' : ''}`;
@@ -860,25 +861,32 @@
 
         // Função para aplicar os filtros
         function aplicarFiltros() {
-            const destino = document.getElementById('destino').value.toLowerCase();
+            const destino = document.getElementById('destino').value;
             const preco = document.getElementById('preco').value;
             const classificacao = document.getElementById('classificacao').value;
-
             hoteisFiltrados = hoteis.filter(hotel => {
-                const atendeDestino = destino === '' || 
-                    hotel.localizacao.toLowerCase().includes(destino) || 
-                    hotel.nome.toLowerCase().includes(destino);
-                
+                const atendeDestino = destino === '' || hotel.cidade === destino;
                 const atendePreco = preco === 'todos' || hotel.categoria === preco;
-                
-                const atendeClassificacao = classificacao === 'todos' || 
-                    hotel.avaliacao >= parseFloat(classificacao);
-
+                const atendeClassificacao = classificacao === 'todos' || hotel.avaliacao >= parseFloat(classificacao);
                 return atendeDestino && atendePreco && atendeClassificacao;
             });
-
             paginaAtual = 1;
             exibirHoteis();
+            // Ajusta o mapa para a cidade selecionada
+            if (destino && map) {
+                const cidadeCoordenadas = {
+                    "sp": [-23.5505, -46.6333],
+                    "rj": [-22.9068, -43.1729],
+                    "rs": [-30.0346, -51.2177],
+                    "ma": [-2.5307, -44.3068],
+                    "mg": [-19.9167, -43.9345],
+                    "pr": [-25.4296, -49.2713],
+                    "sc": [-27.5954, -48.5480]
+                };
+                if (cidadeCoordenadas[destino]) {
+                    map.setView(cidadeCoordenadas[destino], 12);
+                }
+            }
             showNotification('Filtro aplicado com sucesso!', 'success');
         }
 
@@ -887,10 +895,12 @@
             document.getElementById('destino').value = '';
             document.getElementById('preco').value = 'todos';
             document.getElementById('classificacao').value = 'todos';
-
             hoteisFiltrados = [...hoteis];
             paginaAtual = 1;
             exibirHoteis();
+            if (map) {
+                map.setView([-15.7797, -47.9297], 4); // Volta para a visão padrão
+            }
             showNotification('Filtros limpos!', 'success');
         }
 
@@ -899,7 +909,6 @@
             const notificacao = document.getElementById('notificacao');
             notificacao.textContent = message;
             notificacao.className = `notificacao ${type} show`;
-
             setTimeout(() => {
                 notificacao.classList.remove('show');
             }, 4000);
@@ -913,6 +922,32 @@
 
             // Exibe os hotéis inicialmente
             exibirHoteis();
+
+            // Inicializa o mapa com tratamento de erros
+            try {
+                map = L.map('map').setView([-15.7797, -47.9297], 4);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19,
+                    detectRetina: true
+                }).addTo(map);
+                // Adiciona marcadores para os hotéis
+                hoteis.forEach(hotel => {
+                    if (hotel.lat && hotel.lng) {
+                        L.marker([hotel.lat, hotel.lng])
+                            .addTo(map)
+                            .bindPopup(`<b>${hotel.nome}</b><br>${hotel.localizacao}`);
+                    }
+                });
+            } catch (error) {
+                console.error('Erro ao carregar o mapa:', error);
+                document.getElementById('map').innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: #666;">
+                        <p>⚠️ Não foi possível carregar o mapa</p>
+                        <p>Verifique sua conexão com a internet</p>
+                    </div>
+                `;
+            }
         });
     </script>
 @endsection
