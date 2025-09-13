@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Restaurante;
@@ -7,26 +6,39 @@ use Illuminate\Http\Request;
 
 class RestauranteController extends Controller
 {
-    public function listar(Request $request)
+    public function index(Request $request)
     {
         $query = Restaurante::query();
 
-        // Filtro por cidade
-        if ($request->has('cidade')) {
-            $query->where('cidade', $request->cidade);
+        // Aplicar filtros
+        if ($request->has('tipo_cozinha') && $request->tipo_cozinha) {
+            $query->whereJsonContains('tipos', $request->tipo_cozinha);
         }
 
-        $restaurantes = $query->paginate(6);
-        $cidades = Restaurante::select('cidade')
-            ->distinct()
-            ->pluck('cidade');
+        if ($request->has('preco') && $request->preco) {
+            $query->where('preco', $request->preco);
+        }
 
-        return view('restaurante', compact('restaurantes', 'cidades'));
+        if ($request->has('avaliacao') && $request->avaliacao) {
+            $query->where('avaliacao', '>=', $request->avaliacao);
+        }
+
+        if ($request->has('localizacao') && $request->localizacao) {
+            $query->where('cidade', $request->localizacao);
+        }
+
+        $restaurantes = $query->get();
+
+        if ($request->ajax()) {
+            return response()->json($restaurantes);
+        }
+
+        return view('restaurantes.index', compact('restaurantes'));
     }
 
-    public function detalhes($id)
+    public function show($id)
     {
         $restaurante = Restaurante::findOrFail($id);
-        return view('restaurante.detalhes', compact('restaurante'));
+        return view('restaurantes.show', compact('restaurante'));
     }
 }

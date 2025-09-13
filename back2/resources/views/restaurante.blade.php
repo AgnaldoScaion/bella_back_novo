@@ -691,7 +691,7 @@
                 imagem: "https://i.ibb.co/NnswBt5Q/image.png",
                 badge: "Premium",
                 promocao: false,
-                link: "Restaurante - Cipriani.html",
+                link: "cipriani",
                 lat: -22.9711,
                 lng: -43.1828
             },

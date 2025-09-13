@@ -5,7 +5,7 @@
         <ul>
             <li><a href="{{ route('profile.show') }}">Meu Perfil</a></li>
             <li><a href="{{ route('feedbacks') }}">Meus Feedbacks</a></li>
-            <li><a href="{{ route('restaurante.lista') }}">Restaurantes</a></li>
+            <li><a href="{{ route('restaurantes.index') }}">Restaurantes</a></li>
             <li><a href="{{ route('hoteis') }}">Hotéis</a></li>
             <li><a href="{{ route('pontos-turisticos') }}">Pontos Turísticos</a></li>
             <li><a href="{{ route('termos') }}">Termos e condições</a></li>

@@ -33,12 +33,11 @@ Route::get('/sobre-nos', function () {
 Route::get('/destinos', function () {
     return view('destinos');
 })->name('destinos');
-Route::get('/restaurante', [
-    function () {
-        return view('restaurante');
-    }
-])->name('restaurante.lista');
-Route::get('/restaurantes/cipriani', [RestauranteController::class, 'showCipriani'])->name('restaurante.cipriani');
+Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('restaurantes');
+Route::get('/restaurantes/{id}', [RestauranteController::class, 'show'])->name('restaurantes.show');
+
+// Rota para API (filtros via AJAX)
+Route::get('/api/restaurantes', [RestauranteController::class, 'index']);
 
 
 

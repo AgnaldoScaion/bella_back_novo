@@ -4,21 +4,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    public function up(): void
+return new class extends Migration {
+    public function up()
     {
-        Schema::create('restaurante', function (Blueprint $table) {
-            $table->id('id_restaurante');
-            $table->string('nome', 100);
-            $table->string('telefone', 20);
-            $table->string('estado', 50);
-            $table->string('cidade', 50);
-            $table->string('rua', 100);
-            $table->string('bairro', 50);
-            $table->integer('numero');
-            $table->string('horario_funcionamento', 100);
-            $table->string('sobre', 255)->nullable();
+        Schema::create('restaurantes', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
+            $table->text('tipos'); // JSON ou relacionamento separado
+            $table->decimal('avaliacao', 2, 1);
+            $table->text('endereco');
+            $table->string('horario');
+            $table->enum('preco', ['economico', 'medio', 'alto', 'luxo']);
+            $table->string('preco_texto');
+            $table->string('cidade');
+            $table->string('imagem');
+            $table->string('badge')->nullable();
+            $table->boolean('promocao')->default(false);
+            $table->string('link');
+            $table->decimal('lat', 10, 8)->nullable();
+            $table->decimal('lng', 11, 8)->nullable();
+            $table->timestamps();
         });
     }
 
