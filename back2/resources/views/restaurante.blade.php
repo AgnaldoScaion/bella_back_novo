@@ -608,7 +608,7 @@
 @section('scripts')
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Base de dados de restaurantes
+        // Base de dados de restaurantes (dados locais)
         const restaurantes = [
             {
                 id: 1,
@@ -623,7 +623,7 @@
                 imagem: "https://i.ibb.co/wNDYyrGF/image.png",
                 badge: "Premium",
                 promocao: false,
-                link: "Restaurante_Jamile.html",
+                link: "jamile",
                 lat: -23.5505,
                 lng: -46.6333
             },
@@ -640,7 +640,7 @@
                 imagem: "https://i.ibb.co/sJyf79Pw/image.png",
                 badge: null,
                 promocao: false,
-                link: "Restaurante - Casa Terracota.html",
+                link: "casa-terracota",
                 lat: -29.3739,
                 lng: -50.8811
             },
@@ -657,7 +657,7 @@
                 imagem: "https://i.ibb.co/p6CszR4h/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteRS.html",
+                link: "el-fuego",
                 lat: -29.3749,
                 lng: -50.8821
             },
@@ -674,7 +674,7 @@
                 imagem: "https://i.ibb.co/wNDYyrGF/image.png",
                 badge: "Premium",
                 promocao: false,
-                link: "Restaurante - Oro.html",
+                link: "oro",
                 lat: -22.9792,
                 lng: -43.2236
             },
@@ -708,7 +708,7 @@
                 imagem: "https://i.ibb.co/Rk9CXfxM/image.png",
                 badge: "Premium",
                 promocao: false,
-                link: "Restaurante - Fasano.html",
+                link: "fasano",
                 lat: -22.9785,
                 lng: -43.2089
             },
@@ -725,7 +725,7 @@
                 imagem: "https://i.ibb.co/n8syZSDs/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteSP.html",
+                link: "terraco-italia",
                 lat: -23.5505,
                 lng: -46.6333
             },
@@ -742,7 +742,7 @@
                 imagem: "https://i.ibb.co/YBXdWS3Q/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestaurantePR.html",
+                link: "porto-canoas",
                 lat: -25.5478,
                 lng: -54.5873
             },
@@ -759,7 +759,7 @@
                 imagem: "https://i.ibb.co/B50ZTNgP/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestaurantePR.html",
+                link: "rafain",
                 lat: -25.5488,
                 lng: -54.5883
             },
@@ -776,7 +776,7 @@
                 imagem: "https://i.ibb.co/ZpcfkT9f/120736342-945661575912829-652691859883304712-n.jpg",
                 badge: null,
                 promocao: false,
-                link: "RestaurantePR.html",
+                link: "la-mafia-trattoria",
                 lat: -25.5498,
                 lng: -54.5893
             },
@@ -793,7 +793,7 @@
                 imagem: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npAFzSInmryDEoV82CI7lJHUv9hBubTuYzOLuzfpf9xlrPt4hRDz-6oxNZB-2zXsuoe1MA3qMje5Z_3iI6TyIiD1spmJd98YSTItd3J_ittauvVea60ljzy2YnL1gEo2T0gmZLnWA=s680-w680-h510",
                 badge: null,
                 promocao: false,
-                link: "Restaurante - Bené da Flauta.html",
+                link: "bene-da-flauta",
                 lat: -20.3822,
                 lng: -43.5039
             },
@@ -810,7 +810,7 @@
                 imagem: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/c6/4c/e4/salao-1.jpg?w=900&h=500&s=1",
                 badge: null,
                 promocao: false,
-                link: "Restaurante - Gastro Pub.html",
+                link: "gastro-pub",
                 lat: -20.3832,
                 lng: -43.5049
             },
@@ -827,7 +827,7 @@
                 imagem: "https://lh3.googleusercontent.com/p/AF1QipOkHJiEMiwiP1IJFBn9O1wZcrXG_xcyUUoqn-FW=s680-w680-h510",
                 badge: null,
                 promocao: false,
-                link: "RestauranteMG.html",
+                link: "contos-dos-reis",
                 lat: -20.3842,
                 lng: -43.5059
             },
@@ -844,7 +844,7 @@
                 imagem: "https://i.ibb.co/wNDYyrGF/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteMA.html",
+                link: "mangue",
                 lat: -2.7478,
                 lng: -42.8297
             },
@@ -861,7 +861,7 @@
                 imagem: "https://i.ibb.co/NnswBt5Q/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteMA.html",
+                link: "canoa",
                 lat: -2.7488,
                 lng: -42.8307
             },
@@ -878,7 +878,7 @@
                 imagem: "https://i.ibb.co/Rk9CXfxM/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteMA.html",
+                link: "terral",
                 lat: -2.7498,
                 lng: -42.8317
             },
@@ -895,7 +895,7 @@
                 imagem: "https://i.ibb.co/cGRyypv/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteSC.html",
+                link: "alameda",
                 lat: -27.4500,
                 lng: -48.5490
             },
@@ -912,7 +912,7 @@
                 imagem: "https://i.ibb.co/Y4KQnVm6/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteSC.html",
+                link: "olivia-cucina",
                 lat: -27.4510,
                 lng: -48.5500
             },
@@ -929,7 +929,7 @@
                 imagem: "https://i.ibb.co/nqHsNL4R/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteSC.html",
+                link: "dolce-vita",
                 lat: -27.4520,
                 lng: -48.5510
             },
@@ -946,7 +946,7 @@
                 imagem: "https://i.ibb.co/B2sZMYRW/image.png",
                 badge: null,
                 promocao: false,
-                link: "Restaurante - Capim Santo.html",
+                link: "capim-santo",
                 lat: -23.5688,
                 lng: -46.6824
             }
@@ -964,9 +964,10 @@
             restauranteCard.className = 'restaurante-card show';
             const badgeClass = restaurante.promocao ? 'restaurante-badge restaurante-promocao' : 'restaurante-badge';
             const badgeText = restaurante.badge || (restaurante.promocao ? 'Promoção' : '');
+
             restauranteCard.innerHTML = `
                 <div class="restaurante-img">
-                    <img src="${restaurante.imagem}" alt="${restaurante.nome}">
+                    <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
                     ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
                 </div>
                 <div class="restaurante-content">
@@ -983,7 +984,7 @@
                         <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
                     </div>
                     <div class="restaurante-footer">
-                        <a href="${restaurante.link}" class="btn-ver-mais">Ver Detalhes</a>
+                        <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
                     </div>
                 </div>
             `;
@@ -997,19 +998,26 @@
             const startIndex = (paginaAtual - 1) * restaurantesPorPagina;
             const endIndex = startIndex + restaurantesPorPagina;
             const restaurantesPagina = restaurantesFiltrados.slice(startIndex, endIndex);
+
             if (restaurantesPagina.length === 0) {
                 restaurantesGrid.innerHTML = '<div class="loading">Nenhum restaurante encontrado...</div>';
                 return;
             }
+
             restaurantesPagina.forEach(restaurante => {
                 const restauranteCard = criarRestauranteCard(restaurante);
                 restaurantesGrid.appendChild(restauranteCard);
             });
+
             // Atualiza a informação de paginação
             const totalPaginas = Math.ceil(restaurantesFiltrados.length / restaurantesPorPagina);
             document.getElementById('pagination-info').textContent = `Mostrando ${startIndex + 1} a ${Math.min(endIndex, restaurantesFiltrados.length)} de ${restaurantesFiltrados.length} restaurantes`;
+
             // Atualiza os botões de paginação
             atualizarPaginacao(totalPaginas);
+
+            // Atualiza o mapa com os restaurantes filtrados
+            atualizarMapa(restaurantesPagina);
         }
 
         // Função para criar os botões de paginação
@@ -1017,6 +1025,7 @@
             const paginacao = document.getElementById('paginacao');
             paginacao.innerHTML = '';
             if (totalPaginas <= 1) return;
+
             // Botão Anterior
             const btnAnterior = document.createElement('div');
             btnAnterior.className = `pagina-btn ${paginaAtual === 1 ? 'disabled' : ''}`;
@@ -1028,6 +1037,7 @@
                 }
             });
             paginacao.appendChild(btnAnterior);
+
             // Botões de Número
             for (let i = 1; i <= totalPaginas; i++) {
                 const paginaBtn = document.createElement('div');
@@ -1039,6 +1049,7 @@
                 });
                 paginacao.appendChild(paginaBtn);
             }
+
             // Botão Próximo
             const btnProximo = document.createElement('div');
             btnProximo.className = `pagina-btn ${paginaAtual === totalPaginas ? 'disabled' : ''}`;
@@ -1058,6 +1069,7 @@
             const preco = document.getElementById('preco').value;
             const avaliacao = document.getElementById('avaliacao').value;
             const localizacao = document.getElementById('localizacao').value;
+
             restaurantesFiltrados = restaurantes.filter(restaurante => {
                 return (
                     (tipoCozinha === '' || restaurante.tipos.includes(tipoCozinha)) &&
@@ -1066,8 +1078,10 @@
                     (localizacao === '' || restaurante.cidade === localizacao)
                 );
             });
+
             paginaAtual = 1;
             exibirRestaurantes();
+
             // Ajusta o mapa para a cidade selecionada
             if (localizacao && map) {
                 const cidadeCoordenadas = {
@@ -1079,10 +1093,12 @@
                     "parana": [-25.4296, -49.2713],
                     "santa-catarina": [-27.5954, -48.5480]
                 };
+
                 if (cidadeCoordenadas[localizacao]) {
                     map.setView(cidadeCoordenadas[localizacao], 12);
                 }
             }
+
             showNotification('Filtro aplicado com sucesso!', 'success');
         }
 
@@ -1092,13 +1108,37 @@
             document.getElementById('preco').value = '';
             document.getElementById('avaliacao').value = '';
             document.getElementById('localizacao').value = '';
+
             restaurantesFiltrados = [...restaurantes];
             paginaAtual = 1;
             exibirRestaurantes();
+
             if (map) {
                 map.setView([-15.7797, -47.9297], 4);
             }
+
             showNotification('Filtros limpos!', 'success');
+        }
+
+        // Função para atualizar o mapa com os restaurantes
+        function atualizarMapa(restaurantes) {
+            // Limpa marcadores existentes
+            if (map) {
+                map.eachLayer(function(layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
+
+                // Adiciona novos marcadores
+                restaurantes.forEach(restaurante => {
+                    if (restaurante.lat && restaurante.lng) {
+                        L.marker([restaurante.lat, restaurante.lng])
+                            .addTo(map)
+                            .bindPopup(`<b>${restaurante.nome}</b><br>${restaurante.endereco}`);
+                    }
+                });
+            }
         }
 
         // Função para mostrar notificações
@@ -1114,11 +1154,13 @@
 
         // Configura os eventos quando a página é carregada
         document.addEventListener('DOMContentLoaded', function () {
+            // Exibe os restaurantes inicialmente
+            exibirRestaurantes();
+
             // Configura os botões de filtro
             document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
             document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
-            // Exibe os restaurantes inicialmente
-            exibirRestaurantes();
+
             // Inicializa o mapa com tratamento de erros
             try {
                 map = L.map('map').setView([-15.7797, -47.9297], 4);
@@ -1127,6 +1169,7 @@
                     maxZoom: 19,
                     detectRetina: true
                 }).addTo(map);
+
                 // Adiciona marcadores para os restaurantes
                 restaurantes.forEach(restaurante => {
                     if (restaurante.lat && restaurante.lng) {
@@ -1146,4 +1189,4 @@
             }
         });
     </script>
-@endsection
+@endsection 

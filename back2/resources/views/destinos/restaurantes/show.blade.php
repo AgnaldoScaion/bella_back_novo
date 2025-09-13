@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $restaurante->nome . ' - Bella Avventura')
+@section('title', isset($restaurante) ? $restaurante->nome . ' - Bella Avventura' : 'Restaurante - Bella Avventura')
 
 @section('styles')
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -238,6 +238,18 @@
             transform: translateY(-2px);
         }
 
+        .error-message {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .error-message i {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .restaurante-titulo {
                 font-size: 1.5rem;
@@ -264,102 +276,113 @@
 
 @section('content')
     <div class="restaurante-detalhes">
-        <div class="breadcrumb">
-            <a href="{{ route('restaurantes.index') }}">Restaurantes</a> > {{ $restaurante->nome }}
-        </div>
-
-        <div class="restaurante-header">
-            <div class="restaurante-imagem">
-                <img src="{{ $restaurante->imagem }}" alt="{{ $restaurante->nome }}">
+        @if(!isset($restaurante))
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i>
+                <h2>Restaurante não encontrado</h2>
+                <p>O restaurante que você está tentando acessar não foi encontrado.</p>
+                <a href="{{ route('restaurantes.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar para Restaurantes
+                </a>
+            </div>
+        @else
+            <div class="breadcrumb">
+                <a href="{{ route('restaurantes.index') }}">Restaurantes</a> > {{ $restaurante->nome }}
             </div>
 
-            <div class="restaurante-info">
-                <h1 class="restaurante-titulo">{{ $restaurante->nome }}</h1>
-
-                <div class="restaurante-avaliacao">
-                    <span class="star">★</span>
-                    <span>{{ $restaurante->avaliacao }} ({{ rand(100, 500) }} avaliações)</span>
+            <div class="restaurante-header">
+                <div class="restaurante-imagem">
+                    <img src="{{ $restaurante->imagem }}" alt="{{ $restaurante->nome }}" onerror="this.src='https://via.placeholder.com/600x400/5a8f3d/ffffff?text=Imagem+Indisponível'">
                 </div>
 
-                <div class="restaurante-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">Tipo de Cozinha</span>
-                        <span class="meta-value">
-                            @if(is_array($restaurante->tipos))
-                                {{ implode(', ', $restaurante->tipos) }}
-                            @else
-                                {{ $restaurante->tipos }}
+                <div class="restaurante-info">
+                    <h1 class="restaurante-titulo">{{ $restaurante->nome }}</h1>
+
+                    <div class="restaurante-avaliacao">
+                        <span class="star">★</span>
+                        <span>{{ $restaurante->avaliacao }} ({{ rand(100, 500) }} avaliações)</span>
+                    </div>
+
+                    <div class="restaurante-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Tipo de Cozinha</span>
+                            <span class="meta-value">
+                                @if(is_array($restaurante->tipos))
+                                    {{ implode(', ', $restaurante->tipos) }}
+                                @else
+                                    {{ $restaurante->tipos ?? 'Não especificado' }}
+                                @endif
+                            </span>
+                        </div>
+
+                        <div class="meta-item">
+                            <span class="meta-label">Faixa de Preço</span>
+                            <span class="meta-value preco">{{ $restaurante->preco_texto ?? '$$' }} - {{ $restaurante->preco ?? 'Médio' }}</span>
+                        </div>
+
+                        <div class="meta-item">
+                            <span class="meta-label">Horário de Funcionamento</span>
+                            <span class="meta-value">{{ $restaurante->horario ?? 'Horário não especificado' }}</span>
+                        </div>
+
+                        <div class="meta-item">
+                            <span class="meta-label">Localização</span>
+                            <span class="meta-value">{{ $restaurante->endereco ?? 'Endereço não especificado' }}</span>
+                        </div>
+                    </div>
+
+                    @if(($restaurante->badge ?? null) || ($restaurante->promocao ?? false))
+                        <div class="restaurante-badges">
+                            @if($restaurante->badge)
+                                <span class="badge">{{ $restaurante->badge }}</span>
                             @endif
-                        </span>
-                    </div>
-
-                    <div class="meta-item">
-                        <span class="meta-label">Faixa de Preço</span>
-                        <span class="meta-value preco">{{ $restaurante->preco_texto }} - {{ $restaurante->preco }}</span>
-                    </div>
-
-                    <div class="meta-item">
-                        <span class="meta-label">Horário de Funcionamento</span>
-                        <span class="meta-value">{{ $restaurante->horario }}</span>
-                    </div>
-
-                    <div class="meta-item">
-                        <span class="meta-label">Localização</span>
-                        <span class="meta-value">{{ $restaurante->endereco }}</span>
-                    </div>
-                </div>
-
-                @if($restaurante->badge || $restaurante->promocao)
-                    <div class="restaurante-badges">
-                        @if($restaurante->badge)
-                            <span class="badge">{{ $restaurante->badge }}</span>
-                        @endif
-                        @if($restaurante->promocao)
-                            <span class="badge badge-promocao">Promoção</span>
-                        @endif
-                    </div>
-                @endif
-            </div>
-        </div>
-
-        <div class="restaurante-conteudo">
-            <h2 class="secao-titulo">Sobre</h2>
-            <div class="restaurante-descricao">
-                <p>Descubra a excelência gastronômica no {{ $restaurante->nome }}, localizado no coração de {{ explode(',', $restaurante->endereco)[1] ?? $restaurante->endereco }}. Nosso restaurante oferece uma experiência única que combina sabores autênticos com um ambiente acolhedor e sofisticado.</p>
-
-                <p>Nossa equipe de chefs talentosos utiliza apenas os ingredientes mais frescos e selecionados para criar pratos que encantam todos os sentidos. Seja para um jantar romântico, uma reunião de negócios ou uma celebração especial, o {{ $restaurante->nome }} é o local perfeito para momentos memoráveis.</p>
-
-                <p>Com uma avaliação de {{ $restaurante->avaliacao }} estrelas, nosso compromisso é proporcionar não apenas uma refeição, mas uma experiência gastronômica completa que ficará gravada em sua memória.</p>
-            </div>
-
-            <h2 class="secao-titulo">Galeria</h2>
-            <div class="galeria">
-                <div class="galeria-item">
-                    <img src="{{ $restaurante->imagem }}" alt="{{ $restaurante->nome }} - Interior">
-                </div>
-                <div class="galeria-item">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="{{ $restaurante->nome }} - Prato Principal">
-                </div>
-                <div class="galeria-item">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="{{ $restaurante->nome }} - Ambiente">
-                </div>
-                <div class="galeria-item">
-                    <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="{{ $restaurante->nome }} - Sobremesas">
+                            @if($restaurante->promocao)
+                                <span class="badge badge-promocao">Promoção</span>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
 
-            <h2 class="secao-titulo">Localização</h2>
-            <div class="mapa-container" id="map"></div>
-        </div>
+            <div class="restaurante-conteudo">
+                <h2 class="secao-titulo">Sobre</h2>
+                <div class="restaurante-descricao">
+                    <p>Descubra a excelência gastronômica no {{ $restaurante->nome }}, localizado no coração de {{ explode(',', $restaurante->endereco)[1] ?? $restaurante->endereco ?? 'sua cidade' }}. Nosso restaurante oferece uma experiência única que combina sabores autênticos com um ambiente acolhedor e sofisticado.</p>
 
-        <div class="acoes">
-            <a href="{{ route('restaurantes.index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Voltar para Restaurantes
-            </a>
-            <a href="#" class="btn btn-primary">
-                <i class="fas fa-calendar-check"></i> Fazer Reserva
-            </a>
-        </div>
+                    <p>Nossa equipe de chefs talentosos utiliza apenas os ingredientes mais frescos e selecionados para criar pratos que encantam todos os sentidos. Seja para um jantar romântico, uma reunião de negócios ou uma celebração especial, o {{ $restaurante->nome }} é o local perfeito para momentos memoráveis.</p>
+
+                    <p>Com uma avaliação de {{ $restaurante->avaliacao }} estrelas, nosso compromisso é proporcionar não apenas uma refeição, mas uma experiência gastronômica completa que ficará gravada em sua memória.</p>
+                </div>
+
+                <h2 class="secao-titulo">Galeria</h2>
+                <div class="galeria">
+                    <div class="galeria-item">
+                        <img src="{{ $restaurante->imagem }}" alt="{{ $restaurante->nome }} - Interior" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cm极staurante&w=1000&q=80" alt="{{ $restaurante->nome }} - Prato Principal" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="{{ $restaurante->nome }} - Ambiente" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="{{ $restaurante->nome }} - Sobremesas" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                    </div>
+                </div>
+
+                <h2 class="secao-titulo">Localização</h2>
+                <div class="mapa-container" id="map"></div>
+            </div>
+
+            <div class="acoes">
+                <a href="{{ route('restaurantes.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar para Restaurantes
+                </a>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Fazer Reserva
+                </a>
+            </div>
+        @endif
     </div>
 @endsection
 
@@ -367,19 +390,35 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar o mapa
-            const map = L.map('map').setView([{{ $restaurante->lat ?? -15.7797 }}, {{ $restaurante->lng ?? -47.9297 }}], 15);
+            @if(isset($restaurante) && $restaurante->lat && $restaurante->lng)
+                // Inicializar o mapa apenas se o restaurante existir e tiver coordenadas
+                const map = L.map('map').setView([{{ $restaurante->lat }}, {{ $restaurante->lng }}], 15);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
 
-            // Adicionar marcador do restaurante
-            @if($restaurante->lat && $restaurante->lng)
+                // Adicionar marcador do restaurante
                 L.marker([{{ $restaurante->lat }}, {{ $restaurante->lng }}])
                     .addTo(map)
                     .bindPopup('<b>{{ $restaurante->nome }}</b><br>{{ $restaurante->endereco }}')
                     .openPopup();
+            @elseif(isset($restaurante))
+                // Se o restaurante existe mas não tem coordenadas, mostrar mapa genérico do Brasil
+                const map = L.map('map').setView([-15.7797, -47.9297], 4);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Adicionar marcador genérico
+                L.marker([-15.7797, -47.9297])
+                    .addTo(map)
+                    .bindPopup('<b>{{ $restaurante->nome }}</b><br>Localização aproximada')
+                    .openPopup();
+            @else
+                // Se não há restaurante, esconder o mapa
+                document.getElementById('map').style.display = 'none';
             @endif
         });
     </script>
