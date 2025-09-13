@@ -674,7 +674,7 @@
                         </div>
                     </div>
                     <div class="destino-action">
-                        <a href="{{ route('hoteis') }}" class="btn-destino">Explorar Hotéis</a>
+                        <a href="{{ route('hoteis.alternative') }}" class="btn-destino">Explorar Hotéis</a>
                     </div>
                 </div>
             </div>
@@ -842,7 +842,7 @@ function setupMenu() {
 function setupCardOverlays() {
     const overlayButtons = document.querySelectorAll('.destino-overlay-btn');
     const destinations = {
-        'hoteis': '{{ route('hoteis') }}',
+        'hoteis': '{{ route('hoteis.alternative') }}',
         'restaurantes': '{{ route('restaurantes.alternative') }}',
         'pontos-turisticos': '{{ route('pontos-turisticos') }}'
     };
