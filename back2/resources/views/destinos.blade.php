@@ -56,7 +56,7 @@
             flex-direction: column;
         }
 
-        /* Original Header Styles (Unchanged) */
+        /* Original Header Styles (Unchanged except for user-header) */
         .header {
             background-color: var(--accent-color);
             position: relative;
@@ -99,11 +99,24 @@
         }
 
         .user-header {
-            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 700;
+            gap: 8px;
+            transition: var(--transition-smooth);
+        }
+
+        .user-header a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .user-header a:hover {
+            color: var(--primary-light);
         }
 
         /* Menu Styles */
