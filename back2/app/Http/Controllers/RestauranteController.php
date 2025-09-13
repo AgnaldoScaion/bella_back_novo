@@ -33,12 +33,12 @@ class RestauranteController extends Controller
             return response()->json($restaurantes);
         }
 
-        return view('restaurantes.index', compact('restaurantes'));
+        return view('destinos.restaurantes.index');
     }
 
     public function show($id)
     {
         $restaurante = Restaurante::findOrFail($id);
-        return view('restaurantes.show', compact('restaurante'));
+        return view('destinos.restaurantes.show', compact('restaurante'));
     }
 }
