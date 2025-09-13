@@ -640,7 +640,7 @@
                 imagem: "https://i.ibb.co/sJyf79Pw/image.png",
                 badge: null,
                 promocao: false,
-                link: "RestauranteRS.html",
+                link: "Restaurante - Casa Terracota.html",
                 lat: -29.3739,
                 lng: -50.8811
             },
