@@ -429,30 +429,65 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            0% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .floating {
@@ -525,80 +560,81 @@
 @endsection
 
 @section('content')
-<main class="main-content">
-    <h1 class="page-title">Hotéis</h1>
-    <p class="page-subtitle">Encontre os melhores hotéis para sua estadia. Filtre por preço, localização e comodidades para uma experiência personalizada.</p>
-    <!-- Filtros -->
-    <div class="filtros-container">
-        <h3>Filtros</h3>
-        <form class="filtros-form" id="filtros-form">
-            <div class="filtro-grupo">
-                <label for="destino">Destino</label>
-                <i class="fas fa-map-marker-alt"></i>
-                <select id="destino" name="destino">
-                    <option value="">Todas as Cidades</option>
-                    <option value="sp">São Paulo</option>
-                    <option value="rj">Rio de Janeiro</option>
-                    <option value="rs">Rio Grande do Sul</option>
-                    <option value="ma">Maranhão</option>
-                    <option value="mg">Minas Gerais</option>
-                    <option value="pr">Paraná</option>
-                    <option value="sc">Santa Catarina</option>
-                </select>
-            </div>
-            <div class="filtro-grupo">
-                <label for="hospedes">Hóspedes</label>
-                <i class="fas fa-users"></i>
-                <select id="hospedes">
-                    <option value="1">1 Adulto</option>
-                    <option value="2">2 Adultos</option>
-                    <option value="3">3 Adultos</option>
-                    <option value="4">4 Adultos</option>
-                    <option value="familiar">Família com crianças</option>
-                </select>
-            </div>
-            <div class="filtro-grupo">
-                <label for="preco">Faixa de Preço</label>
-                <i class="fas fa-dollar-sign"></i>
-                <select id="preco">
-                    <option value="todos">Qualquer preço</option>
-                    <option value="economico">Econômico (até R$200)</option>
-                    <option value="medio">Médio (R$200 - R$500)</option>
-                    <option value="premium">Premium (R$500+)</option>
-                </select>
-            </div>
-            <div class="filtro-grupo">
-                <label for="classificacao">Classificação</label>
-                <i class="fas fa-star"></i>
-                <select id="classificacao">
-                    <option value="todos">Qualquer classificação</option>
-                    <option value="5">5 estrelas</option>
-                    <option value="4">4 estrelas</option>
-                    <option value="3">3 estrelas</option>
-                    <option value="2">2 estrelas</option>
-                </select>
-            </div>
-            <div class="filtro-botoes">
-                <button type="button" class="btn-filtrar" id="btn-filtrar">Aplicar Filtros</button>
-                <button type="button" class="btn-limpar" id="btn-limpar">Limpar</button>
-            </div>
-        </form>
-    </div>
-    <!-- Info da paginação -->
-    <div class="pagination-info" id="pagination-info">
-        Carregando hotéis...
-    </div>
-    <!-- Hotéis Grid -->
-    <div class="hoteis-grid" id="hoteis-grid">
-        <div class="loading">Carregando hotéis...</div>
-    </div>
-    <!-- Paginação -->
-    <div class="paginacao" id="paginacao"></div>
-    <!-- Mapa -->
-    <div id="map"></div>
-    <!-- Notificação -->
-    <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
-</main>
+    <main class="main-content">
+        <h1 class="page-title">Hotéis</h1>
+        <p class="page-subtitle">Encontre os melhores hotéis para sua estadia. Filtre por preço, localização e comodidades
+            para uma experiência personalizada.</p>
+        <!-- Filtros -->
+        <div class="filtros-container">
+            <h3>Filtros</h3>
+            <form class="filtros-form" id="filtros-form">
+                <div class="filtro-grupo">
+                    <label for="destino">Destino</label>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <select id="destino" name="destino">
+                        <option value="">Todas as Cidades</option>
+                        <option value="sp">São Paulo</option>
+                        <option value="rj">Rio de Janeiro</option>
+                        <option value="rs">Rio Grande do Sul</option>
+                        <option value="ma">Maranhão</option>
+                        <option value="mg">Minas Gerais</option>
+                        <option value="pr">Paraná</option>
+                        <option value="sc">Santa Catarina</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="hospedes">Hóspedes</label>
+                    <i class="fas fa-users"></i>
+                    <select id="hospedes">
+                        <option value="1">1 Adulto</option>
+                        <option value="2">2 Adultos</option>
+                        <option value="3">3 Adultos</option>
+                        <option value="4">4 Adultos</option>
+                        <option value="familiar">Família com crianças</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="preco">Faixa de Preço</label>
+                    <i class="fas fa-dollar-sign"></i>
+                    <select id="preco">
+                        <option value="todos">Qualquer preço</option>
+                        <option value="economico">Econômico (até R$200)</option>
+                        <option value="medio">Médio (R$200 - R$500)</option>
+                        <option value="premium">Premium (R$500+)</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="classificacao">Classificação</label>
+                    <i class="fas fa-star"></i>
+                    <select id="classificacao">
+                        <option value="todos">Qualquer classificação</option>
+                        <option value="5">5 estrelas</option>
+                        <option value="4">4 estrelas</option>
+                        <option value="3">3 estrelas</option>
+                        <option value="2">2 estrelas</option>
+                    </select>
+                </div>
+                <div class="filtro-botoes">
+                    <button type="button" class="btn-filtrar" id="btn-filtrar">Aplicar Filtros</button>
+                    <button type="button" class="btn-limpar" id="btn-limpar">Limpar</button>
+                </div>
+            </form>
+        </div>
+        <!-- Info da paginação -->
+        <div class="pagination-info" id="pagination-info">
+            Carregando hotéis...
+        </div>
+        <!-- Hotéis Grid -->
+        <div class="hoteis-grid" id="hoteis-grid">
+            <div class="loading">Carregando hotéis...</div>
+        </div>
+        <!-- Paginação -->
+        <div class="paginacao" id="paginacao"></div>
+        <!-- Mapa -->
+        <div id="map"></div>
+        <!-- Notificação -->
+        <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
+    </main>
 @endsection
 
 @section('scripts')
@@ -933,120 +969,141 @@
         function criarHotelCard(hotel) {
             const hotelCard = document.createElement('div');
             hotelCard.className = 'hotel-card show';
+
+            // Usar a rota nomeada do Laravel
+            const hotelLink = "{{ route('hoteis.show', ':id') }}".replace(':id', hotel.id);
+
             hotelCard.innerHTML = `
-                <div class="hotel-img">
-                    <img src="${hotel.imagem}" alt="${hotel.nome}">
-                </div>
-                <div class="hotel-content">
-                    <div class="hotel-header">
-                        <h3 class="hotel-title">${hotel.nome}</h3>
-                        <div class="hotel-rating">
-                            <span class="star">★</span>${hotel.avaliacao}
-                        </div>
-                    </div>
-                    <div class="hotel-location">📍 ${hotel.localizacao}</div>
-                    <div class="hotel-info">
-                        <p><span>💰</span> <span class="hotel-price">${hotel.precoTexto}</span> /noite</p>
-                        <p><span>⭐</span> ${hotel.avaliacoes} avaliações</p>
-                    </div>
-                    <div class="hotel-footer">
-                        <a href="${hotel.link}" class="btn-ver-mais">Ver Detalhes</a>
+            <div class="hotel-img">
+                <img src="${hotel.imagem}" alt="${hotel.nome}">
+                ${hotel.categoria === 'premium' ? '<span class="hotel-badge">Premium</span>' : ''}
+            </div>
+            <div class="hotel-content">
+                <div class="hotel-header">
+                    <h3 class="hotel-title">${hotel.nome}</h3>
+                    <div class="hotel-rating">
+                        <span class="star">★</span>${hotel.avaliacao}
                     </div>
                 </div>
-            `;
+                <div class="hotel-location">📍 ${hotel.localizacao}</div>
+                <div class="hotel-info">
+                    <p><span>💰</span> <span class="hotel-price">${hotel.precoTexto}</span> /noite</p>
+                    <p><span>⭐</span> ${hotel.avaliacoes} avaliações</p>
+                    <p><span>🏨</span> ${hotel.estrelas} estrelas</p>
+                </div>
+                <div class="hotel-footer">
+                    <a href="${hotelLink}" class="btn-ver-mais">Ver Detalhes</a>
+                </div>
+            </div>
+        `;
             return hotelCard;
         }
 
-        // Função para exibir os hotéis na página atual
-        function exibirHoteis() {
-            const hoteisGrid = document.getElementById('hoteis-grid');
-            hoteisGrid.innerHTML = '';
-            const startIndex = (paginaAtual - 1) * hoteisPorPagina;
-            const endIndex = startIndex + hoteisPorPagina;
-            const hoteisPagina = hoteisFiltrados.slice(startIndex, endIndex);
-            if (hoteisPagina.length === 0) {
-                hoteisGrid.innerHTML = '<div class="loading">Nenhum hotel encontrado...</div>';
-                return;
-            }
-            hoteisPagina.forEach(hotel => {
-                const hotelCard = criarHotelCard(hotel);
-                hoteisGrid.appendChild(hotelCard);
+        // Função para carregar hotéis via AJAX
+        function carregarHoteis(filtros = {}) {
+            $.ajax({
+                url: '{{ route("hoteis.show") }}',
+                type: 'GET',
+                data: filtros,
+                dataType: 'json',
+                success: function (data) {
+                    hoteisFiltrados = data;
+                    paginaAtual = 1;
+                    exibirHoteis();
+
+                    // Atualizar mapa com os hotéis filtrados
+                    atualizarMapa();
+                },
+                error: function () {
+                    console.error('Erro ao carregar hotéis');
+                    // Fallback para dados locais
+                    hoteisFiltrados = [...hoteis];
+                    paginaAtual = 1;
+                    exibirHoteis();
+                    atualizarMapa();
+                }
             });
-            // Atualiza a informação de paginação
-            const totalPaginas = Math.ceil(hoteisFiltrados.length / hoteisPorPagina);
-            document.getElementById('pagination-info').textContent = `Mostrando ${startIndex + 1} a ${Math.min(endIndex, hoteisFiltrados.length)} de ${hoteisFiltrados.length} hotéis`;
-            // Atualiza os botões de paginação
-            atualizarPaginacao(totalPaginas);
         }
 
-        // Função para criar os botões de paginação
-        function atualizarPaginacao(totalPaginas) {
-            const paginacao = document.getElementById('paginacao');
-            paginacao.innerHTML = '';
-            if (totalPaginas <= 1) return;
-            // Botão Anterior
-            const btnAnterior = document.createElement('div');
-            btnAnterior.className = `pagina-btn ${paginaAtual === 1 ? 'disabled' : ''}`;
-            btnAnterior.innerHTML = '&laquo;';
-            btnAnterior.addEventListener('click', () => {
-                if (paginaAtual > 1) {
-                    paginaAtual--;
-                    exibirHoteis();
-                }
-            });
-            paginacao.appendChild(btnAnterior);
-            // Botões de Número
-            for (let i = 1; i <= totalPaginas; i++) {
-                const paginaBtn = document.createElement('div');
-                paginaBtn.className = `pagina-btn ${i === paginaAtual ? 'active' : ''}`;
-                paginaBtn.textContent = i;
-                paginaBtn.addEventListener('click', () => {
-                    paginaAtual = i;
-                    exibirHoteis();
+        // Função para atualizar o mapa
+        function atualizarMapa() {
+            if (map) {
+                map.eachLayer(function (layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
                 });
-                paginacao.appendChild(paginaBtn);
-            }
-            // Botão Próximo
-            const btnProximo = document.createElement('div');
-            btnProximo.className = `pagina-btn ${paginaAtual === totalPaginas ? 'disabled' : ''}`;
-            btnProximo.innerHTML = '&raquo;';
-            btnProximo.addEventListener('click', () => {
-                if (paginaAtual < totalPaginas) {
-                    paginaAtual++;
-                    exibirHoteis();
+
+                hoteisFiltrados.forEach(hotel => {
+                    if (hotel.lat && hotel.lng) {
+                        L.marker([hotel.lat, hotel.lng])
+                            .addTo(map)
+                            .bindPopup(`<b>${hotel.nome}</b><br>${hotel.localizacao}<br><a href="{{ route('hoteis.show', '') }}/${hotel.id}" class="btn-ver-mais">Ver Detalhes</a>`);
+                    }
+                });
+
+                // Ajustar visão do mapa se houver filtro de destino
+                const destino = document.getElementById('destino').value;
+                if (destino) {
+                    const cidadeCoordenadas = {
+                        "sp": [-23.5505, -46.6333],
+                        "rj": [-22.9068, -43.1729],
+                        "rs": [-30.0346, -51.2177],
+                        "ma": [-2.5307, -44.3068],
+                        "mg": [-19.9167, -43.9345],
+                        "pr": [-25.4296, -49.2713],
+                        "sc": [-27.5954, -48.5480]
+                    };
+                    if (cidadeCoordenadas[destino]) {
+                        map.setView(cidadeCoordenadas[destino], 12);
+                    }
+                } else if (hoteisFiltrados.length > 0) {
+                    // Centralizar no primeiro hotel da lista
+                    const primeiroHotel = hoteisFiltrados[0];
+                    map.setView([primeiroHotel.lat, primeiroHotel.lng], 10);
+                } else {
+                    map.setView([-15.7797, -47.9297], 4);
                 }
-            });
-            paginacao.appendChild(btnProximo);
+            }
         }
+
+        // Configura os eventos quando a página é carregada
+        document.addEventListener('DOMContentLoaded', function () {
+            // Configura os botões de filtro
+            document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
+            document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
+
+            // Carrega os hotéis inicialmente
+            carregarHoteis();
+
+            // Inicializa o mapa
+            try {
+                map = L.map('map').setView([-15.7797, -47.9297], 4);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19,
+                    detectRetina: true
+                }).addTo(map);
+            } catch (error) {
+                console.error('Erro ao carregar o mapa:', error);
+                document.getElementById('map').innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #666;">
+                    <p>⚠️ Não foi possível carregar o mapa</p>
+                    <p>Verifique sua conexão com a internet</p>
+                </div>
+            `;
+            }
+        });
 
         // Função para aplicar os filtros
         function aplicarFiltros() {
-            const destino = document.getElementById('destino').value;
-            const preco = document.getElementById('preco').value;
-            const classificacao = document.getElementById('classificacao').value;
-            hoteisFiltrados = hoteis.filter(hotel => {
-                const atendeDestino = destino === '' || hotel.cidade === destino;
-                const atendePreco = preco === 'todos' || hotel.categoria === preco;
-                const atendeClassificacao = classificacao === 'todos' || hotel.avaliacao >= parseFloat(classificacao);
-                return atendeDestino && atendePreco && atendeClassificacao;
-            });
-            paginaAtual = 1;
-            exibirHoteis();
-            // Ajusta o mapa para a cidade selecionada
-            if (destino && map) {
-                const cidadeCoordenadas = {
-                    "sp": [-23.5505, -46.6333],
-                    "rj": [-22.9068, -43.1729],
-                    "rs": [-30.0346, -51.2177],
-                    "ma": [-2.5307, -44.3068],
-                    "mg": [-19.9167, -43.9345],
-                    "pr": [-25.4296, -49.2713],
-                    "sc": [-27.5954, -48.5480]
-                };
-                if (cidadeCoordenadas[destino]) {
-                    map.setView(cidadeCoordenadas[destino], 12);
-                }
-            }
+            const filtros = {
+                destino: document.getElementById('destino').value,
+                preco: document.getElementById('preco').value,
+                classificacao: document.getElementById('classificacao').value
+            };
+
+            carregarHoteis(filtros);
             showNotification('Filtro aplicado com sucesso!', 'success');
         }
 
@@ -1055,12 +1112,8 @@
             document.getElementById('destino').value = '';
             document.getElementById('preco').value = 'todos';
             document.getElementById('classificacao').value = 'todos';
-            hoteisFiltrados = [...hoteis];
-            paginaAtual = 1;
-            exibirHoteis();
-            if (map) {
-                map.setView([-15.7797, -47.9297], 4); // Volta para a visão padrão
-            }
+
+            carregarHoteis();
             showNotification('Filtros limpos!', 'success');
         }
 
@@ -1103,11 +1156,11 @@
             } catch (error) {
                 console.error('Erro ao carregar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                    <div style="text-align: center; padding: 20px; color: #666;">
-                        <p>⚠️ Não foi possível carregar o mapa</p>
-                        <p>Verifique sua conexão com a internet</p>
-                    </div>
-                `;
+                        <div style="text-align: center; padding: 20px; color: #666;">
+                            <p>⚠️ Não foi possível carregar o mapa</p>
+                            <p>Verifique sua conexão com a internet</p>
+                        </div>
+                    `;
             }
         });
     </script>

@@ -45,99 +45,94 @@ Route::get('/pontos-turisticos', function () {
     return view('pontos-turisticos');
 })->name('pontos-turisticos');
 
-// Rotas para hotéis
+// Rotas para hotéis individuais
 Route::prefix('destinos/hoteis')->group(function () {
-    // Rota principal de listagem
-    Route::get('/', function () {
-        return view('hoteis');
-    })->name('hoteis.index');
-
-    // Rota para detalhes do hotel
+    // Rota para detalhes do hotel via controller
     Route::get('/{id}', [HotelController::class, 'show'])->name('hoteis.show');
 
-    // Rotas para páginas específicas de hotéis (baseado na lista da imagem)
-    Route::get('/hotel-atlantico-business-rj', function () {
-        return view('destinos.hoteis.Hotel_Atlantico_BussinesRJ');
+    // Rotas específicas para cada hotel
+    Route::get('/atlantico-business-rj', function () {
+        return view('destinos.hoteis.AtlanticoBussinesRJ');
     })->name('hoteis.atlantico-business-rj');
 
-    Route::get('/hotel-atlantico-copacabana-rj', function () {
-        return view('destinos.hoteis.Hotel_Atlantico_CopacabanaRJ');
+    Route::get('/atlantico-copacabana-rj', function () {
+        return view('destinos.hoteis.AtlanticoCopacabanaRJ');
     })->name('hoteis.atlantico-copacabana-rj');
 
-    Route::get('/hotel-atlantico-praia-rj', function () {
-        return view('destinos.hoteis.Hotel_Atlantico_PraiaRJ');
+    Route::get('/atlantico-praia-rj', function () {
+        return view('destinos.hoteis.AtlanticoPraiaRJ');
     })->name('hoteis.atlantico-praia-rj');
 
-    Route::get('/hotel-blue-tree-towers-ma', function () {
-        return view('destinos.hoteis.Hotel_Blue_Tree_TowersMA');
+    Route::get('/blue-tree-towers-ma', function () {
+        return view('destinos.hoteis.BlueTreeTowersMA');
     })->name('hoteis.blue-tree-towers-ma');
 
-    Route::get('/hotel-capsula-sp', function () {
-        return view('destinos.hoteis.Hotel_Capsula_HotelSP');
-    })->name('hoteis.capsula-sp');
+    Route::get('/capsula-hotel-sp', function () {
+        return view('destinos.hoteis.CapsulaHotelsP');
+    })->name('hoteis.capsula-hotel-sp');
 
-    Route::get('/hotel-colline-rs', function () {
-        return view('destinos.hoteis.Hotel_CollineRS');
+    Route::get('/colline-rs', function () {
+        return view('destinos.hoteis.CollineRS');
     })->name('hoteis.colline-rs');
 
-    Route::get('/hotel-continental-rs', function () {
-        return view('destinos.hoteis.Hotel_ContinentalRS');
+    Route::get('/continental-rs', function () {
+        return view('destinos.hoteis.ContinentalRS');
     })->name('hoteis.continental-rs');
 
-    Route::get('/hotel-goldmen-express-pr', function () {
-        return view('destinos.hoteis.Hotel_GoldMen_Express_CianortePR');
+    Route::get('/goldmen-express-pr', function () {
+        return view('destinos.hoteis.GoldMenExpressClanortePR');
     })->name('hoteis.goldmen-express-pr');
 
-    Route::get('/hotel-gran-villagio-sp', function () {
-        return view('destinos.hoteis.Hotel_Gran_VillagioSP');
+    Route::get('/gran-villagio-sp', function () {
+        return view('destinos.hoteis.GranVillagiosP');
     })->name('hoteis.gran-villagio-sp');
 
-    Route::get('/hotel-ingleses-palace-sc', function () {
-        return view('destinos.hoteis.Hotel_Ingleses_PalacesC');
+    Route::get('/ingleses-palace-sc', function () {
+        return view('destinos.hoteis.InglesesPalacesC');
     })->name('hoteis.ingleses-palace-sc');
 
-    Route::get('/hotel-life-infinity-rs', function () {
-        return view('destinos.hoteis.Hotel_Life_InfinityRS');
+    Route::get('/life-infinity-rs', function () {
+        return view('destinos.hoteis.LifelnfinityRS');
     })->name('hoteis.life-infinity-rs');
 
-    Route::get('/hotel-minas-garden-mg', function () {
-        return view('destinos.hoteis.Hotel_Minas_GardenMG');
+    Route::get('/minas-garden-mg', function () {
+        return view('destinos.hoteis.MinasGardenMG');
     })->name('hoteis.minas-garden-mg');
 
-    Route::get('/hotel-oceania-park-sc', function () {
-        return view('destinos.hoteis.Hotel_Oceania_ParksC');
+    Route::get('/oceania-park-sc', function () {
+        return view('destinos.hoteis.OceaniaParkSC');
     })->name('hoteis.oceania-park-sc');
 
-    Route::get('/hotel-por-do-sol-mg', function () {
-        return view('destinos.hoteis.Hotel_Por_Do_SolMG');
+    Route::get('/por-do-sol-mg', function () {
+        return view('destinos.hoteis.PorDoSolMG');
     })->name('hoteis.por-do-sol-mg');
 
-    Route::get('/hotel-pousada-agua-marinha-pr', function () {
-        return view('destinos.hoteis.Hotel_Pousada_Agua_MarinhaPR');
+    Route::get('/pousada-agua-marinha-pr', function () {
+        return view('destinos.hoteis.PousadaguavarinhaPR');
     })->name('hoteis.pousada-agua-marinha-pr');
 
-    Route::get('/hotel-pousada-canto-vigia-sc', function () {
-        return view('destinos.hoteis.Hotel_Pousada_Canto_da_VigiasC');
+    Route::get('/pousada-canto-vigia-sc', function () {
+        return view('destinos.hoteis.PousadaCantodaVigiasC');
     })->name('hoteis.pousada-canto-vigia-sc');
 
-    Route::get('/hotel-pousada-universal-ma', function () {
-        return view('destinos.hoteis.Hotel_Pousada_UniversalMA');
+    Route::get('/pousada-universal-ma', function () {
+        return view('destinos.hoteis.PousadaluhversalMA');
     })->name('hoteis.pousada-universal-ma');
 
-    Route::get('/hotel-rios-ma', function () {
-        return view('destinos.hoteis.Hotel_RiosMA');
+    Route::get('/rios-ma', function () {
+        return view('destinos.hoteis.RiosMA');
     })->name('hoteis.rios-ma');
 
-    Route::get('/hotel-san-michel-sp', function () {
-        return view('destinos.hoteis.Hotel_San_MichelSP');
+    Route::get('/san-michel-sp', function () {
+        return view('destinos.hoteis.SanMichelSP');
     })->name('hoteis.san-michel-sp');
 
-    Route::get('/hotel-viale-cataratas-pr', function () {
-        return view('destinos.hoteis.Hotel_Viale_CataratasPR');
+    Route::get('/viale-cataratas-pr', function () {
+        return view('destinos.hoteis.VialeCataratasPR');
     })->name('hoteis.viale-cataratas-pr');
 
-    Route::get('/hotel-villa-lobos-mg', function () {
-        return view('destinos.hoteis.Hotel_Villa_Lobos_Spa_RomanitkMG');
+    Route::get('/villa-lobos-mg', function () {
+        return view('destinos.hoteis.VillaLobosSpaRomantikMG');
     })->name('hoteis.villa-lobos-mg');
 });
 Route::get('/hoteis', function () {
