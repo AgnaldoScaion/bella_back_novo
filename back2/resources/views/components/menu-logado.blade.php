@@ -7,7 +7,7 @@
             <li><a href="{{ route('feedbacks') }}">Meus Feedbacks</a></li>
             <li><a href="{{ route('restaurantes.alternative') }}">Restaurantes</a></li>
             <li><a href="{{ route('hoteis.alternative') }}">Hotéis</a></li>
-            <li><a href="{{ route('pontos-turisticos') }}">Pontos Turísticos</a></li>
+            <li><a href="{{ route('pontos-turisticos.alternative') }}">Pontos Turísticos</a></li>
             <li><a href="{{ route('termos') }}">Termos e condições</a></li>
             <li><a href="{{ route('sobre-nos') }}">Sobre nós</a></li>
             <li>

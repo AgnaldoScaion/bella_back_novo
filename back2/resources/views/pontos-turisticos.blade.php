@@ -627,7 +627,7 @@
                 cidade: "sp",
                 imagem: "https://i.ibb.co/BK3tM0Q6/Beco-do-Batman.png",
                 avaliacoes: 12500,
-                link: "pontos-turisticos/beco-do-batman",
+                link: "beco-do-batman",
                 lat: -23.5505,
                 lng: -46.6333
             },
@@ -642,7 +642,7 @@
                 cidade: "mg",
                 imagem: "https://i.ibb.co/1tYjyVFY/Museu-da-Inconfidencia.png",
                 avaliacoes: 9800,
-                link: "pontos-turisticos/museu-inconfidencia",
+                link: "museu-inconfidencia",
                 lat: -20.3855,
                 lng: -43.5033
             },
@@ -657,7 +657,7 @@
                 cidade: "rj",
                 imagem: "https://i.ibb.co/DPYLP3Tz/pao-de-acucar-principal.jpg",
                 avaliacoes: 8200,
-                link: "pontos-turisticos/pao-de-acucar",
+                link: "pao-de-acucar",
                 lat: -22.9519,
                 lng: -43.1655
             },
@@ -672,7 +672,7 @@
                 cidade: "pr",
                 imagem: "https://i.ibb.co/7xHYWJgC/Parque-das-Aves.png",
                 avaliacoes: 7500,
-                link: "pontos-turisticos/parque-das-aves",
+                link: "parque-das-aves",
                 lat: -25.5163,
                 lng: -54.5854
             },
@@ -687,7 +687,7 @@
                 cidade: "ma",
                 imagem: "https://i.ibb.co/605Jtfp9/Palacio-dos-Leoes.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/palacio-dos-leoes",
+                link: "palacio-dos-leoes",
                 lat: -2.5307,
                 lng: -44.3068
             },
@@ -702,7 +702,7 @@
                 cidade: "mg",
                 imagem: "https://i.ibb.co/CrRHrzy/Mina-da-Passagem.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/mina-da-passagem",
+                link: "mina-da-passagem",
                 lat: -20.3772,
                 lng: -43.4163
             },
@@ -717,7 +717,7 @@
                 cidade: "sp",
                 imagem: "https://i.ibb.co/5XLKDyhC/Catedral-da-S.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/catedral-da-se",
+                link: "catedral-da-se",
                 lat: -23.5505,
                 lng: -46.6333
             },
@@ -732,7 +732,7 @@
                 cidade: "ma",
                 imagem: "https://i.ibb.co/LzsHKZSR/Centro-Hist-rico-de-S-o-Lu-s.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/centro-historico-sao-luis",
+                link: "centro-historico-sao-luis",
                 lat: -2.5307,
                 lng: -44.3068
             },
@@ -747,7 +747,7 @@
                 cidade: "sc",
                 imagem: "https://i.ibb.co/ZRMkQCrw/Praia-da-Joaquina.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/praia-joaquina",
+                link: "praia-joaquina",
                 lat: -27.6355,
                 lng: -48.4462
             },
@@ -762,7 +762,7 @@
                 cidade: "sc",
                 imagem: "https://i.ibb.co/tMc9JSjv/Mirante-do-Morro-da-Cruz.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/mirante-morro-cruz",
+                link: "mirante-morro-cruz",
                 lat: -27.5969,
                 lng: -48.5496
             },
@@ -777,7 +777,7 @@
                 cidade: "pr",
                 imagem: "https://i.ibb.co/4nwCr50p/cataratas-do-iguacu-principal.jpg",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/cataratas-do-iguacu",
+                link: "cataratas-do-iguacu",
                 lat: -25.6953,
                 lng: -54.4367
             },
@@ -792,7 +792,7 @@
                 cidade: "rj",
                 imagem: "https://i.ibb.co/tpFRvZ6Y/cristo-redentor-principal.jpg",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/cristo-redentor",
+                link: "cristo-redentor",
                 lat: -22.9519,
                 lng: -43.2105
             },
@@ -807,7 +807,7 @@
                 cidade: "sc",
                 imagem: "https://i.ibb.co/nMhtHm77/Ilha-do-Campeche.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/ilha-do-campeche",
+                link: "ilha-do-campeche",
                 lat: -27.6892,
                 lng: -48.4754
             },
@@ -822,7 +822,7 @@
                 cidade: "ma",
                 imagem: "https://i.ibb.co/BK4v8LsX/Len-ois-Maranhenses.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/lencois-maranhenses",
+                link: "lencois-maranhenses",
                 lat: -2.5469,
                 lng: -43.1235
             },
@@ -837,7 +837,7 @@
                 cidade: "rs",
                 imagem: "https://i.ibb.co/jvNDDqdk/mini-mundo-principal.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/mini-mundo",
+                link: "mini-mundo",
                 lat: -29.3739,
                 lng: -50.8811
             },
@@ -852,7 +852,7 @@
                 cidade: "rj",
                 imagem: "https://i.ibb.co/RpspQCJb/praia-copacabanaprincipal.jpg",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/praia-copacabana",
+                link: "praia-copacabana",
                 lat: -22.9712,
                 lng: -43.1823
             },
@@ -867,7 +867,7 @@
                 cidade: "rs",
                 imagem: "https://i.ibb.co/RGPQnFfQ/Foto-Rua-Coberta.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/rua-coberta",
+                link: "rua-coberta",
                 lat: -29.3785,
                 lng: -50.8754
             },
@@ -882,7 +882,7 @@
                 cidade: "pr",
                 imagem: "https://i.ibb.co/bgFwbx4F/usina-hidreletrica-itaipu-principal.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/itaipu",
+                link: "usina-hidreletrica-itaipu",
                 lat: -25.4086,
                 lng: -54.5888
             },
@@ -897,7 +897,7 @@
                 cidade: "mg",
                 imagem: "https://i.ibb.co/DTSkvSy/Igreja-de-S-o-Francisco-de-Assis.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/igreja-sao-francisco",
+                link: "igreja-sao-francisco",
                 lat: -20.3855,
                 lng: -43.5033
             },
@@ -912,7 +912,7 @@
                 cidade: "sp",
                 imagem: "https://i.ibb.co/dJWhkRQ5/Ibirapuera-Park.png",
                 avaliacoes: 10200,
-                link: "pontos-turisticos/parque-ibirapuera",
+                link: "parque-ibirapuera",
                 lat: -23.5878,
                 lng: -46.6580
             },
@@ -927,7 +927,7 @@
                 cidade: "rs",
                 imagem: "https://i.ibb.co/k2x0S05T/Lago-Negro.png",
                 avaliacoes: 6800,
-                link: "pontos-turisticos/lago-negro",
+                link: "lago-negro",
                 lat: -29.3769,
                 lng: -50.8764
             }
@@ -961,7 +961,7 @@
                         <p><span>⭐</span> ${ponto.avaliacoes} avaliações</p>
                     </div>
                     <div class="ponto-footer">
-                        <a href="${ponto.link}" class="btn-ver-mais">Ver Detalhes</a>
+                        <a href="/destinos/pontos-turisticos/${ponto.link}" class="btn-ver-mais">Ver Detalhes</a>
                     </div>
                 </div>
             `;

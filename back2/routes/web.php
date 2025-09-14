@@ -41,9 +41,133 @@ Route::get('/profile', function () {
     return view('profile.show');
 })->name('profile.show');
 
+// Rotas para pontos turísticos (mantendo o mesmo padrão das outras rotas)
+Route::prefix('destinos/pontos-turisticos')->group(function () {
+    // Rota principal de listagem
+    Route::get('/', function () {
+        return view('destinos.pontos-turisticos.index');
+    })->name('pontos-turisticos.index');
+
+    // Rotas específicas para cada ponto turístico
+    Route::get('/beco-do-batman', function () {
+        return view('destinos.pontos-turisticos.BecodoBatman');
+    })->name('pontos-turisticos.beco-do-batman');
+
+    Route::get('/cataratas-do-iguacu', function () {
+        return view('destinos.pontos-turisticos.Cataratasdolguacu');
+    })->name('pontos-turisticos.cataratas-do-iguacu');
+
+    Route::get('/catedral-da-se', function () {
+        return view('destinos.pontos-turisticos.CatedraldaS');
+    })->name('pontos-turisticos.catedral-da-se');
+
+    Route::get('/centro-historico-sao-luis', function () {
+        return view('destinos.pontos-turisticos.CentroHistoricodeSaoLuis');
+    })->name('pontos-turisticos.centro-historico-sao-luis');
+
+    Route::get('/cristo-redentor', function () {
+        return view('destinos.pontos-turisticos.CristoRedentor');
+    })->name('pontos-turisticos.cristo-redentor');
+
+    Route::get('/parque-ibirapuera', function () {
+        return view('destinos.pontos-turisticos.IbirapueraPark');
+    })->name('pontos-turisticos.parque-ibirapuera');
+
+    Route::get('/igreja-sao-francisco', function () {
+        return view('destinos.pontos-turisticos.IgrejadeSaoFranciscodeAssis');
+    })->name('pontos-turisticos.igreja-sao-francisco');
+
+    Route::get('/ilha-campeche', function () {
+        return view('destinos.pontos-turisticos.IlhaCampeche');
+    })->name('pontos-turisticos.ilha-campeche');
+
+    Route::get('/ilha-do-campeche', function () {
+        return view('destinos.pontos-turisticos.IlhadoCampeche');
+    })->name('pontos-turisticos.ilha-do-campeche');
+
+    Route::get('/lago-negro', function () {
+        return view('destinos.pontos-turisticos.LagoNegro');
+    })->name('pontos-turisticos.lago-negro');
+
+    Route::get('/lencois-maranhenses', function () {
+        return view('destinos.pontos-turisticos.LencoisMaranhenses');
+    })->name('pontos-turisticos.lencois-maranhenses');
+
+    Route::get('/mina-da-passagem', function () {
+        return view('destinos.pontos-turisticos.MinadaPassagem');
+    })->name('pontos-turisticos.mina-da-passagem');
+
+    Route::get('/mini-mundo', function () {
+        return view('destinos.pontos-turisticos.MiniMundo');
+    })->name('pontos-turisticos.mini-mundo');
+
+    Route::get('/mirante-morro-cruz', function () {
+        return view('destinos.pontos-turisticos.MirantedoMorrodaCruz');
+    })->name('pontos-turisticos.mirante-morro-cruz');
+
+    Route::get('/museu-inconfidencia', function () {
+        return view('destinos.pontos-turisticos.Museudainconfidencia');
+    })->name('pontos-turisticos.museu-inconfidencia');
+
+    Route::get('/palacio-dos-leoes', function () {
+        return view('destinos.pontos-turisticos.PalaciodosLeoes');
+    })->name('pontos-turisticos.palacio-dos-leoes');
+
+    Route::get('/pao-de-acucar', function () {
+        return view('destinos.pontos-turisticos.PaodeAcucar');
+    })->name('pontos-turisticos.pao-de-acucar');
+
+    Route::get('/parque-das-aves', function () {
+        return view('destinos.pontos-turisticos.ParquedasAves');
+    })->name('pontos-turisticos.parque-das-aves');
+
+    Route::get('/praia-copacabana', function () {
+        return view('destinos.pontos-turisticos.PraiaCopacabana');
+    })->name('pontos-turisticos.praia-copacabana');
+
+    Route::get('/praia-joaquina', function () {
+        return view('destinos.pontos-turisticos.Praidaloaquina');
+    })->name('pontos-turisticos.praia-joaquina');
+
+    Route::get('/rua-coberta', function () {
+        return view('destinos.pontos-turisticos.Ruacoberta');
+    })->name('pontos-turisticos.rua-coberta');
+
+    Route::get('/turismo-ma', function () {
+        return view('destinos.pontos-turisticos.TurismoMA');
+    })->name('pontos-turisticos.turismo-ma');
+
+    Route::get('/turismo-mg', function () {
+        return view('destinos.pontos-turisticos.TurismoMG');
+    })->name('pontos-turisticos.turismo-mg');
+
+    Route::get('/turismo-pr', function () {
+        return view('destinos.pontos-turisticos.TurismoPR');
+    })->name('pontos-turisticos.turismo-pr');
+
+    Route::get('/turismo-ru', function () {
+        return view('destinos.pontos-turisticos.TurismoRU');
+    })->name('pontos-turisticos.turismo-ru');
+
+    Route::get('/turismo-rs', function () {
+        return view('destinos.pontos-turisticos.TurismoRS');
+    })->name('pontos-turisticos.turismo-rs');
+
+    Route::get('/turismo-sc', function () {
+        return view('destinos.pontos-turisticos.TurismoSC');
+    })->name('pontos-turisticos.turismo-sc');
+
+    Route::get('/turismo-sp', function () {
+        return view('destinos.pontos-turisticos.TurismoSP');
+    })->name('pontos-turisticos.turismo-sp');
+
+    Route::get('/usina-hidreletrica-itaipu', function () {
+        return view('destinos.pontos-turisticos.UsinalHidreletricadeItaipu');
+    })->name('pontos-turisticos.usina-hidreletrica-itaipu');
+});
 Route::get('/pontos-turisticos', function () {
     return view('pontos-turisticos');
-})->name('pontos-turisticos');
+})->name('pontos-turisticos.alternative');
 
 // Rotas para hotéis individuais
 Route::prefix('destinos/hoteis')->group(function () {
