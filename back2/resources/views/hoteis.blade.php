@@ -638,344 +638,365 @@
 @endsection
 
 @section('scripts')
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script>
-        // Base de dados de hotéis
-        const hoteis = [
-            {
-                id: 1,
-                nome: "Capsula Hotel",
-                avaliacao: 4.8,
-                localizacao: "Consolação, São Paulo",
-                preco: 650,
-                precoTexto: "R$ 650",
-                cidade: "sp",
-                imagem: "https://i.ibb.co/VYFJ1p3n/capsula-hotel.jpg",
-                avaliacoes: 2378,
-                link: "hoteis/capsula-hotel-sp",
-                categoria: "medio",
-                lat: -23.5505,
-                lng: -46.6333
-            },
-            {
-                id: 2,
-                nome: "Hotel Atlântico Business",
-                avaliacao: 4.9,
-                localizacao: "Dantas, Rio de Janeiro",
-                preco: 850,
-                precoTexto: "R$ 850",
-                cidade: "rj",
-                imagem: "https://i.ibb.co/7NYJH7rM/Hotel-atalntico.webp",
-                avaliacoes: 1975,
-                link: "hoteis/atlantico-business-rj",
-                categoria: "premium",
-                lat: -22.9068,
-                lng: -43.1729
-            },
-            {
-                id: 3,
-                nome: "Minas Garden Hotel",
-                avaliacao: 4.7,
-                localizacao: "Poços de Caldas, Minas Gerais",
-                preco: 550,
-                precoTexto: "R$ 550",
-                cidade: "mg",
-                imagem: "https://i.ibb.co/3yLL6n1c/Minas-Garden-Hotel.jpg",
-                avaliacoes: 1526,
-                link: "hoteis/minas-garden-mg",
-                categoria: "medio",
-                lat: -21.7874,
-                lng: -46.5693
-            },
-            {
-                id: 4,
-                nome: "Blue Tree Towers",
-                avaliacao: 4.8,
-                localizacao: "São Luís, Maranhão",
-                preco: 580,
-                precoTexto: "R$ 580",
-                cidade: "ma",
-                imagem: "https://i.ibb.co/tTWQd0GW/Blue-Tree-Towers.jpg",
-                avaliacoes: 3494,
-                link: "hoteis/blue-tree-ma",
-                categoria: "medio",
-                lat: -2.5307,
-                lng: -44.3068
-            },
-            {
-                id: 5,
-                nome: "Ingleses Palace Hotel",
-                avaliacao: 4.9,
-                localizacao: "Florianópolis, Santa Catarina",
-                preco: 980,
-                precoTexto: "R$ 980",
-                cidade: "sc",
-                imagem: "https://i.ibb.co/1YHgJM9K/ingleses-palace-hotel.jpg",
-                avaliacoes: 1550,
-                link: "hoteis/ingleses-palace-sc",
-                categoria: "premium",
-                lat: -27.5954,
-                lng: -48.5480
-            },
-            {
-                id: 6,
-                nome: "Hotel Colline de France-Gramado",
-                avaliacao: 4.6,
-                localizacao: "Gramado, Rio Grande do Sul",
-                preco: 480,
-                precoTexto: "R$ 480",
-                cidade: "rs",
-                imagem: "https://i.ibb.co/VWH7mcc8/hotel-colline-france-gramado.jpg",
-                avaliacoes: 1526,
-                link: "hoteis/colline-france-rs",
-                categoria: "medio",
-                lat: -29.3739,
-                lng: -50.8811
-            },
-            {
-                id: 7,
-                nome: "Hotel Atlântico Copacabana",
-                avaliacao: 4.6,
-                localizacao: "Copacabana, Rio de Janeiro",
-                preco: 880,
-                precoTexto: "R$ 880",
-                cidade: "rj",
-                imagem: "https://i.ibb.co/V0DXvrSj/hotel-atlantico-business.jpg",
-                avaliacoes: 6362,
-                link: "hoteis/atlantico-copacabana-rj",
-                categoria: "premium",
-                lat: -22.9711,
-                lng: -43.1828
-            },
-            {
-                id: 8,
-                nome: "Hotel Atlântico Praia",
-                avaliacao: 4.8,
-                localizacao: "Copacabana, Rio de Janeiro",
-                preco: 780,
-                precoTexto: "R$ 780",
-                cidade: "rj",
-                imagem: "https://i.ibb.co/NgCYTM38/praia-hotel.jpg",
-                avaliacoes: 3695,
-                link: "hoteis/atlantico-praia-rj",
-                categoria: "premium",
-                lat: -22.9721,
-                lng: -43.1838
-            },
-            {
-                id: 9,
-                nome: "Hotel Continental",
-                avaliacao: 4.8,
-                localizacao: "Floresta, Porto Alegre",
-                preco: 680,
-                precoTexto: "R$ 680",
-                cidade: "rs",
-                imagem: "https://i.ibb.co/Pzj4B8sY/hotel-continental.jpg",
-                avaliacoes: 3281,
-                link: "hoteis/continental-rs",
-                categoria: "medio",
-                lat: -30.0346,
-                lng: -51.2177
-            },
-            {
-                id: 10,
-                nome: "Hotel GoldMen Express Cianorte",
-                avaliacao: 4.3,
-                localizacao: "Zona 3, Cianorte - PR",
-                preco: 680,
-                precoTexto: "R$ 680",
-                cidade: "pr",
-                imagem: "https://i.ibb.co/5Xr5wYRn/hotel-gold.jpg",
-                avaliacoes: 58,
-                link: "hoteis/goldmen-express-pr",
-                categoria: "medio",
-                lat: -23.6633,
-                lng: -52.6108
-            },
-            {
-                id: 11,
-                nome: "Gran Villagio Hotel",
-                avaliacao: 4.6,
-                localizacao: "Consolação, São Paulo",
-                preco: 980,
-                precoTexto: "R$ 980",
-                cidade: "sp",
-                imagem: "https://i.ibb.co/CRj4cTP/Gran-Villagio-Hotel.png",
-                avaliacoes: 1425,
-                link: "hoteis/gran-villagio-sp",
-                categoria: "premium",
-                lat: -23.5515,
-                lng: -46.6343
-            },
-            {
-                id: 12,
-                nome: "Life Infinity - Hotel",
-                avaliacao: 4.2,
-                localizacao: "Carniel, Gramado",
-                preco: 870,
-                precoTexto: "R$ 870",
-                cidade: "rs",
-                imagem: "https://i.ibb.co/1YkDLFzJ/infinity-hotel.jpg",
-                avaliacoes: 205,
-                link: "hoteis/life-infinity-rs",
-                categoria: "premium",
-                lat: -29.3749,
-                lng: -50.8821
-            },
-            {
-                id: 13,
-                nome: "Oceania Park Hotel Spa & Convention Center",
-                avaliacao: 4.5,
-                localizacao: "Ingleses Centro, Florianópolis",
-                preco: 630,
-                precoTexto: "R$ 630",
-                cidade: "sc",
-                imagem: "https://i.ibb.co/qLp1GJFc/Hotel-oceania.jpg",
-                avaliacoes: 4103,
-                link: "hoteis/oceania-park-sc",
-                categoria: "medio",
-                lat: -27.4510,
-                lng: -48.5500
-            },
-            {
-                id: 14,
-                nome: "Hotel Pousada Por do Sol",
-                avaliacao: 4.7,
-                localizacao: "Camanducaia - MG",
-                preco: 680,
-                precoTexto: "R$ 680",
-                cidade: "mg",
-                imagem: "https://i.ibb.co/m5WpdDSv/hotel-sol.jpg",
-                avaliacoes: 247,
-                link: "hoteis/por-do-sol-mg",
-                categoria: "medio",
-                lat: -22.7497,
-                lng: -45.9911
-            },
-            {
-                id: 15,
-                nome: "Hotel Pousada Agua Marinha",
-                avaliacao: 4.8,
-                localizacao: "Brejatuba, Guaratuba",
-                preco: 650,
-                precoTexto: "R$ 650",
-                cidade: "pr",
-                imagem: "https://i.ibb.co/fY0nGHmw/Hotel-Pousada-Agua-Marinha.jpg",
-                avaliacoes: 1182,
-                link: "hoteis/agua-marinha-pr",
-                categoria: "medio",
-                lat: -25.8800,
-                lng: -48.5833
-            },
-            {
-                id: 16,
-                nome: "Hotel Pousada Canto da Vigia",
-                avaliacao: 4.9,
-                localizacao: "Armação, Penha",
-                preco: 580,
-                precoTexto: "R$ 580",
-                cidade: "sc",
-                imagem: "https://i.ibb.co/HfPvqV9P/hotel-canto.jpg",
-                avaliacoes: 651,
-                link: "hoteis/canto-vigia-sc",
-                categoria: "medio",
-                lat: -26.7833,
-                lng: -48.6167
-            },
-            {
-                id: 17,
-                nome: "Hotel Pousada Universal",
-                avaliacao: 4.3,
-                localizacao: "Setor rodoviário, Riachão",
-                preco: 580,
-                precoTexto: "R$ 580",
-                cidade: "ma",
-                imagem: "https://i.ibb.co/wNdvDFv4/hotel-universal.webp",
-                avaliacoes: 276,
-                link: "hoteis/pousada-universal-ma",
-                categoria: "medio",
-                lat: -7.3619,
-                lng: -46.6744
-            },
-            {
-                id: 18,
-                nome: "Hotel Rios",
-                avaliacao: 4.4,
-                localizacao: "Potosi, Balsas",
-                preco: 550,
-                precoTexto: "R$ 550",
-                cidade: "ma",
-                imagem: "https://i.ibb.co/N4tRbrF/hotel-rios.jpg",
-                avaliacoes: 80,
-                link: "hoteis/hotel-rios-ma",
-                categoria: "medio",
-                lat: -7.5321,
-                lng: -46.0355
-            },
-            {
-                id: 19,
-                nome: "San Michel Hotel",
-                avaliacao: 4.8,
-                localizacao: "República, São Paulo",
-                preco: 650,
-                precoTexto: "R$ 650",
-                cidade: "sp",
-                imagem: "https://i.ibb.co/7Jr9J0NJ/michel-hotel.jpg",
-                avaliacoes: 2526,
-                link: "hoteis/san-michel-sp",
-                categoria: "medio",
-                lat: -23.5440,
-                lng: -46.6423
-            },
-            {
-                id: 20,
-                nome: "Hotel Viale Cataratas",
-                avaliacao: 4.5,
-                localizacao: "Vila Yolanda, Foz do Iguaçu",
-                preco: 650,
-                precoTexto: "R$ 650",
-                cidade: "pr",
-                imagem: "https://i.ibb.co/5xnLP14N/Viale-Cataratas-Hotel.jpg",
-                avaliacoes: 1864,
-                link: "hoteis/viale-cataratas-pr",
-                categoria: "medio",
-                lat: -25.5478,
-                lng: -54.5873
-            },
-            {
-                id: 21,
-                nome: "Hotel Villa Lobos Spa Romantik",
-                avaliacao: 4.9,
-                localizacao: "Pte. Nova, Extrema",
-                preco: 550,
-                precoTexto: "R$ 550",
-                cidade: "mg",
-                imagem: "https://i.ibb.co/SXsj4K6f/Hotel-spa.jpg",
-                avaliacoes: 13335,
-                link: "hoteis/villa-lobos-mg",
-                categoria: "medio",
-                lat: -22.8548,
-                lng: -46.3186
-            }
-        ];
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    // Base de dados de hotéis
+    const hoteis = [
+        {
+            id: 1,
+            nome: "Capsula Hotel",
+            avaliacao: 4.8,
+            localizacao: "Consolação, São Paulo",
+            preco: 650,
+            precoTexto: "R$ 650",
+            cidade: "sp",
+            imagem: "https://i.ibb.co/VYFJ1p3n/capsula-hotel.jpg",
+            avaliacoes: 2378,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Ar Condicionado", "Café da Manhã"],
+            lat: -23.5505,
+            lng: -46.6333
+        },
+        {
+            id: 2,
+            nome: "Hotel Atlântico Business",
+            avaliacao: 4.9,
+            localizacao: "Dantas, Rio de Janeiro",
+            preco: 850,
+            precoTexto: "R$ 850",
+            cidade: "rj",
+            imagem: "https://i.ibb.co/7NYJH7rM/Hotel-atalntico.webp",
+            avaliacoes: 1975,
+            categoria: "premium",
+            estrelas: 5,
+            comodidades: ["Wi-Fi", "Piscina", "Academia", "Restaurante"],
+            lat: -22.9068,
+            lng: -43.1729
+        },
+        {
+            id: 3,
+            nome: "Minas Garden Hotel",
+            avaliacao: 4.7,
+            localizacao: "Poços de Caldas, Minas Gerais",
+            preco: 550,
+            precoTexto: "R$ 550",
+            cidade: "mg",
+            imagem: "https://i.ibb.co/3yLL6n1c/Minas-Garden-Hotel.jpg",
+            avaliacoes: 1526,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Estacionamento", "Café da Manhã"],
+            lat: -21.7874,
+            lng: -46.5693
+        },
+        {
+            id: 4,
+            nome: "Blue Tree Towers",
+            avaliacao: 4.8,
+            localizacao: "São Luís, Maranhão",
+            preco: 580,
+            precoTexto: "R$ 580",
+            cidade: "ma",
+            imagem: "https://i.ibb.co/tTWQd0GW/Blue-Tree-Towers.jpg",
+            avaliacoes: 3494,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Piscina", "Academia", "Restaurante"],
+            lat: -2.5307,
+            lng: -44.3068
+        },
+        {
+            id: 5,
+            nome: "Ingleses Palace Hotel",
+            avaliacao: 4.9,
+            localizacao: "Florianópolis, Santa Catarina",
+            preco: 980,
+            precoTexto: "R$ 980",
+            cidade: "sc",
+            imagem: "https://i.ibb.co/1YHgJM9K/ingleses-palace-hotel.jpg",
+            avaliacoes: 1550,
+            categoria: "premium",
+            estrelas: 5,
+            comodidades: ["Wi-Fi", "Piscina", "Spa", "Restaurante", "Praia Privativa"],
+            lat: -27.5954,
+            lng: -48.5480
+        },
+        {
+            id: 6,
+            nome: "Hotel Colline de France-Gramado",
+            avaliacao: 4.6,
+            localizacao: "Gramado, Rio Grande do Sul",
+            preco: 480,
+            precoTexto: "R$ 480",
+            cidade: "rs",
+            imagem: "https://i.ibb.co/VWH7mcc8/hotel-colline-france-gramado.jpg",
+            avaliacoes: 1526,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Lareira", "Restaurante", "Estacionamento"],
+            lat: -29.3739,
+            lng: -50.8811
+        },
+        {
+            id: 7,
+            nome: "Hotel Atlântico Copacabana",
+            avaliacao: 4.6,
+            localizacao: "Copacabana, Rio de Janeiro",
+            preco: 880,
+            precoTexto: "R$ 880",
+            cidade: "rj",
+            imagem: "https://i.ibb.co/V0DXvrSj/hotel-atlantico-business.jpg",
+            avaliacoes: 6362,
+            categoria: "premium",
+            estrelas: 5,
+            comodidades: ["Wi-Fi", "Piscina", "Academia", "Restaurante", "Vista para o Mar"],
+            lat: -22.9711,
+            lng: -43.1828
+        },
+        {
+            id: 8,
+            nome: "Hotel Atlântico Praia",
+            avaliacao: 4.8,
+            localizacao: "Copacabana, Rio de Janeiro",
+            preco: 780,
+            precoTexto: "R$ 780",
+            cidade: "rj",
+            imagem: "https://i.ibb.co/NgCYTM38/praia-hotel.jpg",
+            avaliacoes: 3695,
+            categoria: "premium",
+            estrelas: 5,
+            comodidades: ["Wi-Fi", "Piscina", "Restaurante", "Vista para o Mar"],
+            lat: -22.9721,
+            lng: -43.1838
+        },
+        {
+            id: 9,
+            nome: "Hotel Continental",
+            avaliacao: 4.8,
+            localizacao: "Floresta, Porto Alegre",
+            preco: 680,
+            precoTexto: "R$ 680",
+            cidade: "rs",
+            imagem: "https://i.ibb.co/Pzj4B8sY/hotel-continental.jpg",
+            avaliacoes: 3281,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Estacionamento", "Restaurante", "Business Center"],
+            lat: -30.0346,
+            lng: -51.2177
+        },
+        {
+            id: 10,
+            nome: "Hotel GoldMen Express Cianorte",
+            avaliacao: 4.3,
+            localizacao: "Zona 3, Cianorte - PR",
+            preco: 680,
+            precoTexto: "R$ 680",
+            cidade: "pr",
+            imagem: "https://i.ibb.co/5Xr5wYRn/hotel-gold.jpg",
+            avaliacoes: 58,
+            categoria: "medio",
+            estrelas: 3,
+            comodidades: ["Wi-Fi", "Estacionamento", "Café da Manhã"],
+            lat: -23.6633,
+            lng: -52.6108
+        },
+        {
+            id: 11,
+            nome: "Gran Villagio Hotel",
+            avaliacao: 4.6,
+            localizacao: "Consolação, São Paulo",
+            preco: 980,
+            precoTexto: "R$ 980",
+            cidade: "sp",
+            imagem: "https://i.ibb.co/CRj4cTP/Gran-Villagio-Hotel.png",
+            avaliacoes: 1425,
+            categoria: "premium",
+            estrelas: 5,
+            comodidades: ["Wi-Fi", "Piscina", "Spa", "Restaurante", "Academia"],
+            lat: -23.5515,
+            lng: -46.6343
+        },
+        {
+            id: 12,
+            nome: "Life Infinity - Hotel",
+            avaliacao: 4.2,
+            localizacao: "Carniel, Gramado",
+            preco: 870,
+            precoTexto: "R$ 870",
+            cidade: "rs",
+            imagem: "https://i.ibb.co/1YkDLFzJ/infinity-hotel.jpg",
+            avaliacoes: 205,
+            categoria: "premium",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Lareira", "Hidromassagem", "Estacionamento"],
+            lat: -29.3749,
+            lng: -50.8821
+        },
+        {
+            id: 13,
+            nome: "Oceania Park Hotel Spa & Convention Center",
+            avaliacao: 4.5,
+            localizacao: "Ingleses Centro, Florianópolis",
+            preco: 630,
+            precoTexto: "R$ 630",
+            cidade: "sc",
+            imagem: "https://i.ibb.co/qLp1GJFc/Hotel-oceania.jpg",
+            avaliacoes: 4103,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Piscina", "Spa", "Restaurante", "Centro de Convenções"],
+            lat: -27.4510,
+            lng: -48.5500
+        },
+        {
+            id: 14,
+            nome: "Hotel Pousada Por do Sol",
+            avaliacao: 4.7,
+            localizacao: "Camanducaia - MG",
+            preco: 680,
+            precoTexto: "R$ 680",
+            cidade: "mg",
+            imagem: "https://i.ibb.co/m5WpdDSv/hotel-sol.jpg",
+            avaliacoes: 247,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Lareira", "Café da Manhã", "Área de Churrasco"],
+            lat: -22.7497,
+            lng: -45.9911
+        },
+        {
+            id: 15,
+            nome: "Hotel Pousada Agua Marinha",
+            avaliacao: 4.8,
+            localizacao: "Brejatuba, Guaratuba",
+            preco: 650,
+            precoTexto: "R$ 650",
+            cidade: "pr",
+            imagem: "https://i.ibb.co/fY0nGHmw/Hotel-Pousada-Agua-Marinha.jpg",
+            avaliacoes: 1182,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Piscina", "Praia Privativa", "Restaurante"],
+            lat: -25.8800,
+            lng: -48.5833
+        },
+        {
+            id: 16,
+            nome: "Hotel Pousada Canto da Vigia",
+            avaliacao: 4.9,
+            localizacao: "Armação, Penha",
+            preco: 580,
+            precoTexto: "R$ 580",
+            cidade: "sc",
+            imagem: "https://i.ibb.co/HfPvqV9P/hotel-canto.jpg",
+            avaliacoes: 651,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Piscina", "Vista para o Mar", "Café da Manhã"],
+            lat: -26.7833,
+            lng: -48.6167
+        },
+        {
+            id: 17,
+            nome: "Hotel Pousada Universal",
+            avaliacao: 4.3,
+            localizacao: "Setor rodoviário, Riachão",
+            preco: 580,
+            precoTexto: "R$ 580",
+            cidade: "ma",
+            imagem: "https://i.ibb.co/wNdvDFv4/hotel-universal.webp",
+            avaliacoes: 276,
+            categoria: "medio",
+            estrelas: 3,
+            comodidades: ["Wi-Fi", "Estacionamento", "Restaurante"],
+            lat: -7.3619,
+            lng: -46.6744
+        },
+        {
+            id: 18,
+            nome: "Hotel Rios",
+            avaliacao: 4.4,
+            localizacao: "Potosi, Balsas",
+            preco: 550,
+            precoTexto: "R$ 550",
+            cidade: "ma",
+            imagem: "https://i.ibb.co/N4tRbrF/hotel-rios.jpg",
+            avaliacoes: 80,
+            categoria: "medio",
+            estrelas: 3,
+            comodidades: ["Wi-Fi", "Estacionamento", "Café da Manhã"],
+            lat: -7.5321,
+            lng: -46.0355
+        },
+        {
+            id: 19,
+            nome: "San Michel Hotel",
+            avaliacao: 4.8,
+            localizacao: "República, São Paulo",
+            preco: 650,
+            precoTexto: "R$ 650",
+            cidade: "sp",
+            imagem: "https://i.ibb.co/7Jr9J0NJ/michel-hotel.jpg",
+            avaliacoes: 2526,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Business Center", "Restaurante", "Estacionamento"],
+            lat: -23.5440,
+            lng: -46.6423
+        },
+        {
+            id: 20,
+            nome: "Hotel Viale Cataratas",
+            avaliacao: 4.5,
+            localizacao: "Vila Yolanda, Foz do Iguaçu",
+            preco: 650,
+            precoTexto: "R$ 650",
+            cidade: "pr",
+            imagem: "https://i.ibb.co/5xnLP14N/Viale-Cataratas-Hotel.jpg",
+            avaliacoes: 1864,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Piscina", "Restaurante", "Translado para Cataratas"],
+            lat: -25.5478,
+            lng: -54.5873
+        },
+        {
+            id: 21,
+            nome: "Hotel Villa Lobos Spa Romantik",
+            avaliacao: 4.9,
+            localizacao: "Pte. Nova, Extrema",
+            preco: 550,
+            precoTexto: "R$ 550",
+            cidade: "mg",
+            imagem: "https://i.ibb.co/SXsj4K6f/Hotel-spa.jpg",
+            avaliacoes: 13335,
+            categoria: "medio",
+            estrelas: 4,
+            comodidades: ["Wi-Fi", "Spa", "Piscina", "Restaurante", "Tratamentos Relaxantes"],
+            lat: -22.8548,
+            lng: -46.3186
+        }
+    ];
 
-        // Número de hotéis por página
-        const hoteisPorPagina = 6;
-        let paginaAtual = 1;
-        let hoteisFiltrados = [...hoteis];
-        let map;
+    // Número de hotéis por página
+    const hoteisPorPagina = 6;
+    let paginaAtual = 1;
+    let hoteisFiltrados = [...hoteis];
+    let map;
 
-        // Função para criar um card de hotel
-        function criarHotelCard(hotel) {
-            const hotelCard = document.createElement('div');
-            hotelCard.className = 'hotel-card show';
+    // Função para criar um card de hotel
+    function criarHotelCard(hotel) {
+        const hotelCard = document.createElement('div');
+        hotelCard.className = 'hotel-card show';
 
-            // Usar a rota nomeada do Laravel
-            const hotelLink = "{{ route('hoteis.show', ':id') }}".replace(':id', hotel.id);
+        // Usar URL absoluta para evitar problemas com rotas do Laravel no JS
+        const hotelLink = `/destinos/hoteis/${hotel.id}`;
 
-            hotelCard.innerHTML = `
+        hotelCard.innerHTML = `
             <div class="hotel-img">
-                <img src="${hotel.imagem}" alt="${hotel.nome}">
+                <img src="${hotel.imagem}" alt="${hotel.nome}" onerror="this.src='https://via.placeholder.com/400x300/5a8f3d/ffffff?text=Imagem+Indisponível'">
                 ${hotel.categoria === 'premium' ? '<span class="hotel-badge">Premium</span>' : ''}
             </div>
             <div class="hotel-content">
@@ -989,179 +1010,217 @@
                 <div class="hotel-info">
                     <p><span>💰</span> <span class="hotel-price">${hotel.precoTexto}</span> /noite</p>
                     <p><span>⭐</span> ${hotel.avaliacoes} avaliações</p>
-                    <p><span>🏨</span> ${hotel.estrelas} estrelas</p>
+                    <p><span>🏨</span> ${'⭐'.repeat(hotel.estrelas)} (${hotel.estrelas} estrelas)</p>
                 </div>
                 <div class="hotel-footer">
                     <a href="${hotelLink}" class="btn-ver-mais">Ver Detalhes</a>
                 </div>
             </div>
         `;
-            return hotelCard;
+        return hotelCard;
+    }
+
+    // Função para exibir os hotéis na página atual
+    function exibirHoteis() {
+        const hoteisGrid = document.getElementById('hoteis-grid');
+        hoteisGrid.innerHTML = '';
+        const startIndex = (paginaAtual - 1) * hoteisPorPagina;
+        const endIndex = startIndex + hoteisPorPagina;
+        const hoteisPagina = hoteisFiltrados.slice(startIndex, endIndex);
+
+        if (hoteisPagina.length === 0) {
+            hoteisGrid.innerHTML = '<div class="loading">Nenhum hotel encontrado com os filtros aplicados...</div>';
+            return;
         }
 
-        // Função para carregar hotéis via AJAX
-        function carregarHoteis(filtros = {}) {
-            $.ajax({
-                url: '{{ route("hoteis.show") }}',
-                type: 'GET',
-                data: filtros,
-                dataType: 'json',
-                success: function (data) {
-                    hoteisFiltrados = data;
-                    paginaAtual = 1;
-                    exibirHoteis();
+        hoteisPagina.forEach(hotel => {
+            const hotelCard = criarHotelCard(hotel);
+            hoteisGrid.appendChild(hotelCard);
+        });
 
-                    // Atualizar mapa com os hotéis filtrados
-                    atualizarMapa();
-                },
-                error: function () {
-                    console.error('Erro ao carregar hotéis');
-                    // Fallback para dados locais
-                    hoteisFiltrados = [...hoteis];
-                    paginaAtual = 1;
-                    exibirHoteis();
-                    atualizarMapa();
+        // Atualiza a informação de paginação
+        const totalPaginas = Math.ceil(hoteisFiltrados.length / hoteisPorPagina);
+        document.getElementById('pagination-info').textContent =
+            `Mostrando ${startIndex + 1} a ${Math.min(endIndex, hoteisFiltrados.length)} de ${hoteisFiltrados.length} hotéis`;
+
+        // Atualiza os botões de paginação
+        atualizarPaginacao(totalPaginas);
+
+        // Atualiza o mapa
+        atualizarMapa();
+    }
+
+    // Função para criar os botões de paginação
+    function atualizarPaginacao(totalPaginas) {
+        const paginacao = document.getElementById('paginacao');
+        paginacao.innerHTML = '';
+
+        if (totalPaginas <= 1) return;
+
+        // Botão Anterior
+        const btnAnterior = document.createElement('div');
+        btnAnterior.className = `pagina-btn ${paginaAtual === 1 ? 'disabled' : ''}`;
+        btnAnterior.innerHTML = '&laquo;';
+        btnAnterior.addEventListener('click', () => {
+            if (paginaAtual > 1) {
+                paginaAtual--;
+                exibirHoteis();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        paginacao.appendChild(btnAnterior);
+
+        // Botões de Número
+        const maxBotoes = 5;
+        let inicio = Math.max(1, paginaAtual - Math.floor(maxBotoes / 2));
+        let fim = Math.min(totalPaginas, inicio + maxBotoes - 1);
+
+        if (fim - inicio + 1 < maxBotoes) {
+            inicio = Math.max(1, fim - maxBotoes + 1);
+        }
+
+        for (let i = inicio; i <= fim; i++) {
+            const paginaBtn = document.createElement('div');
+            paginaBtn.className = `pagina-btn ${i === paginaAtual ? 'active' : ''}`;
+            paginaBtn.textContent = i;
+            paginaBtn.addEventListener('click', () => {
+                paginaAtual = i;
+                exibirHoteis();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            paginacao.appendChild(paginaBtn);
+        }
+
+        // Botão Próximo
+        const btnProximo = document.createElement('div');
+        btnProximo.className = `pagina-btn ${paginaAtual === totalPaginas ? 'disabled' : ''}`;
+        btnProximo.innerHTML = '&raquo;';
+        btnProximo.addEventListener('click', () => {
+            if (paginaAtual < totalPaginas) {
+                paginaAtual++;
+                exibirHoteis();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        paginacao.appendChild(btnProximo);
+    }
+
+    // Função para atualizar o mapa
+    function atualizarMapa() {
+        if (map) {
+            // Limpar marcadores existentes
+            map.eachLayer(function(layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
                 }
             });
-        }
 
-        // Função para atualizar o mapa
-        function atualizarMapa() {
-            if (map) {
-                map.eachLayer(function (layer) {
-                    if (layer instanceof L.Marker) {
-                        map.removeLayer(layer);
-                    }
-                });
+            // Adicionar novos marcadores
+            hoteisFiltrados.forEach(hotel => {
+                if (hotel.lat && hotel.lng) {
+                    const popupContent = `
+                        <div style="text-align: center;">
+                            <b>${hotel.nome}</b><br>
+                            <small>${hotel.localizacao}</small><br>
+                            <span>⭐ ${hotel.avaliacao}</span><br>
+                            <a href="/destinos/hoteis/${hotel.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
+                                Ver Detalhes
+                            </a>
+                        </div>
+                    `;
 
-                hoteisFiltrados.forEach(hotel => {
-                    if (hotel.lat && hotel.lng) {
-                        L.marker([hotel.lat, hotel.lng])
-                            .addTo(map)
-                            .bindPopup(`<b>${hotel.nome}</b><br>${hotel.localizacao}<br><a href="{{ route('hoteis.show', '') }}/${hotel.id}" class="btn-ver-mais">Ver Detalhes</a>`);
-                    }
-                });
-
-                // Ajustar visão do mapa se houver filtro de destino
-                const destino = document.getElementById('destino').value;
-                if (destino) {
-                    const cidadeCoordenadas = {
-                        "sp": [-23.5505, -46.6333],
-                        "rj": [-22.9068, -43.1729],
-                        "rs": [-30.0346, -51.2177],
-                        "ma": [-2.5307, -44.3068],
-                        "mg": [-19.9167, -43.9345],
-                        "pr": [-25.4296, -49.2713],
-                        "sc": [-27.5954, -48.5480]
-                    };
-                    if (cidadeCoordenadas[destino]) {
-                        map.setView(cidadeCoordenadas[destino], 12);
-                    }
-                } else if (hoteisFiltrados.length > 0) {
-                    // Centralizar no primeiro hotel da lista
-                    const primeiroHotel = hoteisFiltrados[0];
-                    map.setView([primeiroHotel.lat, primeiroHotel.lng], 10);
-                } else {
-                    map.setView([-15.7797, -47.9297], 4);
+                    L.marker([hotel.lat, hotel.lng])
+                        .addTo(map)
+                        .bindPopup(popupContent);
                 }
+            });
+
+            // Ajustar a visualização do mapa
+            if (hoteisFiltrados.length > 0) {
+                const grupo = new L.featureGroup(hoteisFiltrados
+                    .filter(h => h.lat && h.lng)
+                    .map(h => L.marker([h.lat, h.lng])));
+
+                if (grupo.getLayers().length > 0) {
+                    map.fitBounds(grupo.getBounds().pad(0.1));
+                }
+            } else {
+                map.setView([-15.7797, -47.9297], 4);
             }
         }
+    }
 
-        // Configura os eventos quando a página é carregada
-        document.addEventListener('DOMContentLoaded', function () {
-            // Configura os botões de filtro
-            document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
-            document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
+    // Função para aplicar os filtros
+    function aplicarFiltros() {
+        const destino = document.getElementById('destino').value;
+        const preco = document.getElementById('preco').value;
+        const classificacao = document.getElementById('classificacao').value;
 
-            // Carrega os hotéis inicialmente
-            carregarHoteis();
+        hoteisFiltrados = hoteis.filter(hotel => {
+            const atendeDestino = destino === '' || hotel.cidade === destino;
+            const atendePreco = preco === 'todos' ||
+                               (preco === 'economico' && hotel.preco <= 200) ||
+                               (preco === 'medio' && hotel.preco > 200 && hotel.preco <= 500) ||
+                               (preco === 'premium' && hotel.preco > 500);
+            const atendeClassificacao = classificacao === 'todos' || hotel.estrelas >= parseInt(classificacao);
 
-            // Inicializa o mapa
-            try {
-                map = L.map('map').setView([-15.7797, -47.9297], 4);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                    maxZoom: 19,
-                    detectRetina: true
-                }).addTo(map);
-            } catch (error) {
-                console.error('Erro ao carregar o mapa:', error);
-                document.getElementById('map').innerHTML = `
+            return atendeDestino && atendePreco && atendeClassificacao;
+        });
+
+        paginaAtual = 1;
+        exibirHoteis();
+        showNotification('Filtro aplicado com sucesso!', 'success');
+    }
+
+    // Função para limpar os filtros
+    function limparFiltros() {
+        document.getElementById('destino').value = '';
+        document.getElementById('preco').value = 'todos';
+        document.getElementById('classificacao').value = 'todos';
+
+        hoteisFiltrados = [...hoteis];
+        paginaAtual = 1;
+        exibirHoteis();
+        showNotification('Filtros limpos!', 'success');
+    }
+
+    // Função para mostrar notificações
+    function showNotification(message, type) {
+        const notificacao = document.getElementById('notificacao');
+        const notificacaoSpan = notificacao.querySelector('span');
+        notificacaoSpan.textContent = message;
+        notificacao.className = `notificacao ${type} show`;
+        setTimeout(() => {
+            notificacao.classList.remove('show');
+        }, 4000);
+    }
+
+    // Configura os eventos quando a página é carregada
+    document.addEventListener('DOMContentLoaded', function () {
+        // Configura os botões de filtro
+        document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
+        document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
+
+        // Exibe os hotéis inicialmente
+        exibirHoteis();
+
+        // Inicializa o mapa com tratamento de erros
+        try {
+            map = L.map('map').setView([-15.7797, -47.9297], 4);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19,
+                detectRetina: true
+            }).addTo(map);
+        } catch (error) {
+            console.error('Erro ao carregar o mapa:', error);
+            document.getElementById('map').innerHTML = `
                 <div style="text-align: center; padding: 20px; color: #666;">
                     <p>⚠️ Não foi possível carregar o mapa</p>
                     <p>Verifique sua conexão com a internet</p>
                 </div>
             `;
-            }
-        });
-
-        // Função para aplicar os filtros
-        function aplicarFiltros() {
-            const filtros = {
-                destino: document.getElementById('destino').value,
-                preco: document.getElementById('preco').value,
-                classificacao: document.getElementById('classificacao').value
-            };
-
-            carregarHoteis(filtros);
-            showNotification('Filtro aplicado com sucesso!', 'success');
         }
-
-        // Função para limpar os filtros
-        function limparFiltros() {
-            document.getElementById('destino').value = '';
-            document.getElementById('preco').value = 'todos';
-            document.getElementById('classificacao').value = 'todos';
-
-            carregarHoteis();
-            showNotification('Filtros limpos!', 'success');
-        }
-
-        // Função para mostrar notificações
-        function showNotification(message, type) {
-            const notificacao = document.getElementById('notificacao');
-            const notificacaoSpan = notificacao.querySelector('span');
-            notificacaoSpan.textContent = message;
-            notificacao.className = `notificacao ${type} show`;
-            setTimeout(() => {
-                notificacao.classList.remove('show');
-            }, 4000);
-        }
-
-        // Configura os eventos quando a página é carregada
-        document.addEventListener('DOMContentLoaded', function () {
-            // Configura os botões de filtro
-            document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
-            document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
-
-            // Exibe os hotéis inicialmente
-            exibirHoteis();
-
-            // Inicializa o mapa com tratamento de erros
-            try {
-                map = L.map('map').setView([-15.7797, -47.9297], 4);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                    maxZoom: 19,
-                    detectRetina: true
-                }).addTo(map);
-                // Adiciona marcadores para os hotéis
-                hoteis.forEach(hotel => {
-                    if (hotel.lat && hotel.lng) {
-                        L.marker([hotel.lat, hotel.lng])
-                            .addTo(map)
-                            .bindPopup(`<b>${hotel.nome}</b><br>${hotel.localizacao}`);
-                    }
-                });
-            } catch (error) {
-                console.error('Erro ao carregar o mapa:', error);
-                document.getElementById('map').innerHTML = `
-                        <div style="text-align: center; padding: 20px; color: #666;">
-                            <p>⚠️ Não foi possível carregar o mapa</p>
-                            <p>Verifique sua conexão com a internet</p>
-                        </div>
-                    `;
-            }
-        });
-    </script>
+    });
+</script>
 @endsection
