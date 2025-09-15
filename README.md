@@ -1,4 +1,4 @@
-# 🏗️ **Bella Back Novo** - Enterprise Laravel Application
+# 🏗️ **Bella Back Novo** - Laravel Application
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-777BB4?style=flat-square&logo=php)](https://php.net)
 [![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
