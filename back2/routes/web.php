@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RestauranteController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\PontoTuristicoController;
 
 // Rotas de autenticação
 Route::middleware('guest')->group(function () {
@@ -43,13 +44,8 @@ Route::get('/profile', function () {
 
 // Rotas para pontos turísticos (mantendo o mesmo padrão das outras rotas)
 Route::prefix('destinos/pontos-turisticos')->group(function () {
-    // Rota principal de listagem
-    Route::get('/', function () {
-        return view('destinos.pontos-turisticos.index');
-    })->name('pontos-turisticos.index');
-
-        // Rota para detalhes do ponto turístico via controller
-    Route::get('/{id}', [PontoTuristicoController::class, 'show'])->name('pontos-turisticos.show');
+    // Rota para detalhes do hotel via controller
+    Route::get('/{id}', [PontoTuristicoController::class, 'show'])->name('pontos-turisticos.alternative');
 
     // Rotas específicas para cada ponto turístico
     Route::get('/beco-do-batman', function () {

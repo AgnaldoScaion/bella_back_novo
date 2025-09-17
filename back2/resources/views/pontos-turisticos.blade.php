@@ -978,7 +978,7 @@
         // Número de pontos turísticos por página
         const pontosPorPagina = 6;
         let paginaAtual = 1;
-        let pontosFiltrados = [...pontosTuristicos];
+        let pontosFiltrados = [];
         let map;
         let markers = [];
 
@@ -991,26 +991,26 @@
             const pontoLink = `/destinos/pontos-turisticos/${ponto.id}`;
 
             pontoCard.innerHTML = `
-                    <div class="ponto-img">
-                        <img src="${ponto.imagem}" alt="${ponto.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Imagem+Indisponível'">
-                    </div>
-                    <div class="ponto-content">
-                        <div class="ponto-header">
-                            <h3 class="ponto-title">${ponto.nome}</h3>
-                            <div class="ponto-rating">
-                                <span class="star">★</span>${ponto.avaliacao}
-                            </div>
-                        </div>
-                        <div class="ponto-location">📍 ${ponto.localizacao}</div>
-                        <div class="ponto-info">
-                            <p><span>💰</span> <span class="ponto-price">${ponto.precoTexto}</span></p>
-                            <p><span>⭐</span> ${ponto.avaliacoes} avaliações</p>
-                        </div>
-                        <div class="ponto-footer">
-                            <a href="${pontoLink}" class="btn-ver-mais">Ver Detalhes</a>
+                <div class="ponto-img">
+                    <img src="${ponto.imagem}" alt="${ponto.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                </div>
+                <div class="ponto-content">
+                    <div class="ponto-header">
+                        <h3 class="ponto-title">${ponto.nome}</h3>
+                        <div class="ponto-rating">
+                            <span class="star">★</span>${ponto.avaliacao}
                         </div>
                     </div>
-                `;
+                    <div class="ponto-location">📍 ${ponto.localizacao}</div>
+                    <div class="ponto-info">
+                        <p><span>💰</span> <span class="ponto-price">${ponto.precoTexto}</span></p>
+                        <p><span>⭐</span> ${ponto.avaliacoes} avaliações</p>
+                    </div>
+                    <div class="ponto-footer">
+                        <a href="${pontoLink}" class="btn-ver-mais">Ver Detalhes</a>
+                    </div>
+                </div>
+            `;
 
             // Adiciona a animação após um pequeno delay
             setTimeout(() => {
@@ -1023,16 +1023,17 @@
         function exibirPontosTuristicos() {
             const pontosGrid = document.getElementById('pontos-grid');
             pontosGrid.innerHTML = '';
-            const startIndex = (paginaAtual - 1) * pontosPorPagina;
-            const endIndex = startIndex + pontosPorPagina;
-            const pontosPagina = pontosFiltrados.slice(startIndex, endIndex);
 
-            if (pontosPagina.length === 0) {
+            if (pontosFiltrados.length === 0) {
                 pontosGrid.innerHTML = '<div class="loading">Nenhum ponto turístico encontrado...</div>';
                 atualizarPaginacao(0);
                 atualizarMapa();
                 return;
             }
+
+            const startIndex = (paginaAtual - 1) * pontosPorPagina;
+            const endIndex = startIndex + pontosPorPagina;
+            const pontosPagina = pontosFiltrados.slice(startIndex, endIndex);
 
             pontosPagina.forEach(ponto => {
                 const pontoCard = criarPontoCard(ponto);
@@ -1049,24 +1050,14 @@
             // Atualiza o mapa
             atualizarMapa();
         }
-        pontosPagina.forEach(ponto => {
-            const pontoCard = criarPontoCard(ponto);
-            pontosGrid.appendChild(pontoCard);
-        });
-        // Atualiza a informação de paginação
-        const totalPaginas = Math.ceil(pontosFiltrados.length / pontosPorPagina);
-        document.getElementById('pagination-info').textContent = `Mostrando ${startIndex + 1} a ${Math.min(endIndex, pontosFiltrados.length)} de ${pontosFiltrados.length} pontos turísticos`;
-        // Atualiza os botões de paginação
-        atualizarPaginacao(totalPaginas);
-        // Atualiza o mapa
-        atualizarMapa();
-            }
 
         // Função para criar os botões de paginação
         function atualizarPaginacao(totalPaginas) {
             const paginacao = document.getElementById('paginacao');
             paginacao.innerHTML = '';
+
             if (totalPaginas <= 1) return;
+
             // Botão Anterior
             const btnAnterior = document.createElement('div');
             btnAnterior.className = `pagina-btn ${paginaAtual === 1 ? 'disabled' : ''}`;
@@ -1079,8 +1070,17 @@
                 }
             });
             paginacao.appendChild(btnAnterior);
+
             // Botões de Número
-            for (let i = 1; i <= totalPaginas; i++) {
+            const maxBotoes = 5;
+            let inicio = Math.max(1, paginaAtual - Math.floor(maxBotoes / 2));
+            let fim = Math.min(totalPaginas, inicio + maxBotoes - 1);
+
+            if (fim - inicio + 1 < maxBotoes) {
+                inicio = Math.max(1, fim - maxBotoes + 1);
+            }
+
+            for (let i = inicio; i <= fim; i++) {
                 const paginaBtn = document.createElement('div');
                 paginaBtn.className = `pagina-btn ${i === paginaAtual ? 'active' : ''}`;
                 paginaBtn.textContent = i;
@@ -1091,6 +1091,7 @@
                 });
                 paginacao.appendChild(paginaBtn);
             }
+
             // Botão Próximo
             const btnProximo = document.createElement('div');
             btnProximo.className = `pagina-btn ${paginaAtual === totalPaginas ? 'disabled' : ''}`;
@@ -1111,6 +1112,8 @@
             const localizacao = document.getElementById('localizacao').value;
             const avaliacao = document.getElementById('avaliacao').value;
             const preco = document.getElementById('preco').value;
+
+            // Aplicar filtros nos dados locais
             pontosFiltrados = pontosTuristicos.filter(ponto => {
                 return (
                     (tipo === '' || ponto.tipo === tipo) &&
@@ -1119,8 +1122,10 @@
                     (preco === '' || ponto.preco === preco)
                 );
             });
+
             paginaAtual = 1;
             exibirPontosTuristicos();
+
             // Ajusta o mapa para a cidade selecionada
             if (localizacao && map) {
                 const cidadeCoordenadas = {
@@ -1132,10 +1137,12 @@
                     "pr": [-25.4296, -49.2713],
                     "sc": [-27.5954, -48.5480]
                 };
+
                 if (cidadeCoordenadas[localizacao]) {
                     map.setView(cidadeCoordenadas[localizacao], 12);
                 }
             }
+
             showNotification('Filtro aplicado com sucesso!', 'success');
         }
 
@@ -1145,35 +1152,59 @@
             document.getElementById('localizacao').value = '';
             document.getElementById('avaliacao').value = '';
             document.getElementById('preco').value = '';
+
             pontosFiltrados = [...pontosTuristicos];
             paginaAtual = 1;
             exibirPontosTuristicos();
+
             if (map) {
-                map.setView([-15.7797, -47.9297], 4); // Volta para a visão padrão
+                map.setView([-15.7797, -47.9297], 4);
             }
+
             showNotification('Filtros limpos!', 'success');
         }
 
         // Função para atualizar o mapa com os pontos filtrados
         function atualizarMapa() {
             // Limpa marcadores anteriores
-            markers.forEach(marker => map.removeLayer(marker));
-            markers = [];
-            // Adiciona novos marcadores
-            pontosFiltrados.forEach(ponto => {
-                if (ponto.lat && ponto.lng) {
-                    const marker = L.marker([ponto.lat, ponto.lng]).addTo(map)
-                        .bindPopup(`<b>${ponto.nome}</b><br>${ponto.localizacao}`);
-                    markers.push(marker);
+            if (map) {
+                map.eachLayer(function(layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
+
+                markers = [];
+
+                // Adiciona novos marcadores
+                pontosFiltrados.forEach(ponto => {
+                    if (ponto.lat && ponto.lng) {
+                        const popupContent = `
+                            <div style="text-align: center;">
+                                <b>${ponto.nome}</b><br>
+                                <small>${ponto.localizacao}</small><br>
+                                <span>⭐ ${ponto.avaliacao}</span><br>
+                                <a href="/destinos/pontos-turisticos/${ponto.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
+                                    Ver Detalhes
+                                </a>
+                            </div>
+                        `;
+
+                        const marker = L.marker([ponto.lat, ponto.lng])
+                            .addTo(map)
+                            .bindPopup(popupContent);
+                        markers.push(marker);
+                    }
+                });
+
+                // Ajusta a visualização do mapa para mostrar todos os marcadores
+                if (markers.length > 0) {
+                    const group = new L.featureGroup(markers);
+                    map.fitBounds(group.getBounds().pad(0.1));
+                } else {
+                    // Se não houver marcadores, volta para a visualização padrão do Brasil
+                    map.setView([-15.7797, -47.9297], 4);
                 }
-            });
-            // Ajusta a visualização do mapa para mostrar todos os marcadores
-            if (markers.length > 0) {
-                const group = new L.featureGroup(markers);
-                map.fitBounds(group.getBounds().pad(0.1));
-            } else {
-                // Se não houver marcadores, volta para a visualização padrão do Brasil
-                map.setView([-15.7797, -47.9297], 4);
             }
         }
 
@@ -1194,6 +1225,15 @@
             document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
             document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
 
+            // Inicializa os dados (pontosTuristicos deve ser definido globalmente)
+            if (typeof pontosTuristicos !== 'undefined') {
+                pontosFiltrados = [...pontosTuristicos];
+                exibirPontosTuristicos();
+            } else {
+                document.getElementById('pontos-grid').innerHTML = '<div class="loading">Erro: Dados não carregados</div>';
+                console.error('Variável pontosTuristicos não definida');
+            }
+
             // Inicializa o mapa
             try {
                 map = L.map('map').setView([-15.7797, -47.9297], 4);
@@ -1202,17 +1242,17 @@
                     maxZoom: 19,
                     detectRetina: true
                 }).addTo(map);
-                // Exibe os pontos turísticos inicialmente
-                exibirPontosTuristicos();
+
+                // Atualiza o mapa com os pontos carregados
+                atualizarMapa();
             } catch (error) {
                 console.error('Erro ao inicializar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                        <div style="text-align: center; padding: 20px; color: #666;">
-                            <p>⚠️ Não foi possível carregar o mapa</p>
-                            <p>Verifique sua conexão com a internet</p>
-                        </div>
-                    `;
-                exibirPontosTuristicos(); // Ainda exibe os pontos mesmo com erro no mapa
+                    <div style="text-align: center; padding: 20px; color: #666;">
+                        <p>⚠️ Não foi possível carregar o mapa</p>
+                        <p>Verifique sua conexão com a internet</p>
+                    </div>
+                `;
             }
         });
     </script>
