@@ -188,49 +188,49 @@
 @endsection
 
 @section('content')
-<main class="main-content">
-    <a href="{{ route('pontos-turisticos.alternative') }}" class="btn-voltar">
+<div class="ponto-detalhe-container">
+    <a href="{{ route('pontos-turisticos.index') }}" class="btn-voltar">
         <i class="fas fa-arrow-left"></i> Voltar para pontos turísticos
     </a>
 
     <div class="ponto-detalhe-header">
         <div>
-            <h1 class="ponto-detalhe-titulo">{{ $ponto['nome'] }}</h1>
+            <h1 class="ponto-detalhe-titulo">{{ $ponto->nome }}</h1>
             <div class="ponto-detalhe-localizacao">
                 <i class="fas fa-map-marker-alt"></i>
-                {{ $ponto['localizacao'] }}
+                {{ $ponto->localizacao }}
             </div>
             <div class="ponto-detalhe-avaliacao">
                 <span class="star">★</span>
-                <strong>{{ $ponto['avaliacao'] }}</strong>
-                <span>({{ number_format($ponto['avaliacoes']) }} avaliações)</span>
+                <strong>{{ $ponto->avaliacao }}</strong>
+                <span>({{ number_format($ponto->avaliacoes) }} avaliações)</span>
             </div>
         </div>
         <div class="ponto-preco">
-            <strong style="font-size: 1.5rem; color: var(--primary-color);">{{ $ponto['precoTexto'] }}</strong>
+            <strong style="font-size: 1.5rem; color: #5a8f3d;">{{ $ponto->precoTexto }}</strong>
         </div>
     </div>
 
-    <img src="{{ $ponto['imagem'] }}" alt="{{ $ponto['nome'] }}" class="ponto-detalhe-imagem" onerror="this.src='https://via.placeholder.com/800x400/5a8f3d/ffffff?text=Imagem+Indisponível'">
+    <img src="{{ $ponto->imagem }}" alt="{{ $ponto->nome }}" class="ponto-detalhe-imagem" onerror="this.src='https://via.placeholder.com/800x400/5a8f3d/ffffff?text=Imagem+Indisponível'">
 
     <div class="ponto-detalhe-info">
         <div class="ponto-detalhe-card">
             <h3>Informações</h3>
             <div class="info-item">
                 <i class="fas fa-tag"></i>
-                <span><strong>Tipo:</strong> {{ ucfirst($ponto['tipo']) }}</span>
+                <span><strong>Tipo:</strong> {{ ucfirst($ponto->tipo) }}</span>
             </div>
             <div class="info-item">
                 <i class="fas fa-money-bill-wave"></i>
-                <span><strong>Preço:</strong> {{ $ponto['precoTexto'] }}</span>
+                <span><strong>Preço:</strong> {{ $ponto->precoTexto }}</span>
             </div>
             <div class="info-item">
                 <i class="fas fa-star"></i>
-                <span><strong>Avaliação:</strong> {{ $ponto['avaliacao'] }} ({{ number_format($ponto['avaliacoes']) }} avaliações)</span>
+                <span><strong>Avaliação:</strong> {{ $ponto->avaliacao }} ({{ number_format($ponto->avaliacoes) }} avaliações)</span>
             </div>
             <div class="info-item">
                 <i class="fas fa-map-marked-alt"></i>
-                <span><strong>Localização:</strong> {{ $ponto['cidade'] }}</span>
+                <span><strong>Localização:</strong> {{ $ponto->cidade }}</span>
             </div>
         </div>
 
@@ -255,27 +255,11 @@
         </div>
     </div>
 
-    <div class="ponto-descricao">
-        <h3>Sobre este ponto turístico</h3>
-        <p>O {{ $ponto['nome'] }} é um dos destinos mais incríveis do Brasil, oferecendo uma experiência única para todos os visitantes. Localizado em {{ $ponto['localizacao'] }}, este ponto turístico combina beleza natural, cultura e história em um único lugar.</p>
-        <p>Com uma avaliação de {{ $ponto['avaliacao'] }} estrelas baseada em {{ number_format($ponto['avaliacoes']) }} avaliações, este destino é altamente recomendado por turistas e locais. O preço {{ $ponto['precoTexto'] }} torna-o acessível para todos os tipos de viajantes.</p>
-        <p>Venha descobrir por si mesmo por que o {{ $ponto['nome'] }} é considerado uma joia do turismo brasileiro!</p>
-    </div>
-
     <div class="ponto-detalhe-card">
-        <h3>Como chegar</h3>
-        <div class="info-item">
-            <i class="fas fa-car"></i>
-            <span><strong>De carro:</strong> Acesso fácil pela rodovia principal</span>
-        </div>
-        <div class="info-item">
-            <i class="fas fa-bus"></i>
-            <span><strong>De ônibus:</strong> Linhas regulares partem do centro da cidade</span>
-        </div>
-        <div class="info-item">
-            <i class="fas fa-taxi"></i>
-            <span><strong>De táxi:</strong> Disponível 24 horas</span>
-        </div>
+        <h3>Sobre este ponto turístico</h3>
+        <p>O {{ $ponto->nome }} é um dos destinos mais incríveis do Brasil, oferecendo uma experiência única para todos os visitantes. Localizado em {{ $ponto->localizacao }}, este ponto turístico combina beleza natural, cultura e história em um único lugar.</p>
+        <p>Com uma avaliação de {{ $ponto->avaliacao }} estrelas baseada em {{ number_format($ponto->avaliacoes) }} avaliações, este destino é altamente recomendado por turistas e locais. O preço {{ $ponto->precoTexto }} torna-o acessível para todos os tipos de viajantes.</p>
+        <p>Venha descobrir por si mesmo por que o {{ $ponto->nome }} é considerado uma joia do turismo brasileiro!</p>
     </div>
-</main>
+</div>
 @endsection

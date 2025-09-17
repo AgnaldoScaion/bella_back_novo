@@ -48,6 +48,9 @@ Route::prefix('destinos/pontos-turisticos')->group(function () {
         return view('destinos.pontos-turisticos.index');
     })->name('pontos-turisticos.index');
 
+        // Rota para detalhes do ponto turístico via controller
+    Route::get('/{id}', [PontoTuristicoController::class, 'show'])->name('pontos-turisticos.show');
+
     // Rotas específicas para cada ponto turístico
     Route::get('/beco-do-batman', function () {
         return view('destinos.pontos-turisticos.BecodoBatman');
