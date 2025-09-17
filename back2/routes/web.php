@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RestauranteController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\PontoTuristicoController;
-use App\Http\Controllers\FeedbackController;
 
 // Rotas de autenticação
 Route::middleware('guest')->group(function () {
@@ -36,17 +35,12 @@ Route::get('/sobre-nos', function () {
 Route::get('/destinos', function () {
     return view('destinos');
 })->name('destinos');
+Route::get('/feedbacks', function () {
+    return view('feedbacks');
+})->name('feedbacks');
 Route::get('/profile', function () {
     return view('profile.show');
 })->name('profile.show');
-Route::middleware('auth')->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
-        Route::get('/feedbacks/{feedback}', [FeedbackController::class, 'show'])->name('feedbacks.show');
-        Route::delete('/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
-        Route::get('/feedbacks/exportar/csv', [FeedbackController::class, 'exportar'])->name('feedbacks.exportar');
-    });
-});
 
 // Rotas para pontos turísticos (mantendo o mesmo padrão das outras rotas)
 Route::prefix('destinos/pontos-turisticos')->group(function () {
