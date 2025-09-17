@@ -4,7 +4,7 @@
         <h2>Menu</h2>
         <ul>
             <li><a href="{{ route('profile.show') }}">Meu Perfil</a></li>
-            <li><a href="{{ route('feedbacks') }}">Meus Feedbacks</a></li>
+            <li><a href="{{ route('feedbacks.index') }}">Meus Feedbacks</a></li>
             <li><a href="{{ route('restaurantes.alternative') }}">Restaurantes</a></li>
             <li><a href="{{ route('hoteis.alternative') }}">Hotéis</a></li>
             <li><a href="{{ route('pontos-turisticos.alternative') }}">Pontos Turísticos</a></li>

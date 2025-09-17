@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('feedbacks', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->id('id_feedback');
             $table->unsignedBigInteger('id_usuario');
             $table->string('feedback', 255);
