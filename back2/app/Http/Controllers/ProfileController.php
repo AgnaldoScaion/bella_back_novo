@@ -26,7 +26,7 @@ class ProfileController extends Controller
             'nome_completo' => 'required|string|max:100',
             'email' => 'required|email|max:100|unique:usuario,e_mail,' . $user->id_usuario . ',id_usuario',
             'senha_atual' => 'required',
-            'nova_senha' => 'nullable|string|min:6|max:100|confirmed'
+            'nova_senha' => 'nullable|string|min:4|max:100|confirmed'
         ], [
             'nome_completo.required' => 'O nome completo é obrigatório.',
             'email.required' => 'O email é obrigatório.',

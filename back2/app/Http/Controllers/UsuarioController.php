@@ -27,7 +27,7 @@ class UsuarioController extends Controller
             'nome_completo' => 'required|string|max:100',
             'CPF' => 'required|string|max:20|unique:usuario,CPF',
             'e_mail' => 'required|email|max:100|unique:usuario,e_mail',
-            'senha' => 'required|string|min:8|confirmed',
+            'senha' => 'required|string|min:4|confirmed',
         ]);
 
         $usuario = Usuario::create([

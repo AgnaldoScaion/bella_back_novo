@@ -586,8 +586,8 @@
                 }
 
                 // Validação da Senha
-                if (senhaInput.value.length < 8) {
-                    senhaError.textContent = 'A senha deve ter pelo menos 8 caracteres.';
+                if (senhaInput.value.length < 4) {
+                    senhaError.textContent = 'A senha deve ter pelo menos 4 caracteres.';
                     isValid = false;
                 }
 
