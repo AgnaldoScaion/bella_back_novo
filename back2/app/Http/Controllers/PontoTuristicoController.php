@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
 class PontoTuristicoController extends Controller
 {
+    // Array com dados dos pontos turísticos
     private $pontosTuristicos = [
         [
             'id' => 1,
@@ -271,7 +274,7 @@ class PontoTuristicoController extends Controller
             'cidade' => "pr",
             'imagem' => "https://i.ibb.co/bgFwbx4F/usina-hidreletrica-itaipu-principal.png",
             'avaliacoes' => 10200,
-            'link' => "itaipu",
+            'link' => "usina-hidreletrica-itaipu",
             'lat' => -25.4086,
             'lng' => -54.5888
         ],
@@ -322,54 +325,61 @@ class PontoTuristicoController extends Controller
         ]
     ];
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function show($id)
     {
-        return view('pontos-turisticos.index', [
-            'pontosTuristicos' => $this->pontosTuristicos
-        ]);
+        // Encontra o ponto turístico pelo ID
+        $ponto = null;
+        foreach ($this->pontosTuristicos as $pt) {
+            if ($pt['id'] == $id) {
+                $ponto = $pt;
+                break;
+            }
+        }
+
+        // Se não encontrar, retorna erro 404
+        if (!$ponto) {
+            abort(404, 'Ponto turístico não encontrado');
+        }
+
+        // Converte array para objeto para facilitar o uso na view
+        return view('destinos.pontos-turisticos.show', ['ponto' => (object)$ponto]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($ponto)
+    public function index(Request $request)
     {
-        $pontoTuristico = collect($this->pontosTuristicos)->firstWhere('link', $ponto);
+        // Se for requisição AJAX, retorna JSON
+        if ($request->ajax()) {
+            $filtrados = $this->pontosTuristicos;
 
-        if (!$pontoTuristico) {
-            abort(404);
+            // Aplicar filtros
+            if ($request->has('tipo') && $request->tipo) {
+                $filtrados = array_filter($filtrados, function($pt) use ($request) {
+                    return $pt['tipo'] === $request->tipo;
+                });
+            }
+
+            if ($request->has('localizacao') && $request->localizacao) {
+                $filtrados = array_filter($filtrados, function($pt) use ($request) {
+                    return $pt['cidade'] === $request->localizacao;
+                });
+            }
+
+            if ($request->has('avaliacao') && $request->avaliacao) {
+                $filtrados = array_filter($filtrados, function($pt) use ($request) {
+                    return $pt['avaliacao'] >= floatval($request->avaliacao);
+                });
+            }
+
+            if ($request->has('preco') && $request->preco) {
+                $filtrados = array_filter($filtrados, function($pt) use ($request) {
+                    return $pt['preco'] === $request->preco;
+                });
+            }
+
+            return response()->json(array_values($filtrados));
         }
-        return view('pontos-turisticos.show', [
-            'ponto' => $pontoTuristico
-        ]);
-    }
 
-    /**
-     * Filtrar pontos turísticos
-     */
-    public function filtrar(Request $request)
-    {
-        $filtrados = collect($this->pontosTuristicos);
-
-        if ($request->has('tipo') && $request->tipo != '') {
-            $filtrados = $filtrados->where('tipo', $request->tipo);
-        }
-
-        if ($request->has('localizacao') && $request->localizacao != '') {
-            $filtrados = $filtrados->where('cidade', $request->localizacao);
-        }
-
-        if ($request->has('avaliacao') && $request->avaliacao != '') {
-            $filtrados = $filtrados->where('avaliacao', '>=', (float)$request->avaliacao);
-        }
-
-        if ($request->has('preco') && $request->preco != '') {
-            $filtrados = $filtrados->where('preco', $request->preco);
-        }
-
-        return response()->json($filtrados->values());
+        // Se for requisição normal, retorna a view principal
+        return view('pontos-turisticos');
     }
 }

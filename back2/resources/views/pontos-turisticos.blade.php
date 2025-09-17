@@ -436,30 +436,65 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            0% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .floating {
@@ -532,83 +567,90 @@
 @endsection
 
 @section('content')
-<main class="main-content">
-    <h1 class="page-title">Pontos Turísticos</h1>
-    <p class="page-subtitle">Descubra os melhores pontos turísticos para sua visita. Filtre por tipo, localização e avaliações para uma experiência personalizada.</p>
-    <!-- Filtros -->
-    <div class="filtros-container">
-        <h3>Filtros</h3>
-        <form class="filtros-form" id="filtros-form">
-            <div class="filtro-grupo">
-                <label for="tipo">Tipo de Atração</label>
-                <i class="fas fa-landmark"></i>
-                <select id="tipo" name="tipo">
-                    <option value="">Todos</option>
-                    <option value="historico">Histórico</option>
-                    <option value="natural">Natural</option>
-                    <option value="cultural">Cultural</option>
-                    <option value="aventura">Aventura</option>
-                    <option value="religioso">Religioso</option>
-                </select>
-            </div>
-            <div class="filtro-grupo">
-                <label for="localizacao">Localização</label>
-                <i class="fas fa-map-marker-alt"></i>
-                <select id="localizacao" name="localizacao">
-                    <option value="">Todas</option>
-                    <option value="sp">São Paulo</option>
-                    <option value="mg">Minas Gerais</option>
-                    <option value="rs">Rio Grande do Sul</option>
-                    <option value="sc">Santa Catarina</option>
-                    <option value="pr">Paraná</option>
-                    <option value="rj">Rio de Janeiro</option>
-                    <option value="ma">Maranhão</option>
-                </select>
-            </div>
-            <div class="filtro-grupo">
-                <label for="avaliacao">Avaliação Mínima</label>
-                <i class="fas fa-star"></i>
-                <select id="avaliacao" name="avaliacao">
-                    <option value="">Qualquer</option>
-                    <option value="3">3 Estrelas</option>
-                    <option value="4">4 Estrelas</option>
-                    <option value="4.5">4.5+ Estrelas</option>
-                </select>
-            </div>
-            <div class="filtro-grupo">
-                <label for="preco">Faixa de Preço</label>
-                <i class="fas fa-dollar-sign"></i>
-                <select id="preco" name="preco">
-                    <option value="">Todos</option>
-                    <option value="gratis">Gratuito</option>
-                    <option value="economico">Econômico</option>
-                    <option value="medio">Médio</option>
-                    <option value="alto">Alto</option>
-                </select>
-            </div>
-            <div class="filtro-botoes">
-                <button type="button" class="btn-filtrar" id="btn-filtrar">Aplicar Filtros</button>
-                <button type="button" class="btn-limpar" id="btn-limpar">Limpar</button>
-            </div>
-        </form>
-    </div>
-    <!-- Info da paginação -->
-    <div class="pagination-info" id="pagination-info">
-        Carregando pontos turísticos...
-    </div>
-    <!-- Pontos Turísticos Grid -->
-    <div class="pontos-grid" id="pontos-grid">
-        <div class="loading">Carregando pontos turísticos...</div>
-    </div>
-    <!-- Paginação -->
-    <div class="paginacao" id="paginacao"></div>
-    <!-- Mapa -->
-    <div class="map-container">
-        <div id="map"></div>
-    </div>
-    <!-- Notificação -->
-    <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
-</main>
+    <main class="main-content">
+        <h1 class="page-title">Pontos Turísticos</h1>
+        <p class="page-subtitle">Descubra os melhores pontos turísticos para sua visita. Filtre por tipo, localização e
+            avaliações para uma experiência personalizada.</p>
+
+        <!-- Filtros -->
+        <div class="filtros-container">
+            <h3>Filtros</h3>
+            <form class="filtros-form" id="filtros-form">
+                <div class="filtro-grupo">
+                    <label for="tipo">Tipo de Atração</label>
+                    <i class="fas fa-landmark"></i>
+                    <select id="tipo" name="tipo">
+                        <option value="">Todos</option>
+                        <option value="historico">Histórico</option>
+                        <option value="natural">Natural</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="aventura">Aventura</option>
+                        <option value="religioso">Religioso</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="localizacao">Localização</label>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <select id="localizacao" name="localizacao">
+                        <option value="">Todas</option>
+                        <option value="sp">São Paulo</option>
+                        <option value="mg">Minas Gerais</option>
+                        <option value="rs">Rio Grande do Sul</option>
+                        <option value="sc">Santa Catarina</option>
+                        <option value="pr">Paraná</option>
+                        <option value="rj">Rio de Janeiro</option>
+                        <option value="ma">Maranhão</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="avaliacao">Avaliação Mínima</label>
+                    <i class="fas fa-star"></i>
+                    <select id="avaliacao" name="avaliacao">
+                        <option value="">Qualquer</option>
+                        <option value="3">3 Estrelas</option>
+                        <option value="4">4 Estrelas</option>
+                        <option value="4.5">4.5+ Estrelas</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="preco">Faixa de Preço</label>
+                    <i class="fas fa-dollar-sign"></i>
+                    <select id="preco" name="preco">
+                        <option value="">Todos</option>
+                        <option value="gratis">Gratuito</option>
+                        <option value="economico">Econômico</option>
+                        <option value="medio">Médio</option>
+                        <option value="alto">Alto</option>
+                    </select>
+                </div>
+                <div class="filtro-botoes">
+                    <button type="button" class="btn-filtrar" id="btn-filtrar">Aplicar Filtros</button>
+                    <button type="button" class="btn-limpar" id="btn-limpar">Limpar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Info da paginação -->
+        <div class="pagination-info" id="pagination-info">
+            Carregando pontos turísticos...
+        </div>
+
+        <!-- Pontos Turísticos Grid -->
+        <div class="pontos-grid" id="pontos-grid">
+            <div class="loading">Carregando pontos turísticos...</div>
+        </div>
+
+        <!-- Paginação -->
+        <div class="paginacao" id="paginacao"></div>
+
+        <!-- Mapa -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <!-- Notificação -->
+        <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
+    </main>
 @endsection
 
 @section('scripts')
@@ -944,27 +986,32 @@
         function criarPontoCard(ponto) {
             const pontoCard = document.createElement('div');
             pontoCard.className = 'ponto-card';
+
+            // Usar URL absoluta para evitar problemas com rotas do Laravel no JS
+            const pontoLink = `/destinos/pontos-turisticos/${ponto.id}`;
+
             pontoCard.innerHTML = `
-                <div class="ponto-img">
-                    <img src="${ponto.imagem}" alt="${ponto.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Imagem+Indisponível'">
-                </div>
-                <div class="ponto-content">
-                    <div class="ponto-header">
-                        <h3 class="ponto-title">${ponto.nome}</h3>
-                        <div class="ponto-rating">
-                            <span class="star">★</span>${ponto.avaliacao}
+                    <div class="ponto-img">
+                        <img src="${ponto.imagem}" alt="${ponto.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                    </div>
+                    <div class="ponto-content">
+                        <div class="ponto-header">
+                            <h3 class="ponto-title">${ponto.nome}</h3>
+                            <div class="ponto-rating">
+                                <span class="star">★</span>${ponto.avaliacao}
+                            </div>
+                        </div>
+                        <div class="ponto-location">📍 ${ponto.localizacao}</div>
+                        <div class="ponto-info">
+                            <p><span>💰</span> <span class="ponto-price">${ponto.precoTexto}</span></p>
+                            <p><span>⭐</span> ${ponto.avaliacoes} avaliações</p>
+                        </div>
+                        <div class="ponto-footer">
+                            <a href="${pontoLink}" class="btn-ver-mais">Ver Detalhes</a>
                         </div>
                     </div>
-                    <div class="ponto-location">📍 ${ponto.localizacao}</div>
-                    <div class="ponto-info">
-                        <p><span>💰</span> <span class="ponto-price">${ponto.precoTexto}</span></p>
-                        <p><span>⭐</span> ${ponto.avaliacoes} avaliações</p>
-                    </div>
-                    <div class="ponto-footer">
-                        <a href="/destinos/pontos-turisticos/${ponto.link}" class="btn-ver-mais">Ver Detalhes</a>
-                    </div>
-                </div>
-            `;
+                `;
+
             // Adiciona a animação após um pequeno delay
             setTimeout(() => {
                 pontoCard.classList.add('show');
@@ -979,24 +1026,41 @@
             const startIndex = (paginaAtual - 1) * pontosPorPagina;
             const endIndex = startIndex + pontosPorPagina;
             const pontosPagina = pontosFiltrados.slice(startIndex, endIndex);
+
             if (pontosPagina.length === 0) {
                 pontosGrid.innerHTML = '<div class="loading">Nenhum ponto turístico encontrado...</div>';
                 atualizarPaginacao(0);
                 atualizarMapa();
                 return;
             }
+
             pontosPagina.forEach(ponto => {
                 const pontoCard = criarPontoCard(ponto);
                 pontosGrid.appendChild(pontoCard);
             });
+
             // Atualiza a informação de paginação
             const totalPaginas = Math.ceil(pontosFiltrados.length / pontosPorPagina);
             document.getElementById('pagination-info').textContent = `Mostrando ${startIndex + 1} a ${Math.min(endIndex, pontosFiltrados.length)} de ${pontosFiltrados.length} pontos turísticos`;
+
             // Atualiza os botões de paginação
             atualizarPaginacao(totalPaginas);
+
             // Atualiza o mapa
             atualizarMapa();
         }
+        pontosPagina.forEach(ponto => {
+            const pontoCard = criarPontoCard(ponto);
+            pontosGrid.appendChild(pontoCard);
+        });
+        // Atualiza a informação de paginação
+        const totalPaginas = Math.ceil(pontosFiltrados.length / pontosPorPagina);
+        document.getElementById('pagination-info').textContent = `Mostrando ${startIndex + 1} a ${Math.min(endIndex, pontosFiltrados.length)} de ${pontosFiltrados.length} pontos turísticos`;
+        // Atualiza os botões de paginação
+        atualizarPaginacao(totalPaginas);
+        // Atualiza o mapa
+        atualizarMapa();
+            }
 
         // Função para criar os botões de paginação
         function atualizarPaginacao(totalPaginas) {
@@ -1143,11 +1207,11 @@
             } catch (error) {
                 console.error('Erro ao inicializar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                    <div style="text-align: center; padding: 20px; color: #666;">
-                        <p>⚠️ Não foi possível carregar o mapa</p>
-                        <p>Verifique sua conexão com a internet</p>
-                    </div>
-                `;
+                        <div style="text-align: center; padding: 20px; color: #666;">
+                            <p>⚠️ Não foi possível carregar o mapa</p>
+                            <p>Verifique sua conexão com a internet</p>
+                        </div>
+                    `;
                 exibirPontosTuristicos(); // Ainda exibe os pontos mesmo com erro no mapa
             }
         });
