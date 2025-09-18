@@ -711,7 +711,7 @@
                 <div class="destino-img">
                     <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pontos Turísticos">
                     <div class="destino-overlay">
-                        <button class="destino-overlay-btn" data-destination="pontos-turisticos.alternative">Ver Pontos Turísticos</button>
+                        <button class="destino-overlay-btn" data-destination="pontos-turisticos">Ver Pontos Turísticos</button>
                     </div>
                 </div>
                 <div class="destino-content">
