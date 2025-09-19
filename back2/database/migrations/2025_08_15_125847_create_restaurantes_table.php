@@ -18,6 +18,9 @@ return new class extends Migration {
             $table->string('preco_texto');
             $table->string('cidade');
             $table->string('imagem');
+            $table->string('prato');
+            $table->string('ambiente');
+            $table->string('sobremesas');
             $table->string('badge')->nullable();
             $table->boolean('promocao')->default(false);
             $table->string('link');

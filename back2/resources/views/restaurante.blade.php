@@ -429,30 +429,65 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            0% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .floating {
@@ -527,7 +562,8 @@
 @section('content')
     <main class="main-content">
         <h1 class="page-title">Restaurantes</h1>
-        <p class="page-subtitle">Descubra os melhores sabores locais e internacionais. Filtre por tipo de cozinha, preço e avaliações para encontrar o restaurante perfeito para sua experiência gastronômica.</p>
+        <p class="page-subtitle">Descubra os melhores sabores locais e internacionais. Filtre por tipo de cozinha, preço e
+            avaliações para encontrar o restaurante perfeito para sua experiência gastronômica.</p>
         <!-- Filtros -->
         <div class="filtros-container">
             <h3>Filtros</h3>
@@ -621,6 +657,9 @@
                 precoTexto: "$$$$",
                 cidade: "sao-paulo",
                 imagem: "https://i.ibb.co/wNDYyrGF/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: "Premium",
                 promocao: false,
                 link: "jamile",
@@ -638,6 +677,9 @@
                 precoTexto: "$$$",
                 cidade: "rio-grande-do-sul",
                 imagem: "https://i.ibb.co/sJyf79Pw/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "casa-terracota",
@@ -655,6 +697,9 @@
                 precoTexto: "$$$",
                 cidade: "rio-grande-do-sul",
                 imagem: "https://i.ibb.co/p6CszR4h/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "el-fuego",
@@ -672,6 +717,9 @@
                 precoTexto: "$$$$",
                 cidade: "rio-de-janeiro",
                 imagem: "https://i.ibb.co/wNDYyrGF/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: "Premium",
                 promocao: false,
                 link: "oro",
@@ -689,6 +737,9 @@
                 precoTexto: "$$$$",
                 cidade: "rio-de-janeiro",
                 imagem: "https://i.ibb.co/NnswBt5Q/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: "Premium",
                 promocao: false,
                 link: "cipriani",
@@ -706,6 +757,9 @@
                 precoTexto: "$$$$",
                 cidade: "rio-de-janeiro",
                 imagem: "https://i.ibb.co/Rk9CXfxM/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: "Premium",
                 promocao: false,
                 link: "fasano",
@@ -723,6 +777,9 @@
                 precoTexto: "$$$",
                 cidade: "sao-paulo",
                 imagem: "https://i.ibb.co/n8syZSDs/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "terraco-italia",
@@ -740,6 +797,9 @@
                 precoTexto: "$$$",
                 cidade: "parana",
                 imagem: "https://i.ibb.co/YBXdWS3Q/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "porto-canoas",
@@ -757,6 +817,9 @@
                 precoTexto: "$$",
                 cidade: "parana",
                 imagem: "https://i.ibb.co/B50ZTNgP/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "rafain",
@@ -774,6 +837,9 @@
                 precoTexto: "$$",
                 cidade: "parana",
                 imagem: "https://i.ibb.co/ZpcfkT9f/120736342-945661575912829-652691859883304712-n.jpg",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "la-mafia-trattoria",
@@ -791,6 +857,9 @@
                 precoTexto: "$$",
                 cidade: "minas-gerais",
                 imagem: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npAFzSInmryDEoV82CI7lJHUv9hBubTuYzOLuzfpf9xlrPt4hRDz-6oxNZB-2zXsuoe1MA3qMje5Z_3iI6TyIiD1spmJd98YSTItd3J_ittauvVea60ljzy2YnL1gEo2T0gmZLnWA=s680-w680-h510",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "bene-da-flauta",
@@ -808,6 +877,9 @@
                 precoTexto: "$$",
                 cidade: "minas-gerais",
                 imagem: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/c6/4c/e4/salao-1.jpg?w=900&h=500&s=1",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "gastro-pub",
@@ -825,6 +897,9 @@
                 precoTexto: "$$",
                 cidade: "minas-gerais",
                 imagem: "https://lh3.googleusercontent.com/p/AF1QipOkHJiEMiwiP1IJFBn9O1wZcrXG_xcyUUoqn-FW=s680-w680-h510",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "contos-dos-reis",
@@ -842,6 +917,9 @@
                 precoTexto: "$$",
                 cidade: "maranhao",
                 imagem: "https://i.ibb.co/wNDYyrGF/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "mangue",
@@ -859,6 +937,9 @@
                 precoTexto: "$$",
                 cidade: "maranhao",
                 imagem: "https://i.ibb.co/NnswBt5Q/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "canoa",
@@ -876,6 +957,9 @@
                 precoTexto: "$$",
                 cidade: "maranhao",
                 imagem: "https://i.ibb.co/Rk9CXfxM/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "terral",
@@ -893,6 +977,9 @@
                 precoTexto: "$$$",
                 cidade: "santa-catarina",
                 imagem: "https://i.ibb.co/cGRyypv/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "alameda",
@@ -910,6 +997,9 @@
                 precoTexto: "$$",
                 cidade: "santa-catarina",
                 imagem: "https://i.ibb.co/Y4KQnVm6/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "olivia-cucina",
@@ -927,6 +1017,9 @@
                 precoTexto: "$$$",
                 cidade: "santa-catarina",
                 imagem: "https://i.ibb.co/nqHsNL4R/image.png",
+                prato: "",
+                ambiente: "",
+                sobremesas: "",
                 badge: null,
                 promocao: false,
                 link: "dolce-vita",
@@ -944,6 +1037,9 @@
                 precoTexto: "$$$",
                 cidade: "sao-paulo",
                 imagem: "https://i.ibb.co/B2sZMYRW/image.png",
+                prato: "",
+                ambiente: "https://media-cdn.tripadvisor.com/media/photo-m/1280/29/0d/e0/2c/nosso-espaco-interno.jpg",
+                sobremesas: "https://duogourmet-images.s3.us-east-2.amazonaws.com/restaurants/63e15d16dd61931740f887f3/cover.jpg?v=202303021143",
                 badge: null,
                 promocao: false,
                 link: "capim-santo",
@@ -966,28 +1062,28 @@
             const badgeText = restaurante.badge || (restaurante.promocao ? 'Promoção' : '');
 
             restauranteCard.innerHTML = `
-                <div class="restaurante-img">
-                    <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
-                    ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
-                </div>
-                <div class="restaurante-content">
-                    <div class="restaurante-header">
-                        <h3 class="restaurante-title">${restaurante.nome}</h3>
-                        <div class="restaurante-rating">
-                            <span class="star">★</span>${restaurante.avaliacao}
+                    <div class="restaurante-img">
+                        <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
+                        ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                    </div>
+                    <div class="restaurante-content">
+                        <div class="restaurante-header">
+                            <h3 class="restaurante-title">${restaurante.nome}</h3>
+                            <div class="restaurante-rating">
+                                <span class="star">★</span>${restaurante.avaliacao}
+                            </div>
+                        </div>
+                        <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
+                        <div class="restaurante-info">
+                            <p><span>📍</span> ${restaurante.endereco}</p>
+                            <p><span>⏰</span> ${restaurante.horario}</p>
+                            <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
+                        </div>
+                        <div class="restaurante-footer">
+                            <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
                         </div>
                     </div>
-                    <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
-                    <div class="restaurante-info">
-                        <p><span>📍</span> ${restaurante.endereco}</p>
-                        <p><span>⏰</span> ${restaurante.horario}</p>
-                        <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
-                    </div>
-                    <div class="restaurante-footer">
-                        <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
-                    </div>
-                </div>
-            `;
+                `;
             return restauranteCard;
         }
 
@@ -1124,7 +1220,7 @@
         function atualizarMapa(restaurantes) {
             // Limpa marcadores existentes
             if (map) {
-                map.eachLayer(function(layer) {
+                map.eachLayer(function (layer) {
                     if (layer instanceof L.Marker) {
                         map.removeLayer(layer);
                     }
@@ -1181,12 +1277,12 @@
             } catch (error) {
                 console.error('Erro ao carregar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                    <div style="text-align: center; padding: 20px; color: #666;">
-                        <p>⚠️ Não foi possível carregar o mapa</p>
-                        <p>Verifique sua conexão com a internet</p>
-                    </div>
-                `;
+                        <div style="text-align: center; padding: 20px; color: #666;">
+                            <p>⚠️ Não foi possível carregar o mapa</p>
+                            <p>Verifique sua conexão com a internet</p>
+                        </div>
+                    `;
             }
         });
     </script>
-@endsection 
+@endsection

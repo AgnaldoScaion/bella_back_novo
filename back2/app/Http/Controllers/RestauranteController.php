@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class RestauranteController extends Controller
 {
-    // Array com dados dos restaurantes (igual ao do JavaScript)
+    // Array com dados dos restaurantes
     private $restaurantes = [
         [
             'id' => 1,
@@ -19,6 +19,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$$",
             'cidade' => "sao-paulo",
             'imagem' => "https://i.ibb.co/wNDYyrGF/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => "Premium",
             'promocao' => false,
             'link' => "jamile",
@@ -36,6 +39,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$",
             'cidade' => "rio-grande-do-sul",
             'imagem' => "https://i.ibb.co/sJyf79Pw/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "casa-terracota",
@@ -53,6 +59,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$",
             'cidade' => "rio-grande-do-sul",
             'imagem' => "https://i.ibb.co/p6CszR4h/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "el-fuego",
@@ -70,6 +79,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$$",
             'cidade' => "rio-de-janeiro",
             'imagem' => "https://i.ibb.co/wNDYyrGF/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => "Premium",
             'promocao' => false,
             'link' => "oro",
@@ -87,6 +99,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$$",
             'cidade' => "rio-de-janeiro",
             'imagem' => "https://i.ibb.co/NnswBt5Q/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => "Premium",
             'promocao' => false,
             'link' => "cipriani",
@@ -104,6 +119,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$$",
             'cidade' => "rio-de-janeiro",
             'imagem' => "https://i.ibb.co/Rk9CXfxM/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => "Premium",
             'promocao' => false,
             'link' => "fasano",
@@ -121,6 +139,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$",
             'cidade' => "sao-paulo",
             'imagem' => "https://i.ibb.co/n8syZSDs/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "terraco-italia",
@@ -138,6 +159,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$",
             'cidade' => "parana",
             'imagem' => "https://i.ibb.co/YBXdWS3Q/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "porto-canoas",
@@ -155,6 +179,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "parana",
             'imagem' => "https://i.ibb.co/B50ZTNgP/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "rafain",
@@ -172,6 +199,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "parana",
             'imagem' => "https://i.ibb.co/ZpcfkT9f/120736342-945661575912829-652691859883304712-n.jpg",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "la-mafia-trattoria",
@@ -189,6 +219,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "minas-gerais",
             'imagem' => "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npAFzSInmryDEoV82CI7lJHUv9hBubTuYzOLuzfpf9xlrPt4hRDz-6oxNZB-2zXsuoe1MA3qMje5Z_3iI6TyIiD1spmJd98YSTItd3J_ittauvVea60ljzy2YnL1gEo2T0gmZLnWA=s680-w680-h510",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "bene-da-flauta",
@@ -206,6 +239,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "minas-gerais",
             'imagem' => "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/c6/4c/e4/salao-1.jpg?w=900&h=500&s=1",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "gastro-pub",
@@ -223,6 +259,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "minas-gerais",
             'imagem' => "https://lh3.googleusercontent.com/p/AF1QipOkHJiEMiwiP1IJFBn9O1wZcrXG_xcyUUoqn-FW=s680-w680-h510",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "contos-dos-reis",
@@ -240,6 +279,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "maranhao",
             'imagem' => "https://i.ibb.co/wNDYyrGF/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "mangue",
@@ -257,6 +299,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "maranhao",
             'imagem' => "https://i.ibb.co/NnswBt5Q/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "canoa",
@@ -274,6 +319,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "maranhao",
             'imagem' => "https://i.ibb.co/Rk9CXfxM/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "terral",
@@ -291,6 +339,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$",
             'cidade' => "santa-catarina",
             'imagem' => "https://i.ibb.co/cGRyypv/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "alameda",
@@ -308,6 +359,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$",
             'cidade' => "santa-catarina",
             'imagem' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'prato' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'ambiente' => "https://i.ibb.co/Y4KQnVm6/image.png",
+            'sobremesas' => "https://i.ibb.co/Y4KQnVm6/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "olivia-cucina",
@@ -325,6 +379,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$",
             'cidade' => "santa-catarina",
             'imagem' => "https://i.ibb.co/nqHsNL4R/image.png",
+            'prato' => "https://lh3.googleusercontent.com/proxy/xcRO8Hm3Ku3Agds1cPKb7JqObm7d-1_sBnF_i9hiz3akRnXOplx4Uz_R-P9xnG2cV9cHhnCQemY1aVbzqTaInR9d5-yqrfezMZuytiQ",
+            'ambiente' => "https://media-cdn.tripadvisor.com/media/photo-s/0f/c1/7b/62/ambiente-agradavel.jpg",
+            'sobremesas' => "https://i.ibb.co/nqHsNL4R/image.png",
             'badge' => null,
             'promocao' => false,
             'link' => "dolce-vita",
@@ -342,6 +399,9 @@ class RestauranteController extends Controller
             'precoTexto' => "$$$",
             'cidade' => "sao-paulo",
             'imagem' => "https://i.ibb.co/B2sZMYRW/image.png",
+            'prato' => "https://spcity.com.br/wp-content/uploads/2017/11/capim-santo.jpg",
+            'ambiente' => "https://media-cdn.tripadvisor.com/media/photo-m/1280/29/0d/e0/2c/nosso-espaco-interno.jpg",
+            'sobremesas' => "https://duogourmet-images.s3.us-east-2.amazonaws.com/restaurants/63e15d16dd61931740f887f3/cover.jpg?v=202303021143",
             'badge' => null,
             'promocao' => false,
             'link' => "capim-santo",
@@ -352,60 +412,60 @@ class RestauranteController extends Controller
 
     public function show($id)
     {
-        // Encontra o restaurante pelo ID
-        $restaurante = null;
-        foreach ($this->restaurantes as $r) {
-            if ($r['id'] == $id) {
-                $restaurante = $r;
-                break;
-            }
-        }
+        // Encontra o restaurante pelo ID usando collect para maior eficiência
+        $restaurante = collect($this->restaurantes)->firstWhere('id', $id);
 
         // Se não encontrar, retorna erro 404
         if (!$restaurante) {
             abort(404, 'Restaurante não encontrado');
         }
 
+        // Garante que as propriedades prato, ambiente e sobremesas existam
+        $restaurante = array_merge([
+            'prato' => null,
+            'ambiente' => null,
+            'sobremesas' => null,
+        ], $restaurante);
+
         // Converte array para objeto para facilitar o uso na view
-        return view('destinos.restaurantes.show', ['restaurante' => (object)$restaurante]);
+        return view('destinos.restaurantes.show', ['restaurante' => (object) $restaurante]);
     }
 
-    // Método para API (caso precise no futuro)
     public function index(Request $request)
     {
         // Filtros
-        $filtrados = $this->restaurantes;
+        $filtrados = collect($this->restaurantes); // Usa collect para facilitar manipulação
 
         if ($request->has('tipo_cozinha') && $request->tipo_cozinha) {
-            $filtrados = array_filter($filtrados, function($r) use ($request) {
+            $filtrados = $filtrados->filter(function ($r) use ($request) {
                 return in_array($request->tipo_cozinha, $r['tipos']);
             });
         }
 
         if ($request->has('preco') && $request->preco) {
-            $filtrados = array_filter($filtrados, function($r) use ($request) {
+            $filtrados = $filtrados->filter(function ($r) use ($request) {
                 return $r['preco'] === $request->preco;
             });
         }
 
         if ($request->has('avaliacao') && $request->avaliacao) {
-            $filtrados = array_filter($filtrados, function($r) use ($request) {
+            $filtrados = $filtrados->filter(function ($r) use ($request) {
                 return $r['avaliacao'] >= floatval($request->avaliacao);
             });
         }
 
         if ($request->has('localizacao') && $request->localizacao) {
-            $filtrados = array_filter($filtrados, function($r) use ($request) {
+            $filtrados = $filtrados->filter(function ($r) use ($request) {
                 return $r['cidade'] === $request->localizacao;
             });
         }
 
         // Se for requisição AJAX, retorna JSON
         if ($request->ajax()) {
-            return response()->json(array_values($filtrados));
+            return response()->json($filtrados->values()->all());
         }
 
         // Se for requisição normal, retorna a view principal
-        return view('restaurante');
+        return view('restaurante', ['restaurantes' => $filtrados->values()->all()]);
     }
 }
