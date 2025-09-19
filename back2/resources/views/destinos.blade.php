@@ -102,7 +102,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--primary-color);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -110,7 +110,7 @@
         }
 
         .user-header a {
-            color: var(--text-dark);
+            color: var(--primary-color);
             text-decoration: none;
             transition: var(--transition-smooth);
         }
@@ -196,7 +196,7 @@
         .page-title {
             font-family: 'GaramondBold', serif;
             text-align: center;
-            color: var(--primary-color);
+            color: var(--primary-light);
             margin-bottom: 1.5rem;
             font-size: 2.8rem;
             letter-spacing: 0.5px;
@@ -308,7 +308,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--primary-light);
             margin-bottom: 0.8rem;
         }
 
@@ -390,7 +390,7 @@
         }
 
         .instrucoes h3 {
-            color: var(--primary-color);
+            color: var(--primary-light);
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
