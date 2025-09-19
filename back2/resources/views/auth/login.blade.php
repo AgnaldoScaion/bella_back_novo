@@ -12,14 +12,15 @@
 
         /* Variáveis CSS */
         :root {
-            --primary-color: #5a8f3d;
+            --primary-color: #2d5016;
+            --primary-green: #5a8f3d;
             --primary-light: #A7D096;
             --primary-bg: #f3f7f3;
             --accent-color: #A7D096;
             --border-color: #D8E6D9;
             --error-color: #F44336;
             --success-color: #4CAF50;
-            --text-dark: #333;
+            --text-dark: #000000ff;
             --text-medium: #4a4a4a;
             --text-light: #fff;
             --font-main: 'Inter', sans-serif;
@@ -57,7 +58,6 @@
             min-height: 100vh;
         }
 
-        /* Header Styles */
         .header {
             background-color: var(--accent-color);
             position: relative;
@@ -118,6 +118,7 @@
         .user-header i {
             font-size: 16px;
         }
+
 
         /* Menu Styles */
         .menu-box {
@@ -187,7 +188,8 @@
 
         /* Main Content */
         .main-content {
-            flex: 1 0 auto; /* Ocupa o espaço disponível e empurra o footer para baixo */
+            flex: 1 0 auto;
+            /* Ocupa o espaço disponível e empurra o footer para baixo */
             padding: 1.5rem;
             display: flex;
             align-items: center;
@@ -203,7 +205,7 @@
 
         .login-title {
             font-family: var(--font-heading);
-            color: var(--primary-color);
+            color: var(--primary-green);
             font-size: 1.8rem;
             text-align: center;
             margin-bottom: 1.5rem;
@@ -225,7 +227,7 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
+            color: var(--primary-green);
             font-weight: bold;
             font-size: 0.95rem;
         }
@@ -268,7 +270,7 @@
         .login-button {
             width: 100%;
             padding: 0.85rem;
-            background-color: var(--primary-color);
+            background-color: var(--primary-green);
             color: white;
             border: none;
             border-radius: 8px;
@@ -286,7 +288,7 @@
         .back-button {
             display: block;
             text-align: center;
-            color: var(--primary-color);
+            color: var(--primary-green);
             text-decoration: none;
             font-size: 0.95rem;
             transition: var(--transition-default);
@@ -330,9 +332,11 @@
             0% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-5px);
             }
+
             100% {
                 transform: translateY(0px);
             }
@@ -347,16 +351,20 @@
             .main-content {
                 padding: 1rem;
             }
+
             .login-box {
                 padding: 1.5rem;
             }
+
             .top-header {
                 padding: 10px 20px;
             }
+
             .header-img img {
                 height: 100px;
                 top: -30px;
             }
+
             .menu-box {
                 width: 280px;
             }
@@ -366,12 +374,15 @@
             .login-title {
                 font-size: 1.6rem;
             }
+
             .login-box {
                 padding: 1.2rem;
             }
+
             .form-group input {
                 padding: 0.65rem;
             }
+
             .login-button {
                 padding: 0.75rem;
             }
@@ -381,12 +392,15 @@
             .login-box {
                 padding: 1.2rem;
             }
+
             .form-group input {
                 padding: 0.65rem;
             }
+
             .login-button {
                 padding: 0.75rem;
             }
+
             .top-header {
                 padding: 10px 15px;
             }
@@ -399,10 +413,11 @@
             color: #000;
             font-size: 14px;
             text-align: center;
-            animation: fadeIn 1s ease;
-            flex-shrink: 0; /* Impede que o footer encolha */
+            flex-shrink: 0;
+            /* Impede que o footer encolha */
             width: 100%;
-            margin-top: auto; /* Empurra o footer para baixo */
+            margin-top: auto;
+            /* Empurra o footer para baixo */
         }
 
         .footer-top {
@@ -462,6 +477,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }

@@ -12,6 +12,7 @@
     /* Variáveis CSS */
     :root {
         --primary-color: #5a8f3d;
+        --primary-green: #2d5016;
         --primary-light: #A7D096;
         --primary-bg: #f3f7f3;
         --border-color: #D8E6D9;
@@ -86,7 +87,7 @@
         gap: 8px;
         font-size: 15px;
         font-weight: 600;
-        color: var(--primary-color);
+        color: var(--primary-green);
         background: rgba(255,255,255,0.2);
         padding: 6px 12px;
         border-radius: 20px;
