@@ -13,6 +13,10 @@ return new class extends Migration
             $table->string('nome_hotel', 50);
             $table->string('estado', 50);
             $table->string('cidade', 50);
+            $table->string('imagem');
+            $table->string('prato');
+            $table->string('ambiente');
+            $table->string('sobremesas');
             $table->string('bairro', 50);
             $table->string('rua', 100);
             $table->integer('numero');
