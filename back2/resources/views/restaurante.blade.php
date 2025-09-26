@@ -338,6 +338,22 @@
             outline: none;
         }
 
+        .breadcrumb {
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
         .paginacao {
             display: flex;
             justify-content: center;
@@ -561,6 +577,10 @@
 
 @section('content')
     <main class="main-content">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="{{ route('destinos') }}">Voltar a seleção</a>
+        </div>
         <h1 class="page-title">Restaurantes</h1>
         <p class="page-subtitle">Descubra os melhores sabores locais e internacionais. Filtre por tipo de cozinha, preço e
             avaliações para encontrar o restaurante perfeito para sua experiência gastronômica.</p>
@@ -676,7 +696,7 @@
                 preco: "alto",
                 precoTexto: "$$$",
                 cidade: "rio-grande-do-sul",
-                imagem: "https://i.ibb.co/sJyf79Pw/image.png",
+                imagem: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/5d/9b/33/restaurane-com-vista.jpg?w=800&h=-1&s=1",
                 prato: "",
                 ambiente: "",
                 sobremesas: "",
@@ -1062,28 +1082,28 @@
             const badgeText = restaurante.badge || (restaurante.promocao ? 'Promoção' : '');
 
             restauranteCard.innerHTML = `
-                    <div class="restaurante-img">
-                        <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
-                        ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
-                    </div>
-                    <div class="restaurante-content">
-                        <div class="restaurante-header">
-                            <h3 class="restaurante-title">${restaurante.nome}</h3>
-                            <div class="restaurante-rating">
-                                <span class="star">★</span>${restaurante.avaliacao}
+                        <div class="restaurante-img">
+                            <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
+                            ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                        </div>
+                        <div class="restaurante-content">
+                            <div class="restaurante-header">
+                                <h3 class="restaurante-title">${restaurante.nome}</h3>
+                                <div class="restaurante-rating">
+                                    <span class="star">★</span>${restaurante.avaliacao}
+                                </div>
+                            </div>
+                            <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
+                            <div class="restaurante-info">
+                                <p><span>📍</span> ${restaurante.endereco}</p>
+                                <p><span>⏰</span> ${restaurante.horario}</p>
+                                <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
+                            </div>
+                            <div class="restaurante-footer">
+                                <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
                             </div>
                         </div>
-                        <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
-                        <div class="restaurante-info">
-                            <p><span>📍</span> ${restaurante.endereco}</p>
-                            <p><span>⏰</span> ${restaurante.horario}</p>
-                            <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
-                        </div>
-                        <div class="restaurante-footer">
-                            <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
-                        </div>
-                    </div>
-                `;
+                    `;
             return restauranteCard;
         }
 
@@ -1277,11 +1297,11 @@
             } catch (error) {
                 console.error('Erro ao carregar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                        <div style="text-align: center; padding: 20px; color: #666;">
-                            <p>⚠️ Não foi possível carregar o mapa</p>
-                            <p>Verifique sua conexão com a internet</p>
-                        </div>
-                    `;
+                            <div style="text-align: center; padding: 20px; color: #666;">
+                                <p>⚠️ Não foi possível carregar o mapa</p>
+                                <p>Verifique sua conexão com a internet</p>
+                            </div>
+                        `;
             }
         });
     </script>

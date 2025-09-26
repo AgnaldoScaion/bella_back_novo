@@ -20,10 +20,14 @@
             --bg-light: #f8f9fa;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
-            --primary-light: #7ab55c; /* Adicionado para back-to-top */
-            --text-light: #ffffff; /* Adicionado para back-to-top */
-            --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08); /* Adicionado para back-to-top */
-            --transition-smooth: all 0.3s ease; /* Adicionado para back-to-top */
+            --primary-light: #7ab55c;
+            /* Adicionado para back-to-top */
+            --text-light: #ffffff;
+            /* Adicionado para back-to-top */
+            --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+            /* Adicionado para back-to-top */
+            --transition-smooth: all 0.3s ease;
+            /* Adicionado para back-to-top */
         }
 
         .main-content {
@@ -342,6 +346,22 @@
             outline: none;
         }
 
+        .breadcrumb {
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
         .paginacao {
             display: flex;
             justify-content: center;
@@ -463,30 +483,65 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            0% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .floating {
@@ -565,6 +620,10 @@
 
 @section('content')
     <main class="main-content">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="{{ route('destinos') }}">Voltar a seleção</a>
+        </div>
         <h1 class="page-title">Hotéis</h1>
         <p class="page-subtitle">Encontre os melhores hotéis para sua estadia. Filtre por preço, localização e comodidades
             para uma experiência personalizada.</p>
@@ -1003,28 +1062,28 @@
             const hotelLink = `/destinos/hoteis/${hotel.id}`;
 
             hotelCard.innerHTML = `
-                    <div class="hotel-img">
-                        <img src="${hotel.imagem}" alt="${hotel.nome}" onerror="this.src='https://via.placeholder.com/400x300/5a8f3d/ffffff?text=Imagem+Indisponível'">
-                        ${hotel.categoria === 'premium' ? '<span class="hotel-badge">Premium</span>' : ''}
-                    </div>
-                    <div class="hotel-content">
-                        <div class="hotel-header">
-                            <h3 class="hotel-title">${hotel.nome}</h3>
-                            <div class="hotel-rating">
-                                <span class="star">★</span>${hotel.avaliacao}
+                            <div class="hotel-img">
+                                <img src="${hotel.imagem}" alt="${hotel.nome}" onerror="this.src='https://via.placeholder.com/400x300/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                                ${hotel.categoria === 'premium' ? '<span class="hotel-badge">Premium</span>' : ''}
                             </div>
-                        </div>
-                        <div class="hotel-location">📍 ${hotel.localizacao}</div>
-                        <div class="hotel-info">
-                            <p><span>💰</span> <span class="hotel-price">${hotel.precoTexto}</span> /noite</p>
-                            <p><span>⭐</span> ${hotel.avaliacoes} avaliações</p>
-                            <p><span>🏨</span> ${'⭐'.repeat(hotel.estrelas)} (${hotel.estrelas} estrelas)</p>
-                        </div>
-                        <div class="hotel-footer">
-                            <a href="${hotelLink}" class="btn-ver-mais">Ver Detalhes</a>
-                        </div>
-                    </div>
-                `;
+                            <div class="hotel-content">
+                                <div class="hotel-header">
+                                    <h3 class="hotel-title">${hotel.nome}</h3>
+                                    <div class="hotel-rating">
+                                        <span class="star">★</span>${hotel.avaliacao}
+                                    </div>
+                                </div>
+                                <div class="hotel-location">📍 ${hotel.localizacao}</div>
+                                <div class="hotel-info">
+                                    <p><span>💰</span> <span class="hotel-price">${hotel.precoTexto}</span> /noite</p>
+                                    <p><span>⭐</span> ${hotel.avaliacoes} avaliações</p>
+                                    <p><span>🏨</span> ${'⭐'.repeat(hotel.estrelas)} (${hotel.estrelas} estrelas)</p>
+                                </div>
+                                <div class="hotel-footer">
+                                    <a href="${hotelLink}" class="btn-ver-mais">Ver Detalhes</a>
+                                </div>
+                            </div>
+                        `;
             return hotelCard;
         }
 
@@ -1127,15 +1186,15 @@
                 hoteisFiltrados.forEach(hotel => {
                     if (hotel.lat && hotel.lng) {
                         const popupContent = `
-                                <div style="text-align: center;">
-                                    <b>${hotel.nome}</b><br>
-                                    <small>${hotel.localizacao}</small><br>
-                                    <span>⭐ ${hotel.avaliacao}</span><br>
-                                    <a href="/destinos/hoteis/${hotel.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
-                                        Ver Detalhes
-                                    </a>
-                                </div>
-                            `;
+                                        <div style="text-align: center;">
+                                            <b>${hotel.nome}</b><br>
+                                            <small>${hotel.localizacao}</small><br>
+                                            <span>⭐ ${hotel.avaliacao}</span><br>
+                                            <a href="/destinos/hoteis/${hotel.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
+                                                Ver Detalhes
+                                            </a>
+                                        </div>
+                                    `;
 
                         L.marker([hotel.lat, hotel.lng])
                             .addTo(map)
@@ -1223,11 +1282,11 @@
             } catch (error) {
                 console.error('Erro ao carregar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                        <div style="text-align: center; padding: 20px; color: #666;">
-                            <p>⚠️ Não foi possível carregar o mapa</p>
-                            <p>Verifique sua conexão com a internet</p>
-                        </div>
-                    `;
+                                <div style="text-align: center; padding: 20px; color: #666;">
+                                    <p>⚠️ Não foi possível carregar o mapa</p>
+                                    <p>Verifique sua conexão com a internet</p>
+                                </div>
+                            `;
             }
 
             // Configurar botão "Voltar ao Topo"
