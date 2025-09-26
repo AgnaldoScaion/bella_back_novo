@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Rotas públicas
+Route::get('/', function () {
+    return redirect('home');
+})->name('home');
 Route::get('/home', function () {
     return view('home');
 })->name('home');

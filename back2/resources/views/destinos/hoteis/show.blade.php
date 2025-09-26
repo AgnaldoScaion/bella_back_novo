@@ -386,16 +386,24 @@
                 <h2 class="secao-titulo">Galeria</h2>
                 <div class="galeria">
                     <div class="galeria-item">
-                        <img src="{{ $hotel->imagem }}" alt="{{ $hotel->nome }} - Fachada" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                        <img src="{{ $hotel->imagem ?? 'https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível' }}"
+                            alt="{{ $hotel->nome }} - Interior"
+                            onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
                     </div>
                     <div class="galeria-item">
-                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Quarto Standard" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                        <img src="{{ !empty($hotel->prato) ? $hotel->prato : 'https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível' }}"
+                            alt="{{ $hotel->nome }} - Prato Principal"
+                            onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
                     </div>
                     <div class="galeria-item">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Área de Lazer" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                        <img src="{{ !empty($hotel->ambiente) ? $hotel->ambiente : 'https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível' }}"
+                            alt="{{ $hotel->nome }} - Ambiente"
+                            onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
                     </div>
                     <div class="galeria-item">
-                        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Restaurante do Hotel" onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                        <img src="{{ !empty($hotel->sobremesas) ? $hotel->sobremesas : 'https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível' }}"
+                            alt="{{ $hotel->nome }} - Sobremesas"
+                            onerror="this.src='https://via.placeholder.com/300x200/5a8f3d/ffffff?text=Imagem+Indisponível'">
                     </div>
                 </div>
                 <h2 class="secao-titulo">Localização</h2>

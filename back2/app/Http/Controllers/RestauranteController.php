@@ -25,8 +25,8 @@ class RestauranteController extends Controller
             'badge' => "Premium",
             'promocao' => false,
             'link' => "jamile",
-            'lat' => -23.5505,
-            'lng' => -46.6333
+            'lat' => -23.5618,
+            'lng' => -46.6501
         ],
         [
             'id' => 2,
@@ -45,8 +45,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "casa-terracota",
-            'lat' => -29.3739,
-            'lng' => -50.8811
+            'lat' => -29.3754,
+            'lng' => -50.8764
         ],
         [
             'id' => 3,
@@ -65,8 +65,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "el-fuego",
-            'lat' => -29.3749,
-            'lng' => -50.8821
+            'lat' => -29.3789,
+            'lng' => -50.8743
         ],
         [
             'id' => 4,
@@ -85,8 +85,8 @@ class RestauranteController extends Controller
             'badge' => "Premium",
             'promocao' => false,
             'link' => "oro",
-            'lat' => -22.9792,
-            'lng' => -43.2236
+            'lat' => -22.9844,
+            'lng' => -43.2208
         ],
         [
             'id' => 5,
@@ -105,8 +105,8 @@ class RestauranteController extends Controller
             'badge' => "Premium",
             'promocao' => false,
             'link' => "cipriani",
-            'lat' => -22.9711,
-            'lng' => -43.1828
+            'lat' => -22.9786,
+            'lng' => -43.1887
         ],
         [
             'id' => 6,
@@ -125,8 +125,8 @@ class RestauranteController extends Controller
             'badge' => "Premium",
             'promocao' => false,
             'link' => "fasano",
-            'lat' => -22.9785,
-            'lng' => -43.2089
+            'lat' => -22.9862,
+            'lng' => -43.1946
         ],
         [
             'id' => 7,
@@ -145,8 +145,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "terraco-italia",
-            'lat' => -23.5505,
-            'lng' => -46.6333
+            'lat' => -23.5455,
+            'lng' => -46.6433
         ],
         [
             'id' => 8,
@@ -165,8 +165,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "porto-canoas",
-            'lat' => -25.5478,
-            'lng' => -54.5873
+            'lat' => -25.6831,
+            'lng' => -54.4415
         ],
         [
             'id' => 9,
@@ -185,8 +185,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "rafain",
-            'lat' => -25.5488,
-            'lng' => -54.5883
+            'lat' => -25.5167,
+            'lng' => -54.5833
         ],
         [
             'id' => 10,
@@ -205,8 +205,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "la-mafia-trattoria",
-            'lat' => -25.5498,
-            'lng' => -54.5893
+            'lat' => -25.5452,
+            'lng' => -54.5821
         ],
         [
             'id' => 11,
@@ -225,8 +225,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "bene-da-flauta",
-            'lat' => -20.3822,
-            'lng' => -43.5039
+            'lat' => -20.3856,
+            'lng' => -43.5034
         ],
         [
             'id' => 12,
@@ -245,8 +245,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "gastro-pub",
-            'lat' => -20.3832,
-            'lng' => -43.5049
+            'lat' => -20.3867,
+            'lng' => -43.5052
         ],
         [
             'id' => 13,
@@ -265,8 +265,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "contos-dos-reis",
-            'lat' => -20.3842,
-            'lng' => -43.5059
+            'lat' => -20.3878,
+            'lng' => -43.5065
         ],
         [
             'id' => 14,
@@ -285,8 +285,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "mangue",
-            'lat' => -2.7478,
-            'lng' => -42.8297
+            'lat' => -2.7506,
+            'lng' => -42.8263
         ],
         [
             'id' => 15,
@@ -305,8 +305,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "canoa",
-            'lat' => -2.7488,
-            'lng' => -42.8307
+            'lat' => -2.7498,
+            'lng' => -42.8271
         ],
         [
             'id' => 16,
@@ -325,8 +325,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "terral",
-            'lat' => -2.7498,
-            'lng' => -42.8317
+            'lat' => -2.7489,
+            'lng' => -42.8282
         ],
         [
             'id' => 17,
@@ -345,8 +345,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "alameda",
-            'lat' => -27.4500,
-            'lng' => -48.5490
+            'lat' => -27.4246,
+            'lng' => -48.4253
         ],
         [
             'id' => 18,
@@ -365,8 +365,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "olivia-cucina",
-            'lat' => -27.4510,
-            'lng' => -48.5500
+            'lat' => -27.5935,
+            'lng' => -48.5532
         ],
         [
             'id' => 19,
@@ -385,8 +385,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "dolce-vita",
-            'lat' => -27.4520,
-            'lng' => -48.5510
+            'lat' => -27.5942,
+            'lng' => -48.5487
         ],
         [
             'id' => 20,
@@ -405,8 +405,8 @@ class RestauranteController extends Controller
             'badge' => null,
             'promocao' => false,
             'link' => "capim-santo",
-            'lat' => -23.5688,
-            'lng' => -46.6824
+            'lat' => -23.5697,
+            'lng' => -46.6922
         ]
     ];
 

@@ -733,7 +733,7 @@
                 preco: 850,
                 precoTexto: "R$ 850",
                 cidade: "rj",
-                imagem: "https://i.ibb.co/7NYJH7rM/Hotel-atalntico.webp",
+                imagem: "https://images.trvl-media.com/lodging/5000000/4320000/4316400/4316320/afb006b3.jpg?impolicy=resizecrop&rw=1200&ra=fit",
                 avaliacoes: 1975,
                 categoria: "premium",
                 estrelas: 5,
