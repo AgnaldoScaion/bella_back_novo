@@ -656,7 +656,7 @@
                 preco: "luxo",
                 precoTexto: "$$$$",
                 cidade: "sao-paulo",
-                imagem: "https://i.ibb.co/wNDYyrGF/image.png",
+                imagem: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/c3/89/b9/photo0jpg.jpg?w=1600&h=-1&s=1",
                 prato: "",
                 ambiente: "",
                 sobremesas: "",
