@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Login')
+@section('title', 'Esqueceu a Senha')
 
 @section('styles')
 <style>
@@ -114,14 +114,6 @@
     .menu-conteudo a:hover {
         color: #3a6545;
     }
-.top-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px;
-    background-color: var(--accent-color);
-    position: relative;
-}
     .hidden {
         visibility: hidden;
         opacity: 0;
@@ -146,7 +138,7 @@
         align-items: center;
         justify-content: center;
     }
-    .login-container {
+    .forgot-password-container {
         width: 100%;
         max-width: 480px;
         margin: 0 auto;
@@ -162,7 +154,7 @@
             transform: translateY(0);
         }
     }
-    .login-title {
+    .forgot-password-title {
         font-family: var(--font-heading);
         color: var(--primary-green);
         font-size: 2.2rem;
@@ -171,7 +163,7 @@
         position: relative;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
     }
-    .login-title::after {
+    .forgot-password-title::after {
         content: '';
         position: absolute;
         bottom: -10px;
@@ -182,7 +174,7 @@
         background: linear-gradient(to right, var(--primary-green), var(--primary-light));
         border-radius: 2px;
     }
-    .login-box {
+    .forgot-password-box {
         background: linear-gradient(135deg, #ffffff 0%, #fafffe 100%);
         border-radius: 20px;
         padding: 2.5rem;
@@ -191,7 +183,7 @@
         position: relative;
         overflow: hidden;
     }
-    .login-box::before {
+    .forgot-password-box::before {
         content: '';
         position: absolute;
         top: 0;
@@ -252,35 +244,7 @@
         25% { transform: translateX(-5px); }
         75% { transform: translateX(5px); }
     }
-    .forgot-password {
-        display: block;
-        text-align: right;
-        margin-bottom: 1.5rem;
-        color: var(--primary-color);
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: var(--transition-default);
-        font-weight: 600;
-        position: relative;
-    }
-    .forgot-password::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -2px;
-        right: 0;
-        background-color: var(--primary-color);
-        transition: width 0.3s ease;
-    }
-    .forgot-password:hover::after {
-        width: 100%;
-        left: 0;
-    }
-    .forgot-password:hover {
-        color: var(--primary-green);
-    }
-    .login-button {
+    .submit-button {
         width: 100%;
         padding: 1rem;
         background: linear-gradient(135deg, var(--primary-green) 0%, #4a7d2d 100%);
@@ -298,7 +262,7 @@
         position: relative;
         overflow: hidden;
     }
-    .login-button::before {
+    .submit-button::before {
         content: '';
         position: absolute;
         top: 50%;
@@ -310,15 +274,15 @@
         transform: translate(-50%, -50%);
         transition: width 0.6s, height 0.6s;
     }
-    .login-button:hover::before {
+    .submit-button:hover::before {
         width: 300px;
         height: 300px;
     }
-    .login-button:hover {
+    .submit-button:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 25px rgba(90, 143, 61, 0.4);
     }
-    .login-button:active {
+    .submit-button:active {
         transform: translateY(-1px);
     }
     .back-button {
@@ -404,26 +368,14 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
-    .footer-top {
-        margin-bottom: 15px;
-    }
-    .footer-top img {
-        width: 15%;
-        height: auto;
-        transition: transform 0.5s ease;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-    }
-    .footer-top:hover img {
-        transform: rotate(5deg) scale(1.05);
-    }
     @media (max-width: 768px) {
         .main-content {
             padding: 1.5rem 1rem;
         }
-        .login-box {
+        .forgot-password-box {
             padding: 2rem;
         }
-        .login-title {
+        .forgot-password-title {
             font-size: 1.9rem;
         }
         .top-header {
@@ -437,36 +389,36 @@
         }
     }
     @media (max-width: 600px) {
-        .login-title {
+        .forgot-password-title {
             font-size: 1.7rem;
         }
-        .login-box {
+        .forgot-password-box {
             padding: 1.8rem;
             border-radius: 16px;
         }
         .form-group input {
             padding: 0.8rem;
         }
-        .login-button {
+        .submit-button {
             padding: 0.9rem;
             font-size: 1rem;
         }
     }
     @media (max-width: 480px) {
-        .login-container {
+        .forgot-password-container {
             max-width: 100%;
         }
-        .login-box {
+        .forgot-password-box {
             padding: 1.5rem;
             border-radius: 14px;
         }
         .form-group input {
             padding: 0.75rem;
         }
-        .login-button {
+        .submit-button {
             padding: 0.85rem;
         }
-        .login-title {
+        .forgot-password-title {
             font-size: 1.6rem;
         }
         .top-header {
@@ -478,171 +430,34 @@
 
 @section('content')
 <div class="wrapper">
-    <header class="header">
-        <div class="top-header"></div>
-    </header>
     <div class="main-content">
-        <div class="login-container">
-            <h1 class="login-title">Login</h1>
-            @if(session('error'))
-                <div class="notification error show">
-                    {{ session('error') }}
-                </div>
-            @endif
+        <div class="forgot-password-container">
+            <h1 class="forgot-password-title">Esqueceu a Senha?</h1>
             @if(session('success'))
                 <div class="notification success show">
                     {{ session('success') }}
                 </div>
             @endif
-            <div class="login-box">
-                <form method="POST" action="{{ route('login') }}" id="loginForm">
+            @if($errors->has('email'))
+                <div class="notification error show">
+                    {{ $errors->first('email') }}
+                </div>
+            @endif
+            <div class="forgot-password-box">
+                <form method="POST" action="{{ route('password.email') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="CPF">CPF</label>
-                        <input type="text" id="CPF" name="CPF" value="{{ old('CPF') }}" placeholder="000.000.000-00" maxlength="14" required>
-                        <span id="cpf_error" class="error"></span>
-                        @error('CPF')
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="email@exemplo.com" required>
+                        @error('email')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="password">Senha</label>
-                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-                        <span id="password_error" class="error"></span>
-                        @error('password')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <a href="{{ route('password.request') }}" class="forgot-password">Esqueceu a senha?</a>
-                    <button type="submit" class="login-button">Entrar</button>
+                    <button type="submit" class="submit-button">Enviar Link de Redefinição</button>
                 </form>
-                <a href="{{ route('register') }}" class="back-button">Não tem conta? Cadastre-se</a>
+                <a href="{{ route('login') }}" class="back-button">Voltar ao Login</a>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-@section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const cpfInput = document.getElementById('CPF');
-        const cpfError = document.getElementById('cpf_error');
-        const passwordInput = document.getElementById('password');
-        const passwordError = document.getElementById('password_error');
-        const loginForm = document.getElementById('loginForm');
-        const menuToggle = document.getElementById('menuToggle');
-        const menuBox = document.getElementById('menuBox');
-
-        // Menu functionality
-        if (menuToggle && menuBox) {
-            menuToggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                menuBox.classList.toggle('visible');
-            });
-            document.addEventListener('click', function (e) {
-                if (!menuBox.contains(e.target) && e.target !== menuToggle) {
-                    menuBox.classList.remove('visible');
-                }
-            });
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    if (this.getAttribute('href') !== '#') {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                            menuBox.classList.remove('visible');
-                        }
-                    }
-                });
-            });
-        }
-
-        // CPF validation
-        if (cpfInput) {
-            cpfInput.addEventListener('input', function (e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.substring(0, 11);
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                e.target.value = value;
-                validateCPF(value);
-            });
-
-            cpfInput.addEventListener('blur', function (e) {
-                validateCPF(e.target.value);
-            });
-
-            function validateCPF(value) {
-                const digits = value.replace(/\D/g, '');
-                if (digits.length === 0) {
-                    cpfError.textContent = 'O CPF é obrigatório.';
-                    return false;
-                }
-                if (digits.length !== 11) {
-                    cpfError.textContent = 'O CPF deve conter 11 números.';
-                    return false;
-                }
-                if (!isValidCPF(digits)) {
-                    cpfError.textContent = 'CPF inválido.';
-                    return false;
-                }
-                cpfError.textContent = '';
-                return true;
-            }
-
-            function isValidCPF(cpf) {
-                if (/^(\d)\1{10}$/.test(cpf)) {
-                    return false;
-                }
-                let sum = 0;
-                for (let i = 0; i < 9; i++) {
-                    sum += parseInt(cpf[i]) * (10 - i);
-                }
-                let remainder = (sum * 10) % 11;
-                if (remainder === 10) remainder = 0;
-                if (remainder !== parseInt(cpf[9])) {
-                    return false;
-                }
-                sum = 0;
-                for (let i = 0; i < 10; i++) {
-                    sum += parseInt(cpf[i]) * (11 - i);
-                }
-                remainder = (sum * 10) % 11;
-                if (remainder === 10) remainder = 0;
-                if (remainder !== parseInt(cpf[10])) {
-                    return false;
-                }
-                return true;
-            }
-        }
-
-        // Form validation
-        if (loginForm) {
-            loginForm.addEventListener('submit', function (e) {
-                let isValid = true;
-                if (cpfError) cpfError.textContent = '';
-                if (passwordError) passwordError.textContent = '';
-
-                if (!validateCPF(cpfInput.value)) {
-                    isValid = false;
-                }
-
-                if (passwordInput.value.length < 4) {
-                    passwordError.textContent = 'A senha deve ter pelo menos 4 caracteres.';
-                    isValid = false;
-                }
-
-                if (!isValid) {
-                    e.preventDefault();
-                }
-            });
-        }
-    });
-</script>
 @endsection

@@ -84,7 +84,7 @@
             animation: loading 1.5s infinite;
             border-radius: 4px;
         }
-        
+
         .image-error {
             background-color: #f8f9fa;
             display: flex;
@@ -95,18 +95,18 @@
             border: 1px dashed #dee2e6;
             min-height: 100px;
         }
-        
+
         @keyframes loading {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-        
+
         /* Estilo para imagens com carregamento otimizado */
         img.lazy-load {
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         img.lazy-load.loaded {
             opacity: 1;
         }
@@ -157,7 +157,7 @@
         <div class="header">
             <div class="header-img">
                 <a href="{{ route('home') }}">
-                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating" 
+                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating"
                          onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRTBFMEUwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZDNzU3RCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJlbGxhIEF2dmVudHVyYTwvdGV4dD48L3N2Zz4='"/>
                 </a>
             </div>
@@ -191,7 +191,7 @@
         <footer class="footer">
             <div class="footer-top">
                 <a href="https://www.bellaavventura.com.br/">
-                    <img src="https://i.ibb.co/j9vGknyy/image.png" alt="Bella Avventura" 
+                    <img src="https://i.ibb.co/j9vGknyy/image.png" alt="Bella Avventura"
                          onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNFMEUwRTAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNkM3NTdEIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+QmVsbGEgQXZ2ZW50dXJhPC90ZXh0Pjwvc3ZnPg=='"/>
                 </a>
             </div>
@@ -214,9 +214,9 @@
             const MAX_RETRY_ATTEMPTS = 3;
             const RETRY_DELAY = 5000; // 5 segundos
             const COLD_STORAGE_DELAY = 30000; // 30 segundos para storage frio
-            
+
             let observer;
-            
+
             // Inicializar IntersectionObserver se disponível
             if ('IntersectionObserver' in window) {
                 observer = new IntersectionObserver((entries) => {
@@ -232,18 +232,18 @@
                     threshold: 0.01
                 });
             }
-            
+
             // Função principal para carregar imagens com sistema de retry
             function loadImageWithRetry(imgElement, retryCount = 0) {
                 const src = imgElement.getAttribute('data-src') || imgElement.src;
                 if (!src) return;
-                
+
                 // Mostra placeholder de carregamento
                 imgElement.classList.add('image-loading');
                 imgElement.classList.remove('image-error', 'loaded');
-                
+
                 const img = new Image();
-                
+
                 img.onload = function() {
                     // Sucesso no carregamento
                     if (imgElement.hasAttribute('data-src')) {
@@ -252,18 +252,18 @@
                     }
                     imgElement.classList.remove('image-loading');
                     imgElement.classList.add('loaded');
-                    
+
                     // Força o cache do navegador
                     preloadImage(src);
                 };
-                
+
                 img.onerror = function() {
                     imgElement.classList.remove('image-loading');
-                    
+
                     if (retryCount < MAX_RETRY_ATTEMPTS) {
                         // Tenta novamente após um delay
                         const delay = retryCount === 0 ? COLD_STORAGE_DELAY : RETRY_DELAY;
-                        
+
                         setTimeout(() => {
                             console.log(`Tentativa ${retryCount + 1} para imagem: ${src}`);
                             loadImageWithRetry(imgElement, retryCount + 1);
@@ -274,7 +274,7 @@
                         console.warn(`Falha ao carregar imagem após ${MAX_RETRY_ATTEMPTS} tentativas: ${src}`);
                     }
                 };
-                
+
                 // Inicia o carregamento com parâmetro único para evitar cache em retries
                 if (retryCount > 0) {
                     img.src = `${src}${src.includes('?') ? '&' : '?'}_t=${Date.now()}`;
@@ -282,7 +282,7 @@
                     img.src = src;
                 }
             }
-            
+
             // Pré-carrega imagens para o cache do navegador
             function preloadImage(url) {
                 const link = document.createElement('link');
@@ -290,7 +290,7 @@
                 link.as = 'image';
                 link.href = url;
                 document.head.appendChild(link);
-                
+
                 // Remove após um tempo para limpeza
                 setTimeout(() => {
                     if (link.parentNode) {
@@ -298,16 +298,16 @@
                     }
                 }, 1000);
             }
-            
+
             // Inicializa o lazy loading para todas as imagens
             function initImageLoading() {
                 const images = document.querySelectorAll('img[data-src], img:not([data-src])');
-                
+
                 images.forEach(img => {
                     // Se já tem src, carrega normalmente
                     if (img.src && !img.hasAttribute('data-src')) {
                         loadImageWithRetry(img);
-                    } 
+                    }
                     // Se tem data-src, usa lazy loading
                     else if (img.hasAttribute('data-src')) {
                         if (observer) {
@@ -319,10 +319,10 @@
                     }
                 });
             }
-            
+
             // Inicializa quando o DOM estiver pronto
             initImageLoading();
-            
+
             // Sistema de retry para imagens que falharam
             setInterval(() => {
                 document.querySelectorAll('img.image-error').forEach(img => {

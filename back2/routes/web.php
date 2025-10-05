@@ -14,6 +14,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'register']);
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
+    Route::get('/password/reset', [LoginController::class, 'showForgotPasswordForm'])->name('password.request');
+    Route::post('/password/email', [LoginController::class, 'forgotPassword'])->name('password.email');
 });
 
 // Rotas protegidas
