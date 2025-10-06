@@ -3,6 +3,7 @@
     <div class="menu-conteudo">
         <h2>Menu</h2>
         <ul>
+            <li><a href="{{ route('home') }}">Início</a></li>
             <li><a href="{{ route('login') }}">Login</a></li>
             <li><a href="{{ route('register') }}">Cadastro</a></li>
             <li><a href="{{ route('sobre-nos') }}">Sobre nós</a></li>

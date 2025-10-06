@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', 'Login')
-
 @section('styles')
 <style>
     @font-face {
@@ -9,16 +7,17 @@
         src: local('Garamond'), serif;
         font-weight: bold;
     }
+    /* Variáveis CSS */
     :root {
-        --primary-color: #2d5016;
-        --primary-green: #5a8f3d;
+        --primary-color: #5a8f3d; /* Ajustado para corresponder ao cadastro */
+        --primary-green: #2d5016;
         --primary-light: #A7D096;
         --primary-bg: #f3f7f3;
         --accent-color: #A7D096;
         --border-color: #D8E6D9;
         --error-color: #F44336;
         --success-color: #4CAF50;
-        --text-dark: #000000ff;
+        --text-dark: #333;
         --text-medium: #4a4a4a;
         --text-light: #fff;
         --font-main: 'Inter', sans-serif;
@@ -32,6 +31,7 @@
         --border-radius: 16px;
         --border-radius-small: 8px;
     }
+    /* Reset e Estilos Globais */
     * {
         margin: 0;
         padding: 0;
@@ -39,27 +39,23 @@
     }
     html, body {
         height: 100%;
-        margin: 0;
-    }
-    body {
         font-family: var(--font-main);
         font-weight: 700;
         background: linear-gradient(135deg, #f3f7f3 0%, #e8f3e8 100%);
         color: var(--text-dark);
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
     }
+    /* Menu Icon */
     .menu-icon {
         font-size: 24px;
         cursor: pointer;
         transition: transform 0.3s ease, color 0.3s ease;
-        color: var(--primary-color);
+        color: var(--primary-green);
     }
     .menu-icon:hover {
         transform: scale(1.2) rotate(90deg);
-        color: var(--primary-green);
+        color: var(--primary-color);
     }
+    /* Menu Styles */
     .menu-box {
         position: fixed;
         top: 50px;
@@ -75,13 +71,13 @@
         font-family: 'Garamond', serif;
         z-index: 1000;
         transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        border: 2px solid rgba(255,255,255,0.3);
+        border: 2px solid rgba(255, 255, 255, 0.3);
     }
     .menu-lateral {
         background: linear-gradient(to bottom, #88b68b, #6a9a6d);
         width: 24px;
         border-radius: 12px;
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .menu-conteudo {
         flex: 1;
@@ -91,7 +87,7 @@
         margin: 0;
         border-bottom: 2px solid #999;
         padding-bottom: 10px;
-        color: var(--primary-color);
+        color: var(--primary-green);
     }
     .menu-conteudo ul {
         list-style: none;
@@ -114,14 +110,6 @@
     .menu-conteudo a:hover {
         color: #3a6545;
     }
-.top-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px;
-    background-color: var(--accent-color);
-    position: relative;
-}
     .hidden {
         visibility: hidden;
         opacity: 0;
@@ -134,6 +122,7 @@
         pointer-events: auto;
         transform: translateX(0);
     }
+    /* Estrutura Principal */
     .wrapper {
         display: flex;
         flex-direction: column;
@@ -146,6 +135,16 @@
         align-items: center;
         justify-content: center;
     }
+    /* Header */
+    .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 30px;
+        background-color: var(--accent-color);
+        position: relative;
+    }
+    /* Container de Login */
     .login-container {
         width: 100%;
         max-width: 480px;
@@ -164,12 +163,12 @@
     }
     .login-title {
         font-family: var(--font-heading);
-        color: var(--primary-green);
+        color: var(--primary-color);
         font-size: 2.2rem;
         text-align: center;
         margin-bottom: 1.8rem;
         position: relative;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
     }
     .login-title::after {
         content: '';
@@ -179,14 +178,14 @@
         transform: translateX(-50%);
         width: 80px;
         height: 4px;
-        background: linear-gradient(to right, var(--primary-green), var(--primary-light));
+        background: linear-gradient(to right, var(--primary-color), var(--primary-light));
         border-radius: 2px;
     }
     .login-box {
         background: linear-gradient(135deg, #ffffff 0%, #fafffe 100%);
         border-radius: 20px;
         padding: 2.5rem;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
         border: 3px solid var(--border-color);
         position: relative;
         overflow: hidden;
@@ -198,14 +197,19 @@
         left: 0;
         width: 100%;
         height: 4px;
-        background: linear-gradient(to right, var(--primary-green), var(--primary-light), var(--primary-green));
+        background: linear-gradient(to right, var(--primary-color), var(--primary-light), var(--primary-color));
         background-size: 200% 100%;
         animation: gradientShift 3s ease infinite;
     }
     @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
     }
+    /* Formulário */
     .form-group {
         margin-bottom: 1.5rem;
         position: relative;
@@ -213,7 +217,7 @@
     .form-group label {
         display: block;
         margin-bottom: 0.6rem;
-        color: var(--primary-green);
+        color: var(--primary-color);
         font-weight: bold;
         font-size: 0.95rem;
         transition: var(--transition-default);
@@ -229,7 +233,7 @@
         font-family: var(--font-main);
     }
     .form-group input:focus {
-        border-color: var(--primary-green);
+        border-color: var(--primary-color);
         outline: none;
         box-shadow: 0 0 0 4px rgba(90, 143, 61, 0.1);
         background-color: white;
@@ -248,9 +252,15 @@
         animation: shake 0.3s ease;
     }
     @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        75% { transform: translateX(5px); }
+        0%, 100% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-5px);
+        }
+        75% {
+            transform: translateX(5px);
+        }
     }
     .forgot-password {
         display: block;
@@ -283,7 +293,7 @@
     .login-button {
         width: 100%;
         padding: 1rem;
-        background: linear-gradient(135deg, var(--primary-green) 0%, #4a7d2d 100%);
+        background: linear-gradient(135deg, var(--primary-color) 0%, #4a7d2d 100%);
         color: white;
         border: none;
         border-radius: 12px;
@@ -306,7 +316,7 @@
         width: 0;
         height: 0;
         border-radius: 50%;
-        background: rgba(255,255,255,0.2);
+        background: rgba(255, 255, 255, 0.2);
         transform: translate(-50%, -50%);
         transition: width 0.6s, height 0.6s;
     }
@@ -324,7 +334,8 @@
     .back-button {
         display: block;
         text-align: center;
-        color: var(--primary-green);
+        margin-top: 1.8rem;
+        color: var(--primary-color);
         text-decoration: none;
         font-size: 0.95rem;
         transition: var(--transition-default);
@@ -337,12 +348,13 @@
         transition: var(--transition-default);
     }
     .back-button:hover {
-        color: var(--primary-color);
+        color: var(--primary-green);
         transform: translateX(5px);
     }
     .back-button:hover::after {
         margin-left: 12px;
     }
+    /* Notificação */
     .notification {
         position: fixed;
         top: 20px;
@@ -356,7 +368,7 @@
         opacity: 0;
         transition: opacity 0.3s ease, top 0.3s ease;
         font-size: 0.95rem;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(10px);
     }
     .notification.show {
@@ -380,29 +392,39 @@
     .notification.error {
         background: linear-gradient(135deg, var(--error-color) 0%, #d32f2f 100%);
     }
+    /* Animação Flutuante */
     @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-8px); }
-        100% { transform: translateY(0px); }
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
     }
     .floating {
         animation: float 3s ease-in-out infinite;
     }
+    /* Footer Styles */
     .footer {
         background: linear-gradient(to right, var(--primary-light), #b8dca8);
         padding: 25px 20px;
         color: #000;
         font-size: 14px;
         text-align: center;
-        flex-shrink: 0;
-        width: 100%;
-        margin-top: auto;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
         animation: fadeIn 1s ease;
+        margin-top: auto;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
     }
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
     .footer-top {
         margin-bottom: 15px;
@@ -411,11 +433,12 @@
         width: 15%;
         height: auto;
         transition: transform 0.5s ease;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
     .footer-top:hover img {
         transform: rotate(5deg) scale(1.05);
     }
+    /* Responsividade */
     @media (max-width: 768px) {
         .main-content {
             padding: 1.5rem 1rem;
@@ -475,12 +498,8 @@
     }
 </style>
 @endsection
-
 @section('content')
 <div class="wrapper">
-    <header class="header">
-        <div class="top-header"></div>
-    </header>
     <div class="main-content">
         <div class="login-container">
             <h1 class="login-title">Login</h1>
@@ -522,7 +541,6 @@
     </div>
 </div>
 @endsection
-
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -533,7 +551,6 @@
         const loginForm = document.getElementById('loginForm');
         const menuToggle = document.getElementById('menuToggle');
         const menuBox = document.getElementById('menuBox');
-
         // Menu functionality
         if (menuToggle && menuBox) {
             menuToggle.addEventListener('click', function (e) {
@@ -561,7 +578,6 @@
                 });
             });
         }
-
         // CPF validation
         if (cpfInput) {
             cpfInput.addEventListener('input', function (e) {
@@ -573,11 +589,9 @@
                 e.target.value = value;
                 validateCPF(value);
             });
-
             cpfInput.addEventListener('blur', function (e) {
                 validateCPF(e.target.value);
             });
-
             function validateCPF(value) {
                 const digits = value.replace(/\D/g, '');
                 if (digits.length === 0) {
@@ -595,7 +609,6 @@
                 cpfError.textContent = '';
                 return true;
             }
-
             function isValidCPF(cpf) {
                 if (/^(\d)\1{10}$/.test(cpf)) {
                     return false;
@@ -621,23 +634,19 @@
                 return true;
             }
         }
-
         // Form validation
         if (loginForm) {
             loginForm.addEventListener('submit', function (e) {
                 let isValid = true;
                 if (cpfError) cpfError.textContent = '';
                 if (passwordError) passwordError.textContent = '';
-
                 if (!validateCPF(cpfInput.value)) {
                     isValid = false;
-                }
-
+                }F
                 if (passwordInput.value.length < 4) {
                     passwordError.textContent = 'A senha deve ter pelo menos 4 caracteres.';
                     isValid = false;
                 }
-
                 if (!isValid) {
                     e.preventDefault();
                 }

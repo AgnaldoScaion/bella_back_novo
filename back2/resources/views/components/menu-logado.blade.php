@@ -3,6 +3,7 @@
     <div class="menu-conteudo">
         <h2>Menu</h2>
         <ul>
+            <li><a href="{{ route('home') }}">Início</a></li>
             <li><a href="{{ route('profile.show') }}">Meu Perfil</a></li>
             <li><a href="{{ route('feedbacks') }}">Meus Feedbacks</a></li>
             <li><a href="{{ route('restaurantes.alternative') }}">Restaurantes</a></li>
