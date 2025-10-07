@@ -130,7 +130,7 @@
     }
     .main-content {
         flex: 1 0 auto;
-        padding: 2rem 1.5rem;
+        padding: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
