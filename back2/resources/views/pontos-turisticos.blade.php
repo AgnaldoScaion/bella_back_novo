@@ -671,6 +671,9 @@
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
     </main>
+    @if(Auth::check())
+        @include('components.chat-feedback')
+    @endif
 @endsection
 
 @section('scripts')
@@ -1011,26 +1014,26 @@
             const pontoLink = `/destinos/pontos-turisticos/${ponto.id}`;
 
             pontoCard.innerHTML = `
-                        <div class="ponto-img">
-                            <img src="${ponto.imagem}" alt="${ponto.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Imagem+Indisponível'">
-                        </div>
-                        <div class="ponto-content">
-                            <div class="ponto-header">
-                                <h3 class="ponto-title">${ponto.nome}</h3>
-                                <div class="ponto-rating">
-                                    <span class="star">★</span>${ponto.avaliacao}
+                            <div class="ponto-img">
+                                <img src="${ponto.imagem}" alt="${ponto.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                            </div>
+                            <div class="ponto-content">
+                                <div class="ponto-header">
+                                    <h3 class="ponto-title">${ponto.nome}</h3>
+                                    <div class="ponto-rating">
+                                        <span class="star">★</span>${ponto.avaliacao}
+                                    </div>
+                                </div>
+                                <div class="ponto-location">📍 ${ponto.localizacao}</div>
+                                <div class="ponto-info">
+                                    <p><span>💰</span> <span class="ponto-price">${ponto.precoTexto}</span></p>
+                                    <p><span>⭐</span> ${ponto.avaliacoes} avaliações</p>
+                                </div>
+                                <div class="ponto-footer">
+                                    <a href="${pontoLink}" class="btn-ver-mais">Ver Detalhes</a>
                                 </div>
                             </div>
-                            <div class="ponto-location">📍 ${ponto.localizacao}</div>
-                            <div class="ponto-info">
-                                <p><span>💰</span> <span class="ponto-price">${ponto.precoTexto}</span></p>
-                                <p><span>⭐</span> ${ponto.avaliacoes} avaliações</p>
-                            </div>
-                            <div class="ponto-footer">
-                                <a href="${pontoLink}" class="btn-ver-mais">Ver Detalhes</a>
-                            </div>
-                        </div>
-                    `;
+                        `;
 
             // Adiciona a animação após um pequeno delay
             setTimeout(() => {
@@ -1200,15 +1203,15 @@
                 pontosFiltrados.forEach(ponto => {
                     if (ponto.lat && ponto.lng) {
                         const popupContent = `
-                                    <div style="text-align: center;">
-                                        <b>${ponto.nome}</b><br>
-                                        <small>${ponto.localizacao}</small><br>
-                                        <span>⭐ ${ponto.avaliacao}</span><br>
-                                        <a href="/destinos/pontos-turisticos/${ponto.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
-                                            Ver Detalhes
-                                        </a>
-                                    </div>
-                                `;
+                                        <div style="text-align: center;">
+                                            <b>${ponto.nome}</b><br>
+                                            <small>${ponto.localizacao}</small><br>
+                                            <span>⭐ ${ponto.avaliacao}</span><br>
+                                            <a href="/destinos/pontos-turisticos/${ponto.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
+                                                Ver Detalhes
+                                            </a>
+                                        </div>
+                                    `;
 
                         const marker = L.marker([ponto.lat, ponto.lng])
                             .addTo(map)
@@ -1268,11 +1271,11 @@
             } catch (error) {
                 console.error('Erro ao inicializar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                            <div style="text-align: center; padding: 20px; color: #666;">
-                                <p>⚠️ Não foi possível carregar o mapa</p>
-                                <p>Verifique sua conexão com a internet</p>
-                            </div>
-                        `;
+                                <div style="text-align: center; padding: 20px; color: #666;">
+                                    <p>⚠️ Não foi possível carregar o mapa</p>
+                                    <p>Verifique sua conexão com a internet</p>
+                                </div>
+                            `;
             }
         });
     </script>

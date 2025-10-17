@@ -686,10 +686,23 @@
             <p>Descubra os melhores restaurantes e pontos turísticos baseados na sua localização, avalie suas experiências e
                 ganhe descontos para suas próximas aventuras!</p>
             @auth
-                <a href="{{ route('destinos') }}" class="btn">
-                    <i class="fas fa-compass"></i>
-                    Explorar Destinos
-                </a>
+                    <a href="{{ route('destinos') }}" class="btn">
+                        <i class="fas fa-compass"></i>
+                        Explorar Destinos
+                    </a>
+
+                    <!-- Step-by-step guide for logged users -->
+                    <div class="step-guide" style="margin: 2rem auto; max-width: 600px; background: #eafbe2; border-radius: 12px; box-shadow: 0 2px 12px #5a8f3d22; padding: 2rem;">
+                        <h3 style="color: #2d5016; font-size: 1.3rem; margin-bottom: 1.2rem; font-family: 'GaramondBold', serif;">Como explorar a nossa aplicação.</h3>
+                        <ol style="padding-left: 1.2rem; color: #2d5016; font-size: 1.08rem;">
+                            <li style="margin-bottom: 1rem;">
+                                <span style="font-weight: bold;">Menu Lateral:</span> Clique no <span style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">☰</span> icon (topo esquerdo) para abrir o menu lateral, para vizualizar algumas guias que possivelmente deseja ao explorar o site.
+                            </li>
+                            <li style="margin-bottom: 1rem;">
+                                <span style="font-weight: bold;">Volte para aqui:</span> Clique em <span style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">Bella Avventura logo</span> que fica no meio do cabeçalho da pagina e flutuando para retornar a home em qualquer pagina.
+                            </li>
+                        </ol>
+                    </div>
             @else
                 <a href="{{ route('login') }}" class="btn">
                     <i class="fas fa-compass"></i>

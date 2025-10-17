@@ -702,6 +702,9 @@
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
     </main>
+    @if(Auth::check())
+        @include('components.chat-feedback')
+    @endif
 @endsection
 
 @section('scripts')
@@ -1062,33 +1065,33 @@
             const hotelLink = `/destinos/hoteis/${hotel.id}`;
 
             hotelCard.innerHTML = `
-                            <div class="hotel-img">
-                                <img src="${hotel.imagem}" alt="${hotel.nome}" onerror="this.src='https://via.placeholder.com/400x300/5a8f3d/ffffff?text=Imagem+Indisponível'">
-                                ${hotel.categoria === 'premium' ? '<span class="hotel-badge">Premium</span>' : ''}
-                            </div>
-                            <div class="hotel-content">
-                                <div class="hotel-header">
-                                    <h3 class="hotel-title">${hotel.nome}</h3>
-                                    <div class="hotel-rating">
-                                        <span class="star">★</span>${hotel.avaliacao}
+                                <div class="hotel-img">
+                                    <img src="${hotel.imagem}" alt="${hotel.nome}" onerror="this.src='https://via.placeholder.com/400x300/5a8f3d/ffffff?text=Imagem+Indisponível'">
+                                    ${hotel.categoria === 'premium' ? '<span class="hotel-badge">Premium</span>' : ''}
+                                </div>
+                                <div class="hotel-content">
+                                    <div class="hotel-header">
+                                        <h3 class="hotel-title">${hotel.nome}</h3>
+                                        <div class="hotel-rating">
+                                            <span class="star">★</span>${hotel.avaliacao}
+                                        </div>
+                                    </div>
+                                    <div class="hotel-location">📍 ${hotel.localizacao}</div>
+                                    <div class="hotel-info">
+                                        <p><span>💰</span> <span class="hotel-price">${hotel.precoTexto}</span> /noite</p>
+                                        <p><span>⭐</span> ${hotel.avaliacoes} avaliações</p>
+                                        <p><span>🏨</span> ${'⭐'.repeat(hotel.estrelas)} (${hotel.estrelas} estrelas)</p>
+                                    </div>
+                                    <div class="hotel-footer">
+                                        <a href="${hotelLink}" class="btn-ver-mais">Ver Detalhes</a>
+                                        @auth
+                                            <a href="/reservas/create/${hotel.id}" class="btn-reservar" style="background: #667eea; color: white; padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none; display: inline-block; margin-left: 8px;">
+                                                <i class="fas fa-calendar-check"></i> Reservar
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
-                                <div class="hotel-location">📍 ${hotel.localizacao}</div>
-                                <div class="hotel-info">
-                                    <p><span>💰</span> <span class="hotel-price">${hotel.precoTexto}</span> /noite</p>
-                                    <p><span>⭐</span> ${hotel.avaliacoes} avaliações</p>
-                                    <p><span>🏨</span> ${'⭐'.repeat(hotel.estrelas)} (${hotel.estrelas} estrelas)</p>
-                                </div>
-                                <div class="hotel-footer">
-                                    <a href="${hotelLink}" class="btn-ver-mais">Ver Detalhes</a>
-                                    @auth
-                                        <a href="/reservas/create/${hotel.id}" class="btn-reservar" style="background: #667eea; color: white; padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none; display: inline-block; margin-left: 8px;">
-                                            <i class="fas fa-calendar-check"></i> Reservar
-                                        </a>
-                                    @endauth
-                                </div>
-                            </div>
-                        `;
+                            `;
             return hotelCard;
         }
 
@@ -1191,15 +1194,15 @@
                 hoteisFiltrados.forEach(hotel => {
                     if (hotel.lat && hotel.lng) {
                         const popupContent = `
-                                        <div style="text-align: center;">
-                                            <b>${hotel.nome}</b><br>
-                                            <small>${hotel.localizacao}</small><br>
-                                            <span>⭐ ${hotel.avaliacao}</span><br>
-                                            <a href="/destinos/hoteis/${hotel.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
-                                                Ver Detalhes
-                                            </a>
-                                        </div>
-                                    `;
+                                            <div style="text-align: center;">
+                                                <b>${hotel.nome}</b><br>
+                                                <small>${hotel.localizacao}</small><br>
+                                                <span>⭐ ${hotel.avaliacao}</span><br>
+                                                <a href="/destinos/hoteis/${hotel.id}" style="display: inline-block; margin-top: 8px; padding: 5px 10px; background: #5a8f3d; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">
+                                                    Ver Detalhes
+                                                </a>
+                                            </div>
+                                        `;
 
                         L.marker([hotel.lat, hotel.lng])
                             .addTo(map)
@@ -1287,11 +1290,11 @@
             } catch (error) {
                 console.error('Erro ao carregar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                                <div style="text-align: center; padding: 20px; color: #666;">
-                                    <p>⚠️ Não foi possível carregar o mapa</p>
-                                    <p>Verifique sua conexão com a internet</p>
-                                </div>
-                            `;
+                                    <div style="text-align: center; padding: 20px; color: #666;">
+                                        <p>⚠️ Não foi possível carregar o mapa</p>
+                                        <p>Verifique sua conexão com a internet</p>
+                                    </div>
+                                `;
             }
 
             // Configurar botão "Voltar ao Topo"

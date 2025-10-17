@@ -1,112 +1,31 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos e Condições - Bella Avventura</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
+@extends('layouts.app')
+
+@section('title', 'Termos e Condições')
+
+@section('styles')
     <style>
-        @font-face {
-            font-family: 'GaramondBold';
-            src: local('Garamond'), serif;
-            font-weight: bold;
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            display: flex;
-            flex-direction: column;
-            background-color: #f3f7f3;
-        }
-
-        .wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
-            background-color: #A7D096;
-            position: relative;
-        }
-
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-icon:hover {
-            transform: scale(1.2);
-        }
-
-        .user-header {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: transform 0.3s ease;
-        }
-
-        .user-header:hover {
-            transform: translateX(5px);
-        }
-
-        .header {
-            background-color: #A7D096;
-            position: relative;
-            height: 86px;
-        }
-
-        .header-img img {
-            height: 126px;
-            transition: transform 0.5s ease;
-        }
-
-        .header-img {
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-
         .terms-container {
             max-width: 1000px;
             margin: 4rem auto 2rem;
             padding: 0 2rem;
             animation: fadeIn 0.8s ease;
         }
-
         .terms-header {
             text-align: center;
             margin-bottom: 2rem;
         }
-
         .terms-header h1 {
             color: #5a8f3d;
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             animation: slideInUp 0.8s ease;
         }
-
         .terms-header .update-date {
             color: #666;
             font-style: italic;
             margin-bottom: 1rem;
             animation: fadeIn 1.2s ease;
         }
-
         .terms-content {
             background-color: white;
             padding: 2rem;
@@ -115,18 +34,15 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-
         .terms-content:hover {
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             transform: translateY(-5px);
         }
-
         .terms-section {
             margin-bottom: 2rem;
             animation: fadeInUp 0.8s ease forwards;
             opacity: 0;
         }
-
         .terms-section:nth-child(1) { animation-delay: 0.2s; }
         .terms-section:nth-child(2) { animation-delay: 0.4s; }
         .terms-section:nth-child(3) { animation-delay: 0.6s; }
@@ -140,7 +56,6 @@
         .terms-section:nth-child(11) { animation-delay: 2.2s; }
         .terms-section:nth-child(12) { animation-delay: 2.4s; }
         .terms-section:nth-child(13) { animation-delay: 2.6s; }
-
         .terms-section h2 {
             color: #5a8f3d;
             font-size: 1.5rem;
@@ -149,32 +64,26 @@
             padding-bottom: 0.5rem;
             transition: all 0.3s ease;
         }
-
         .terms-section h2:hover {
             color: #3a6f1d;
             border-bottom-color: #3a6f1d;
         }
-
         .terms-section p, .terms-section ul {
             margin-bottom: 1rem;
             font-weight: 400;
         }
-
         .terms-section ul {
             padding-left: 1.5rem;
         }
-
         .terms-section li {
             margin-bottom: 0.8rem;
             position: relative;
             transition: all 0.3s ease;
             padding-left: 10px;
         }
-
         .terms-section li:hover {
             transform: translateX(5px);
         }
-
         .terms-section li::before {
             content: "•";
             color: #5a8f3d;
@@ -184,202 +93,20 @@
             margin-left: -1em;
             transition: all 0.3s ease;
         }
-
         .terms-section li:hover::before {
             color: #3a6f1d;
             transform: scale(1.5);
         }
-
-        .notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 15px 25px;
-            border-radius: 5px;
-            color: white;
-            font-weight: bold;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease, top 0.3s ease;
-        }
-
-        .notification.show {
-            top: 30px;
-            opacity: 1;
-        }
-
-        .success {
-            background-color: #4CAF50;
-        }
-
-        .error {
-            background-color: #F44336;
-        }
-
-        .footer {
-            background-color: #A7D096;
-            padding: 20px;
-            color: #000;
-            font-size: 14px;
-            text-align: center;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .footer-top {
-            margin-bottom: 15px;
-        }
-
-        .footer-top img {
-            width: 15%;
-            height: auto;
-            transition: all 0.5s ease;
-        }
-
-        .footer-top:hover img {
-            transform: rotate(5deg) scale(1.1);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .footer-left, .footer-center, .footer-right {
-            flex: 1;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .footer-left:hover, .footer-right:hover {
-            transform: translateY(-3px);
-        }
-
-        .footer-left {
-            text-align: left;
-        }
-
-        .footer-right {
-            text-align: right;
-        }
-
-        .footer-bottom a {
-            text-decoration: underline;
-            color: black;
-            transition: all 0.3s ease;
-        }
-
-        .footer-bottom a:hover {
-            color: #3a6f1d;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes float {
-            0% { transform: translate(-50%, 0px); }
-            50% { transform: translate(-50%, -5px); }
-            100% { transform: translate(-50%, 0px); }
-        }
-
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @media (max-width: 600px) {
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-left, .footer-center, .footer-right {
-                text-align: center;
-            }
-
-            .terms-header h1 {
-                font-size: 2rem;
-            }
-
-            .terms-content {
-                padding: 1.5rem;
-            }
-
-            .header-img img {
-                height: 100px;
-                top: -30px;
-            }
-
-            .terms-section {
-                animation-delay: 0s !important;
-                animation-duration: 0.5s;
-            }
-        }
     </style>
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Header -->
-        <div class="top-header">
-            <div class="menu-icon">☰</div>
-            <div class="user-header">
-                <span>👤</span> {{ auth()->check() ? auth()->user()->nome_completo : 'Visitante' }}
-            </div>
-        </div>
+@endsection
 
-        <div class="header">
-            <div class="header-img">
-                <a href="{{ route('home') }}">
-                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating" />
-                </a>
-            </div>
-        </div>
-
-        <!-- Menu -->
-        @if(auth()->check())
-            @include('components.menu-logado')
-        @else
-            @include('components.menu-nao-logado')
-        @endif
-
-        <!-- Notificação -->
-        <div id="notification" class="notification @if(session('success')) success @elseif($errors->any()) error @endif">
-            @if(session('success'))
-                {{ session('success') }}
-            @elseif($errors->any())
-                @foreach($errors->all() as $error)
-                    {{ $error }}<br>
-                @endforeach
-            @endif
-        </div>
-
-        <!-- Conteúdo -->
-        <div class="terms-container">
-            <div class="terms-header">
-                <h1>TERMOS E CONDIÇÕES</h1>
-                <div class="update-date">Última atualização: 01/04/2025</div>
-            </div>
-
-            <div class="terms-content">
+@section('content')
+<div class="terms-container">
+    <div class="terms-header">
+        <h1>TERMOS E CONDIÇÕES</h1>
+        <div class="update-date">Última atualização: 01/04/2025</div>
+    </div>
+    <div class="terms-content">
                 <div class="terms-section">
                     <h2>1. Aceitação dos Termos</h2>
                     <p>Ao acessar ou utilizar este site, você concorda em cumprir e se submeter aos Termos e Condições

@@ -8,6 +8,8 @@ use App\Http\Controllers\RestauranteController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\PontoTuristicoController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\Auth\AdminLoginController;
 
 // Rotas de autenticação
 Route::middleware('guest')->group(function () {
@@ -29,6 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/reservas', [ReservaController::class, 'store'])->name('reservas.store');
     Route::get('/minhas-reservas', [ReservaController::class, 'minhasReservas'])->name('reservas.minhas');
     Route::post('/reservas/{id}/cancelar', [ReservaController::class, 'cancelar'])->name('reservas.cancelar');
+
+    // Rotas de feedback multiusuário
+    Route::get('/api/feedbacks', [FeedbackController::class, 'index']);
+    Route::post('/api/feedbacks', [FeedbackController::class, 'store']);
 });
 
 // Rotas públicas de Reservas (não requerem autenticação)
@@ -409,3 +415,12 @@ Route::prefix('destinos/restaurantes')->group(function () {
 Route::get('/restaurantes', function () {
     return view('restaurante');
 })->name('restaurantes.alternative');
+
+// Rotas de login admin "escondido"
+Route::get('/admin-login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login.form');
+Route::post('/admin-login', [AdminLoginController::class, 'login'])->name('admin.login');
+Route::get('/admin-password', [AdminLoginController::class, 'showPasswordForm'])->name('admin.password');
+Route::post('/admin-password', [AdminLoginController::class, 'verifyPassword'])->name('admin.password.verify');
+Route::middleware(['auth', 'admin'])->get('/admin/dashboard', function() {
+    return view('admin.dashboard');
+})->name('admin.dashboard');

@@ -659,6 +659,9 @@
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
     </main>
+    @if(Auth::check())
+        @include('components.chat-feedback')
+    @endif
 @endsection
 
 @section('scripts')
@@ -1082,28 +1085,28 @@
             const badgeText = restaurante.badge || (restaurante.promocao ? 'Promoção' : '');
 
             restauranteCard.innerHTML = `
-                        <div class="restaurante-img">
-                            <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
-                            ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
-                        </div>
-                        <div class="restaurante-content">
-                            <div class="restaurante-header">
-                                <h3 class="restaurante-title">${restaurante.nome}</h3>
-                                <div class="restaurante-rating">
-                                    <span class="star">★</span>${restaurante.avaliacao}
+                            <div class="restaurante-img">
+                                <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
+                                ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                            </div>
+                            <div class="restaurante-content">
+                                <div class="restaurante-header">
+                                    <h3 class="restaurante-title">${restaurante.nome}</h3>
+                                    <div class="restaurante-rating">
+                                        <span class="star">★</span>${restaurante.avaliacao}
+                                    </div>
+                                </div>
+                                <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
+                                <div class="restaurante-info">
+                                    <p><span>📍</span> ${restaurante.endereco}</p>
+                                    <p><span>⏰</span> ${restaurante.horario}</p>
+                                    <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
+                                </div>
+                                <div class="restaurante-footer">
+                                    <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
                                 </div>
                             </div>
-                            <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
-                            <div class="restaurante-info">
-                                <p><span>📍</span> ${restaurante.endereco}</p>
-                                <p><span>⏰</span> ${restaurante.horario}</p>
-                                <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
-                            </div>
-                            <div class="restaurante-footer">
-                                <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
-                            </div>
-                        </div>
-                    `;
+                        `;
             return restauranteCard;
         }
 
@@ -1297,11 +1300,11 @@
             } catch (error) {
                 console.error('Erro ao carregar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                            <div style="text-align: center; padding: 20px; color: #666;">
-                                <p>⚠️ Não foi possível carregar o mapa</p>
-                                <p>Verifique sua conexão com a internet</p>
-                            </div>
-                        `;
+                                <div style="text-align: center; padding: 20px; color: #666;">
+                                    <p>⚠️ Não foi possível carregar o mapa</p>
+                                    <p>Verifique sua conexão com a internet</p>
+                                </div>
+                            `;
             }
         });
     </script>

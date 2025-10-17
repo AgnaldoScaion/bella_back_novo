@@ -467,18 +467,26 @@
             gap: 10px;
         }
 
-        .footer-left, .footer-center, .footer-right {
+        .footer-left,
+        .footer-center,
+        .footer-right {
             flex: 1;
             text-align: center;
             transition: all 0.3s ease;
         }
 
-        .footer-left:hover, .footer-right:hover {
+        .footer-left:hover,
+        .footer-right:hover {
             transform: translateY(-3px);
         }
 
-        .footer-left { text-align: left; }
-        .footer-right { text-align: right; }
+        .footer-left {
+            text-align: left;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
 
         .footer-bottom a {
             text-decoration: underline;
@@ -554,30 +562,65 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            0% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .floating {
@@ -647,18 +690,21 @@
     <!-- Main Content -->
     <main class="main-content">
         <h1 class="page-title">Escolha seu próximo destino</h1>
-        <p class="page-subtitle">Selecione entre nossos hotéis, restaurantes ou pontos turísticos e comece a planejar sua Bella Avventura</p>
+        <p class="page-subtitle">Selecione entre nossos hotéis, restaurantes ou pontos turísticos e comece a planejar sua
+            Bella Avventura</p>
         <div class="destinos-container">
             <div class="destino-card">
                 <div class="destino-img">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hotéis">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                        alt="Hotéis">
                     <div class="destino-overlay">
                         <button class="destino-overlay-btn" data-destination="hoteis">Ver Hotéis</button>
                     </div>
                 </div>
                 <div class="destino-content">
                     <h3 class="destino-title">Hotéis</h3>
-                    <p class="destino-desc">Encontre os melhores hotéis para sua estadia. Diferentes categorias, avaliações reais e preços acessíveis para todos os tipos de viajantes.</p>
+                    <p class="destino-desc">Encontre os melhores hotéis para sua estadia. Diferentes categorias, avaliações
+                        reais e preços acessíveis para todos os tipos de viajantes.</p>
                     <div class="destino-stats">
                         <div class="destino-stat">
                             <span class="stat-value">200+</span>
@@ -680,14 +726,16 @@
             </div>
             <div class="destino-card">
                 <div class="destino-img">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Restaurantes">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                        alt="Restaurantes">
                     <div class="destino-overlay">
                         <button class="destino-overlay-btn" data-destination="restaurantes">Ver Restaurantes</button>
                     </div>
                 </div>
                 <div class="destino-content">
                     <h3 class="destino-title">Restaurantes</h3>
-                    <p class="destino-desc">Descubra a gastronomia local com os melhores restaurantes. Culinária variada, preços para todos os bolsos e experiências inesquecíveis.</p>
+                    <p class="destino-desc">Descubra a gastronomia local com os melhores restaurantes. Culinária variada,
+                        preços para todos os bolsos e experiências inesquecíveis.</p>
                     <div class="destino-stats">
                         <div class="destino-stat">
                             <span class="stat-value">500+</span>
@@ -709,14 +757,17 @@
             </div>
             <div class="destino-card">
                 <div class="destino-img">
-                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pontos Turísticos">
+                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                        alt="Pontos Turísticos">
                     <div class="destino-overlay">
-                        <button class="destino-overlay-btn" data-destination="pontos-turisticos">Ver Pontos Turísticos</button>
+                        <button class="destino-overlay-btn" data-destination="pontos-turisticos">Ver Pontos
+                            Turísticos</button>
                     </div>
                 </div>
                 <div class="destino-content">
                     <h3 class="destino-title">Pontos Turísticos</h3>
-                    <p class="destino-desc">Conheça os pontos turísticos mais populares e os tesouros escondidos. Atrações naturais, históricas e culturais para todos os gostos.</p>
+                    <p class="destino-desc">Conheça os pontos turísticos mais populares e os tesouros escondidos. Atrações
+                        naturais, históricas e culturais para todos os gostos.</p>
                     <div class="destino-stats">
                         <div class="destino-stat">
                             <span class="stat-value">350+</span>
@@ -744,126 +795,133 @@
             <h3>Como utilizar nosso sistema</h3>
             <ol class="instrucoes-lista">
                 <li class="instrucoes-item">
-                    <strong>Escolha uma categoria:</strong> Selecione entre hotéis, restaurantes ou pontos turísticos com base no seu interesse atual.
+                    <strong>Escolha uma categoria:</strong> Selecione entre hotéis, restaurantes ou pontos turísticos com
+                    base no seu interesse atual.
                 </li>
                 <li class="instrucoes-item">
-                    <strong>Explore as opções:</strong> Veja as diversas opções disponíveis, filtre por avaliações, preço, localização ou outros critérios relevantes.
+                    <strong>Explore as opções:</strong> Veja as diversas opções disponíveis, filtre por avaliações, preço,
+                    localização ou outros critérios relevantes.
                 </li>
                 <li class="instrucoes-item">
-                    <strong>Faça reservas ou planeje visitas:</strong> Para hotéis, faça reservas diretamente. Para restaurantes, verifique disponibilidade ou faça reservas. Para pontos turísticos, planeje sua visita.
+                    <strong>Faça reservas ou planeje visitas:</strong> Para hotéis, faça reservas diretamente. Para
+                    restaurantes, verifique disponibilidade ou faça reservas. Para pontos turísticos, planeje sua visita.
                 </li>
                 <li class="instrucoes-item">
-                    <strong>Compartilhe sua experiência:</strong> Após sua visita, avalie e compartilhe sua experiência para ajudar outros viajantes e acumular pontos para descontos futuros.
+                    <strong>Compartilhe sua experiência:</strong> Após sua visita, avalie e compartilhe sua experiência para
+                    ajudar outros viajantes e acumular pontos para descontos futuros.
                 </li>
             </ol>
         </div>
     </main>
+    @if(Auth::check())
+        @include('components.chat-feedback')
+    @endif
 @endsection
 
 @section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Exibir notificação se houver mensagem na sessão
-    @if (session('msg'))
-        showNotification("{{ session('msg') }}", 'success');
-    @endif
-    // Configurar overlays dos cards
-    setupCardOverlays();
-    // Configurar menu hamburguer
-    setupMenu();
-    // Configurar botão "voltar ao topo"
-    const backToTopButton = document.getElementById('backToTop');
-    const footer = document.getElementById('pageFooter');
-    function adjustBackToTopPosition() {
-        if (footer) {
-            const footerRect = footer.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            const footerTop = footerRect.top;
-            if (footerTop < viewportHeight) {
-                const newBottom = (viewportHeight - footerTop) + 10;
-                backToTopButton.style.bottom = `${newBottom}px`;
-            } else {
-                backToTopButton.style.bottom = '20px';
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Exibir notificação se houver mensagem na sessão
+            @if (session('msg'))
+                showNotification("{{ session('msg') }}", 'success');
+            @endif
+            // Configurar overlays dos cards
+            setupCardOverlays();
+            // Configurar menu hamburguer
+            setupMenu();
+            // Configurar botão "voltar ao topo"
+            const backToTopButton = document.getElementById('backToTop');
+            const footer = document.getElementById('pageFooter');
+            function adjustBackToTopPosition() {
+                if (footer) {
+                    const footerRect = footer.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    const footerTop = footerRect.top;
+                    if (footerTop < viewportHeight) {
+                        const newBottom = (viewportHeight - footerTop) + 10;
+                        backToTopButton.style.bottom = `${newBottom}px`;
+                    } else {
+                        backToTopButton.style.bottom = '20px';
+                    }
+                }
+            }
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+                adjustBackToTopPosition();
+            });
+            backToTopButton.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            window.addEventListener('resize', adjustBackToTopPosition);
+            adjustBackToTopPosition();
+        });
+        function setupMenu() {
+            const menuIcon = document.querySelector('.menu-icon');
+            const menuBox = document.getElementById('menuBox');
+            if (menuIcon && menuBox) {
+                menuIcon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    menuBox.classList.toggle('hidden');
+                    menuBox.classList.toggle('visible');
+                });
+                // Fechar menu ao clicar fora
+                document.addEventListener('click', function (e) {
+                    if (!menuBox.contains(e.target) && e.target !== menuIcon) {
+                        menuBox.classList.add('hidden');
+                        menuBox.classList.remove('visible');
+                    }
+                });
+                // Impedir que cliques no menu fechem ele
+                menuBox.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                });
+            }
+            // Configurar logout
+            const logoutLinks = document.querySelectorAll('a[href="{{ route('logout') }}"]');
+            logoutLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const form = document.getElementById('logout-form');
+                    if (form) {
+                        form.submit();
+                    } else {
+                        console.error('Logout form not found');
+                    }
+                });
+            });
+        }
+        function setupCardOverlays() {
+            const overlayButtons = document.querySelectorAll('.destino-overlay-btn');
+            const destinations = {
+                'hoteis': '{{ route('hoteis.alternative') }}',
+                'restaurantes': '{{ route('restaurantes.alternative') }}',
+                'pontos-turisticos': '{{ route('pontos-turisticos.alternative') }}'
+            };
+            overlayButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const destination = button.getAttribute('data-destination');
+                    if (destinations[destination]) {
+                        window.location.href = destinations[destination];
+                    }
+                });
+            });
+        }
+        function showNotification(message, type) {
+            const notificacao = document.getElementById('notificacao');
+            if (notificacao) {
+                notificacao.textContent = message;
+                notificacao.className = `notificacao ${type} show`;
+                setTimeout(() => {
+                    notificacao.classList.remove('show');
+                }, 4000);
             }
         }
-    }
-    window.addEventListener('scroll', function () {
-        if (window.pageYOffset > 300) {
-            backToTopButton.classList.add('visible');
-        } else {
-            backToTopButton.classList.remove('visible');
-        }
-        adjustBackToTopPosition();
-    });
-    backToTopButton.addEventListener('click', function () {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    window.addEventListener('resize', adjustBackToTopPosition);
-    adjustBackToTopPosition();
-});
-function setupMenu() {
-    const menuIcon = document.querySelector('.menu-icon');
-    const menuBox = document.getElementById('menuBox');
-    if (menuIcon && menuBox) {
-        menuIcon.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menuBox.classList.toggle('hidden');
-            menuBox.classList.toggle('visible');
-        });
-        // Fechar menu ao clicar fora
-        document.addEventListener('click', function(e) {
-            if (!menuBox.contains(e.target) && e.target !== menuIcon) {
-                menuBox.classList.add('hidden');
-                menuBox.classList.remove('visible');
-            }
-        });
-        // Impedir que cliques no menu fechem ele
-        menuBox.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    }
-    // Configurar logout
-    const logoutLinks = document.querySelectorAll('a[href="{{ route('logout') }}"]');
-    logoutLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const form = document.getElementById('logout-form');
-            if (form) {
-                form.submit();
-            } else {
-                console.error('Logout form not found');
-            }
-        });
-    });
-}
-function setupCardOverlays() {
-    const overlayButtons = document.querySelectorAll('.destino-overlay-btn');
-    const destinations = {
-        'hoteis': '{{ route('hoteis.alternative') }}',
-        'restaurantes': '{{ route('restaurantes.alternative') }}',
-        'pontos-turisticos': '{{ route('pontos-turisticos.alternative') }}'
-    };
-    overlayButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const destination = button.getAttribute('data-destination');
-            if (destinations[destination]) {
-                window.location.href = destinations[destination];
-            }
-        });
-    });
-}
-function showNotification(message, type) {
-    const notificacao = document.getElementById('notificacao');
-    if (notificacao) {
-        notificacao.textContent = message;
-        notificacao.className = `notificacao ${type} show`;
-        setTimeout(() => {
-            notificacao.classList.remove('show');
-        }, 4000);
-    }
-}
-</script>
+    </script>
 @endsection
