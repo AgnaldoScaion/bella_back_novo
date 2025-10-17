@@ -416,15 +416,7 @@
                 <a href="{{ route('restaurantes.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Voltar para Restaurantes
                 </a>
-                @auth
-                    <a href="{{ route('reservas.create', ['tipo' => 'restaurante', 'id' => $restaurante->id]) }}" class="btn btn-primary">
-                        <i class="fas fa-utensils"></i> Reservar Mesa
-                    </a>
-                @else
-                    <a href="{{ route('login') }}" class="btn btn-primary" title="Faça login para reservar">
-                        <i class="fas fa-sign-in-alt"></i> Login para Reservar
-                    </a>
-                @endauth
+                <!-- Nenhuma reserva necessária para restaurantes -->
             </div>
         @endif
     </div>
