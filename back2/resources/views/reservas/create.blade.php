@@ -4,59 +4,78 @@
 
 @section('styles')
 <style>
-    .reserva-container {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        padding: 3rem 0;
+    :root {
+        --primary-color: #2d5016;
+        --primary-light: #5a8f3d;
+        --accent-color: #a7d096;
+        --primary-bg: #f3f7f3;
+        --border-color: #e5f2e5;
+        --text-dark: #1a1a1a;
+        --text-medium: #4a4a4a;
+        --text-light: #ffffff;
+        --shadow-soft: 0 2px 15px rgba(45, 80, 22, 0.08);
+        --shadow-medium: 0 8px 30px rgba(45, 80, 22, 0.12);
+        --shadow-strong: 0 15px 40px rgba(45, 80, 22, 0.18);
+        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --border-radius: 16px;
+        --border-radius-small: 8px;
     }
 
-    .reserva-content {
-        max-width: 900px;
+    .booking-wrapper {
+        min-height: 100vh;
+        padding: 4.5rem 1rem 1.5rem 1rem; /* Espaço ajustado para header e footer */
+        background: var(--primary-bg);
+        font-family: 'Inter', sans-serif;
+        box-sizing: border-box;
+    }
+
+    .booking-container {
+        max-width: 960px;
         margin: 0 auto;
-        padding: 0 1rem;
     }
 
     .hotel-card {
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid var(--border-color);
     }
 
     .hotel-header {
         display: flex;
         align-items: center;
-        gap: 1.5rem;
-        margin-bottom: 1.5rem;
+        gap: 1rem;
+        margin-bottom: 1rem;
     }
 
     .hotel-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        border-radius: 16px;
+        width: 64px;
+        height: 64px;
+        background: var(--primary-color);
+        border-radius: var(--border-radius-small);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.5rem;
-        flex-shrink: 0;
+        font-size: 2rem;
+        color: var(--text-light);
     }
 
     .hotel-info h2 {
-        font-family: 'Garamond', serif;
-        color: #2c3e50;
-        margin: 0 0 0.5rem 0;
-        font-size: 1.8rem;
+        font-family: 'GaramondBold', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
     }
 
     .hotel-meta {
         display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-        color: #666;
+        gap: 1rem;
+        color: var(--text-medium);
+        font-size: 0.875rem;
     }
 
     .hotel-meta-item {
@@ -66,67 +85,58 @@
     }
 
     .form-card {
-        background: white;
-        border-radius: 20px;
-        padding: 2.5rem;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    .form-section {
-        margin-bottom: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid var(--border-color);
     }
 
     .section-title {
-        font-family: 'Garamond', serif;
-        color: #2c3e50;
-        font-size: 1.3rem;
-        margin-bottom: 1.5rem;
+        font-family: 'GaramondBold', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
     }
 
-    .section-title::before {
-        content: '';
-        width: 4px;
-        height: 24px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        border-radius: 2px;
-    }
-
     .date-inputs {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 1rem;
     }
 
     .input-group {
-        position: relative;
+        margin-bottom: 1rem;
     }
 
     .input-label {
-        display: block;
-        font-weight: 600;
-        color: #4a5568;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-medium);
         margin-bottom: 0.5rem;
-        font-size: 0.9rem;
+        display: block;
     }
 
     .input-field {
         width: 100%;
-        padding: 0.875rem 1rem;
-        border: 2px solid #e2e8f0;
-        border-radius: 12px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        background: #f8fafc;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
+        background: rgba(255, 255, 255, 0.5);
+        color: var(--text-dark);
+        transition: var(--transition-smooth);
     }
 
     .input-field:focus {
         outline: none;
-        border-color: #667eea;
-        background: white;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.2);
     }
 
     .room-types {
@@ -135,208 +145,166 @@
     }
 
     .room-card {
-        border: 2px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 1.25rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-small);
+        padding: 1rem;
         cursor: pointer;
-        transition: all 0.3s ease;
-        background: #f8fafc;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .room-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        transform: scaleY(0);
-        transition: transform 0.3s ease;
+        transition: var(--transition-smooth);
+        background: rgba(255, 255, 255, 0.5);
     }
 
     .room-card:hover {
-        border-color: #667eea;
-        background: white;
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-soft);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
     }
 
     .room-card.selected {
-        border-color: #667eea;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-    }
-
-    .room-card.selected::before {
-        transform: scaleY(1);
+        border-color: var(--primary-color);
+        background: rgba(167, 208, 150, 0.2);
     }
 
     .room-content {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 1rem;
-    }
-
-    .room-details {
-        flex: 1;
     }
 
     .room-title {
-        font-size: 1.1rem;
+        font-family: 'GaramondBold', serif;
+        font-size: 1rem;
         font-weight: 600;
-        color: #2c3e50;
-        margin-bottom: 0.25rem;
+        color: var(--text-dark);
     }
 
     .room-description {
-        color: #718096;
-        font-size: 0.9rem;
-        margin: 0;
-    }
-
-    .room-price {
-        text-align: right;
+        color: var(--text-medium);
+        font-size: 0.875rem;
     }
 
     .price-badge {
         padding: 0.5rem 1rem;
-        border-radius: 8px;
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
         font-weight: 600;
-        font-size: 0.9rem;
-        white-space: nowrap;
     }
 
-    .badge-base {
-        background: #d4edda;
-        color: #155724;
+    .badge-standard {
+        background: var(--primary-light);
+        color: var(--text-light);
     }
 
     .badge-premium {
-        background: #fff3cd;
-        color: #856404;
+        background: var(--accent-color);
+        color: var(--text-dark);
     }
 
-    .badge-luxury {
-        background: #cce5ff;
-        color: #004085;
+    .badge-family {
+        background: rgba(167, 208, 150, 0.3);
+        color: var(--text-dark);
     }
 
     .price-summary {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        border-radius: 16px;
-        padding: 2rem;
-        margin-top: 2rem;
-        border: 2px dashed #cbd5e0;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: var(--border-radius-small);
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border: 1px solid var(--border-color);
     }
 
     .price-header {
         text-align: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .price-label {
-        color: #4a5568;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-medium);
     }
 
     .price-value {
-        font-size: 2.5rem;
-        font-weight: bold;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-family: 'GaramondBold', serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--primary-color);
     }
 
     .price-breakdown {
         display: flex;
-        justify-content: space-around;
         gap: 1rem;
         flex-wrap: wrap;
+        justify-content: space-around;
     }
 
     .breakdown-item {
         text-align: center;
         padding: 1rem;
-        background: white;
-        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: var(--border-radius-small);
         flex: 1;
-        min-width: 120px;
+        min-width: 100px;
     }
 
     .breakdown-label {
-        font-size: 0.85rem;
-        color: #718096;
-        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        color: var(--text-medium);
     }
 
     .breakdown-value {
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: 600;
-        color: #2c3e50;
+        color: var(--text-dark);
     }
 
     .action-buttons {
         display: grid;
         grid-template-columns: 3fr 1fr;
         gap: 1rem;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.75rem;
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-align: center;
+        transition: var(--transition-smooth);
     }
 
     .btn-reserve {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+        background: var(--primary-color);
+        color: var(--text-light);
         border: none;
-        padding: 1rem 2rem;
-        border-radius: 12px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
     }
 
     .btn-reserve:hover {
+        background: var(--primary-light);
         transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        box-shadow: var(--shadow-soft);
     }
 
     .btn-back {
-        background: white;
-        color: #4a5568;
-        border: 2px solid #e2e8f0;
-        padding: 1rem 2rem;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
     }
 
     .btn-back:hover {
-        background: #f8fafc;
-        border-color: #cbd5e0;
+        background: rgba(167, 208, 150, 0.1);
+        color: var(--primary-light);
+        transform: translateY(-2px);
     }
 
     .alert {
-        border-radius: 12px;
-        padding: 1rem 1.5rem;
-        margin-bottom: 1.5rem;
+        background: rgba(244, 67, 54, 0.2);
+        color: #f44336;
+        padding: 1rem;
+        border-radius: var(--border-radius-small);
+        margin-bottom: 1rem;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
         .hotel-header {
             flex-direction: column;
             text-align: center;
@@ -355,9 +323,8 @@
 @endsection
 
 @section('content')
-<div class="reserva-container">
-    <div class="reserva-content">
-        <!-- Card do Hotel -->
+<div class="booking-wrapper">
+    <div class="booking-container">
         <div class="hotel-card">
             <div class="hotel-header">
                 <div class="hotel-icon">🏨</div>
@@ -369,7 +336,7 @@
                             <span>{{ $hotel->localizacao }}</span>
                         </div>
                         <div class="hotel-meta-item">
-                            <i class="fas fa-star" style="color: #ffc107;"></i>
+                            <i class="fas fa-star" style="color: var(--primary-color);"></i>
                             <span>{{ $hotel->avaliacao }} ({{ number_format($hotel->avaliacoes) }})</span>
                         </div>
                     </div>
@@ -377,15 +344,13 @@
             </div>
         </div>
 
-        <!-- Formulário -->
         <div class="form-card">
-            <div class="section-title">
-                <i class="fas fa-edit"></i>
-                <span>Complete sua Reserva</span>
-            </div>
+            <h4 class="section-title">
+                <i class="fas fa-edit"></i> Complete sua Reserva
+            </h4>
 
             @if($errors->any())
-                <div class="alert alert-danger">
+                <div class="alert">
                     <strong>⚠️ Atenção:</strong>
                     <ul class="mb-0 mt-2">
                         @foreach($errors->all() as $error)
@@ -399,64 +364,41 @@
                 @csrf
                 <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
-                <!-- Datas -->
                 <div class="form-section">
                     <h4 class="section-title">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Período da Estadia</span>
+                        <i class="fas fa-calendar-alt"></i> Período da Estadia
                     </h4>
                     <div class="date-inputs">
                         <div class="input-group">
-                            <label class="input-label">
-                                <i class="fas fa-sign-in-alt"></i> Check-in *
-                            </label>
-                            <input type="date"
-                                   name="data_entrada"
-                                   class="input-field"
-                                   value="{{ old('data_entrada') }}"
-                                   min="{{ date('Y-m-d') }}"
-                                   required
-                                   id="checkIn">
+                            <label class="input-label"><i class="fas fa-sign-in-alt"></i> Check-in *</label>
+                            <input type="date" name="data_entrada" class="input-field" value="{{ old('data_entrada') }}" min="{{ date('Y-m-d') }}" required id="checkIn">
                         </div>
                         <div class="input-group">
-                            <label class="input-label">
-                                <i class="fas fa-sign-out-alt"></i> Check-out *
-                            </label>
-                            <input type="date"
-                                   name="data_saida"
-                                   class="input-field"
-                                   value="{{ old('data_saida') }}"
-                                   min="{{ date('Y-m-d', strtotime('+1 day')) }}"
-                                   required
-                                   id="checkOut">
+                            <label class="input-label"><i class="fas fa-sign-out-alt"></i> Check-out *</label>
+                            <input type="date" name="data_saida" class="input-field" value="{{ old('data_saida') }}" min="{{ date('Y-m-d', strtotime('+1 day')) }}" required id="checkOut">
                         </div>
                     </div>
                 </div>
 
-                <!-- Tipo de Quarto -->
                 <div class="form-section">
                     <h4 class="section-title">
-                        <i class="fas fa-bed"></i>
-                        <span>Escolha seu Quarto</span>
+                        <i class="fas fa-bed"></i> Escolha seu Quarto
                     </h4>
                     <input type="hidden" name="tipo_quarto" id="tipoQuartoInput" value="{{ old('tipo_quarto', 'standard') }}">
 
                     <div class="room-types">
-                        <div class="room-card {{ old('tipo_quarto', 'standard') == 'standard' ? 'selected' : '' }}"
-                             data-tipo="standard" data-ajuste="0">
+                        <div class="room-card {{ old('tipo_quarto', 'standard') == 'standard' ? 'selected' : '' }}" data-tipo="standard" data-ajuste="0">
                             <div class="room-content">
                                 <div class="room-details">
                                     <div class="room-title">🛏️ Standard</div>
                                     <p class="room-description">Quarto confortável com amenidades básicas</p>
                                 </div>
                                 <div class="room-price">
-                                    <span class="price-badge badge-base">Preço Base</span>
+                                    <span class="price-badge badge-standard">Preço Base</span>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="room-card {{ old('tipo_quarto') == 'luxo' ? 'selected' : '' }}"
-                             data-tipo="luxo" data-ajuste="150">
+                        <div class="room-card {{ old('tipo_quarto') == 'luxo' ? 'selected' : '' }}" data-tipo="luxo" data-ajuste="150">
                             <div class="room-content">
                                 <div class="room-details">
                                     <div class="room-title">✨ Luxo</div>
@@ -467,55 +409,34 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="room-card {{ old('tipo_quarto') == 'familiar' ? 'selected' : '' }}"
-                             data-tipo="familiar" data-ajuste="250">
+                        <div class="room-card {{ old('tipo_quarto') == 'familiar' ? 'selected' : '' }}" data-tipo="familiar" data-ajuste="250">
                             <div class="room-content">
                                 <div class="room-details">
                                     <div class="room-title">👨‍👩‍👧‍👦 Familiar</div>
                                     <p class="room-description">Espaço amplo ideal para famílias</p>
                                 </div>
                                 <div class="room-price">
-                                    <span class="price-badge badge-luxury">+R$ 250/noite</span>
+                                    <span class="price-badge badge-family">+R$ 250/noite</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Hóspedes e Observações -->
                 <div class="form-section">
                     <h4 class="section-title">
-                        <i class="fas fa-info-circle"></i>
-                        <span>Informações Adicionais</span>
+                        <i class="fas fa-info-circle"></i> Informações Adicionais
                     </h4>
-
-                    <div class="input-group" style="margin-bottom: 1rem;">
-                        <label class="input-label">
-                            <i class="fas fa-users"></i> Número de Hóspedes *
-                        </label>
-                        <input type="number"
-                               name="hospedes"
-                               class="input-field"
-                               value="{{ old('hospedes', 1) }}"
-                               min="1"
-                               max="10"
-                               required>
-                    </div>
-
                     <div class="input-group">
-                        <label class="input-label">
-                            <i class="fas fa-comment"></i> Observações
-                        </label>
-                        <textarea name="observacoes"
-                                  class="input-field"
-                                  rows="3"
-                                  placeholder="Alguma preferência especial? Necessidades alimentares? Deixe-nos saber!"
-                                  style="resize: vertical;">{{ old('observacoes') }}</textarea>
+                        <label class="input-label"><i class="fas fa-users"></i> Número de Hóspedes *</label>
+                        <input type="number" name="hospedes" class="input-field" value="{{ old('hospedes', 1) }}" min="1" max="10" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label"><i class="fas fa-comment"></i> Observações</label>
+                        <textarea name="observacoes" class="input-field" rows="3" placeholder="Alguma preferência especial?" style="resize: vertical;">{{ old('observacoes') }}</textarea>
                     </div>
                 </div>
 
-                <!-- Resumo do Preço -->
                 <div class="price-summary">
                     <div class="price-header">
                         <div class="price-label">Valor Total Estimado</div>
@@ -537,14 +458,12 @@
                     </div>
                 </div>
 
-                <!-- Botões de Ação -->
                 <div class="action-buttons">
-                    <button type="submit" class="btn-reserve">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Confirmar Reserva</span>
+                    <button type="submit" class="btn btn-reserve">
+                        <i class="fas fa-check-circle"></i> Confirmar Reserva
                     </button>
-                    <a href="{{ route('hoteis.show', $hotel->id) }}" class="btn-back">
-                        <i class="fas fa-arrow-left"></i>
+                    <a href="{{ route('hoteis.show', $hotel->id) }}" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i> Voltar
                     </a>
                 </div>
             </form>
@@ -557,21 +476,25 @@
     const precoBase = {{ $hotel->preco ?? 0 }};
     let ajusteQuarto = 0;
 
-    // Seleção de tipo de quarto
-    document.querySelectorAll('.room-card').forEach(card => {
-        card.addEventListener('click', function() {
-            document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
-            this.classList.add('selected');
-            document.getElementById('tipoQuartoInput').value = this.dataset.tipo;
-            ajusteQuarto = parseFloat(this.dataset.ajuste);
-            calcularPreco();
-        });
-    });
+    // Debounce function to optimize event handling
+    const debounce = (fn, delay) => {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => fn(...args), delay);
+        };
+    };
 
-    // Calcular preço total
-    function calcularPreco() {
+    // Format currency
+    const formatCurrency = (value) => {
+        return `R$ ${value.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+    };
+
+    // Calculate total price
+    const calculatePrice = () => {
         const checkIn = document.getElementById('checkIn').value;
         const checkOut = document.getElementById('checkOut').value;
+        const hospedes = document.querySelector('input[name="hospedes"]').value;
 
         if (checkIn && checkOut) {
             const dataEntrada = new Date(checkIn);
@@ -584,31 +507,36 @@
                 const total = precoPorNoite * noites;
 
                 document.getElementById('numNoites').textContent = noites;
-                document.getElementById('precoPorNoite').textContent =
-                    'R$ ' + precoPorNoite.toFixed(2).replace('.', ',');
-                document.getElementById('valorTotal').textContent =
-                    'R$ ' + total.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                document.getElementById('precoPorNoite').textContent = formatCurrency(precoPorNoite);
+                document.getElementById('valorTotal').textContent = formatCurrency(total);
+                document.getElementById('numHospedes').textContent = hospedes;
             }
         }
-    }
+    };
 
-    // Atualizar número de hóspedes
-    document.querySelector('input[name="hospedes"]').addEventListener('input', function() {
-        document.getElementById('numHospedes').textContent = this.value;
+    // Room selection
+    document.querySelectorAll('.room-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            document.getElementById('tipoQuartoInput').value = card.dataset.tipo;
+            ajusteQuarto = parseFloat(card.dataset.ajuste);
+            calculatePrice();
+        });
     });
 
-    // Listeners para mudanças nas datas
-    document.getElementById('checkIn').addEventListener('change', function() {
-        const minCheckOut = new Date(this.value);
+    // Input event listeners
+    const debouncedCalculate = debounce(calculatePrice, 300);
+    document.getElementById('checkIn').addEventListener('change', () => {
+        const minCheckOut = new Date(document.getElementById('checkIn').value);
         minCheckOut.setDate(minCheckOut.getDate() + 1);
         document.getElementById('checkOut').min = minCheckOut.toISOString().split('T')[0];
-        calcularPreco();
+        debouncedCalculate();
     });
+    document.getElementById('checkOut').addEventListener('change', debouncedCalculate);
+    document.querySelector('input[name="hospedes"]').addEventListener('input', debouncedCalculate);
 
-    document.getElementById('checkOut').addEventListener('change', calcularPreco);
-
-    // Calcular preço inicial
-    calcularPreco();
+    // Initial calculation
+    calculatePrice();
 </script>
-@endsection
 @endsection

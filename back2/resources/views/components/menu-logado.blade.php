@@ -6,7 +6,6 @@
             <li><a href="{{ route('home') }}">Início</a></li>
             <li><a href="{{ route('profile.show') }}">Meu Perfil</a></li>
             <li><a href="{{ route('reservas.minhas') }}"></i> Minhas Reservas</a></li>
-            <li><a href="{{ route('feedbacks') }}">Meus Feedbacks</a></li>
             <li><a href="{{ route('destinos') }}">Destinos</a></li>
             <li><a href="{{ route('termos') }}">Termos e condições</a></li>
             <li><a href="{{ route('sobre-nos') }}">Sobre nós</a></li>

@@ -4,73 +4,92 @@
 
 @section('styles')
 <style>
-    .reservas-hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 3rem 0 4rem;
-        color: white;
-        margin-bottom: -2rem;
+    :root {
+        --primary-color: #2d5016;
+        --primary-light: #5a8f3d;
+        --accent-color: #a7d096;
+        --primary-bg: #f3f7f3;
+        --border-color: #e5f2e5;
+        --text-dark: #1a1a1a;
+        --text-medium: #4a4a4a;
+        --text-light: #ffffff;
+        --shadow-soft: 0 2px 15px rgba(45, 80, 22, 0.08);
+        --shadow-medium: 0 8px 30px rgba(45, 80, 22, 0.12);
+        --shadow-strong: 0 15px 40px rgba(45, 80, 22, 0.18);
+        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --border-radius: 16px;
+        --border-radius-small: 8px;
+    }
+
+    .reservations-hero {
+        background: var(--accent-color);
+        padding: 2rem 1rem;
+        color: var(--text-dark);
     }
 
     .hero-content {
-        max-width: 1200px;
+        max-width: 960px;
         margin: 0 auto;
-        padding: 0 1rem;
+        text-align: center;
     }
 
     .hero-title {
-        font-family: 'Garamond', serif;
-        font-size: 2.5rem;
+        font-family: 'GaramondBold', serif;
+        font-size: 1.75rem;
+        font-weight: 600;
         margin-bottom: 0.5rem;
     }
 
     .hero-subtitle {
-        opacity: 0.9;
-        font-size: 1.1rem;
+        font-size: 1rem;
+        color: var(--text-medium);
     }
 
-    .reservas-container {
-        max-width: 1200px;
+    .reservations-container {
+        max-width: 960px;
         margin: 0 auto;
-        padding: 0 1rem 3rem;
+        padding: 1rem;
     }
 
     .filters-card {
-        background: white;
-        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: var(--border-radius);
         padding: 1.5rem;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        margin-bottom: 2rem;
+        box-shadow: var(--shadow-medium);
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border-color);
     }
 
     .filter-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 1rem;
-        align-items: end;
     }
 
     .filter-group label {
-        display: block;
-        font-weight: 600;
-        color: #4a5568;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-medium);
         margin-bottom: 0.5rem;
-        font-size: 0.9rem;
+        display: block;
     }
 
     .filter-select {
         width: 100%;
-        padding: 0.75rem 1rem;
-        border: 2px solid #e2e8f0;
-        border-radius: 12px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        background: #f8fafc;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
+        background: rgba(255, 255, 255, 0.5);
+        color: var(--text-dark);
+        transition: var(--transition-smooth);
     }
 
     .filter-select:focus {
         outline: none;
-        border-color: #667eea;
-        background: white;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.2);
     }
 
     .filter-buttons {
@@ -79,110 +98,112 @@
     }
 
     .btn-filter {
-        padding: 0.75rem 1.5rem;
-        border-radius: 12px;
-        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
         font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        transition: var(--transition-smooth);
     }
 
     .btn-filter.primary {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+        background: var(--primary-color);
+        color: var(--text-light);
+        border: none;
     }
 
     .btn-filter.secondary {
-        background: #e2e8f0;
-        color: #4a5568;
+        background: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
     }
 
     .btn-filter:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        box-shadow: var(--shadow-soft);
     }
 
-    .reservas-grid {
+    .reservations-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1rem;
     }
 
-    .reserva-card {
-        background: white;
-        border-radius: 20px;
+    .reservation-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-medium);
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
+        transition: var(--transition-smooth);
     }
 
-    .reserva-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    .reservation-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-strong);
     }
 
-    .reserva-header {
-        padding: 1.25rem 1.5rem;
+    .reservation-header {
+        padding: 1rem;
+        color: var(--text-light);
+        font-weight: 500;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: white;
-        font-weight: 600;
     }
 
-    .status-confirmada { background: linear-gradient(135deg, #10b981, #059669); }
-    .status-pendente { background: linear-gradient(135deg, #f59e0b, #d97706); }
-    .status-cancelada { background: linear-gradient(135deg, #ef4444, #dc2626); }
-    .status-concluida { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .status-confirmada { background: var(--primary-light); }
+    .status-pendente { background: #f59e0b; }
+    .status-cancelada { background: #f44336; }
+    .status-concluida { background: #6366f1; }
 
     .status-icon {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 
-    .codigo-badge {
-        background: rgba(255,255,255,0.2);
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        backdrop-filter: blur(10px);
+    .code-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.5rem;
+        border-radius: var(--border-radius-small);
+        font-size: 0.75rem;
     }
 
-    .reserva-body {
+    .reservation-body {
         padding: 1.5rem;
     }
 
     .hotel-name {
-        font-family: 'Garamond', serif;
-        font-size: 1.4rem;
-        color: #2c3e50;
+        font-family: 'GaramondBold', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
         margin-bottom: 0.5rem;
     }
 
     .hotel-location {
-        color: #718096;
-        margin-bottom: 1.5rem;
+        color: var(--text-medium);
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
     }
 
-    .reserva-details {
+    .reservation-details {
         display: grid;
-        gap: 0.75rem;
-        margin-bottom: 1.5rem;
+        gap: 0.5rem;
     }
 
     .detail-row {
         display: flex;
         justify-content: space-between;
-        padding: 0.75rem;
-        background: #f8fafc;
-        border-radius: 8px;
+        padding: 0.5rem;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: var(--border-radius-small);
     }
 
     .detail-label {
-        color: #718096;
+        color: var(--text-medium);
+        font-size: 0.875rem;
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -190,42 +211,42 @@
     }
 
     .detail-value {
-        color: #2c3e50;
+        color: var(--text-dark);
         font-weight: 600;
+        font-size: 0.875rem;
     }
 
     .total-value {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-        border: 2px solid #667eea;
+        background: rgba(167, 208, 150, 0.2);
         padding: 1rem;
-        border-radius: 12px;
+        border-radius: var(--border-radius-small);
         text-align: center;
         margin-bottom: 1rem;
     }
 
     .total-label {
-        font-size: 0.85rem;
-        color: #667eea;
-        font-weight: 600;
-        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        color: var(--primary-color);
+        font-weight: 500;
     }
 
     .total-amount {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: #667eea;
+        font-family: 'GaramondBold', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
     }
 
     .observacoes-box {
-        background: #fff3cd;
-        border-left: 4px solid #ffc107;
+        background: rgba(167, 208, 150, 0.2);
+        border-left: 4px solid var(--primary-color);
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
         margin-bottom: 1rem;
-        font-size: 0.9rem;
     }
 
-    .reserva-actions {
+    .reservation-actions {
         display: flex;
         gap: 0.5rem;
         flex-wrap: wrap;
@@ -233,140 +254,128 @@
 
     .action-btn {
         flex: 1;
-        min-width: 120px;
-        padding: 0.75rem 1rem;
-        border-radius: 10px;
-        border: none;
+        padding: 0.75rem;
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
         font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        font-size: 0.9rem;
+        text-align: center;
+        transition: var(--transition-smooth);
     }
 
     .btn-confirmar {
-        background: linear-gradient(135deg, #10b981, #059669);
-        color: white;
+        background: var(--primary-light);
+        color: var(--text-light);
     }
 
     .btn-confirmar:hover {
+        background: var(--primary-color);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
     .btn-cancelar {
-        background: linear-gradient(135deg, #ef4444, #dc2626);
-        color: white;
+        background: #f44336;
+        color: var(--text-light);
     }
 
     .btn-cancelar:hover {
+        background: #d32f2f;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
     }
 
     .btn-ver-hotel {
-        background: white;
-        color: #667eea;
-        border: 2px solid #667eea;
+        background: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
     }
 
     .btn-ver-hotel:hover {
-        background: #667eea;
-        color: white;
+        background: rgba(167, 208, 150, 0.1);
+        color: var(--primary-light);
+        transform: translateY(-2px);
     }
 
     .btn-disabled {
-        background: #e2e8f0;
-        color: #94a3b8;
+        background: #e5e7eb;
+        color: #9ca3af;
         cursor: not-allowed;
     }
 
     .timestamp {
-        font-size: 0.8rem;
-        color: #94a3b8;
+        font-size: 0.75rem;
+        color: var(--text-medium);
         text-align: center;
         margin-top: 0.75rem;
         padding-top: 0.75rem;
-        border-top: 1px solid #e2e8f0;
+        border-top: 1px solid var(--border-color);
     }
 
     .empty-state {
         text-align: center;
-        padding: 4rem 2rem;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-medium);
     }
 
     .empty-icon {
-        font-size: 5rem;
+        font-size: 3rem;
         margin-bottom: 1rem;
-        opacity: 0.5;
+        color: var(--text-medium);
     }
 
     .empty-title {
-        font-family: 'Garamond', serif;
-        font-size: 1.8rem;
-        color: #2c3e50;
-        margin-bottom: 0.5rem;
+        font-family: 'GaramondBold', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-dark);
     }
 
     .empty-text {
-        color: #718096;
-        margin-bottom: 2rem;
+        color: var(--text-medium);
+        margin-bottom: 1rem;
     }
 
     .btn-explore {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 1rem 2rem;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--border-radius-small);
+        background: var(--primary-color);
+        color: var(--text-light);
         text-decoration: none;
-        border-radius: 12px;
+        font-size: 0.875rem;
         font-weight: 600;
-        transition: all 0.3s ease;
+        transition: var(--transition-smooth);
     }
 
     .btn-explore:hover {
+        background: var(--primary-light);
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-        color: white;
+        box-shadow: var(--shadow-soft);
     }
 
-    .nova-reserva-section {
+    .new-reservation-section {
         text-align: center;
-        margin-top: 3rem;
+        margin-top: 2rem;
     }
 
-    .btn-nova-reserva {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 1.25rem 3rem;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
+    .btn-new-reservation {
+        padding: 1rem 2rem;
+        border-radius: var(--border-radius-small);
+        background: var(--primary-color);
+        color: var(--text-light);
         text-decoration: none;
-        border-radius: 16px;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        transition: var(--transition-smooth);
     }
 
-    .btn-nova-reserva:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
-        color: white;
+    .btn-new-reservation:hover {
+        background: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-soft);
     }
 
-    @media (max-width: 768px) {
-        .reservas-grid {
+    @media (max-width: 600px) {
+        .reservations-grid {
             grid-template-columns: 1fr;
         }
 
@@ -375,78 +384,56 @@
         }
 
         .hero-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 </style>
 @endsection
 
 @section('content')
-<!-- Hero Section -->
-<div class="reservas-hero">
+<div class="reservations-hero">
     <div class="hero-content">
-        <h1 class="hero-title">
-            <i class="fas fa-calendar-check"></i> Minhas Reservas
-        </h1>
+        <h1 class="hero-title"><i class="fas fa-calendar-check"></i> Minhas Reservas</h1>
         <p class="hero-subtitle">Gerencie todas as suas reservas em um só lugar</p>
     </div>
 </div>
 
-<div class="reservas-container">
+<div class="reservations-container">
     @if($reservas->isEmpty())
-        <!-- Empty State -->
         <div class="empty-state">
             <div class="empty-icon">🏨</div>
             <h2 class="empty-title">Nenhuma reserva encontrada</h2>
-            <p class="empty-text">Você ainda não possui reservas. Que tal explorar nossos hotéis incríveis?</p>
+            <p class="empty-text">Explore nossos hotéis e faça sua próxima reserva!</p>
             <a href="{{ route('hoteis.alternative') }}" class="btn-explore">
-                <i class="fas fa-search"></i>
-                <span>Explorar Hotéis</span>
+                <i class="fas fa-search"></i> Explorar Hotéis
             </a>
         </div>
     @else
-        <!-- Filtros -->
         <div class="filters-card">
             <form method="GET" action="{{ route('reservas.minhas') }}">
                 <div class="filter-grid">
                     <div class="filter-group">
-                        <label>
-                            <i class="fas fa-filter"></i> Status da Reserva
-                        </label>
+                        <label><i class="fas fa-filter"></i> Status da Reserva</label>
                         <select name="status" class="filter-select">
                             <option value="">Todas as reservas</option>
-                            <option value="pendente" {{ request('status') == 'pendente' ? 'selected' : '' }}>
-                                ⏳ Pendentes
-                            </option>
-                            <option value="confirmada" {{ request('status') == 'confirmada' ? 'selected' : '' }}>
-                                ✅ Confirmadas
-                            </option>
-                            <option value="cancelada" {{ request('status') == 'cancelada' ? 'selected' : '' }}>
-                                ❌ Canceladas
-                            </option>
-                            <option value="concluida" {{ request('status') == 'concluida' ? 'selected' : '' }}>
-                                ✔️ Concluídas
-                            </option>
+                            <option value="pendente" {{ request('status') == 'pendente' ? 'selected' : '' }}>⏳ Pendentes</option>
+                            <option value="confirmada" {{ request('status') == 'confirmada' ? 'selected' : '' }}>✅ Confirmadas</option>
+                            <option value="cancelada" {{ request('status') == 'cancelada' ? 'selected' : '' }}>❌ Canceladas</option>
+                            <option value="concluida" {{ request('status') == 'concluida' ? 'selected' : '' }}>✔️ Concluídas</option>
                         </select>
                     </div>
                     <div class="filter-buttons">
-                        <button type="submit" class="btn-filter primary">
-                            <i class="fas fa-search"></i> Filtrar
-                        </button>
-                        <a href="{{ route('reservas.minhas') }}" class="btn-filter secondary">
-                            <i class="fas fa-redo"></i> Limpar
-                        </a>
+                        <button type="submit" class="btn-filter primary"><i class="fas fa-search"></i> Filtrar</button>
+                        <a href="{{ route('reservas.minhas') }}" class="btn-filter secondary"><i class="fas fa-redo"></i> Limpar</a>
                     </div>
                 </div>
             </form>
         </div>
 
-        <!-- Grid de Reservas -->
-        <div class="reservas-grid">
+        <div class="reservations-grid">
             @foreach($reservas as $reserva)
-                <div class="reserva-card">
-                    <!-- Header com Status -->
-                    <div class="reserva-header status-{{ $reserva->status }}">
+                <div class="reservation-card">
+                    <div class="reservation-header status-{{ $reserva->status }}">
                         <span class="status-icon">
                             @if($reserva->status == 'pendente')
                                 ⏳
@@ -459,60 +446,44 @@
                             @endif
                             {{ ucfirst($reserva->status) }}
                         </span>
-                        <span class="codigo-badge">
-                            {{ $reserva->codigo_confirmacao }}
-                        </span>
+                        <span class="code-badge">{{ $reserva->codigo_confirmacao }}</span>
                     </div>
 
-                    <!-- Corpo do Card -->
-                    <div class="reserva-body">
+                    <div class="reservation-body">
                         <h3 class="hotel-name">{{ $reserva->hotel->nome ?? 'Hotel' }}</h3>
                         <div class="hotel-location">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ $reserva->hotel->localizacao ?? 'Localização não disponível' }}</span>
                         </div>
 
-                        <!-- Detalhes -->
-                        <div class="reserva-details">
+                        <div class="reservation-details">
                             <div class="detail-row">
-                                <span class="detail-label">
-                                    <i class="fas fa-calendar-check"></i> Check-in
-                                </span>
+                                <span class="detail-label"><i class="fas fa-calendar-check"></i> Check-in</span>
                                 <span class="detail-value">{{ $reserva->data_entrada->format('d/m/Y') }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label">
-                                    <i class="fas fa-calendar-times"></i> Check-out
-                                </span>
+                                <span class="detail-label"><i class="fas fa-calendar-times"></i> Check-out</span>
                                 <span class="detail-value">{{ $reserva->data_saida->format('d/m/Y') }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label">
-                                    <i class="fas fa-bed"></i> Quarto
-                                </span>
+                                <span class="detail-label"><i class="fas fa-bed"></i> Quarto</span>
                                 <span class="detail-value">{{ ucfirst($reserva->tipo_quarto) }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label">
-                                    <i class="fas fa-users"></i> Hóspedes
-                                </span>
+                                <span class="detail-label"><i class="fas fa-users"></i> Hóspedes</span>
                                 <span class="detail-value">{{ $reserva->hospedes }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label">
-                                    <i class="fas fa-moon"></i> Noites
-                                </span>
+                                <span class="detail-label"><i class="fas fa-moon"></i> Noites</span>
                                 <span class="detail-value">{{ $reserva->calcularDias() }}</span>
                             </div>
                         </div>
 
-                        <!-- Valor Total -->
                         <div class="total-value">
                             <div class="total-label">Valor Total</div>
                             <div class="total-amount">R$ {{ number_format($reserva->valor_total, 2, ',', '.') }}</div>
                         </div>
 
-                        <!-- Observações -->
                         @if($reserva->observacoes)
                             <div class="observacoes-box">
                                 <strong><i class="fas fa-info-circle"></i> Observações:</strong><br>
@@ -520,11 +491,9 @@
                             </div>
                         @endif
 
-                        <!-- Ações -->
-                        <div class="reserva-actions">
+                        <div class="reservation-actions">
                             @if($reserva->status == 'pendente')
-                                <a href="{{ route('reservas.confirmar', $reserva->codigo_confirmacao) }}"
-                                   class="action-btn btn-confirmar">
+                                <a href="{{ route('reservas.confirmar', $reserva->codigo_confirmacao) }}" class="action-btn btn-confirmar">
                                     <i class="fas fa-check"></i> Confirmar
                                 </a>
                             @endif
@@ -534,34 +503,25 @@
                                     $diasAteCheckIn = now()->diffInDays($reserva->data_entrada, false);
                                 @endphp
                                 @if($diasAteCheckIn > 2)
-                                    <form method="POST"
-                                          action="{{ route('reservas.cancelar', $reserva->id) }}"
-                                          style="flex: 1; min-width: 120px;"
-                                          onsubmit="return confirm('⚠️ Tem certeza que deseja cancelar esta reserva?');">
+                                    <form method="POST" action="{{ route('reservas.cancelar', $reserva->id) }}" style="flex: 1;" onsubmit="return confirm('⚠️ Tem certeza que deseja cancelar esta reserva?');">
                                         @csrf
-                                        <button type="submit" class="action-btn btn-cancelar" style="width: 100%;">
-                                            <i class="fas fa-times"></i> Cancelar
-                                        </button>
+                                        <button type="submit" class="action-btn btn-cancelar"><i class="fas fa-times"></i> Cancelar</button>
                                     </form>
                                 @else
-                                    <button class="action-btn btn-disabled"
-                                            title="Cancelamento disponível apenas 48h antes do check-in">
+                                    <button class="action-btn btn-disabled" title="Cancelamento disponível apenas 48h antes do check-in">
                                         <i class="fas fa-ban"></i> Indisponível
                                     </button>
                                 @endif
                             @endif
 
-                            <a href="{{ route('hoteis.show', $reserva->hotel->id ?? 1) }}"
-                               class="action-btn btn-ver-hotel">
+                            <a href="{{ route('hoteis.show', $reserva->hotel->id ?? 1) }}" class="action-btn btn-ver-hotel">
                                 <i class="fas fa-hotel"></i> Ver Hotel
                             </a>
                         </div>
 
-                        <!-- Timestamp de Confirmação -->
                         @if($reserva->confirmada_em)
                             <div class="timestamp">
-                                <i class="fas fa-clock"></i>
-                                Confirmada em {{ $reserva->confirmada_em->format('d/m/Y H:i') }}
+                                <i class="fas fa-clock"></i> Confirmada em {{ $reserva->confirmada_em->format('d/m/Y H:i') }}
                             </div>
                         @endif
                     </div>
@@ -569,17 +529,14 @@
             @endforeach
         </div>
 
-        <!-- Paginação -->
         <div class="d-flex justify-content-center mt-4">
             {{ $reservas->links() }}
         </div>
     @endif
 
-    <!-- Botão Nova Reserva -->
-    <div class="nova-reserva-section">
-        <a href="{{ route('hoteis.alternative') }}" class="btn-nova-reserva">
-            <i class="fas fa-plus-circle"></i>
-            <span>Fazer Nova Reserva</span>
+    <div class="new-reservation-section">
+        <a href="{{ route('hoteis.alternative') }}" class="btn-new-reservation">
+            <i class="fas fa-plus-circle"></i> Fazer Nova Reserva
         </a>
     </div>
 </div>

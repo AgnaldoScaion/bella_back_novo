@@ -4,403 +4,320 @@
 
 @section('styles')
 <style>
-    .confirmada-wrapper {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    :root {
+        --primary-color: #2d5016;
+        --primary-light: #5a8f3d;
+        --accent-color: #a7d096;
+        --primary-bg: #f3f7f3;
+        --border-color: #e5f2e5;
+        --text-dark: #1a1a1a;
+        --text-medium: #4a4a4a;
+        --text-light: #ffffff;
+        --shadow-soft: 0 2px 15px rgba(45, 80, 22, 0.08);
+        --shadow-medium: 0 8px 30px rgba(45, 80, 22, 0.12);
+        --shadow-strong: 0 15px 40px rgba(45, 80, 22, 0.18);
+        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --border-radius: 16px;
+        --border-radius-small: 8px;
+    }
+
+    .confirmation-wrapper {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem 1rem;
+        padding: 1rem;
+        background: var(--primary-bg);
+        font-family: 'Inter', sans-serif;
     }
 
-    .confirmada-container {
-        max-width: 800px;
+    .confirmation-container {
+        max-width: 720px;
         width: 100%;
+        margin: 0 auto;
     }
 
-    .confirmada-card {
-        background: white;
-        border-radius: 24px;
-        padding: 3rem 2rem;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    .confirmation-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid var(--border-color);
         position: relative;
         overflow: hidden;
+        animation: slideIn 0.5s ease-out;
     }
 
-    .confirmada-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 6px;
-        background: linear-gradient(90deg, #10b981, #059669);
+    @keyframes slideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
     }
 
-    .celebration-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0.03;
-        pointer-events: none;
-        background-image:
-            radial-gradient(circle at 20% 30%, #10b981 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, #059669 0%, transparent 50%);
-    }
-
-    .confirmada-content {
-        position: relative;
-        z-index: 1;
-    }
-
-    .success-icon-wrapper {
+    .confirmation-header {
         text-align: center;
         margin-bottom: 2rem;
     }
 
-    .confirmada-icon {
-        font-size: 6rem;
-        animation: celebrate 1s ease-out;
-        display: inline-block;
+    .confirmation-icon {
+        font-size: 4rem;
+        color: var(--primary-color);
+        animation: pulse 2s infinite ease-in-out;
     }
 
-    @keyframes celebrate {
-        0% {
-            transform: scale(0) rotate(-180deg);
-            opacity: 0;
-        }
-        50% {
-            transform: scale(1.2) rotate(10deg);
-        }
-        100% {
-            transform: scale(1) rotate(0deg);
-            opacity: 1;
-        }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
     }
 
-    .confirmada-titulo {
-        font-family: 'Garamond', serif;
-        color: #10b981;
-        font-size: 2.5rem;
-        text-align: center;
-        margin-bottom: 1rem;
+    .confirmation-title {
+        font-family: 'GaramondBold', serif;
+        font-size: 1.75rem;
         font-weight: 700;
-    }
-
-    .confirmada-mensagem {
-        text-align: center;
-        color: #4a5568;
-        font-size: 1.1rem;
-        margin-bottom: 2.5rem;
-        line-height: 1.6;
-    }
-
-    .status-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-        color: #065f46;
-        padding: 1rem 2rem;
-        border-radius: 50px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin: 0 auto 2.5rem;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        color: var(--text-dark);
+        margin: 0;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
 
-    .status-badge i {
-        font-size: 1.3rem;
-    }
-
-    .detalhes-reserva {
-        background: #f9fafb;
-        border-radius: 16px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .detalhes-titulo {
-        color: #1f2937;
-        font-size: 1.4rem;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
+    .confirmation-message {
+        color: var(--text-medium);
+        font-size: 1rem;
+        line-height: 1.5;
         text-align: center;
+        margin: 1rem 0 2rem;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--primary-light);
+        color: var(--text-light);
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin: 0 auto 2rem;
+        text-transform: uppercase;
+        box-shadow: var(--shadow-soft);
+        transition: var(--transition-smooth);
+    }
+
+    .status-badge:hover {
+        transform: translateY(-2px);
+        background: var(--primary-color);
+    }
+
+    .details-section {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: var(--border-radius-small);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border: 1px solid var(--border-color);
+    }
+
+    .details-title {
+        font-family: 'GaramondBold', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
-        justify-content: center;
         gap: 0.5rem;
     }
 
-    .detalhe-row {
+    .detail-row {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0;
-        border-bottom: 1px solid #e5e7eb;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border-color);
     }
 
-    .detalhe-row:last-child {
+    .detail-row:last-child {
         border-bottom: none;
     }
 
-    .detalhe-label {
-        color: #6b7280;
+    .detail-label {
+        color: var(--text-medium);
+        font-size: 0.875rem;
         font-weight: 500;
-        font-size: 0.95rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
     }
 
-    .detalhe-label i {
-        color: #10b981;
-        width: 20px;
-    }
-
-    .detalhe-valor {
-        color: #1f2937;
+    .detail-value {
+        color: var(--text-dark);
         font-weight: 600;
-        font-size: 1rem;
-        text-align: right;
+        font-size: 0.875rem;
     }
 
-    .valor-destaque {
-        color: #10b981;
-        font-size: 1.8rem;
+    .highlight-value {
+        color: var(--primary-color);
+        font-size: 1.25rem;
         font-weight: 700;
     }
 
     .info-box {
-        background: linear-gradient(135deg, #e0f2fe, #bae6fd);
-        border-left: 4px solid #0ea5e9;
-        border-radius: 12px;
-        padding: 1.5rem;
+        background: rgba(167, 208, 150, 0.2);
+        border-left: 4px solid var(--primary-color);
+        padding: 1rem;
+        border-radius: var(--border-radius-small);
         margin-bottom: 2rem;
-    }
-
-    .info-box i {
-        color: #0369a1;
-        font-size: 1.5rem;
-        margin-right: 1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
     }
 
     .info-box-content {
-        display: inline-block;
-        color: #075985;
-        line-height: 1.6;
+        color: var(--text-medium);
+        font-size: 0.875rem;
+        line-height: 1.5;
     }
 
     .info-box-title {
-        font-weight: 700;
-        margin-bottom: 0.5rem;
+        font-family: 'GaramondBold', serif;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.25rem;
     }
 
-    .acoes-botoes {
+    .action-buttons {
         display: flex;
         gap: 1rem;
-        flex-wrap: wrap;
         justify-content: center;
-        margin-top: 2rem;
+        flex-wrap: wrap;
     }
 
-    .btn-action {
-        flex: 1;
-        min-width: 200px;
-        padding: 1rem 2rem;
-        border-radius: 12px;
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--border-radius-small);
+        font-size: 0.875rem;
         font-weight: 600;
-        font-size: 1rem;
         text-decoration: none;
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        transition: all 0.3s ease;
-        border: none;
+        gap: 0.5rem;
+        transition: var(--transition-smooth);
         cursor: pointer;
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, #10b981, #059669);
-        color: white;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        background: var(--primary-color);
+        color: var(--text-light);
+        border: none;
     }
 
     .btn-primary:hover {
+        background: var(--primary-light);
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-        color: white;
+        box-shadow: var(--shadow-soft);
     }
 
     .btn-secondary {
-        background: white;
-        color: #10b981;
-        border: 2px solid #10b981;
+        background: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
     }
 
     .btn-secondary:hover {
-        background: #f0fdf4;
+        background: rgba(167, 208, 150, 0.1);
+        color: var(--primary-light);
         transform: translateY(-2px);
-        color: #059669;
-        border-color: #059669;
     }
 
-    @media (max-width: 768px) {
-        .confirmada-titulo {
-            font-size: 2rem;
+    @media (max-width: 600px) {
+        .confirmation-card {
+            padding: 1.5rem;
         }
 
-        .confirmada-card {
-            padding: 2rem 1.5rem;
+        .confirmation-title {
+            font-size: 1.5rem;
         }
 
-        .btn-action {
-            min-width: 100%;
-        }
-
-        .detalhe-row {
+        .detail-row {
             flex-direction: column;
-            align-items: flex-start;
-            gap: 0.5rem;
+            gap: 0.25rem;
         }
 
-        .detalhe-valor {
+        .detail-value {
             text-align: left;
         }
-    }
 
-    /* Animação de pulso para o badge */
-    @keyframes pulse {
-        0%, 100% {
-            opacity: 1;
+        .btn {
+            width: 100%;
+            justify-content: center;
         }
-        50% {
-            opacity: 0.8;
-        }
-    }
-
-    .status-badge {
-        animation: pulse 2s infinite;
     }
 </style>
 @endsection
 
 @section('content')
-<div class="confirmada-wrapper">
-    <div class="confirmada-container">
-        <div class="confirmada-card">
-            <div class="celebration-bg"></div>
-
-            <div class="confirmada-content">
-                <!-- Ícone de Sucesso -->
-                <div class="success-icon-wrapper">
-                    <div class="confirmada-icon">✅</div>
-                </div>
-
-                <!-- Título e Mensagem -->
-                <h1 class="confirmada-titulo">Reserva Confirmada!</h1>
-                <p class="confirmada-mensagem">
-                    Parabéns! Sua reserva foi confirmada com sucesso. <br>
-                    Estamos ansiosos para recebê-lo e proporcionar uma experiência inesquecível.
+<div class="confirmation-wrapper">
+    <div class="confirmation-container">
+        <div class="confirmation-card">
+            <div class="confirmation-header">
+                <div class="confirmation-icon">✅</div>
+                <h1 class="confirmation-title">Reserva Confirmada</h1>
+                <p class="confirmation-message">
+                    Sua reserva foi confirmada com sucesso. Prepare-se para uma experiência inesquecível!
                 </p>
-
-                <!-- Badge de Status -->
-                <div style="text-align: center;">
-                    <div class="status-badge">
-                        <i class="fas fa-check-circle"></i>
-                        CONFIRMADA
-                    </div>
+                <div class="status-badge">
+                    <i class="fas fa-check-circle"></i> Confirmada
                 </div>
+            </div>
 
-                <!-- Informação Importante -->
-                <div class="info-box">
-                    <i class="fas fa-info-circle"></i>
-                    <div class="info-box-content">
-                        <div class="info-box-title">📧 Confirmação enviada por email</div>
-                        <div>Você receberá todos os detalhes da sua reserva no email cadastrado.</div>
-                    </div>
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <div class="info-box-content">
+                    <div class="info-box-title">Confirmação Enviada</div>
+                    <div>Os detalhes da sua reserva foram enviados para o email cadastrado.</div>
                 </div>
+            </div>
 
-                <!-- Detalhes da Reserva -->
-                <div class="detalhes-reserva">
-                    <h3 class="detalhes-titulo">
-                        <i class="fas fa-clipboard-list"></i>
-                        Resumo da Reserva
-                    </h3>
-
-                    <div class="detalhe-row">
-                        <span class="detalhe-label">
-                            <i class="fas fa-hotel"></i>
-                            Hotel
-                        </span>
-                        <span class="detalhe-valor">{{ $reserva->hotel->nome ?? 'Hotel' }}</span>
-                    </div>
-
-                    <div class="detalhe-row">
-                        <span class="detalhe-label">
-                            <i class="fas fa-calendar-check"></i>
-                            Check-in
-                        </span>
-                        <span class="detalhe-valor">{{ $reserva->data_entrada->format('d/m/Y') }}</span>
-                    </div>
-
-                    <div class="detalhe-row">
-                        <span class="detalhe-label">
-                            <i class="fas fa-calendar-times"></i>
-                            Check-out
-                        </span>
-                        <span class="detalhe-valor">{{ $reserva->data_saida->format('d/m/Y') }}</span>
-                    </div>
-
-                    <div class="detalhe-row">
-                        <span class="detalhe-label">
-                            <i class="fas fa-bed"></i>
-                            Tipo de Quarto
-                        </span>
-                        <span class="detalhe-valor">{{ ucfirst($reserva->tipo_quarto) }}</span>
-                    </div>
-
-                    <div class="detalhe-row">
-                        <span class="detalhe-label">
-                            <i class="fas fa-users"></i>
-                            Hóspedes
-                        </span>
-                        <span class="detalhe-valor">{{ $reserva->hospedes }} {{ $reserva->hospedes == 1 ? 'pessoa' : 'pessoas' }}</span>
-                    </div>
-
-                    <div class="detalhe-row">
-                        <span class="detalhe-label">
-                            <i class="fas fa-money-bill-wave"></i>
-                            Valor Total
-                        </span>
-                        <span class="detalhe-valor valor-destaque">R$ {{ number_format($reserva->valor_total, 2, ',', '.') }}</span>
-                    </div>
-
-                    <div class="detalhe-row">
-                        <span class="detalhe-label">
-                            <i class="fas fa-barcode"></i>
-                            Código de Confirmação
-                        </span>
-                        <span class="detalhe-valor" style="font-family: monospace; color: #10b981;">{{ $reserva->codigo_confirmacao }}</span>
-                    </div>
+            <div class="details-section">
+                <h3 class="details-title">
+                    <i class="fas fa-clipboard-list"></i> Resumo da Reserva
+                </h3>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fas fa-hotel"></i> Hotel</span>
+                    <span class="detail-value">{{ $reserva->hotel->nome ?? 'Hotel' }}</span>
                 </div>
-
-                <!-- Botões de Ação -->
-                <div class="acoes-botoes">
-                    <a href="{{ route('reservas.minhas') }}" class="btn-action btn-primary">
-                        <i class="fas fa-list"></i>
-                        Ver Minhas Reservas
-                    </a>
-                    <a href="{{ route('home') }}" class="btn-action btn-secondary">
-                        <i class="fas fa-home"></i>
-                        Voltar ao Início
-                    </a>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fas fa-calendar-check"></i> Check-in</span>
+                    <span class="detail-value">{{ $reserva->data_entrada->format('d/m/Y') }}</span>
                 </div>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fas fa-calendar-times"></i> Check-out</span>
+                    <span class="detail-value">{{ $reserva->data_saida->format('d/m/Y') }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fas fa-bed"></i> Tipo de Quarto</span>
+                    <span class="detail-value">{{ ucfirst($reserva->tipo_quarto) }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fas fa-users"></i> Hóspedes</span>
+                    <span class="detail-value">{{ $reserva->hospedes }} {{ $reserva->hospedes == 1 ? 'pessoa' : 'pessoas' }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fas fa-money-bill-wave"></i> Valor Total</span>
+                    <span class="detail-value highlight-value">R$ {{ number_format($reserva->valor_total, 2, ',', '.') }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fas fa-barcode"></i> Código</span>
+                    <span class="detail-value" style="font-family: monospace; color: var(--primary-color);">{{ $reserva->codigo_confirmacao }}</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="{{ route('reservas.minhas') }}" class="btn btn-primary">
+                    <i class="fas fa-list"></i> Minhas Reservas
+                </a>
+                <a href="{{ route('home') }}" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
             </div>
         </div>
     </div>
