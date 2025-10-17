@@ -39,7 +39,7 @@ class ReservaController extends Controller
 
         // Para restaurantes e pontos turísticos, redireciona para hotéis por enquanto
         // (você pode criar views específicas depois)
-        return redirect()->route('hoteis.index')
+        return redirect()->route('hoteis.alternative')
             ->with('info', 'Sistema de reservas disponível apenas para hotéis no momento.');
     }
 
