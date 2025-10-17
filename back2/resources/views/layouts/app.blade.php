@@ -147,6 +147,18 @@
                 <span>👤</span>
                 @auth
                     {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email }}
+                    @php
+                        $reservasPendentes = \App\Models\Reserva::where('user_id', Auth::id())
+                            ->where('status', 'pendente')
+                            ->count();
+                    @endphp
+                    @if($reservasPendentes > 0)
+                        <a href="{{ route('reservas.minhas') }}" style="margin-left: 10px; text-decoration: none;">
+                            <span style="background: #ff6b6b; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+                                {{ $reservasPendentes }} {{ $reservasPendentes == 1 ? 'reserva pendente' : 'reservas pendentes' }}
+                            </span>
+                        </a>
+                    @endif
                 @else
                     Visitante
                 @endauth
