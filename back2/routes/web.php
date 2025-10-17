@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RestauranteController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\PontoTuristicoController;
+use App\Http\Controllers\ReservaController;
 
 // Rotas de autenticação
 Route::middleware('guest')->group(function () {
@@ -22,7 +23,17 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Rotas de Reservas (protegidas - requer autenticação)
+    Route::get('/reservas/create/{hotel}', [ReservaController::class, 'create'])->name('reservas.create');
+    Route::post('/reservas', [ReservaController::class, 'store'])->name('reservas.store');
+    Route::get('/minhas-reservas', [ReservaController::class, 'minhasReservas'])->name('reservas.minhas');
+    Route::post('/reservas/{id}/cancelar', [ReservaController::class, 'cancelar'])->name('reservas.cancelar');
 });
+
+// Rotas públicas de Reservas (não requerem autenticação)
+Route::get('/reservas/sucesso/{id}', [ReservaController::class, 'sucesso'])->name('reservas.sucesso');
+Route::get('/reservas/confirmar/{codigo}', [ReservaController::class, 'confirmar'])->name('reservas.confirmar');
 
 // Rotas públicas
 Route::get('/', function () {

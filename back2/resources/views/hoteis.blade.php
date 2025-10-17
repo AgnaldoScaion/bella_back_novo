@@ -1081,6 +1081,11 @@
                                 </div>
                                 <div class="hotel-footer">
                                     <a href="${hotelLink}" class="btn-ver-mais">Ver Detalhes</a>
+                                    @auth
+                                        <a href="/reservas/create/${hotel.id}" class="btn-reservar" style="background: #667eea; color: white; padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none; display: inline-block; margin-left: 8px;">
+                                            <i class="fas fa-calendar-check"></i> Reservar
+                                        </a>
+                                    @endauth
                                 </div>
                             </div>
                         `;

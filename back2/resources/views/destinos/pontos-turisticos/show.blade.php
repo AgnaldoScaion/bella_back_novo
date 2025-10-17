@@ -350,9 +350,15 @@
         <a href="{{ route('pontos-turisticos.alternative') }}" class="btn btn-secondary">
           <i class="fas fa-arrow-left"></i> Voltar para Pontos Turísticos
         </a>
-        <a href="#" class="btn btn-primary">
-          <i class="fas fa-calendar-check"></i> Planejar Visita
-        </a>
+        @auth
+          <a href="{{ route('reservas.create', ['tipo' => 'ponto_turistico', 'id' => $ponto->id]) }}" class="btn btn-primary">
+            <i class="fas fa-ticket-alt"></i> Reservar Ingresso
+          </a>
+        @else
+          <a href="{{ route('login') }}" class="btn btn-primary" title="Faça login para reservar">
+            <i class="fas fa-sign-in-alt"></i> Login para Reservar
+          </a>
+        @endauth
       </div>
     @endif
   </div>

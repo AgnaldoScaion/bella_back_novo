@@ -14,10 +14,22 @@ class ReservaController extends Controller
     /**
      * Exibe o formulário de reserva
      */
-    public function create($hotel_id)
+    public function create(Request $request, $id = null)
     {
-        $hotel = Hotel::findOrFail($hotel_id);
-        return view('reservas.create', compact('hotel'));
+        // Se vier com parâmetro 'tipo', identifica o tipo de reserva
+        $tipo = $request->query('tipo', 'hotel');
+
+        if ($tipo === 'hotel' || !$request->has('tipo')) {
+            // Reserva de hotel (comportamento padrão)
+            $hotel_id = $id ?? $request->query('id');
+            $hotel = Hotel::findOrFail($hotel_id);
+            return view('reservas.create', compact('hotel'));
+        }
+
+        // Para restaurantes e pontos turísticos, redireciona para hotéis por enquanto
+        // (você pode criar views específicas depois)
+        return redirect()->route('hoteis.index')
+            ->with('info', 'Sistema de reservas disponível apenas para hotéis no momento.');
     }
 
     /**
@@ -38,14 +50,14 @@ class ReservaController extends Controller
         // Calcular valor total
         $hotel = Hotel::findOrFail($request->hotel_id);
         $dias = \Carbon\Carbon::parse($request->data_entrada)->diffInDays($request->data_saida);
-        
+
         // Preços por tipo de quarto
         $precos = [
             'standard' => $hotel->preco,
             'luxo' => $hotel->preco + 150,
             'familiar' => $hotel->preco + 250
         ];
-        
+
         $valor_total = $precos[$request->tipo_quarto] * $dias;
 
         // Criar reserva
@@ -81,7 +93,7 @@ class ReservaController extends Controller
     public function sucesso($id)
     {
         $reserva = Reserva::with(['hotel', 'usuario'])->findOrFail($id);
-        
+
         // Verificar se o usuário tem permissão para ver essa reserva
         if (Auth::id() !== $reserva->user_id) {
             abort(403);
@@ -96,7 +108,7 @@ class ReservaController extends Controller
     public function confirmar($codigo)
     {
         $reserva = Reserva::where('codigo_confirmacao', $codigo)->firstOrFail();
-        
+
         if ($reserva->status === 'confirmada') {
             return redirect()->route('home')->with('info', 'Esta reserva já foi confirmada anteriormente.');
         }
@@ -126,7 +138,7 @@ class ReservaController extends Controller
     public function cancelar($id)
     {
         $reserva = Reserva::findOrFail($id);
-        
+
         // Verificar permissão
         if (Auth::id() !== $reserva->user_id) {
             abort(403);
@@ -134,7 +146,7 @@ class ReservaController extends Controller
 
         // Verificar se pode cancelar (ex: não pode cancelar se faltam menos de 48h)
         $diasParaEntrada = now()->diffInDays($reserva->data_entrada, false);
-        
+
         if ($diasParaEntrada < 2) {
             return back()->with('error', 'Não é possível cancelar com menos de 48h de antecedência.');
         }
