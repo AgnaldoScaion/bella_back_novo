@@ -410,6 +410,19 @@ class RestauranteController extends Controller
         ]
     ];
 
+    /**
+     * Retorna um restaurante pelo ID (método público para ser usado por outros controllers)
+     */
+    public function getRestauranteById($id)
+    {
+        foreach ($this->restaurantes as $restaurante) {
+            if ($restaurante['id'] == $id) {
+                return $restaurante;
+            }
+        }
+        return null;
+    }
+
     public function show($id)
     {
         // Encontra o restaurante pelo ID usando collect para maior eficiência

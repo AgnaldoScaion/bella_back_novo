@@ -56,7 +56,7 @@
 
             <div class="detalhe-row">
                 <span class="detalhe-label">Hotel:</span>
-                <span class="detalhe-valor">{{ $reserva->hotel->nome_hotel }}</span>
+                <span class="detalhe-valor">{{ $reserva->hotel->nome ?? 'Hotel' }}</span>
             </div>
 
             <div class="detalhe-row">

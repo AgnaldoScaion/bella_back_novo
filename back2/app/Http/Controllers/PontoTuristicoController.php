@@ -325,6 +325,19 @@ class PontoTuristicoController extends Controller
         ]
     ];
 
+    /**
+     * Retorna um ponto turístico pelo ID (método público para ser usado por outros controllers)
+     */
+    public function getPontoTuristicoById($id)
+    {
+        foreach ($this->pontosTuristicos as $ponto) {
+            if ($ponto['id'] == $id) {
+                return $ponto;
+            }
+        }
+        return null;
+    }
+
     public function show($id)
     {
         // Encontra o ponto turístico pelo ID

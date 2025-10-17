@@ -68,9 +68,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ $reserva->hotel->nome_hotel }}</h5>
+                            <h5 class="card-title">{{ $reserva->hotel->nome ?? 'Hotel' }}</h5>
                             <p class="card-text text-muted mb-3">
-                                <i class="fas fa-map-marker-alt"></i> {{ $reserva->hotel->cidade_hotel }}, {{ $reserva->hotel->estado_hotel }}
+                                <i class="fas fa-map-marker-alt"></i> {{ $reserva->hotel->localizacao ?? 'Localização não disponível' }}
                             </p>
 
                             <div class="reserva-info">
@@ -137,7 +137,7 @@
                                     @endif
                                 @endif
 
-                                <a href="{{ route('hoteis.show', $reserva->hotel->id_hotel) }}"
+                                <a href="{{ route('hoteis.show', $reserva->hotel->id ?? 1) }}"
                                    class="btn btn-outline-primary btn-sm flex-fill">
                                     <i class="fas fa-hotel"></i> Ver Hotel
                                 </a>

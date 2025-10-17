@@ -68,14 +68,14 @@
 <div class="reserva-form-container">
     <!-- Informações do Hotel -->
     <div class="hotel-info-card">
-        <h2>{{ $hotel->nome_hotel }}</h2>
+        <h2>{{ $hotel->nome }}</h2>
         <p class="mb-2">
             <i class="fas fa-map-marker-alt"></i>
-            {{ $hotel->endereco_hotel }}, {{ $hotel->cidade_hotel }} - {{ $hotel->estado_hotel }}
+            {{ $hotel->localizacao }}
         </p>
         <p class="mb-0">
             <i class="fas fa-star"></i>
-            Classificação: {{ $hotel->classificacao_hotel ?? 'N/A' }}
+            Avaliação: {{ $hotel->avaliacao }} ({{ number_format($hotel->avaliacoes) }} avaliações)
         </p>
     </div>
 
@@ -97,7 +97,7 @@
 
         <form method="POST" action="{{ route('reservas.store') }}" id="reservaForm">
             @csrf
-            <input type="hidden" name="hotel_id" value="{{ $hotel->id_hotel }}">
+            <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
             <!-- Datas -->
             <div class="row mb-3">
@@ -192,7 +192,7 @@
             <!-- Display de Preço -->
             <div class="price-display">
                 <div class="price-label">Valor Total Estimado:</div>
-                <div class="price-value" id="valorTotal">R$ {{ number_format($hotel->preco_hotel ?? 0, 2, ',', '.') }}</div>
+                <div class="price-value" id="valorTotal">R$ {{ number_format($hotel->preco ?? 0, 2, ',', '.') }}</div>
                 <small class="text-muted" id="detalhesPreco">
                     Baseado em <span id="numNoites">1</span> noite(s)
                 </small>
@@ -203,7 +203,7 @@
                 <button type="submit" class="btn btn-primary btn-lg flex-fill">
                     <i class="fas fa-check-circle"></i> Confirmar Reserva
                 </button>
-                <a href="{{ route('hoteis.show', $hotel->id_hotel) }}" class="btn btn-secondary btn-lg">
+                <a href="{{ route('hoteis.show', $hotel->id) }}" class="btn btn-secondary btn-lg">
                     <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
@@ -213,7 +213,7 @@
 
 @section('scripts')
 <script>
-    const precoBase = {{ $hotel->preco_hotel ?? 0 }};
+    const precoBase = {{ $hotel->preco ?? 0 }};
     let ajusteQuarto = 0;
 
     // Seleção de tipo de quarto

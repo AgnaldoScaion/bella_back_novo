@@ -420,7 +420,7 @@
                     <i class="fas fa-arrow-left"></i> Voltar para Hotéis
                 </a>
                 @auth
-                    <a href="{{ route('reservas.create', $hotel->id_hotel) }}" class="btn btn-primary">
+                    <a href="{{ route('reservas.create', $hotel->id) }}" class="btn btn-primary">
                         <i class="fas fa-calendar-check"></i> Fazer Reserva
                     </a>
                 @else

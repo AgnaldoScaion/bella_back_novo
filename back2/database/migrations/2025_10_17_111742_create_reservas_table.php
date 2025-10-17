@@ -28,7 +28,7 @@ return new class extends Migration
 
             // Chaves estrangeiras
             $table->foreign('user_id')->references('id_usuario')->on('usuario')->onDelete('set null');
-            $table->foreign('hotel_id')->references('id_hotel')->on('hotel')->onDelete('cascade');
+            // Nota: hotel_id não tem FK pois hotéis estão em array hardcoded no HotelController
         });
     }
 

@@ -428,6 +428,19 @@ class HotelController extends Controller
         ]
     ];
 
+    /**
+     * Retorna um hotel pelo ID (método público para ser usado por outros controllers)
+     */
+    public function getHotelById($id)
+    {
+        foreach ($this->hoteis as $hotel) {
+            if ($hotel['id'] == $id) {
+                return $hotel;
+            }
+        }
+        return null;
+    }
+
     public function show($id)
     {
         // Encontra o hotel pelo ID

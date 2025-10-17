@@ -51,6 +51,16 @@ class Reserva extends Model
         return $this->belongsTo(Hotel::class, 'hotel_id', 'id_hotel');
     }
 
+    /**
+     * Busca os dados do hotel do array hardcoded
+     */
+    public function getHotelData()
+    {
+        $hotelController = new \App\Http\Controllers\HotelController();
+        $hotelData = $hotelController->getHotelById($this->hotel_id);
+        return $hotelData ? (object) $hotelData : null;
+    }
+
     // Métodos úteis
     public function confirmar()
     {
