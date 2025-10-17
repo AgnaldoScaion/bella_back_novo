@@ -106,7 +106,7 @@
 
                 <div class="info-row">
                     <span class="label">Hotel:</span>
-                    <span class="value">{{ $reserva->hotel->nome_hotel }}</span>
+                    <span class="value">{{ $reserva->getHotelData()->nome_hotel ?? 'Hotel não encontrado' }}</span>
                 </div>
 
                 <div class="info-row">

@@ -1,61 +1,244 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🇮🇹 Bella Avventura - Sistema de Reservas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema de gerenciamento de viagens e reservas para a Itália, desenvolvido em Laravel 12.
 
-## About Laravel
+## 📋 Sobre o Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Bella Avventura é uma plataforma de viagens que permite aos usuários:
+- 🏨 Reservar hotéis na Itália
+- 🍽️ Descobrir restaurantes autênticos
+- 🗺️ Explorar pontos turísticos
+- ✉️ Receber confirmações por email
+- 📱 Gerenciar suas reservas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Tecnologias
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend:** Laravel 12.24.0
+- **Database:** MySQL 8.0
+- **PHP:** 8.2.12
+- **Email:** Gmail SMTP
+- **Frontend:** Blade Templates + Tailwind CSS
 
-## Learning Laravel
+## ⚙️ Instalação Rápida
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Windows (PowerShell)
+```powershell
+# Clone o repositório
+git clone <repo-url>
+cd back2
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+# Execute o instalador automático
+.\install.ps1
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Linux/Mac (Bash)
+```bash
+# Clone o repositório
+git clone <repo-url>
+cd back2
 
-## Laravel Sponsors
+# Execute o instalador automático
+chmod +x install.sh
+./install.sh
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🔧 Instalação Manual
 
-### Premium Partners
+### 1. Dependências
+```bash
+composer install --optimize-autoloader
+npm install
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Configuração
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+### 3. Configurar .env
+```env
+APP_NAME="Bella Avventura"
+DB_CONNECTION=mysql
+DB_DATABASE=bella_avventura
+DB_USERNAME=root
+DB_PASSWORD=
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=seu-email@gmail.com
+MAIL_PASSWORD=sua-senha-app
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=seu-email@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
 
-## Code of Conduct
+### 4. Database
+```bash
+# Criar banco de dados
+mysql -u root -e "CREATE DATABASE bella_avventura"
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Rodar migrations
+php artisan migrate
 
-## Security Vulnerabilities
+# (Opcional) Popular com dados de teste
+php artisan db:seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Iniciar Servidor
+```bash
+php artisan serve
+```
 
-## License
+Acesse: http://localhost:8000
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📁 Estrutura do Projeto
+
+```
+back2/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── ReservaController.php    # Gerencia reservas
+│   │   ├── HotelController.php      # Dados dos hotéis
+│   │   └── ...
+│   ├── Models/
+│   │   ├── Reserva.php              # Model de reservas
+│   │   └── User.php
+│   └── Mail/
+│       └── ReservaConfirmacao.php   # Email de confirmação
+├── database/
+│   └── migrations/                   # Schema do banco
+├── resources/
+│   └── views/
+│       ├── reservas/                 # Views de reservas
+│       └── emails/                   # Templates de email
+└── routes/
+    └── web.php                       # Rotas da aplicação
+```
+
+## 🔍 Arquitetura de Dados
+
+⚠️ **Importante:** Este projeto usa uma arquitetura híbrida:
+
+### Banco de Dados MySQL
+- ✅ Usuários
+- ✅ Reservas
+- ✅ Feedbacks
+- ✅ Viagens
+
+### Arrays Hardcoded (PHP)
+- 🏨 Hotéis (HotelController.php)
+- 🍽️ Restaurantes (RestauranteController.php)
+- 🗺️ Pontos Turísticos (PontoTuristicoController.php)
+
+📖 Para detalhes completos, veja: [ARQUITETURA_DADOS.md](./ARQUITETURA_DADOS.md)
+
+## 📧 Configuração de Email
+
+### Gmail App Password
+
+1. Acesse: https://myaccount.google.com/apppasswords
+2. Crie uma senha de app para "Mail"
+3. Use no .env:
+```env
+MAIL_PASSWORD=sua-senha-de-16-digitos
+```
+
+📖 Guia completo: [CONFIGURACAO_EMAIL.md](./CONFIGURACAO_EMAIL.md)
+
+## 🚀 Uso
+
+### Fazer uma Reserva
+1. Acesse `/hoteis`
+2. Escolha um hotel
+3. Preencha dados da reserva
+4. Confirme via link no email
+
+### API Endpoints
+```
+GET  /api/hoteis              - Listar hotéis
+GET  /api/restaurantes        - Listar restaurantes
+GET  /api/pontos-turisticos   - Listar pontos turísticos
+POST /reservas                - Criar reserva
+GET  /reservas/confirmar/{codigo} - Confirmar reserva
+```
+
+## 🐛 Troubleshooting
+
+### Email não está sendo enviado
+```bash
+# Verificar logs
+tail -f storage/logs/laravel.log
+
+# Limpar cache
+php artisan config:clear
+php artisan view:clear
+```
+
+### Erro de conexão com banco
+```bash
+# Verificar configuração
+php artisan db:show
+
+# Testar conexão
+php artisan migrate:status
+```
+
+### Erro de FK (Foreign Key)
+```bash
+# A migration já está correta, mas se necessário:
+php artisan migrate:fresh
+```
+
+## 📝 Comandos Úteis
+
+```bash
+# Limpar todos os caches
+php artisan optimize:clear
+
+# Ver rotas
+php artisan route:list
+
+# Gerar nova migration
+php artisan make:migration nome_da_migration
+
+# Criar controller
+php artisan make:controller NomeController
+
+# Criar model
+php artisan make:model Nome -m
+```
+
+## 🔐 Segurança
+
+- ✅ Validação de dados em PT-BR
+- ✅ Proteção CSRF em formulários
+- ✅ Sanitização de inputs
+- ✅ Senhas hasheadas (bcrypt)
+- ✅ App passwords para email
+
+## 📄 Documentação Adicional
+
+- [ARQUITETURA_DADOS.md](./ARQUITETURA_DADOS.md) - Estrutura de dados
+- [CONFIGURACAO_EMAIL.md](./CONFIGURACAO_EMAIL.md) - Setup de email
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie uma branch (`git checkout -b feature/NovaFeature`)
+3. Commit suas mudanças (`git commit -m 'Add: Nova feature'`)
+4. Push para a branch (`git push origin feature/NovaFeature`)
+5. Abra um Pull Request
+
+## 📜 Licença
+
+Este projeto é licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
+
+## 👥 Autores
+
+Desenvolvido com ❤️ para Bella Avventura
+
+---
+
+**Powered by Laravel 12** 🚀
