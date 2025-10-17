@@ -1,363 +1,416 @@
-# 🏗️ **Bella Back Novo** - Laravel Application
+# 🌍 Bella Avventura - Plataforma de Turismo
 
-[![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-777BB4?style=flat-square&logo=php)](https://php.net)
-[![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
+![Bella Avventura](https://i.ibb.co/Q7T008b1/image.png)
+
+[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php)](https://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=flat-square&logo=mysql)](https://www.mysql.com)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square)](https://github.com/AgnaldoScaion/bella_back_novo)
 
-> **Arquitetura moderna em Laravel com foco em performance, escalabilidade e manutenibilidade.**
+> **Plataforma completa de turismo** para buscar destinos, reservar hotéis e descobrir experiências incríveis de viagem! 🏨✈️
 
 ---
 
-## 🔧 **Stack Tecnológica**
+## 📖 Índice
 
-```yaml
-Backend:
-  Framework: Laravel 10.x
-  Language: PHP 8.0+
-  Architecture: MVC + Repository Pattern
-  
-Database:
-  Primary: MySQL 8.0+
-  Migrations: Laravel Eloquent ORM
-  
-DevOps:
-  Dependency Manager: Composer
-  Task Runner: Artisan CLI
-  Environment: Docker Ready
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação Rápida](#-instalação-rápida)
+- [Instalação Detalhada](#-instalação-detalhada)
+- [Comandos Úteis](#-comandos-úteis)
+- [Problemas Comuns](#-problemas-comuns)
+- [Tecnologias](#-tecnologias)
+- [Licença](#-licença)
+
+---
+
+## 🎯 Sobre o Projeto
+
+**Bella Avventura** é uma plataforma web moderna que permite:
+
+- 🏨 **Buscar e reservar hotéis** com filtros avançados
+- 🗺️ **Explorar destinos turísticos** pelo Brasil
+- 🍽️ **Descobrir restaurantes** locais e suas especialidades
+- ⭐ **Avaliar experiências** de outros viajantes
+- 📅 **Gerenciar reservas** de forma simples
+
+---
+
+## ✨ Funcionalidades
+
+### Para Usuários
+- ✅ Cadastro e login seguro
+- ✅ Busca de hotéis por cidade, preço e avaliação
+- ✅ Sistema de reservas online
+- ✅ Perfil personalizável
+- ✅ Histórico de viagens
+
+### Para Hotéis
+- ✅ Catálogo com mais de 21 hotéis cadastrados
+- ✅ Galeria de fotos
+- ✅ Informações detalhadas (comodidades, preços, localização)
+- ✅ Sistema de avaliações e comentários
+- ✅ Mapa interativo com localização
+
+---
+
+## 🔧 Pré-requisitos
+
+Antes de começar, você precisa ter instalado:
+
+### Obrigatório
+- ✅ **PHP 8.2 ou superior** ([Download](https://www.php.net/downloads))
+- ✅ **Composer** ([Download](https://getcomposer.org/download/))
+- ✅ **MySQL 8.0 ou superior** ([Download](https://dev.mysql.com/downloads/mysql/))
+
+### Opcional
+- ⚡ **XAMPP** (inclui PHP + MySQL) ([Download](https://www.apachefriends.org/))
+- 🎨 **Node.js** (para compilar assets CSS/JS) ([Download](https://nodejs.org/))
+- 📝 **VS Code** (editor recomendado) ([Download](https://code.visualstudio.com/))
+
+---
+
+## 🚀 Instalação Rápida
+
+> **Para quem já tem PHP, Composer e MySQL instalados**
+
+### Opção 1: Instalação Automática ⚡
+
+```bash
+# 1. Clone o projeto
+git clone https://github.com/seu-usuario/bella_back_novo.git
+cd bella_back_novo/back2
+
+# 2. Execute o instalador automático
+composer setup-full
+
+# 3. Inicie o servidor
+composer serve
+```
+
+Pronto! Acesse: **http://localhost:8000** 🎉
+
+---
+
+### Opção 2: Instalação Manual Simplificada
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/bella_back_novo.git
+cd bella_back_novo/back2
+
+# 2. Instale as dependências
+composer install
+
+# 3. Configure o ambiente
+cp .env.example .env
+php artisan key:generate
+
+# 4. Configure o banco de dados no arquivo .env
+# Abra o arquivo .env e edite:
+DB_DATABASE=bella_avventura
+DB_USERNAME=root
+DB_PASSWORD=sua_senha
+
+# 5. Crie as tabelas do banco
+php artisan migrate
+
+# 6. Inicie o servidor
+php artisan serve
+```
+
+Acesse: **http://localhost:8000** ✅
+
+---
+
+## 📚 Instalação Detalhada (Passo a Passo)
+
+### 1️⃣ Instalar XAMPP (se não tiver PHP/MySQL)
+
+1. Baixe o XAMPP: https://www.apachefriends.org/
+2. Instale e inicie **Apache** e **MySQL** pelo painel de controle
+3. Verifique se está funcionando acessando: http://localhost/phpmyadmin
+
+---
+
+### 2️⃣ Instalar Composer
+
+1. Baixe: https://getcomposer.org/download/
+2. Execute o instalador
+3. Teste no terminal:
+```bash
+composer --version
 ```
 
 ---
 
-## 📋 **Requisitos do Sistema**
+### 3️⃣ Baixar o Projeto
 
-### **Ambiente de Desenvolvimento**
-| Tecnologia | Versão Mínima | Recomendada |
-|------------|---------------|-------------|
-| PHP | 8.0.x | 8.2.x |
-| Composer | 2.0+ | 2.6+ |
-| MySQL | 8.0+ | 8.0+ |
-| Node.js | 16.x+ | 18.x+ |
-| NPM | 8.x+ | 9.x+ |
-
-### **Extensões PHP Obrigatórias**
+**Opção A: Usando Git**
 ```bash
-- OpenSSL PHP Extension
-- PDO PHP Extension
-- Mbstring PHP Extension
-- Tokenizer PHP Extension
-- XML PHP Extension
-- Ctype PHP Extension
-- JSON PHP Extension
-- BCMath PHP Extension
+git clone https://github.com/seu-usuario/bella_back_novo.git
+cd bella_back_novo/back2
 ```
+
+**Opção B: Download manual**
+1. Baixe o ZIP do GitHub
+2. Extraia para `C:\xampp\htdocs\bella_back_novo`
+3. Abra o terminal na pasta `back2`
 
 ---
 
-## ⚡ **Instalação & Configuração**
+### 4️⃣ Instalar Dependências
 
-### **1. Clonagem do Repositório**
 ```bash
-git clone https://github.com/AgnaldoScaion/bella_back_novo.git
-cd bella_back_novo
-```
-
-### **2. Instalação de Dependências**
-```bash
-# Produção otimizada
-composer install --optimize-autoloader --no-dev --prefer-dist
-
-# Desenvolvimento
 composer install
 ```
 
-### **3. Configuração de Ambiente**
+Se aparecer erro, tente:
 ```bash
-# Copia template de configuração
-cp .env.example .env
-
-# Gera chave de criptografia da aplicação
-php artisan key:generate --ansi
+composer install --ignore-platform-reqs
 ```
 
-### **4. Configuração do Banco de Dados**
+---
+
+### 5️⃣ Configurar o Ambiente
+
 ```bash
-# Arquivo .env - Configurações críticas
+# Copiar arquivo de configuração
+cp .env.example .env
+
+# Gerar chave de segurança
+php artisan key:generate
+```
+
+---
+
+### 6️⃣ Configurar Banco de Dados
+
+1. **Criar o banco de dados:**
+   - Acesse: http://localhost/phpmyadmin
+   - Clique em "Novo"
+   - Digite: `bella_avventura`
+   - Clique em "Criar"
+
+2. **Configurar o arquivo `.env`:**
+
+Abra o arquivo `.env` e edite estas linhas:
+
+```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=bella_avventura
-DB_USERNAME=your_username
-DB_PASSWORD=your_secure_password
+DB_USERNAME=root
+DB_PASSWORD=           # Deixe vazio se não tiver senha
 ```
 
-### **5. Execução de Migrações**
-```bash
-# Estrutura do banco
-php artisan migrate --force
+---
 
-# Com dados de exemplo (desenvolvimento)
+### 7️⃣ Criar as Tabelas
+
+```bash
+php artisan migrate
+```
+
+**Quer popular com dados de exemplo?**
+```bash
+php artisan db:seed
+```
+
+---
+
+### 8️⃣ Iniciar o Servidor
+
+```bash
+php artisan serve
+```
+
+Você verá algo como:
+```
+Server running on [http://127.0.0.1:8000]
+```
+
+**Acesse no navegador:** http://localhost:8000 🎉
+
+---
+
+## 🛠️ Comandos Úteis
+
+### Instalação e Setup
+```bash
+# Setup básico (sem banco)
+composer setup
+
+# Setup completo (com banco + dados)
+composer setup-full
+
+# Limpar cache
+composer clean
+```
+
+### Servidor
+```bash
+# Iniciar servidor
+composer serve
+# ou
+php artisan serve
+
+# Servidor com porta customizada
+php artisan serve --port=8080
+```
+
+### Banco de Dados
+```bash
+# Criar tabelas
+php artisan migrate
+
+# Resetar banco (APAGA TUDO!)
+composer fresh
+# ou
 php artisan migrate:fresh --seed
+
+# Popular com dados de teste
+php artisan db:seed
 ```
 
----
-
-## 🚀 **Scripts de Automação**
-
-### **Limpeza Completa do Cache**
+### Desenvolvimento
 ```bash
-#!/bin/bash
-# Script: clear-cache.sh
-
+# Limpar cache
 php artisan optimize:clear
-php artisan cache:clear
-php artisan config:clear
-php artisan route:clear
-php artisan view:clear
-php artisan queue:clear
-composer dump-autoload -o
-echo "✅ Cache limpo e aplicação otimizada!"
+
+# Ver rotas disponíveis
+php artisan route:list
+
+# Criar um controller
+php artisan make:controller NomeController
+
+# Criar um model com migration
+php artisan make:model NomeModel -m
 ```
 
-### **Build de Produção**
+---
+
+## ❓ Problemas Comuns
+
+### ❌ "composer: command not found"
+**Solução:** Composer não está instalado ou não está no PATH.
+- Windows: Reinstale o Composer e marque "Add to PATH"
+- Linux/Mac: `sudo apt install composer` ou `brew install composer`
+
+---
+
+### ❌ "Class 'PDO' not found"
+**Solução:** Extensão PHP não ativada.
+
+Edite o arquivo `php.ini` e remova o `;` destas linhas:
+```ini
+extension=pdo_mysql
+extension=mysqli
+```
+
+Reinicie o Apache/XAMPP.
+
+---
+
+### ❌ "Access denied for user 'root'@'localhost'"
+**Solução:** Senha do MySQL incorreta.
+
+No arquivo `.env`, ajuste:
+```env
+DB_USERNAME=root
+DB_PASSWORD=      # Deixe vazio ou coloque a senha correta
+```
+
+---
+
+### ❌ "SQLSTATE[HY000] [2002] Connection refused"
+**Solução:** MySQL não está rodando.
+
+- **XAMPP:** Inicie o MySQL pelo painel de controle
+- **Linux:** `sudo service mysql start`
+- **Mac:** `brew services start mysql`
+
+---
+
+### ❌ Porta 8000 já está em uso
+**Solução:** Use outra porta:
 ```bash
-#!/bin/bash
-# Script: production-build.sh
-
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan event:cache
-composer install --optimize-autoloader --no-dev
-echo "🚀 Build de produção concluído!"
+php artisan serve --port=8080
 ```
 
 ---
 
-## 📊 **Arquitetura & Padrões**
+### ❌ "The stream or file could not be opened"
+**Solução:** Permissões de pasta.
 
-### **Estrutura de Diretórios**
-```
-app/
-├── Http/Controllers/     # Controllers da API
-├── Models/              # Modelos Eloquent
-├── Repositories/        # Repository Pattern
-├── Services/           # Lógica de negócio
-├── Exceptions/         # Exception handlers
-└── Providers/          # Service Providers
-
-database/
-├── migrations/         # Schema do banco
-├── seeders/           # Dados iniciais
-└── factories/         # Model factories
-
-tests/
-├── Feature/           # Testes de integração
-└── Unit/             # Testes unitários
-```
-
-### **Convenções de Código**
-- **PSR-12** - Padrão de codificação PHP
-- **SOLID Principles** - Princípios de design
-- **Repository Pattern** - Abstração de dados
-- **Service Layer** - Separação de responsabilidades
-
----
-
-## 🔒 **Segurança & Performance**
-
-### **Configurações de Segurança**
+**Windows:**
 ```bash
-# Headers de segurança
-SECURE_HEADERS=true
-HTTPS_ONLY=true
-CSRF_PROTECTION=enabled
-
-# Rate Limiting
-API_RATE_LIMIT=60/min
-AUTH_RATE_LIMIT=5/min
+icacls storage /grant Users:F /T
+icacls bootstrap/cache /grant Users:F /T
 ```
 
-### **Otimizações de Performance**
+**Linux/Mac:**
 ```bash
-# Cache de configuração
-php artisan config:cache
-
-# Cache de rotas
-php artisan route:cache
-
-# Cache de views Blade
-php artisan view:cache
-
-# Otimização do autoloader
-composer dump-autoload --optimize --classmap-authoritative
+chmod -R 775 storage bootstrap/cache
+chown -R $USER:www-data storage bootstrap/cache
 ```
 
 ---
 
-## 🧪 **Testes & Qualidade**
+## 🧰 Tecnologias
 
-### **Execução de Testes**
-```bash
-# Suite completa
-php artisan test
+### Backend
+- **Laravel 12.x** - Framework PHP moderno
+- **PHP 8.2+** - Linguagem de programação
+- **MySQL 8.0+** - Banco de dados relacional
 
-# Testes com cobertura
-php artisan test --coverage
+### Frontend
+- **Blade Templates** - Engine de templates do Laravel
+- **Bootstrap 5** - Framework CSS responsivo
+- **Font Awesome 6** - Biblioteca de ícones
+- **Leaflet.js** - Mapas interativos
+- **JavaScript** - Interatividade
 
-# Testes específicos
-php artisan test --filter UserTest
-```
-
-### **Análise de Código**
-```bash
-# PHPStan - Análise estática
-./vendor/bin/phpstan analyse
-
-# PHP CS Fixer - Formatação
-./vendor/bin/php-cs-fixer fix
-```
+### Ferramentas
+- **Composer** - Gerenciador de dependências PHP
+- **Git** - Controle de versão
+- **XAMPP** - Ambiente de desenvolvimento local
 
 ---
 
-## 🐳 **Docker & Containerização**
 
-### **Docker Compose (Desenvolvimento)**
-```yaml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "8000:8000"
-    environment:
-      - APP_ENV=local
-  
-  mysql:
-    image: mysql:8.0
-    environment:
-      - MYSQL_DATABASE=bella_avventura
-    ports:
-      - "3306:3306"
-```
 
-```bash
-# Inicialização com Docker
-docker-compose up -d
+## 📄 Licença
 
-# Comandos Laravel no container
-docker-compose exec app php artisan migrate
-```
+Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 📈 **Monitoramento & Logs**
+## 📞 Contato
 
-### **Configuração de Logs**
-```bash
-# Canais de log disponíveis
-LOG_CHANNEL=stack
-LOG_STACK=single,daily,slack
-
-# Nível de log em produção
-LOG_LEVEL=error
-```
-
-### **Health Check Endpoint**
-```php
-// Route: /health
-{
-    "status": "ok",
-    "timestamp": "2024-01-15T10:30:00Z",
-    "version": "1.0.0",
-    "database": "connected",
-    "cache": "active"
-}
-```
+- 📧 **Email:** spectraldevteam@gmail.com
+- 🌐 **Website:** [Ainda em Desenvolvimento](https://agnaldoscaion.netlify.app)
+- 🐙 **GitHub:** [Seu GitHub](https://github.com/AgnaldoScaion)
 
 ---
 
-## 🚦 **Pipeline CI/CD**
 
-### **GitHub Actions**
-```yaml
-name: Laravel CI/CD
-on: [push, pull_request]
+## 📸 Screenshots
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-      - name: Run Tests
-        run: php artisan test
-```
+### Página Inicial (Sem Cadastro)
+![Home](https://i.ibb.co/V0CbCVdZ/image.png)
+
+### Seleção de Destinos
+![Detalhes](https://i.ibb.co/Myh6cbYj/image.png)
 
 ---
 
-## 🔗 **Recursos & Documentação**
+<p align="center">
+  Desenvolvido com ❤️ pela equipe <strong>Bella Avventura</strong>
+</p>
 
-### **Links Essenciais**
-- 📚 [Laravel Documentation](https://laravel.com/docs)
-- 🏗️ [Architecture Guide](https://laravel.com/docs/structure)
-- 🚀 [Deployment Guide](https://laravel.com/docs/deployment)
-- 🔒 [Security Best Practices](https://laravel.com/docs/security)
-
-### **Ferramentas Recomendadas**
-- **IDE**: PhpStorm, VS Code
-- **Debug**: Laravel Debugbar, Telescope
-- **API**: Postman, Insomnia
-- **DB**: TablePlus, phpMyAdmin
-
----
-
-## 🤝 **Contribuição & Desenvolvimento**
-
-### **Fluxo de Trabalho**
-1. **Fork** o repositório
-2. Crie uma **branch** para sua feature (`git checkout -b feature/nova-funcionalidade`)
-3. **Commit** suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
-4. **Push** para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um **Pull Request**
-
-### **Convenções de Commit**
-```bash
-feat: nova funcionalidade
-fix: correção de bug
-docs: atualização de documentação
-style: formatação de código
-refactor: refatoração
-test: adição de testes
-chore: tarefas de manutenção
-```
-
----
-
-## 📞 **Suporte & Comunidade**
-
-### **Canais de Comunicação**
-- 🐛 **Issues**: [GitHub Issues](https://github.com/AgnaldoScaion/bella_back_novo/issues)
-- 💬 **Discussões**: [GitHub Discussions](https://github.com/AgnaldoScaion/bella_back_novo/discussions)
-- 📧 **Email**: spectraldevteam@gmail.com
-
-### **Status do Projeto**
-![GitHub last commit](https://img.shields.io/github/last-commit/AgnaldoScaion/bella_back_novo?style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues/AgnaldoScaion/bella_back_novo?style=flat-square)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/AgnaldoScaion/bella_back_novo?style=flat-square)
-
----
-
-<div align="center">
-
-**Desenvolvido com 💜 pela equipe Spectral**
-
-⭐ **Star este repositório se ele foi útil para você!**
-
-[![GitHub stars](https://img.shields.io/github/stars/AgnaldoScaion/bella_back_novo?style=social)](https://github.com/AgnaldoScaion/bella_back_novo)
-[![GitHub forks](https://img.shields.io/github/forks/AgnaldoScaion/bella_back_novo?style=social)](https://github.com/AgnaldoScaion/bella_back_novo)
-
-</div>
+<p align="center">
+  <a href="#-bella-avventura---plataforma-de-turismo">⬆ Voltar ao topo</a>
+</p>
