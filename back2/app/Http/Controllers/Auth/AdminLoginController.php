@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 use Twilio\Rest\Client;
+use App\Http\Controllers\Controller;
 
 class AdminLoginController extends Controller
 {
