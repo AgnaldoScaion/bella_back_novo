@@ -21,7 +21,7 @@ class FeedbackController extends Controller
 
     public function index()
     {
-        $feedbacks = Feedback::where('user_id', Auth::id())
+        $feedbacks = Feedback::with('user')
             ->orderBy('created_at', 'desc')
             ->get();
         return response()->json($feedbacks);
