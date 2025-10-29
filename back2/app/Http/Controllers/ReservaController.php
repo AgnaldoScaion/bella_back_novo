@@ -122,26 +122,8 @@ class ReservaController extends Controller
                 'status' => 'pendente'
             ]);
 
-            // Enviar email de confirmação
+            // Email desabilitado para teste de loading
             $emailEnviado = false;
-            if (Auth::check() && Auth::user()->email) {
-                try {
-                    Mail::to(Auth::user()->email)->send(new ReservaConfirmacao($reserva));
-                    $emailEnviado = true;
-                    \Log::info('Email de confirmação enviado com sucesso', [
-                        'reserva_id' => $reserva->id,
-                        'email' => Auth::user()->email
-                    ]);
-                } catch (\Exception $e) {
-                    // Log do erro mas não quebra o fluxo
-                    \Log::error('Erro ao enviar email de confirmação', [
-                        'reserva_id' => $reserva->id,
-                        'email' => Auth::user()->email,
-                        'erro' => $e->getMessage(),
-                        'trace' => $e->getTraceAsString()
-                    ]);
-                }
-            }
 
             $mensagem = 'Reserva realizada com sucesso!';
             if ($emailEnviado) {

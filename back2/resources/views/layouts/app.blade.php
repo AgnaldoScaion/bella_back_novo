@@ -13,6 +13,17 @@
 
     <!-- Estilos globais para layout e notificações -->
     <style>
+        /* Animação menu hamburguer global */
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+            color: #2d5016;
+        }
+        .menu-icon:hover {
+            transform: scale(1.2) rotate(90deg);
+            color: #5a8f3d;
+        }
         .wrapper {
             display: flex;
             flex-direction: column;
