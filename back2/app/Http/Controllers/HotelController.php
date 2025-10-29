@@ -135,9 +135,9 @@ class HotelController extends Controller
             'precoTexto' => "R$ 880",
             'cidade' => "rj",
             'imagem' => "https://i.ibb.co/V0DXvrSj/hotel-atlantico-business.jpg",
-            'prato' => "https://spcity.com.br/wp-content/uploads/2017/11/capim-santo.jpg",
-            'ambiente' => "https://media-cdn.tripadvisor.com/media/photo-m/1280/29/0d/e0/2c/nosso-espaco-interno.jpg",
-            'sobremesas' => "https://duogourmet-images.s3.us-east-2.amazonaws.com/restaurants/63e15d16dd61931740f887f3/cover.jpg?v=202303021143",
+            'prato' => "https://images.unsplash.com/photo-1519125323398-675f0ddb6308", // Quarto hotel moderno
+            'ambiente' => "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", // Praia Copacabana
+            'sobremesas' => "https://images.unsplash.com/photo-1464983953574-0892a716854b", // Banheiro moderno
             'avaliacoes' => 6362,
             'rota' => "hoteis.atlantico-copacabana-rj",
             'categoria' => "premium",
@@ -155,9 +155,9 @@ class HotelController extends Controller
             'precoTexto' => "R$ 780",
             'cidade' => "rj",
             'imagem' => "https://i.ibb.co/NgCYTM38/praia-hotel.jpg",
-            'prato' => "https://spcity.com.br/wp-content/uploads/2017/11/capim-santo.jpg",
-            'ambiente' => "https://media-cdn.tripadvisor.com/media/photo-m/1280/29/0d/e0/2c/nosso-espaco-interno.jpg",
-            'sobremesas' => "https://duogourmet-images.s3.us-east-2.amazonaws.com/restaurants/63e15d16dd61931740f887f3/cover.jpg?v=202303021143",
+            'prato' => "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg", // Quarto de hotel com vista para praia
+            'ambiente' => "https://images.unsplash.com/photo-1465156799763-2c087c332922", // Praia tropical
+            'sobremesas' => "https://images.pexels.com/photos/1457845/pexels-photo-1457845.jpeg", // Banheiro clean
             'avaliacoes' => 3695,
             'rota' => "hoteis.atlantico-praia-rj",
             'categoria' => "premium",
@@ -175,9 +175,9 @@ class HotelController extends Controller
             'precoTexto' => "R$ 680",
             'cidade' => "rs",
             'imagem' => "https://i.ibb.co/Pzj4B8sY/hotel-continental.jpg",
-            'prato' => "https://spcity.com.br/wp-content/uploads/2017/11/capim-santo.jpg",
-            'ambiente' => "https://media-cdn.tripadvisor.com/media/photo-m/1280/29/0d/e0/2c/nosso-espaco-interno.jpg",
-            'sobremesas' => "https://duogourmet-images.s3.us-east-2.amazonaws.com/restaurants/63e15d16dd61931740f887f3/cover.jpg?v=202303021143",
+            'prato' => "https://images.unsplash.com/photo-1503676382389-4809596d5290", // Quarto hotel urbano
+            'ambiente' => "https://images.unsplash.com/photo-1465101046530-73398c7f28ca", // Vista urbana Porto Alegre
+            'sobremesas' => "https://images.unsplash.com/photo-1507089947368-19c1da9775ae", // Banheiro hotel
             'avaliacoes' => 3281,
             'rota' => "hoteis.continental-rs",
             'categoria' => "medio",
@@ -195,9 +195,9 @@ class HotelController extends Controller
             'precoTexto' => "R$ 680",
             'cidade' => "pr",
             'imagem' => "https://i.ibb.co/5Xr5wYRn/hotel-gold.jpg",
-            'prato' => "https://spcity.com.br/wp-content/uploads/2017/11/capim-santo.jpg",
-            'ambiente' => "https://media-cdn.tripadvisor.com/media/photo-m/1280/29/0d/e0/2c/nosso-espaco-interno.jpg",
-            'sobremesas' => "https://duogourmet-images.s3.us-east-2.amazonaws.com/restaurants/63e15d16dd61931740f887f3/cover.jpg?v=202303021143",
+            'prato' => "https://images.unsplash.com/photo-1519710164239-da123dc03ef4", // Quarto hotel aconchegante
+            'ambiente' => "https://images.unsplash.com/photo-1501785888041-af3ef285b470", // Natureza Paraná
+            'sobremesas' => "https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg", // Banheiro clean
             'avaliacoes' => 58,
             'rota' => "hoteis.goldmen-express-pr",
             'categoria' => "medio",

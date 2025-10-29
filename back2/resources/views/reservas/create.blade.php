@@ -11,7 +11,7 @@
         --primary-bg: #f3f7f3;
         --border-color: #e5f2e5;
         --text-dark: #1a1a1a;
-        --text-medium: #4a4a4a;
+        --text-medium: #4a4a4a; 
         --text-light: #ffffff;
         --shadow-soft: 0 2px 15px rgba(45, 80, 22, 0.08);
         --shadow-medium: 0 8px 30px rgba(45, 80, 22, 0.12);
