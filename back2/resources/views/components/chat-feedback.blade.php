@@ -509,16 +509,20 @@ messageInput.addEventListener('keypress', (e) => {
     }
 });
 setTimeout(() => {
-  const tutorial = document.getElementById('chat-tutorial');
-  if (tutorial) tutorial.style.display = 'flex';
+  if (localStorage.getItem('chatTutorialClosed') !== '1') {
+    const tutorial = document.getElementById('chat-tutorial');
+    if (tutorial) tutorial.style.display = 'flex';
+  }
 }, 1200);
 document.getElementById('chatToggle').addEventListener('click', () => {
   const tutorial = document.getElementById('chat-tutorial');
   if (tutorial) tutorial.style.display = 'none';
+  localStorage.setItem('chatTutorialClosed', '1');
 });
 document.getElementById('close-tutorial').addEventListener('click', () => {
   const tutorial = document.getElementById('chat-tutorial');
   if (tutorial) tutorial.style.display = 'none';
+  localStorage.setItem('chatTutorialClosed', '1');
 });
 </script>
 <!-- Fim do Chat Popup -->
