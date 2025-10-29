@@ -10,6 +10,7 @@ use App\Http\Controllers\PontoTuristicoController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\ChatController;
 
 // Rotas de autenticação
 Route::middleware('guest')->group(function () {
@@ -35,6 +36,11 @@ Route::middleware('auth')->group(function () {
     // Rotas de feedback multiusuário
     Route::get('/api/feedbacks', [FeedbackController::class, 'index']);
     Route::post('/api/feedbacks', [FeedbackController::class, 'store']);
+
+    // Rotas do chat
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/messages', [ChatController::class, 'getMessages'])->name('chat.messages');
+    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
 });
 
 // Rotas públicas de Reservas (não requerem autenticação)

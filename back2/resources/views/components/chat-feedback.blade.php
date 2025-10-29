@@ -1,4 +1,3 @@
-
 <style>
 /* ... CSS do chat-feedback.css aqui ... */
 @keyframes pulse-badge {
@@ -25,28 +24,29 @@
   display: block !important;
 }
 .cf-btn {
-  background: linear-gradient(135deg, #2d5016, #5a8f3d);
+  background: linear-gradient(135deg, #5a8f3d, #2d5016);
   border-radius: 50%;
-  box-shadow: 0 4px 20px rgba(45, 80, 22, 0.3);
-  width: 65px;
-  height: 65px;
+  box-shadow: 0 4px 16px rgba(45,80,22,0.18), 0 0 0 2px #fff;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
+  border: 2px solid #fff;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: visible;
-  animation: float 3s ease-in-out infinite;
+  position: fixed;
+  left: 30px !important;
+  right: auto !important;
+  bottom: 30px !important;
+  animation: float 2.5s ease-in-out infinite;
   z-index: 100000 !important;
-  display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
 .cf-btn:hover {
-  transform: scale(1.1) translateY(-2px);
-  box-shadow: 0 8px 30px rgba(45, 80, 22, 0.4);
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 24px rgba(45,80,22,0.22);
 }
 .cf-btn:active .cf-ripple {
   animation: ripple 0.6s ease-out;
@@ -88,26 +88,15 @@
   transition: transform 0.3s ease;
 }
 .cf-popup {
-  display: none;
-  position: fixed;
-  left: 20px;
-  bottom: 15px;
-  width: min(420px, calc(100vw - 40px));
-  max-width: 420px;
-  background: rgba(30,40,30,0.82);
-  border-radius: 32px;
-  box-shadow: 0 10px 40px 0 rgba(45, 80, 22, 0.25), 0 0 0 1.5px #5a8f3d;
-  overflow: visible;
-  max-height: calc(100vh - 60px);
-  display: flex;
-  flex-direction: column;
-  transform: translateY(20px) scale(0.97);
-  opacity: 0;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(16px) saturate(1.2);
-  z-index: 100001 !important;
-  border: 1.5px solid #5a8f3d;
-  visibility: visible !important;
+  background: #f8fdf8;
+  border-radius: 18px;
+  box-shadow: 0 12px 48px rgba(45,80,22,0.10), 0 0 0 2px #e5f2e5;
+  border: 2px solid #e5f2e5;
+  padding: 0;
+  max-width: 380px;
+  min-width: 220px;
+  width: 100%;
+  margin: 0;
   opacity: 1 !important;
 }
 .cf-popup.show {
@@ -117,117 +106,128 @@
   pointer-events: auto;
 }
 .cf-header {
-  background: linear-gradient(135deg, #2d5016, #5a8f3d);
-  padding: 20px;
+  background: linear-gradient(135deg, #5a8f3d 80%, #e5f2e5 100%);
   color: #fff;
-  position: relative;
-  overflow: hidden;
-  border-radius: 32px 32px 0 0;
-}
-.cf-header-bg {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 6px 6px;
-  opacity: 0.18;
-  pointer-events: none;
-}
-.cf-header-content {
-  position: relative;
-  z-index: 1;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 2px 12px rgba(45,80,22,0.10);
+  padding: 18px 0 12px 0;
+  font-size: 1.08em;
+  min-height: 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #e5f2e5;
 }
 .cf-title {
-  margin: 0;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  color: #2d5016;
+  margin: 0;
+  text-align: center;
 }
 .cf-subtitle {
-  margin: 8px 0 0;
-  font-size: 14px;
-  opacity: 0.9;
-  font-weight: 400;
+  font-size: 13px;
+  color: #6b7280;
+  opacity: 0.85;
+  margin: 2px 0 0 0;
+  text-align: center;
+}
+.cf-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
 }
 .cf-tabs {
+  padding: 6px 0 6px 0;
+  gap: 6px;
+  border-radius: 0;
+  background: #f7fafc;
+  justify-content: center;
   display: flex;
-  background: linear-gradient(135deg, #f8fdf8, #f3f7f3);
-  border-bottom: 1px solid rgba(45, 80, 22, 0.1);
-  padding: 6px;
-  gap: 8px;
 }
 .feedback-tab {
-  flex: 1;
-  padding: 12px 8px;
-  border: none;
-  background: transparent;
-  font-size: 13px;
-  font-weight: 600;
-  color: #6b7280;
-  border-radius: 12px;
-  cursor: pointer;
-  margin: 0 2px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  min-width: 0;
+  transition: background 0.2s, color 0.2s;
 }
-.feedback-tab.active {
-  background: #fff !important;
+.feedback-tab.active, .feedback-tab:hover {
+  background: #e5f2e5 !important;
   color: #2d5016 !important;
-  box-shadow: 0 4px 12px rgba(45, 80, 22, 0.15) !important;
-}
-.feedback-tab:hover {
-  background: #fff !important;
-  color: #2d5016 !important;
-  box-shadow: 0 4px 12px rgba(45, 80, 22, 0.15) !important;
-  transform: translateY(-1px);
+  border-color: #5a8f3d !important;
 }
 .cf-list {
-  flex: 1 1 auto;
-  min-height: 0;
-  max-height: 32vh;
+  background: transparent;
+  border-radius: 0;
+  padding: 10px 8px 10px 8px;
+  box-shadow: none;
+  max-height: 30vh;
+  min-height: 60px;
   overflow-y: auto;
-  padding: 6px 8px 8px 8px;
-  background: linear-gradient(135deg, rgba(60,80,60,0.10), rgba(40,60,40,0.08));
-  position: relative;
-  border-radius: 24px 24px 0 0;
+}
+.feedback-message.cf-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(45,80,22,0.06);
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cf-avatar {
+  background: #5a8f3d;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
 }
 .cf-footer {
-  padding: 12px 16px 16px 16px;
-  background: rgba(255,255,255,0.92);
-  border-top: 1.5px solid #5a8f3d;
-  border-radius: 0 0 32px 32px;
-  flex-shrink: 0;
-  box-shadow: 0 2px 12px 0 rgba(45,80,22,0.07);
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: none;
+  padding: 12px 12px 14px 12px;
+  border-top: 1px solid #e5e7eb;
 }
 .cf-select, .cf-input, .cf-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 16px;
-  border: 1.5px solid #5a8f3d;
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #2d5016;
-  background: linear-gradient(135deg, #f8fdf8, #fff);
-  font-weight: 500;
-  transition: all 0.2s;
-  box-shadow: 0 1px 4px 0 rgba(45,80,22,0.06);
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 7px 10px;
+  margin-bottom: 7px;
+  border: 1px solid #e5e7eb;
+  background: #f7fafc;
+  color: #374151;
+}
+.cf-select:focus, .cf-input:focus, .cf-textarea:focus {
+  border-color: #5a8f3d;
+  outline: none;
 }
 .cf-rating-box {
-  margin-bottom: 8px;
-  background: linear-gradient(135deg, #f8fdf8, #fff);
-  padding: 10px;
-  border-radius: 16px;
-  border: 1.5px solid #5a8f3d;
-  box-shadow: 0 1px 4px 0 rgba(45,80,22,0.06);
+  margin-bottom: 7px;
+  background: #f7fafc;
+  padding: 7px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
 }
 .cf-label {
-  font-size: 13px;
+  font-size: 12px;
   color: #2d5016;
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
+  margin-bottom: 4px;
 }
 .cf-stars {
   display: flex;
@@ -247,321 +247,278 @@
   animation: bounce 0.3s ease;
 }
 .cf-send-btn {
-  margin-top: 8px;
-  width: 100%;
-  background: linear-gradient(135deg, #2d5016 60%, #5a8f3d 100%);
+  background: linear-gradient(90deg, #5a8f3d 80%, #3a6c2f 100%);
   color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 8px;
+  margin-top: 6px;
+  box-shadow: 0 2px 8px 0 rgba(45, 80, 22, 0.08);
   border: none;
-  border-radius: 16px;
-  padding: 12px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 700;
-  transition: all 0.18s;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 16px 0 rgba(45, 80, 22, 0.18);
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  width: 100%;
+  transition: background 0.2s;
 }
 .cf-send-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(45, 80, 22, 0.4) !important;
+  background: linear-gradient(90deg, #3a6c2f 80%, #5a8f3d 100%);
 }
-.cf-send-btn:active {
-  transform: translateY(0);
-}
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .cf-popup {
-    width: calc(100vw - 30px) !important;
-    left: 15px !important;
-    bottom: 90px !important;
+    width: calc(100vw - 6px) !important;
+    left: 3px !important;
+    bottom: 50px !important;
+    min-width: 0;
+    max-width: 100vw;
   }
-  .cf-btn {
-    width: 55px !important;
-    height: 55px !important;
-    left: 20px !important;
-    bottom: 20px !important;
+  .cf-header {
+    padding: 8px 0 6px 0;
+    font-size: 0.92em;
+    min-height: 24px;
   }
-  .feedback-tab {
-    font-size: 11px !important;
-    padding: 10px 6px !important;
+  .cf-list {
+    padding: 6px 2px 6px 2px;
+    max-height: 22vh;
+  }
+  .cf-footer {
+    padding: 8px 4px 10px 4px;
   }
 }
-@media (max-width: 360px) {
-  .feedback-tab span {
-    font-size: 10px !important;
+@media (max-width: 400px) {
+  .cf-popup {
+    min-width: 0;
+    max-width: 100vw;
+    left: 0 !important;
+    right: 0 !important;
   }
+}
+/* ...existing code... */
+
+/* Adiciona estilo direto ao botão do toggle */
+#chatToggle {
+  background: linear-gradient(135deg, #5a8f3d, #2d5016) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 16px rgba(45,80,22,0.18), 0 0 0 2px #fff !important;
+  width: 60px !important;
+  height: 60px !important;
+  border: 2px solid #fff !important;
+  position: fixed !important;
+  left: 30px !important;
+  right: auto !important;
+  bottom: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 100000 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  opacity: 1 !important;
+}
+#chatToggle:hover {
+  transform: scale(1.08) translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(45,80,22,0.22) !important;
+}
+#chatToggle svg {
+  width: 28px !important;
+  height: 28px !important;
+  color: #fff !important;
+}
+#chatPopup {
+  left: 30px !important;
+  right: auto !important;
+  bottom: 100px !important;
+  position: fixed !important;
+}
+
+/* Ajusta o container interno do popup para garantir alinhamento à esquerda */
+#chatPopup > div {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+#chat-tutorial {
+  left: 100px !important;
+  right: auto !important;
+  bottom: 40px !important;
+  position: fixed !important;
 }
 </style>
 
-<div id="chat-feedback" class="cf-fixed">
-  <button id="chat-feedback-btn" class="cf-btn" aria-label="Abrir chat de comentários">
-    <span class="cf-btn-bg"></span>
-    <!-- Ícone de chat -->
-    <svg width="32" height="32" fill="#fff" viewBox="0 0 24 24" class="cf-btn-icon"><path d="M12 3C6.48 3 2 6.92 2 12c0 2.08.8 3.98 2.13 5.5L2 21l3.67-1.1C7.6 20.6 9.72 21 12 21c5.52 0 10-3.92 10-9s-4.48-9-10-9zm0 16c-2.01 0-3.89-.5-5.33-1.36l-.38-.23-2.09.62.62-2.09-.23-.38C4.5 15.89 4 13.99 4 12c0-4.08 4.03-7 8-7s8 2.92 8 7-4.03 7-8 7z"/></svg>
-    <span id="chat-feedback-badge" class="cf-badge"></span>
-    <span id="chat-ripple" class="cf-ripple"></span>
-  </button>
-
-  <div id="chat-feedback-popup" class="cf-popup" style="display: none;">
-    <div class="cf-header">
-      <span class="cf-header-bg"></span>
-      <button id="chat-feedback-close" style="position:absolute;top:12px;right:16px;background:transparent;border:none;color:#fff;font-size:22px;cursor:pointer;z-index:2;line-height:1;">&times;</button>
-      <div class="cf-header-content">
-        <h3 class="cf-title">🌟 Chat de Comentários</h3>
-        <p class="cf-subtitle">Compartilhe suas experiências de viagem</p>
-      </div>
-    </div>
-    <div class="cf-tabs">
-      <button class="feedback-tab active" data-category="geral"><span>🌍 Geral</span></button>
-      <button class="feedback-tab" data-category="restaurante"><span>🍽️ Restaurante</span></button>
-      <button class="feedback-tab" data-category="hotel"><span>🏨 Hotel</span></button>
-    </div>
-    <div id="chat-feedback-list" class="cf-list"></div>
-    <div class="cf-footer">
-      <select id="chat-feedback-category" class="cf-select">
-        <option value="geral">🌍 Experiência Geral</option>
-        <option value="restaurante">🍽️ Restaurante</option>
-        <option value="hotel">🏨 Hotel</option>
-      </select>
-      <input id="chat-feedback-location" class="cf-input" placeholder="📍 Nome do local (ex: Restaurante Bella Vista)">
-      <div class="cf-rating-box">
-        <label class="cf-label">⭐ Como foi sua experiência?</label>
-        <div id="rating-stars" class="cf-stars">
-          <span class="star" data-rating="1">★</span>
-          <span class="star" data-rating="2">★</span>
-          <span class="star" data-rating="3">★</span>
-          <span class="star" data-rating="4">★</span>
-          <span class="star" data-rating="5">★</span>
+<!-- Chat Popup Tecnológico -->
+<button id="chatToggle" style="position:fixed;bottom:30px;right:30px;z-index:999" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110">
+    <svg id="chatIcon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+    </svg>
+    <svg id="closeIcon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+</button>
+<div id="chatPopup" style="display:none;position:fixed;bottom:100px;right:30px;z-index:1000;width:400px;max-width:calc(100vw - 40px);" class="">
+    <div style="background:rgba(30,41,59,0.95);backdrop-filter:blur(8px);border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.18);border:1px solid #334155;overflow:hidden;display:flex;flex-direction:column;height:600px;">
+        <div style="background:rgba(30,41,59,0.7);border-bottom:1px solid #334155;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:10px;">
+                <div style="position:relative;">
+                    <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f472b6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;">AI</div>
+                    <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:#4ade80;border-radius:50%;border:2px solid #1e293b;"></div>
+                </div>
+                <div>
+                    <div style="color:#fff;font-weight:600;font-size:16px;">Assistente Virtual</div>
+                    <div style="color:#4ade80;font-size:12px;">Online</div>
+                </div>
+            </div>
+            <button id="minimizeChat" style="padding:6px;background:transparent;border:none;border-radius:8px;cursor:pointer;">
+                <svg style="width:22px;height:22px;color:#cbd5e1;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
         </div>
-      </div>
-      <textarea id="chat-feedback-text" class="cf-textarea" placeholder="✨ Conte-nos sobre sua experiência... O que mais te impressionou?"></textarea>
-      <button id="chat-feedback-send" class="cf-send-btn">
-        <span class="flex items-center gap-2">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-          Compartilhar Experiência
-        </span>
-      </button>
+        <div id="messagesArea" style="flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;"></div>
+        <div style="background:rgba(30,41,59,0.7);border-top:1px solid #334155;padding:14px 18px;">
+            <form id="chatForm" style="display:flex;align-items:end;gap:10px;">
+                <div style="flex:1;background:rgba(51,65,85,0.5);border-radius:12px;border:1px solid #64748b;">
+                    <textarea id="messageInput" placeholder="Digite sua mensagem..." style="width:100%;background:transparent;color:#fff;padding:10px 12px;outline:none;resize:none;border:none;font-size:14px;max-height:80px;" rows="1"></textarea>
+                </div>
+                <button type="submit" id="sendButton" style="padding:10px;background:linear-gradient(90deg,#a78bfa,#f472b6);border:none;border-radius:12px;box-shadow:0 2px 8px #a78bfa44;cursor:pointer;">
+                    <svg style="width:20px;height:20px;color:#fff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
-
+<div id="chat-tutorial" style="position:fixed;right:100px;bottom:40px;z-index:99999;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(45,80,22,0.10);border:2px solid #5a8f3d;padding:18px 22px;display:flex;align-items:center;gap:14px;animation:fade-in 1s;">
+    <svg style="width:32px;height:32px;color:#5a8f3d;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+    </svg>
+    <div style="color:#2d5016;font-size:16px;font-weight:600;">Clique no botão do chat para tirar dúvidas ou pedir ajuda! 👈</div>
+    <button id="close-tutorial" style="background:transparent;border:none;font-size:22px;color:#5a8f3d;cursor:pointer;">&times;</button>
+</div>
 <script>
-// Chat Feedback Component JS - inline
-document.addEventListener('DOMContentLoaded', () => {
-  let rating = 0;
-  let category = 'geral';
-  // Experiências mock para exibição inicial
-  const feedbacks = [
-    { user: 'Maria Santos', mensagem: 'Plataforma incrível! Consegui organizar toda minha viagem em poucos cliques. Super recomendo! 🌟', category: 'geral', location: null, rating: 5, date: '2025-10-23' },
-    { user: 'João Pedro', mensagem: 'Experiência gastronômica excepcional! O risotto de camarão estava divino e o atendimento impecável. Voltarei com certeza! 🍽️', category: 'restaurante', location: 'Restaurante Bella Vista', rating: 5, date: '2025-10-22' },
-    { user: 'Ana Clara', mensagem: 'Hospedagem maravilhosa! Quartos espaçosos, vista para o mar e café da manhã com produtos locais fresquinhos. 🏨', category: 'hotel', location: 'Hotel Paraíso Tropical', rating: 5, date: '2025-10-21' },
-    { user: 'Carlos Miguel', mensagem: 'Interface muito intuitiva e design moderno. Facilitou muito o planejamento da nossa lua de mel! 💕', category: 'geral', location: null, rating: 5, date: '2025-10-20' },
-    { user: 'Fernanda Lima', mensagem: 'Ambiente aconchegante e pratos autorais deliciosos. A sobremesa de chocolate belga é imperdível! 🍫', category: 'restaurante', location: 'Bistrô do Chef', rating: 4, date: '2025-10-19' },
-    { user: 'Roberto Silva', mensagem: 'Localização perfeita e staff super atencioso. A piscina na cobertura tem uma vista espetacular! 🏊‍♂️', category: 'hotel', location: 'Grand Hotel Central', rating: 5, date: '2025-10-18' },
-    { user: 'Luiza Costa', mensagem: 'Encontrei opções incríveis que não conhecia! A funcionalidade de filtros é muito útil. 🔍', category: 'geral', location: null, rating: 4, date: '2025-10-17' },
-    { user: 'Daniel Oliveira', mensagem: 'Comida italiana autêntica no coração da cidade! O ambiente romântico é perfeito para casais. 🇮🇹', category: 'restaurante', location: 'Trattoria Amore', rating: 5, date: '2025-10-16' }
-  ];
-  // Botão X fecha o chat
-  const closeBtn = document.getElementById('chat-feedback-close');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      popup.classList.remove('show');
-      setTimeout(() => {
-        popup.style.display = 'none';
-        popup.style.pointerEvents = 'none';
-        btn.setAttribute('aria-expanded', 'false');
-        if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
-      }, 100);
-    });
-  }
-  const btn = document.getElementById('chat-feedback-btn');
-  const popup = document.getElementById('chat-feedback-popup');
-  const sendBtn = document.getElementById('chat-feedback-send');
-  const textArea = document.getElementById('chat-feedback-text');
-  const categorySelect = document.getElementById('chat-feedback-category');
-  const locationInput = document.getElementById('chat-feedback-location');
-  const list = document.getElementById('chat-feedback-list');
-  const badge = document.getElementById('chat-feedback-badge');
-  const tabs = document.querySelectorAll('.feedback-tab');
-  const stars = document.querySelectorAll('.star');
-  let pollInterval = null;
-
-  stars.forEach(star => {
-    star.addEventListener('click', () => {
-      rating = parseInt(star.dataset.rating);
-      stars.forEach((s, i) => s.classList.toggle('active', i < rating));
-    });
-  });
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      category = tab.dataset.category;
-      categorySelect.value = category;
-      renderFeedbacks();
-    });
-  });
-
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isVisible = popup.classList.contains('show');
-    if (isVisible) {
-      popup.classList.remove('show');
-      setTimeout(() => {
-        popup.style.display = 'none';
-        popup.style.pointerEvents = 'none';
-        btn.setAttribute('aria-expanded', 'false');
-        if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
-      }, 200);
-    } else {
-      popup.style.display = 'flex';
-      popup.style.pointerEvents = 'auto';
-      btn.setAttribute('aria-expanded', 'true');
-      setTimeout(() => popup.classList.add('show'), 10);
-      fetchFeedbacks();
-      if (!pollInterval) pollInterval = setInterval(fetchFeedbacks, 8000);
+const chatToggle = document.getElementById('chatToggle');
+const chatPopup = document.getElementById('chatPopup');
+const minimizeChat = document.getElementById('minimizeChat');
+const chatIcon = document.getElementById('chatIcon');
+const closeIcon = document.getElementById('closeIcon');
+const messagesArea = document.getElementById('messagesArea');
+const chatForm = document.getElementById('chatForm');
+const messageInput = document.getElementById('messageInput');
+const sendButton = document.getElementById('sendButton');
+let isOpen = false;
+chatToggle.addEventListener('click', () => {
+    isOpen = !isOpen;
+    chatPopup.style.display = isOpen ? 'block' : 'none';
+    chatIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+    if (isOpen) {
+        loadMessages();
+        setTimeout(() => messageInput.focus(), 200);
     }
-  });
-
-  // Fecha o chat ao clicar em qualquer lugar fora do popup
-  document.addEventListener('mousedown', function(e) {
-    if (popup && popup.classList.contains('show')) {
-      if (!popup.contains(e.target) && !btn.contains(e.target)) {
-        popup.classList.remove('show');
+});
+minimizeChat.addEventListener('click', () => {
+    isOpen = false;
+    chatPopup.style.display = 'none';
+    chatIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
+});
+document.addEventListener('mousedown', function(e) {
+    if (isOpen && chatPopup.style.display === 'block') {
+        if (!chatPopup.contains(e.target) && !chatToggle.contains(e.target)) {
+            isOpen = false;
+            chatPopup.style.display = 'none';
+            chatIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        }
+    }
+});
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+async function loadMessages() {
+    try {
+        const response = await fetch('/chat/messages', {
+            headers: { 'X-CSRF-TOKEN': csrfToken }
+        });
+        const messages = await response.json();
+        messagesArea.innerHTML = '';
+        messages.forEach(msg => addMessageToUI(msg));
+        scrollToBottom();
+    } catch (error) { console.error('Erro ao carregar mensagens:', error); }
+}
+chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = messageInput.value.trim();
+    if (!message) return;
+    messageInput.value = '';
+    sendButton.disabled = true;
+    try {
+        showTypingIndicator();
+        const response = await fetch('/chat/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({ message })
+        });
+        const data = await response.json();
+        removeTypingIndicator();
+        addMessageToUI(data.userMessage, true);
         setTimeout(() => {
-          popup.style.display = 'none';
-          popup.style.pointerEvents = 'none';
-          btn.setAttribute('aria-expanded', 'false');
-          if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
-        }, 100);
-      }
+            addMessageToUI(data.botMessage, true);
+            scrollToBottom();
+        }, 500);
+    } catch (error) {
+        console.error('Erro ao enviar mensagem:', error);
+        removeTypingIndicator();
+    } finally {
+        sendButton.disabled = false;
+        messageInput.focus();
     }
-  });
-
-  sendBtn.addEventListener('click', () => {
-    const msg = textArea.value.trim();
-    const cat = categorySelect.value;
-    const loc = locationInput.value.trim();
-    if (!msg || !rating) return alert('Preencha o feedback e a avaliação!');
-    if ((cat === 'restaurante' || cat === 'hotel') && !loc) return alert('Informe o nome do local!');
-    sendBtn.disabled = true;
-    sendBtn.textContent = 'Enviando...';
-    fetch('/api/feedbacks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-      },
-      body: JSON.stringify({ mensagem: msg, category: cat, location: loc || null, rating })
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('network');
-      return res.json();
-    })
-    .then(() => {
-      textArea.value = '';
-      locationInput.value = '';
-      rating = 0;
-      stars.forEach(s => s.classList.remove('active'));
-      sendBtn.disabled = false;
-      sendBtn.textContent = 'Compartilhar Experiência';
-      fetchFeedbacks();
-    })
-    .catch(() => {
-      sendBtn.disabled = false;
-      sendBtn.textContent = 'Compartilhar Experiência';
-      alert('Erro ao enviar. Tente novamente.');
-    });
-  });
-
-  function renderFeedbacks() {
-    let filtered = feedbacks;
-    if (category && filtered.some(f => f.category)) {
-      filtered = feedbacks.filter(f => f.category === category);
-    }
-    list.innerHTML = filtered.length ? '' : `
-      <div class="cf-empty">
-        <div class="cf-empty-icon">
-          ${category === 'geral' ? '🌍' : category === 'restaurante' ? '🍽️' : '🏨'}
+});
+function addMessageToUI(message, animate = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}${animate ? ' animate-fade-in' : ''}`;
+    messageDiv.innerHTML = `
+        <div style="max-width:80%;border-radius:12px;padding:10px 14px;${message.sender === 'user' ? 'background:linear-gradient(90deg,#e5f2e5 80%,#5a8f3d 100%);color:#2d5016;border-bottom-right-radius:6px;' : 'background:#f3f7f3;color:#374151;border-bottom-left-radius:6px;'}">
+            <div style="font-size:14px;line-height:1.5;">${escapeHtml(message.text)}</div>
+            <div style="font-size:11px;margin-top:4px;${message.sender === 'user' ? 'color:#c6f6d5;' : 'color:#94a3b8;'}">${message.time}</div>
         </div>
-        <p class="cf-empty-title">Ainda não há experiências compartilhadas</p>
-        <p class="cf-empty-desc">Seja o primeiro a contar como foi sua experiência!</p>
-      </div>
     `;
-    filtered.slice(0, 6).forEach((f, index) => {
-      const div = document.createElement('div');
-      div.className = 'feedback-message cf-card';
-      const text = f.mensagem || f.message || f.text || '';
-      const userName = (f.user && (f.user.name || f.user.email)) ? (f.user.name || f.user.email) : (f.user || 'Anônimo');
-      const dateStr = f.created_at || f.date || f.createdAt || new Date().toISOString();
-      div.innerHTML = `
-        <div style="display: flex; gap: 14px; margin-bottom: 14px;">
-          <div class="cf-avatar">
-            ${(userName && userName[0]) ? userName[0].toUpperCase() : 'U'}
-          </div>
-          <div style="flex: 1;">
-            <div style="font-weight: 700; font-size: 15px; color: #2d5016; margin-bottom: 2px;">${userName}</div>
-            ${f.location ? `<div style=\"font-size: 13px; color: #5a8f3d; display: flex; align-items: center; gap: 4px;\"><span>📍</span> ${f.location}</div>` : ''}
-          </div>
-          <div style="font-size: 12px; color: #6b7280; text-align: right;">${new Date(dateStr).toLocaleDateString('pt-BR')}</div>
-        </div>
-        <div style="color: #f59e0b; font-size: 18px; margin-bottom: 12px; filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.3));">${'★'.repeat(f.rating || 0)}${'☆'.repeat(5-(f.rating||0))}</div>
-        <div style="font-size: 14px; color: #374151; line-height: 1.6; background: linear-gradient(135deg, #f8fdf8, transparent); padding: 12px; border-radius: 12px; border-left: 3px solid #5a8f3d;">${text}</div>
-      `;
-      list.appendChild(div);
-      setTimeout(() => {
-        div.style.opacity = '1';
-        div.style.transform = 'translateY(0)';
-      }, index * 150);
-    });
-    badge.textContent = feedbacks.length;
-    badge.style.display = feedbacks.length ? 'flex' : 'none';
-  }
-
-  function fetchFeedbacks() {
-    fetch('/api/feedbacks')
-      .then(r => {
-        if (!r.ok) throw new Error('network');
-        return r.json();
-      })
-      .then(data => {
-        let arr = [];
-        if (Array.isArray(data)) {
-          arr = data;
-        } else if (data && Array.isArray(data.data)) {
-          arr = data.data;
-        } else if (data && Array.isArray(data.feedbacks)) {
-          arr = data.feedbacks;
-        }
-        if (arr.length) {
-          feedbacks.length = 0;
-          arr.forEach(item => {
-            feedbacks.push({
-              id: item.id,
-              user: item.user ? (item.user.name || item.user.email || 'Usuário') : (item.user_name || 'Usuário'),
-              mensagem: item.mensagem || item.message || item.text || '',
-              message: item.mensagem || item.message || item.text || '',
-              category: item.category || 'geral',
-              location: item.location || item.local || null,
-              rating: item.rating || 0,
-              date: item.created_at || item.date || new Date().toISOString()
-            });
-          });
-        }
-        renderFeedbacks();
-      })
-      .catch(() => {
-        renderFeedbacks();
-      });
-  }
-
-  renderFeedbacks();
+    messagesArea.appendChild(messageDiv);
+    scrollToBottom();
+}
+function showTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.id = 'typingIndicator';
+    typingDiv.className = 'flex justify-start animate-fade-in';
+    typingDiv.innerHTML = `<div style='background:rgba(51,65,85,0.7);border-radius:12px;border-bottom-left-radius:4px;padding:10px 14px;'><div style='display:flex;gap:3px;'><div style='width:8px;height:8px;background:#94a3b8;border-radius:50%;animation:bounce 0.6s infinite;'></div><div style='width:8px;height:8px;background:#94a3b8;border-radius:50%;animation:bounce 0.6s infinite 0.2s;'></div><div style='width:8px;height:8px;background:#94a3b8;border-radius:50%;animation:bounce 0.6s infinite 0.4s;'></div></div></div>`;
+    messagesArea.appendChild(typingDiv);
+    scrollToBottom();
+}
+function removeTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) indicator.remove();
+}
+function scrollToBottom() {
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+messageInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.dispatchEvent(new Event('submit'));
+    }
+});
+setTimeout(() => {
+  const tutorial = document.getElementById('chat-tutorial');
+  if (tutorial) tutorial.style.display = 'flex';
+}, 1200);
+document.getElementById('chatToggle').addEventListener('click', () => {
+  const tutorial = document.getElementById('chat-tutorial');
+  if (tutorial) tutorial.style.display = 'none';
+});
+document.getElementById('close-tutorial').addEventListener('click', () => {
+  const tutorial = document.getElementById('chat-tutorial');
+  if (tutorial) tutorial.style.display = 'none';
 });
 </script>
+<!-- Fim do Chat Popup -->

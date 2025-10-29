@@ -702,9 +702,7 @@
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
     </main>
-    @if(Auth::check())
-        @include('components.chat-feedback')
-    @endif
+    @include('components.chat-feedback')
 @endsection
 
 @section('scripts')
