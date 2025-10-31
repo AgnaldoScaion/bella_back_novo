@@ -1,11 +1,17 @@
 # 🌍 Bella Avventura - Plataforma de Turismo
 
-![Bella Avventura](https://i.ibb.co/Vp07k1Gf/image.png)
+<div align="center">
+  <img src="https://i.ibb.co/Vp07k1Gf/image.png" alt="Bella Avventura" width="800" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
+
+<div align="center">
 
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php)](https://php.net)
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=flat-square&logo=mysql)](https://www.mysql.com)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+
+</div>
 
 > **Plataforma completa de turismo** para buscar destinos, reservar hotéis e descobrir experiências incríveis de viagem! 🏨✈️
 
@@ -380,8 +386,6 @@ chown -R $USER:www-data storage bootstrap/cache
 
 ---
 
-
-
 ## 📄 Licença
 
 Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
@@ -396,14 +400,17 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 
 ---
 
-
 ## 📸 Screenshots
 
 ### Página Inicial (Sem Cadastro)
-![Home](https://i.ibb.co/V0CbCVdZ/image.png)
+<div align="center">
+  <img src="https://i.ibb.co/V0CbCVdZ/image.png" alt="Página Inicial" width="900" style="max-width: 100%; border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
 
 ### Seleção de Destinos
-![Detalhes](https://i.ibb.co/Myh6cbYj/image.png)
+<div align="center">
+  <img src="https://i.ibb.co/Myh6cbYj/image.png" alt="Seleção de Destinos" width="900" style="max-width: 100%; border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
 
 ---
 
