@@ -158,4 +158,3 @@
     </div>
 </main>
 @endsection
-            font-family: 'GaramondBold', serif;
