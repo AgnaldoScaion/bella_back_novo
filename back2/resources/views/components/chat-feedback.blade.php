@@ -383,13 +383,6 @@
         </div>
     </div>
 </div>
-<div id="chat-tutorial" style="position:fixed;right:100px;bottom:40px;z-index:99999;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(45,80,22,0.10);border:2px solid #5a8f3d;padding:18px 22px;display:flex;align-items:center;gap:14px;animation:fade-in 1s;">
-    <svg style="width:32px;height:32px;color:#5a8f3d;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-    </svg>
-    <div style="color:#2d5016;font-size:16px;font-weight:600;">Clique no botão do chat para tirar dúvidas ou pedir ajuda! 👈</div>
-    <button id="close-tutorial" style="background:transparent;border:none;font-size:22px;color:#5a8f3d;cursor:pointer;">&times;</button>
-</div>
 <script>
 const chatToggle = document.getElementById('chatToggle');
 const chatPopup = document.getElementById('chatPopup');
@@ -507,22 +500,6 @@ messageInput.addEventListener('keypress', (e) => {
         e.preventDefault();
         chatForm.dispatchEvent(new Event('submit'));
     }
-});
-setTimeout(() => {
-  if (localStorage.getItem('chatTutorialClosed') !== '1') {
-    const tutorial = document.getElementById('chat-tutorial');
-    if (tutorial) tutorial.style.display = 'flex';
-  }
-}, 1200);
-document.getElementById('chatToggle').addEventListener('click', () => {
-  const tutorial = document.getElementById('chat-tutorial');
-  if (tutorial) tutorial.style.display = 'none';
-  localStorage.setItem('chatTutorialClosed', '1');
-});
-document.getElementById('close-tutorial').addEventListener('click', () => {
-  const tutorial = document.getElementById('chat-tutorial');
-  if (tutorial) tutorial.style.display = 'none';
-  localStorage.setItem('chatTutorialClosed', '1');
 });
 </script>
 <!-- Fim do Chat Popup -->

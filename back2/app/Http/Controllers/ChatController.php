@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
+    /**
+     * Marca o tutorial do chat como fechado para o usuário logado.
+     */
+    public function closeTutorial(Request $request)
+    {
+        $user = auth()->user();
+        if ($user) {
+            $user->chat_tutorial_closed = true;
+            $user->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 401);
+    }
     public function index()
     {
         return view('chat.index');

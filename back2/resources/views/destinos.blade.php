@@ -813,7 +813,9 @@
             </ol>
         </div>
     </main>
-    @include('components.chat-feedback')
+    @if(Auth::check())
+        @include('components.chat-feedback')
+    @endif
 @endsection
 
 @section('scripts')

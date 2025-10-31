@@ -17,7 +17,8 @@ class User extends Authenticatable
         'CPF',
         'email',
         'password',
-        'nome_perfil'
+        'nome_perfil',
+        'chat_tutorial_closed'
     ];
 
     protected $hidden = [
@@ -27,5 +28,6 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'chat_tutorial_closed' => 'boolean',
     ];
 }

@@ -1,4 +1,6 @@
 <?php
+// Rota para registrar fechamento do tutorial do chat
+Route::post('/api/chat-tutorial-close', [ChatController::class, 'closeTutorial'])->middleware('auth');
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProfileController;
