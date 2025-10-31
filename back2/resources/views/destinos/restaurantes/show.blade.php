@@ -1,3 +1,4 @@
+{{-- resources/views/restaurantes/show.blade.php --}}
 @extends('layouts.app')
 
 @section('title', isset($restaurante) ? $restaurante->nome . ' - Bella Avventura' : 'Restaurante - Bella Avventura')
@@ -276,25 +277,11 @@
         }
 
         @media (max-width: 768px) {
-            .restaurante-titulo {
-                font-size: 1.5rem;
-            }
-
-            .restaurante-meta {
-                grid-template-columns: 1fr;
-            }
-
-            .galeria {
-                grid-template-columns: 1fr;
-            }
-
-            .mapa-container {
-                height: 300px;
-            }
-
-            .acoes {
-                flex-direction: column;
-            }
+            .restaurante-titulo { font-size: 1.5rem; }
+            .restaurante-meta { grid-template-columns: 1fr; }
+            .galeria { grid-template-columns: 1fr; }
+            .mapa-container { height: 300px; }
+            .acoes { flex-direction: column; }
         }
     </style>
 @endsection
@@ -302,7 +289,6 @@
 @section('content')
     <div class="restaurante-detalhes">
         @if(!isset($restaurante))
-            <!-- Mensagem de erro caso o restaurante não seja encontrado -->
             <div class="error-message">
                 <i class="fas fa-exclamation-circle"></i>
                 <h2>Restaurante não encontrado</h2>
@@ -312,12 +298,10 @@
                 </a>
             </div>
         @else
-            <!-- Breadcrumb -->
             <div class="breadcrumb">
                 <a href="{{ route('restaurantes.index') }}">Restaurantes</a> > {{ $restaurante->nome }}
             </div>
 
-            <!-- Cabeçalho do Restaurante -->
             <div class="restaurante-header">
                 <div class="restaurante-imagem">
                     <img src="{{ $restaurante->imagem }}" alt="{{ $restaurante->nome }}"
@@ -342,8 +326,7 @@
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">Faixa de Preço</span>
-                            <span class="meta-value preco">{{ $restaurante->preco_texto ?? '$$' }} -
-                                {{ $restaurante->preco ?? 'Médio' }}</span>
+                            <span class="meta-value preco">{{ $restaurante->preco_texto ?? '$$' }} - {{ $restaurante->preco ?? 'Médio' }}</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">Horário de Funcionamento</span>
@@ -356,25 +339,19 @@
                     </div>
                     @if(($restaurante->badge ?? null) || ($restaurante->promocao ?? false))
                         <div class="restaurante-badges">
-                            @if($restaurante->badge)
-                                <span class="badge">{{ $restaurante->badge }}</span>
-                            @endif
-                            @if($restaurante->promocao)
-                                <span class="badge badge-promocao">Promoção</span>
-                            @endif
+                            @if($restaurante->badge)<span class="badge">{{ $restaurante->badge }}</span>@endif
+                            @if($restaurante->promocao)<span class="badge badge-promocao">Promoção</span>@endif
                         </div>
                     @endif
                 </div>
             </div>
 
-            <!-- Conteúdo do Restaurante -->
             <div class="restaurante-conteudo">
                 <h2 class="secao-titulo">Sobre</h2>
                 <div class="restaurante-descricao">
                     <p>Descubra a excelência gastronômica no {{ $restaurante->nome }}, localizado no coração de
                         {{ explode(',', $restaurante->endereco)[1] ?? $restaurante->endereco ?? 'sua cidade' }}. Nosso
-                        restaurante oferece uma experiência única que combina sabores autênticos com um ambiente acolhedor e
-                        sofisticado.</p>
+                        restaurante oferece uma experiência única que combina sabores autênticos com um ambiente acolhedor e sofisticado.</p>
                     <p>Nossa equipe de chefs talentosos utiliza apenas os ingredientes mais frescos e selecionados para criar
                         pratos que encantam todos os sentidos. Seja para um jantar romântico, uma reunião de negócios ou uma
                         celebração especial, o {{ $restaurante->nome }} é o local perfeito para momentos memoráveis.</p>
@@ -406,7 +383,7 @@
                     </div>
                 </div>
 
-                <!-- Seção do Mapa -->
+                <!-- === SEÇÃO DO MAPA (CORRIGIDA) === -->
                 <h2 class="secao-titulo">Localização</h2>
                 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin:40px 0 32px 0;">
                     <button id="openMap"
@@ -419,7 +396,6 @@
                 </div>
             </div>
 
-            <!-- Ações -->
             <div class="acoes">
                 <a href="{{ route('restaurantes.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Voltar para Restaurantes
@@ -438,46 +414,65 @@
             const openMapBtn = document.getElementById('openMap');
             const mapContainer = document.getElementById('mapContainer');
             const mapElement = document.getElementById('map');
+            let mapInitialized = false;
 
             openMapBtn.addEventListener('click', function () {
-                // Mostra o container e esconde o botão
-                mapContainer.style.display = 'block';
                 openMapBtn.style.display = 'none';
+                mapContainer.style.display = 'block';
+                mapContainer.style.opacity = '0';
+                mapContainer.style.transition = 'opacity 0.3s ease';
 
-                // Evita inicializar o mapa mais de uma vez
-                if (mapElement._leaflet_id) {
-                    return;
-                }
+                // Força reflow para calcular o tamanho real
+                void mapContainer.offsetHeight;
 
-                @if(isset($restaurante) && $restaurante->lat && $restaurante->lng)
-                    // Inicializa o mapa com coordenadas válidas
-                    const map = L.map('map').setView([{{ $restaurante->lat }}, {{ $restaurante->lng }}], 15);
+                // Mostra com animação
+                requestAnimationFrame(() => {
+                    mapContainer.style.opacity = '1';
+                });
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                        maxZoom: 19
-                    }).addTo(map);
+                if (mapInitialized) return;
+                mapInitialized = true;
 
-                    L.marker([{{ $restaurante->lat }}, {{ $restaurante->lng }}])
-                        .addTo(map)
-                        .bindPopup('<b>{{ addslashes($restaurante->nome) }}</b><br>{{ addslashes($restaurante->endereco) }}')
-                        .openPopup();
-
-                    // Garante que o mapa se ajuste ao container visível
-                    setTimeout(() => {
-                        map.invalidateSize();
-                    }, 150);
-
-                @else
-                    // Sem coordenadas: exibe mensagem de erro
-                    mapElement.innerHTML = `
-                        <div class="mapa-error">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <p>Coordenadas não disponíveis para este restaurante.</p>
-                        </div>
-                    `;
-                @endif
+                // Inicializa o mapa após o container estar visível
+                setTimeout(initializeMap, 120);
             });
+
+            function initializeMap() {
+                @if(isset($restaurante) && $restaurante->lat && $restaurante->lng)
+                    try {
+                        const map = L.map('map').setView([{{ $restaurante->lat }}, {{ $restaurante->lng }}], 15);
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                            maxZoom: 19
+                        }).addTo(map);
+
+                        L.marker([{{ $restaurante->lat }}, {{ $restaurante->lng }}])
+                            .addTo(map)
+                            .bindPopup('<b>{{ addslashes($restaurante->nome) }}</b><br>{{ addslashes($restaurante->endereco) }}')
+                            .openPopup();
+
+                        // Garante o redimensionamento correto
+                        setTimeout(() => map.invalidateSize(true), 200);
+                        setTimeout(() => map.invalidateSize(true), 500);
+
+                    } catch (e) {
+                        console.error('Erro ao carregar o mapa:', e);
+                        showMapError();
+                    }
+                @else
+                    showMapError();
+                @endif
+            }
+
+            function showMapError() {
+                mapElement.innerHTML = `
+                    <div class="mapa-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Coordenadas não disponíveis para este restaurante.</p>
+                    </div>
+                `;
+            }
         });
     </script>
 @endsection
