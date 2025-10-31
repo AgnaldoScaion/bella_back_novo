@@ -1,30 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Nós - Bella Avventura</title>
+@extends('layouts.app')
+
+@section('title', 'Sobre Nós')
+
+@section('styles')
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/png" href="https://i.ibb.co/vx2Dzj9v/image.png">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         @font-face {
             font-family: 'GaramondBold';
             src: local('Garamond'), serif;
             font-weight: bold;
         }
-@extends('layouts.app')
-
-@section('title', 'Sobre Nós')
-
-@section('styles')
-    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f5e4 100%);
+            font-family: 'Inter', sans-serif;
+        }
         .container {
             max-width: 1200px;
             margin: 4rem auto 2rem;
@@ -37,49 +32,89 @@
         .about-header h1 {
             font-family: 'GaramondBold', serif;
             color: #5a8f3d;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px #d8e6d9;
         }
         .about-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
+            background-color: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 18px;
             border: 3px solid #D8E6D9;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(90, 143, 61, 0.08);
+            margin-bottom: 2rem;
         }
         .about-section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         .about-section h2 {
             color: #5a8f3d;
             font-family: 'GaramondBold', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             border-bottom: 2px solid #D8E6D9;
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
         }
         .about-section p {
             color: #555;
             line-height: 1.8;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
         }
         .values-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
         .value-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.75rem;
+            background: linear-gradient(120deg, #e9f5e4 0%, #fff 100%);
+            padding: 2.2rem 1.5rem;
+            border-radius: 1rem;
             text-align: center;
-            border: 2px solid #E9F5E4;
+            border: 2px solid #A7D096;
+            box-shadow: 0 4px 16px rgba(90, 143, 61, 0.07);
             transition: all 0.3s ease;
+            position: relative;
         }
         .value-card:hover {
-            border-color: #A7D096;
-            box-shadow: 0 8px 24px rgba(167, 208, 150, 0.15);
+            border-color: #5a8f3d;
+            box-shadow: 0 12px 32px rgba(90, 143, 61, 0.13);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .value-card h3 {
+            font-family: 'GaramondBold', serif;
+            color: #5a8f3d;
+            font-size: 1.4rem;
+            margin-bottom: 0.7rem;
+        }
+        .value-card p {
+            color: #444;
+            font-size: 1.08rem;
+        }
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .about-content {
+                padding: 1.5rem 0.5rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .about-header h1 {
+                font-size: 2rem;
+            }
+            .about-section h2 {
+                font-size: 1.3rem;
+            }
+            .about-content {
+                padding: 1rem 0.2rem;
+            }
+            .values-section {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 @endsection
