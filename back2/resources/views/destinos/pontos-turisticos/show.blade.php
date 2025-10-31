@@ -336,13 +336,16 @@
           </div>
         </div>
         <h2 class="secao-titulo">Localização</h2>
-        <div class="mapa-container" id="map">
-          @if(!isset($ponto->lat) || !isset($ponto->lng))
-            <div class="mapa-error">
-              <i class="fas fa-exclamation-circle"></i>
-              <p>Coordenadas não disponíveis para este ponto turístico.</p>
-            </div>
-          @endif
+        <button id="openMap" style="background:#5a8f3d;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:16px;box-shadow:0 2px 8px #5a8f3d22;cursor:pointer;margin-bottom:18px;">Ver Mapa</button>
+        <div id="mapContainer" style="display:none;margin-bottom:18px;">
+          <div class="mapa-container" id="map">
+            @if(!isset($ponto->lat) || !isset($ponto->lng))
+              <div class="mapa-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Coordenadas não disponíveis para este ponto turístico.</p>
+              </div>
+            @endif
+          </div>
         </div>
       </div>
       <!-- Ações -->
@@ -400,6 +403,11 @@
           </div>
         `;
       }
+
+      document.getElementById('openMap').addEventListener('click', function() {
+        document.getElementById('mapContainer').style.display = 'block';
+        this.style.display = 'none';
+      });
     });
   </script>
 @endsection

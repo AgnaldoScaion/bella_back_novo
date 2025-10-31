@@ -354,11 +354,11 @@
         <div style="background:rgba(30,41,59,0.7);border-bottom:1px solid #334155;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;">
             <div style="display:flex;align-items:center;gap:10px;">
                 <div style="position:relative;">
-                    <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f472b6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;">AI</div>
+                    <div style="width:38px;height:38px;border-radius:50%;background:#babaca;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:18px;">A</div>
                     <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:#4ade80;border-radius:50%;border:2px solid #1e293b;"></div>
                 </div>
                 <div>
-                    <div style="color:#fff;font-weight:600;font-size:16px;">Assistente Virtual</div>
+                    <div style="color:#fff;font-weight:600;font-size:16px;">Assistente</div>
                     <div style="color:#4ade80;font-size:12px;">Online</div>
                 </div>
             </div>
@@ -374,8 +374,8 @@
                 <div style="flex:1;background:rgba(51,65,85,0.5);border-radius:12px;border:1px solid #64748b;">
                     <textarea id="messageInput" placeholder="Digite sua mensagem..." style="width:100%;background:transparent;color:#fff;padding:10px 12px;outline:none;resize:none;border:none;font-size:14px;max-height:80px;" rows="1"></textarea>
                 </div>
-                <button type="submit" id="sendButton" style="padding:10px;background:linear-gradient(90deg,#a78bfa,#f472b6);border:none;border-radius:12px;box-shadow:0 2px 8px #a78bfa44;cursor:pointer;">
-                    <svg style="width:20px;height:20px;color:#fff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button type="submit" id="sendButton" style="padding:10px;background:#babaca;border:none;border-radius:12px;box-shadow:0 2px 8px #a78bfa44;cursor:pointer;">
+                    <svg style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                     </svg>
                 </button>

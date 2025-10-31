@@ -407,13 +407,16 @@
                     </div>
                 </div>
                 <h2 class="secao-titulo">Localização</h2>
-                <div class="mapa-container" id="map"></div>
-                @if(!isset($hotel->lat) || !isset($hotel->lng) || empty($hotel->lat) || empty($hotel->lng))
-                    <div class="error-message">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <p>Localização exata não disponível para este hotel.</p>
-                    </div>
-                @endif
+                <button id="openMap" style="background:#5a8f3d;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:16px;box-shadow:0 2px 8px #5a8f3d22;cursor:pointer;margin-bottom:18px;">Ver Mapa</button>
+                <div id="mapContainer" style="display:none;margin-bottom:18px;">
+                    <div class="mapa-container" id="map"></div>
+                    @if(!isset($hotel->lat) || !isset($hotel->lng) || empty($hotel->lat) || empty($hotel->lng))
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Localização exata não disponível para este hotel.</p>
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="acoes">
                 <a href="{{ route('hoteis.alternative') }}" class="btn btn-secondary">
@@ -465,6 +468,11 @@
                 // Esconder o mapa se não houver hotel
                 document.getElementById('map').style.display = 'none';
             @endif
+
+            document.getElementById('openMap').addEventListener('click', function() {
+                document.getElementById('mapContainer').style.display = 'block';
+                this.style.display = 'none';
+            });
         });
     </script>
 @endsection
