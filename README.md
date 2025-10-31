@@ -1,7 +1,7 @@
 # 🌍 Bella Avventura - Plataforma de Turismo
 
 <div align="center">
-  <img src="https://i.ibb.co/Vp07k1Gf/image.png" alt="Bella Avventura" width="800" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <img src="back2/images/Bellaaventura.png" alt="Bella Avventura" width="800" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
 </div>
 
 <div align="center">
@@ -404,12 +404,12 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 
 ### Página Inicial (Sem Cadastro)
 <div align="center">
-  <img src="https://i.ibb.co/V0CbCVdZ/image.png" alt="Página Inicial" width="900" style="max-width: 100%; border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <img src="back2/images/Home.png" alt="Página Inicial" width="900" style="max-width: 100%; border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
 </div>
 
 ### Seleção de Destinos
 <div align="center">
-  <img src="https://i.ibb.co/Myh6cbYj/image.png" alt="Seleção de Destinos" width="900" style="max-width: 100%; border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <img src="back2/images/Destinos.png" alt="Seleção de Destinos" width="900" style="max-width: 100%; border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
 </div>
 
 ---
