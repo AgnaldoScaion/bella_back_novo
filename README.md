@@ -1,6 +1,6 @@
 # 🌍 Bella Avventura - Plataforma de Turismo
 
-![Bella Avventura](https://i.ibb.co/Q7T008b1/image.png)
+![Bella Avventura](https://i.ibb.co/Vp07k1Gf/image.png)
 
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php)](https://php.net)
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
