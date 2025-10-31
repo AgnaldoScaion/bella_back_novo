@@ -654,8 +654,6 @@
         </div>
         <!-- Paginação -->
         <div class="paginacao" id="paginacao"></div>
-        <!-- Mapa -->
-        <div id="map"></div>
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
     </main>

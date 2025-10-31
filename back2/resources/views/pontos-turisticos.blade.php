@@ -663,10 +663,6 @@
         <!-- Paginação -->
         <div class="paginacao" id="paginacao"></div>
 
-        <!-- Mapa -->
-        <div class="map-container">
-            <div id="map"></div>
-        </div>
 
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>

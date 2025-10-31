@@ -336,15 +336,17 @@
           </div>
         </div>
         <h2 class="secao-titulo">Localização</h2>
-        <button id="openMap" style="background:#5a8f3d;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:16px;box-shadow:0 2px 8px #5a8f3d22;cursor:pointer;margin-bottom:18px;">Ver Mapa</button>
-        <div id="mapContainer" style="display:none;margin-bottom:18px;">
-          <div class="mapa-container" id="map">
-            @if(!isset($ponto->lat) || !isset($ponto->lng))
-              <div class="mapa-error">
-                <i class="fas fa-exclamation-circle"></i>
-                <p>Coordenadas não disponíveis para este ponto turístico.</p>
-              </div>
-            @endif
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin:40px 0 32px 0;">
+          <button id="openMap" style="background:#5a8f3d;color:#fff;border:none;border-radius:10px;padding:14px 32px;font-size:18px;box-shadow:0 2px 12px #5a8f3d22;cursor:pointer;margin-bottom:24px;">Ver Mapa</button>
+          <div id="mapContainer" style="display:none;width:100%;max-width:700px;margin:0 auto;">
+            <div class="mapa-container" id="map">
+              @if(!isset($ponto->lat) || !isset($ponto->lng))
+                <div class="mapa-error">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <p>Coordenadas não disponíveis para este ponto turístico.</p>
+                </div>
+              @endif
+            </div>
           </div>
         </div>
       </div>

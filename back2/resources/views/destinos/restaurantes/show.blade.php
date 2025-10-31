@@ -206,10 +206,16 @@
             color: #666;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
         }
 
         .mapa-error i {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #ff6b6b;
             margin-bottom: 0.5rem;
         }
@@ -308,7 +314,7 @@
         @else
             <!-- Breadcrumb -->
             <div class="breadcrumb">
-                <a href="{{ route('restaurantes.index') }}">Restaurantes</a> &gt; {{ $restaurante->nome }}
+                <a href="{{ route('restaurantes.index') }}">Restaurantes</a> > {{ $restaurante->nome }}
             </div>
 
             <!-- Cabeçalho do Restaurante -->
@@ -400,19 +406,15 @@
                     </div>
                 </div>
 
+                <!-- Seção do Mapa -->
                 <h2 class="secao-titulo">Localização</h2>
-                <button id="openMap"
-                    style="background:#5a8f3d;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:16px;box-shadow:0 2px 8px #5a8f3d22;cursor:pointer;margin-bottom:18px;">
-                    Ver Mapa
-                </button>
-                <div id="mapContainer" style="display:none;margin-bottom:18px;">
-                    <div class="mapa-container" id="map">
-                        @if(!isset($restaurante->lat) || !isset($restaurante->lng))
-                            <div class="mapa-error">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <p>Coordenadas não disponíveis para este restaurante.</p>
-                            </div>
-                        @endif
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin:40px 0 32px 0;">
+                    <button id="openMap"
+                        style="background:#5a8f3d;color:#fff;border:none;border-radius:10px;padding:14px 32px;font-size:18px;box-shadow:0 2px 12px #5a8f3d22;cursor:pointer;margin-bottom:24px;">
+                        Ver Mapa
+                    </button>
+                    <div id="mapContainer" style="display:none;width:100%;max-width:700px;margin:0 auto;">
+                        <div class="mapa-container" id="map"></div>
                     </div>
                 </div>
             </div>
@@ -422,7 +424,6 @@
                 <a href="{{ route('restaurantes.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Voltar para Restaurantes
                 </a>
-                <!-- Nenhuma reserva necessária para restaurantes -->
             </div>
         @endif
     </div>
@@ -434,50 +435,48 @@
         crossorigin=""></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Inicialização do mapa
-            try {
+            const openMapBtn = document.getElementById('openMap');
+            const mapContainer = document.getElementById('mapContainer');
+            const mapElement = document.getElementById('map');
+
+            openMapBtn.addEventListener('click', function () {
+                // Mostra o container e esconde o botão
+                mapContainer.style.display = 'block';
+                openMapBtn.style.display = 'none';
+
+                // Evita inicializar o mapa mais de uma vez
+                if (mapElement._leaflet_id) {
+                    return;
+                }
+
                 @if(isset($restaurante) && $restaurante->lat && $restaurante->lng)
-                    // Restaurante com coordenadas válidas
+                    // Inicializa o mapa com coordenadas válidas
                     const map = L.map('map').setView([{{ $restaurante->lat }}, {{ $restaurante->lng }}], 15);
+
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                        maxZoom: 19,
-                        detectRetina: true
+                        maxZoom: 19
                     }).addTo(map);
+
                     L.marker([{{ $restaurante->lat }}, {{ $restaurante->lng }}])
                         .addTo(map)
-                        .bindPopup('<b>{{ $restaurante->nome }}</b><br>{{ $restaurante->endereco }}')
+                        .bindPopup('<b>{{ addslashes($restaurante->nome) }}</b><br>{{ addslashes($restaurante->endereco) }}')
                         .openPopup();
-                    // Forçar redimensionamento do mapa
+
+                    // Garante que o mapa se ajuste ao container visível
                     setTimeout(() => {
                         map.invalidateSize();
-                    }, 100);
-                @elseif(isset($restaurante))
-                        // Restaurante sem coordenadas: exibir mensagem de erro no mapa
-                        document.getElementById('map').innerHTML = `
-                        <div class="mapa-error">
-                          <i class="fas fa-exclamation-circle"></i>
-                          <p>Coordenadas não disponíveis para este restaurante.</p>
-                        </div>
-                      `;
-                @else
-                    // Restaurante não encontrado: ocultar mapa
-                    document.getElementById('map').style.display = 'none';
-                @endif
-          } catch (error) {
-                console.error('Erro ao inicializar o mapa:', error);
-                document.getElementById('map').innerHTML = `
-              <div class="mapa-error">
-                <i class="fas fa-exclamation-circle"></i>
-                <p>Não foi possível carregar o mapa. Verifique sua conexão com a internet.</p>
-              </div>
-            `;
-            }
+                    }, 150);
 
-            // Mostrar mapa ao clicar no botão
-            document.getElementById('openMap').addEventListener('click', function() {
-                document.getElementById('mapContainer').style.display = 'block';
-                this.style.display = 'none';
+                @else
+                    // Sem coordenadas: exibe mensagem de erro
+                    mapElement.innerHTML = `
+                        <div class="mapa-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Coordenadas não disponíveis para este restaurante.</p>
+                        </div>
+                    `;
+                @endif
             });
         });
     </script>
