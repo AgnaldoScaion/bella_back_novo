@@ -88,15 +88,6 @@
             position: relative;
         }
 
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-icon:hover {
-            transform: scale(1.1);
-        }
 
         .user-header {
             font-family: 'Inter', sans-serif;

@@ -84,39 +84,6 @@
             position: relative;
         }
 
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-icon:hover {
-            transform: scale(1.1);
-        }
-
-        /* Adiciona estilos para o user header */
-        .user-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
-            transition: var(--transition-smooth);
-        }
-
-        .user-header:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .user-header i {
-            font-size: 16px;
-        }
-
         /* Menu Styles */
         .menu-box {
             position: fixed;
@@ -686,23 +653,31 @@
             <p>Descubra os melhores restaurantes e pontos turísticos baseados na sua localização, avalie suas experiências e
                 ganhe descontos para suas próximas aventuras!</p>
             @auth
-                    <a href="{{ route('destinos') }}" class="btn">
-                        <i class="fas fa-compass"></i>
-                        Explorar Destinos
-                    </a>
+                <a href="{{ route('destinos') }}" class="btn">
+                    <i class="fas fa-compass"></i>
+                    Explorar Destinos
+                </a>
 
-                    <!-- Step-by-step guide for logged users -->
-                    <div class="step-guide" style="margin: 2rem auto; max-width: 600px; background: #eafbe2; border-radius: 12px; box-shadow: 0 2px 12px #5a8f3d22; padding: 2rem;">
-                        <h3 style="color: #2d5016; font-size: 1.3rem; margin-bottom: 1.2rem; font-family: 'GaramondBold', serif;">Como explorar a nossa aplicação.</h3>
-                        <ol style="padding-left: 1.2rem; color: #2d5016; font-size: 1.08rem;">
-                            <li style="margin-bottom: 1rem;">
-                                <span style="font-weight: bold;">Menu Lateral:</span> Clique no <span style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">☰</span> icon (topo esquerdo) para abrir o menu lateral, para vizualizar algumas guias que possivelmente deseja ao explorar o site.
-                            </li>
-                            <li style="margin-bottom: 1rem;">
-                                <span style="font-weight: bold;">Volte para aqui:</span> Clique em <span style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">Bella Avventura logo</span> que fica no meio do cabeçalho da pagina e flutuando para retornar a home em qualquer pagina.
-                            </li>
-                        </ol>
-                    </div>
+                <!-- Step-by-step guide for logged users -->
+                <div class="step-guide"
+                    style="margin: 2rem auto; max-width: 600px; background: #eafbe2; border-radius: 12px; box-shadow: 0 2px 12px #5a8f3d22; padding: 2rem;">
+                    <h3 style="color: #2d5016; font-size: 1.3rem; margin-bottom: 1.2rem; font-family: 'GaramondBold', serif;">
+                        Como explorar a nossa aplicação.</h3>
+                    <ol style="padding-left: 1.2rem; color: #2d5016; font-size: 1.08rem;">
+                        <li style="margin-bottom: 1rem;">
+                            <span style="font-weight: bold;">Menu Lateral:</span> Clique no <span
+                                style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">☰</span>
+                            icon (topo esquerdo) para abrir o menu lateral, para vizualizar algumas guias que possivelmente
+                            deseja ao explorar o site.
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <span style="font-weight: bold;">Volte para aqui:</span> Clique em <span
+                                style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">Bella
+                                Avventura logo</span> que fica no meio do cabeçalho da pagina e flutuando para retornar a home
+                            em qualquer pagina.
+                        </li>
+                    </ol>
+                </div>
             @else
                 <a href="{{ route('login') }}" class="btn">
                     <i class="fas fa-compass"></i>
