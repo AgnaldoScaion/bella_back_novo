@@ -15,13 +15,23 @@
     <style>
         /* Animação menu hamburguer global */
         .menu-icon {
-            font-size: 24px;
+            font-size: 32px;
             cursor: pointer;
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
             color: #2d5016;
+            background: rgba(255, 255, 255, 0.35);
+            width: 56px;
+            height: 56px;
+            padding: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(90,143,61,0.07);
         }
         .menu-icon:hover {
-            transform: scale(1.2) rotate(90deg);
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.08) rotate(90deg);
             color: #5a8f3d;
         }
         .wrapper {
@@ -158,7 +168,7 @@
             <div class="user-header">
                 <span>👤</span>
                 @auth
-                    {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email }}
+                    {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email ?? 'Usuário' }}
                     @php
                         $reservasPendentes = \App\Models\Reserva::where('user_id', Auth::id())
                             ->where('status', 'pendente')

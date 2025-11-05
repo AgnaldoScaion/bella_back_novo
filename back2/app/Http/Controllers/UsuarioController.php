@@ -43,8 +43,6 @@ class UsuarioController extends Controller
 
         return redirect('/destinos')->with('success', 'Cadastro realizado com sucesso!');
     }
-
-    // Métodos para administração
     public function listUsuario()
     {
         $usuarios = Usuario::all();

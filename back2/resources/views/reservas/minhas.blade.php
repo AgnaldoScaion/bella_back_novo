@@ -819,19 +819,20 @@
             </form>
         </div>
 
-        <div class="reservations-grid">
+        @php $count = $reservas->count(); @endphp
+        <div class="reservations-grid" style="{{ $count === 1 ? 'display: flex; justify-content: center;' : '' }}">
             @foreach($reservas as $reserva)
-                <div class="reservation-card">
+                <div class="reservation-card {{ $count === 1 ? 'single-reservation' : '' }}">
                     <div class="reservation-header status-{{ $reserva->status }}">
                         <span class="status-icon">
                             @if($reserva->status == 'pendente')
-                                ⏳
+                                <span style="color: #f59e0b;">⏳</span>
                             @elseif($reserva->status == 'confirmada')
-                                ✅
+                                <span style="color: #5a8f3d;">✅</span>
                             @elseif($reserva->status == 'cancelada')
-                                ❌
+                                <span style="color: #f44336;">❌</span>
                             @else
-                                ✔️
+                                <span style="color: #6366f1;">✔️</span>
                             @endif
                             {{ ucfirst($reserva->status) }}
                         </span>
@@ -841,29 +842,29 @@
                     <div class="reservation-body">
                         <h3 class="hotel-name">{{ $reserva->hotel->nome ?? 'Hotel' }}</h3>
                         <div class="hotel-location">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas fa-map-marker-alt" style="color: #a7d096;"></i>
                             <span>{{ $reserva->hotel->localizacao ?? 'Localização não disponível' }}</span>
                         </div>
 
                         <div class="reservation-details">
                             <div class="detail-row">
-                                <span class="detail-label"><i class="fas fa-calendar-check"></i> Check-in</span>
+                                <span class="detail-label"><i class="fas fa-calendar-check" style="color: #a7d096;"></i> Check-in</span>
                                 <span class="detail-value">{{ $reserva->data_entrada->format('d/m/Y') }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label"><i class="fas fa-calendar-times"></i> Check-out</span>
+                                <span class="detail-label"><i class="fas fa-calendar-times" style="color: #a7d096;"></i> Check-out</span>
                                 <span class="detail-value">{{ $reserva->data_saida->format('d/m/Y') }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label"><i class="fas fa-bed"></i> Quarto</span>
+                                <span class="detail-label"><i class="fas fa-bed" style="color: #a7d096;"></i> Quarto</span>
                                 <span class="detail-value">{{ ucfirst($reserva->tipo_quarto) }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label"><i class="fas fa-users"></i> Hóspedes</span>
+                                <span class="detail-label"><i class="fas fa-users" style="color: #a7d096;"></i> Hóspedes</span>
                                 <span class="detail-value">{{ $reserva->hospedes }}</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label"><i class="fas fa-moon"></i> Noites</span>
+                                <span class="detail-label"><i class="fas fa-moon" style="color: #a7d096;"></i> Noites</span>
                                 <span class="detail-value">{{ $reserva->calcularDias() }}</span>
                             </div>
                         </div>
@@ -875,8 +876,7 @@
 
                         @if($reserva->observacoes)
                             <div class="observacoes-box">
-                                <strong><i class="fas fa-info-circle"></i> Observações:</strong><br>
-                                {{ $reserva->observacoes }}
+                                <strong><i class="fas fa-info-circle" style="color: #a7d096;"></i> Observações:</strong><br>{{ $reserva->observacoes }}
                             </div>
                         @endif
 
