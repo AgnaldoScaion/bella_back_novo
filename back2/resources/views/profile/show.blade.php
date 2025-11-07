@@ -1,679 +1,581 @@
+{{-- resources/views/profile/edit.blade.php --}}
 @extends('layouts.app')
 @section('title', 'Meu Perfil - Bella Avventura')
+
 @section('styles')
 <style>
-    @font-face {
-        font-family: 'GaramondBold';
-        src: local('Garamond'), serif;
-        font-weight: bold;
-    }
-    /* Variáveis CSS */
     :root {
-        --primary-color: #5a8f3d;
-        --primary-green: #2d5016;
-        --primary-light: #A7D096;
-        --primary-bg: #f3f7f3;
-        --accent-color: #A7D096;
-        --border-color: #D8E6D9;
-        --error-color: #F44336;
-        --success-color: #4CAF50;
-        --text-dark: #333;
-        --text-medium: #4a4a4a;
-        --text-light: #fff;
-        --font-main: 'Inter', sans-serif;
-        --font-heading: 'Garamond', serif;
-        --shadow-default: 0 4px 15px rgba(0, 0, 0, 0.1);
-        --shadow-soft: 0 2px 15px rgba(45, 80, 22, 0.08);
-        --shadow-medium: 0 8px 30px rgba(45, 80, 22, 0.12);
-        --shadow-strong: 0 15px 40px rgba(45, 80, 22, 0.18);
-        --transition-default: all 0.3s ease;
-        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        --border-radius: 16px;
-        --border-radius-small: 8px;
+        --cor-primaria: #5a8f3d;
+        --cor-primaria-escura: #2d5016;
+        --cor-fundo: #f3f7f3;
+        --cor-borda: #D8E6D9;
+        --cor-texto: #333;
+        --cor-erro: #e74c3c;
+        --cor-sucesso: #27ae60;
+        --cor-aviso: #f39c12;
+        --radius: 12px;
+        --sombra: 0 4px 12px rgba(0,0,0,0.08);
+        --transicao: all 0.25s ease;
     }
-    /* Reset e Estilos Globais */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    html, body {
-        height: 100%;
-        font-family: var(--font-main);
-        font-weight: 700;
-        background: linear-gradient(135deg, #f3f7f3 0%, #e8f3e8 100%);
-        color: var(--text-dark);
-    }
-    /* Menu Icon */
-    .menu-icon {
-        font-size: 24px;
-        cursor: pointer;
-        transition: transform 0.3s ease, color 0.3s ease;
-        color: var(--primary-green);
-    }
-    .menu-icon:hover {
-        transform: scale(1.2) rotate(90deg);
-        color: var(--primary-color);
-    }
-    /* Menu Styles */
-    .menu-box {
-        position: fixed;
-        top: 50px;
-        left: 20px;
-        background: rgba(214, 227, 214, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 16px;
-        padding: 20px;
-        width: 260px;
-        display: flex;
-        gap: 20px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
         font-family: 'Garamond', serif;
-        z-index: 1000;
-        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-    .menu-lateral {
-        background: linear-gradient(to bottom, #88b68b, #6a9a6d);
-        width: 24px;
-        border-radius: 12px;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .menu-conteudo {
-        flex: 1;
-    }
-    .menu-conteudo h2 {
-        font-size: 20px;
-        margin: 0;
-        border-bottom: 2px solid #999;
-        padding-bottom: 10px;
-        color: var(--primary-green);
-    }
-    .menu-conteudo ul {
-        list-style: none;
-        padding: 0;
-        margin-top: 15px;
-    }
-    .menu-conteudo li {
-        margin: 15px 0;
-        transition: transform 0.2s ease;
-    }
-    .menu-conteudo li:hover {
-        transform: translateX(5px);
-    }
-    .menu-conteudo a {
-        text-decoration: none;
-        color: black;
-        transition: color 0.2s;
-        font-weight: 600;
-    }
-    .menu-conteudo a:hover {
-        color: #3a6545;
-    }
-    .hidden {
-        visibility: hidden;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateX(-20px);
-    }
-    .visible {
-        visibility: visible;
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateX(0);
-    }
-    /* Estrutura Principal */
-    .wrapper {
+        background: linear-gradient(135deg, #f3f7f3 0%, #e8f3e8 100%);
+        color: var(--cor-texto);
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
     }
-    .main-content {
+
+    .container {
         flex: 1;
-        padding: 2rem 1.5rem;
+        padding: 2rem 1rem;
         display: flex;
-        align-items: center;
         justify-content: center;
     }
-    /* Profile Container */
-    .profile-container {
-        max-width: 800px;
-        min-width: 300px;
-        width: 90%;
-        margin: 0 auto;
-        background: linear-gradient(135deg, #ffffff 0%, #fafffe 100%);
-        border-radius: 20px;
-        padding: 2.5rem;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-        border: 3px solid var(--border-color);
-        position: relative;
-        overflow: hidden;
-    }
-    .profile-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
+
+    .perfil-card {
+        background: white;
+        border-radius: var(--radius);
+        padding: 2rem;
         width: 100%;
-        height: 4px;
-        background: linear-gradient(to right, var(--primary-color), var(--primary-light), var(--primary-color));
-        background-size: 200% 100%;
-        animation: gradientShift 3s ease infinite;
+        max-width: 900px;
+        box-shadow: var(--sombra);
+        border: 2px solid var(--cor-borda);
     }
-    @keyframes gradientShift {
-        0%, 100% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-    }
-    .profile-header {
+
+    .cabecalho {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 2rem;
-        border-bottom: 2px solid var(--border-color);
+        margin-bottom: 1.5rem;
         padding-bottom: 1rem;
+        border-bottom: 1px solid var(--cor-borda);
     }
-    .profile-title {
-        font-family: var(--font-heading);
-        color: var(--primary-color);
-        font-size: 2.2rem;
+
+    .titulo {
+        font-family: 'Garamond', serif;
+        font-size: 1.8rem;
+        color: var(--cor-primaria-escura);
         margin: 0;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
     }
-    .edit-button {
-        background: linear-gradient(135deg, var(--primary-color) 0%, #4a7d2d 100%);
-        color: var(--text-light);
+
+    .modo-edicao {
+        font-size: 0.85rem;
+        color: var(--cor-aviso);
+        font-weight: 600;
+        display: none;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .modo-edicao.ativo { display: flex; }
+
+    .btn {
+        padding: 0.7rem 1.4rem;
         border: none;
-        padding: 0.8rem 1.5rem;
-        border-radius: 12px;
+        border-radius: 10px;
+        font-weight: 600;
         cursor: pointer;
-        font-weight: bold;
-        transition: var(--transition-default);
-        box-shadow: 0 4px 15px rgba(90, 143, 61, 0.3);
-        position: relative;
-        overflow: hidden;
+        transition: var(--transicao);
+        font-size: 0.95rem;
     }
-    .edit-button::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+
+    .btn-editar {
+        background: var(--cor-primaria);
+        color: white;
     }
-    .edit-button:hover::before {
-        width: 300px;
-        height: 300px;
+    .btn-editar:hover { background: #4a7d2d; transform: translateY(-1px); }
+
+    .secao {
+        margin-bottom: 1.8rem;
+        padding: 1.3rem;
+        background: #fafafa;
+        border-radius: 10px;
+        border: 1px solid var(--cor-borda);
     }
-    .edit-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 25px rgba(90, 143, 61, 0.4);
+
+    .secao-titulo {
+        font-family: 'Garamond', serif;
+        color: var(--cor-primaria-escura);
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
-    .edit-button:active {
-        transform: translateY(-1px);
-    }
-    .profile-info {
+
+    .grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
+        gap: 1.2rem;
     }
-    .info-group {
-        margin-bottom: 1.5rem;
+
+    .campo {
+        margin-bottom: 0.8rem;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+        color: var(--cor-primaria);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .valor {
+        padding: 0.8rem 1rem;
+        background: white;
+        border: 1px solid var(--cor-borda);
+        border-radius: 10px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        font-size: 0.95rem;
+    }
+
+    .input-edicao {
+        display: none;
         position: relative;
     }
-    .info-label {
-        display: block;
-        margin-bottom: 0.6rem;
-        color: var(--primary-color);
-        font-weight: bold;
-        font-size: 0.95rem;
-        transition: var(--transition-default);
-    }
-    .info-value {
-        padding: 0.9rem 1rem;
-        background-color: #fafffe;
-        border: 2px solid var(--border-color);
-        border-radius: 12px;
-        font-size: 0.95rem;
-    }
-    .edit-form input {
+    .input-edicao.mostrando { display: block; }
+
+    .input-edicao input {
         width: 100%;
-        padding: 0.9rem 1rem;
-        border: 2px solid var(--border-color);
-        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--cor-borda);
+        border-radius: 10px;
         font-size: 0.95rem;
-        transition: var(--transition-default);
-        background-color: #fafffe;
-        font-family: var(--font-main);
+        transition: var(--transicao);
     }
-    .edit-form input:focus {
-        border-color: var(--primary-color);
+    .input-edicao input:focus {
         outline: none;
-        box-shadow: 0 0 0 4px rgba(90, 143, 61, 0.1);
-        background-color: white;
-        transform: translateY(-2px);
+        border-color: var(--cor-primaria);
+        box-shadow: 0 0 0 3px rgba(90,143,61,0.15);
     }
-    .edit-form input::placeholder {
-        color: #aaa;
-        font-weight: 400;
+
+    .senha-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: var(--cor-primaria);
+        font-size: 1.1rem;
     }
-    .error {
-        color: var(--error-color);
+
+    .erro {
+        color: var(--cor-erro);
         font-size: 0.8rem;
-        margin-top: 0.4rem;
-        display: block;
+        margin-top: 0.3rem;
+        display: none;
+    }
+    .erro.mostrando { display: block; }
+
+    .ajuda {
+        font-size: 0.75rem;
+        color: #666;
+        margin-top: 0.3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .forca-senha {
+        font-size: 0.8rem;
         font-weight: 600;
-        animation: shake 0.3s ease;
+        margin-top: 0.4rem;
+        display: none;
     }
-    @keyframes shake {
-        0%, 100% {
-            transform: translateX(0);
-        }
-        25% {
-            transform: translateX(-5px);
-        }
-        75% {
-            transform: translateX(5px);
-        }
-    }
-    .profile-actions {
+    .forca-senha.ativa { display: block; }
+    .forca-senha.fraca { color: var(--cor-erro); }
+    .forca-senha.media { color: var(--cor-aviso); }
+    .forca-senha.forte { color: var(--cor-sucesso); }
+
+    .acoes {
         display: flex;
         justify-content: flex-end;
         gap: 1rem;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--cor-borda);
     }
-    .action-button {
-        padding: 1rem;
-        border-radius: 12px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: var(--transition-default);
-        font-size: 1.05rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        position: relative;
-        overflow: hidden;
+
+    .btn-cancelar {
+        background: #f5f5f5;
+        color: #555;
+        border: 1px solid var(--cor-borda);
     }
-    .save-button {
-        background: linear-gradient(135deg, var(--primary-color) 0%, #4a7d2d 100%);
-        color: var(--text-light);
-        border: none;
+    .btn-cancelar:hover { background: #eaeaea; }
+
+    .btn-salvar {
+        background: var(--cor-primaria);
+        color: white;
         display: none;
     }
-    .save-button::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+    .btn-salvar:hover { background: #4a7d2d; }
+    .btn-salvar:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
-    .save-button:hover::before {
-        width: 300px;
-        height: 300px;
-    }
-    .save-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 25px rgba(90, 143, 61, 0.4);
-    }
-    .save-button:active {
-        transform: translateY(-1px);
-    }
-    .cancel-button {
-        background-color: transparent;
-        border: 2px solid var(--error-color);
-        color: var(--error-color);
-        display: none;
-    }
-    .cancel-button:hover {
-        background-color: #ffeeee;
-    }
-    /* Notificação */
-    .notification {
+
+    .toast-container {
         position: fixed;
         top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 14px 28px;
-        border-radius: 12px;
-        color: var(--text-light);
-        font-weight: bold;
-        z-index: 1000;
+        right: 20px;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 380px;
+    }
+
+    .toast {
+        background: white;
+        padding: 14px 18px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transform: translateX(120%);
         opacity: 0;
-        transition: opacity 0.3s ease, top 0.3s ease;
-        font-size: 0.95rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
     }
-    .notification.show {
-        top: 30px;
+    .toast.mostrando {
+        transform: translateX(0);
         opacity: 1;
-        animation: slideInDown 0.4s ease;
     }
-    @keyframes slideInDown {
-        from {
-            transform: translateX(-50%) translateY(-100px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+
+    .toast.sucesso { border-left: 5px solid var(--cor-sucesso); }
+    .toast.erro { border-left: 5px solid var(--cor-erro); }
+    .toast.aviso { border-left: 5px solid var(--cor-aviso); }
+
+    .toast-icone { font-size: 1.4rem; }
+    .toast-texto { flex: 1; }
+    .toast-titulo { font-weight: 600; font-size: 0.95rem; }
+    .toast-mensagem { font-size: 0.85rem; color: #555; }
+    .toast-fechar { cursor: pointer; opacity: 0.7; }
+    .toast-fechar:hover { opacity: 1; }
+
+    .carregando {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        backdrop-filter: blur(3px);
     }
-    .notification.success {
-        background: linear-gradient(135deg, var(--success-color) 0%, #45a049 100%);
+    .carregando.ativo { display: flex; }
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid #ddd;
+        border-top-color: var(--cor-primaria);
+        border-radius: 50%;
+        animation: girar 1s linear infinite;
     }
-    .notification.error {
-        background: linear-gradient(135deg, var(--error-color) 0%, #d32f2f 100%);
-    }
-    /* Animação Flutuante */
-    @keyframes float {
-        0% {
-            transform: translateY(0px);
-        }
-        50% {
-            transform: translateY(-8px);
-        }
-        100% {
-            transform: translateY(0px);
-        }
-    }
-    .floating {
-        animation: float 3s ease-in-out infinite;
-    }
-    /* Footer Styles */
-    .footer {
-        background: linear-gradient(to right, var(--primary-light), #b8dca8);
-        padding: 25px 20px;
-        color: #000;
-        font-size: 14px;
-        text-align: center;
-        animation: fadeIn 1s ease;
-        margin-top: auto;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
-    }
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    /* Responsividade */
+    @keyframes girar { to { transform: rotate(360deg); } }
+
     @media (max-width: 768px) {
-        .main-content {
-            padding: 1.5rem 1rem;
-        }
-        .profile-container {
-            padding: 2rem;
-        }
-        .profile-title {
-            font-size: 1.9rem;
-        }
-        .profile-info {
-            grid-template-columns: 1fr;
-        }
-        .profile-actions {
-            flex-direction: column;
-        }
-        .action-button {
-            width: 100%;
-        }
-    }
-    @media (max-width: 600px) {
-        .profile-title {
-            font-size: 1.7rem;
-        }
-        .profile-container {
-            padding: 1.8rem;
-            border-radius: 16px;
-        }
-        .edit-form input {
-            padding: 0.8rem;
-        }
-        .action-button {
-            padding: 0.9rem;
-            font-size: 1rem;
-        }
-    }
-    @media (max-width: 480px) {
-        .profile-container {
-            max-width: 100%;
-            padding: 1.5rem;
-            border-radius: 14px;
-        }
-        .profile-title {
-            font-size: 1.6rem;
-        }
-        .edit-form input {
-            padding: 0.75rem;
-        }
-        .action-button {
-            padding: 0.85rem;
-        }
+        .grid { grid-template-columns: 1fr; }
+        .acoes { flex-direction: column; }
+        .btn { width: 100%; }
+        .toast-container { left: 10px; right: 10px; }
     }
 </style>
 @endsection
+
 @section('content')
-<div class="wrapper">
-    <div class="main-content">
-        <div class="profile-container">
-            <div class="profile-header">
-                <h1 class="profile-title">Meu Perfil</h1>
-                <button id="editButton" class="edit-button">Editar Perfil</button>
+<div class="container">
+    <div class="perfil-card">
+        <div class="cabecalho">
+            <div>
+                <h1 class="titulo">Meu Perfil</h1>
+                <div class="modo-edicao" id="modoEdicao">
+                    Edição ativa
+                </div>
             </div>
-            @if(session('success'))
-                <div id="notification" class="notification success show">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if($errors->any())
-                <div id="notification" class="notification error show">
-                    {{ $errors->first() }}
-                </div>
-            @endif
-            <div id="notification" class="notification"></div>
-            <form id="profileForm">
-                @csrf
-                <div class="profile-info">
-                    <div class="info-group">
-                        <span class="info-label">Nome Completo</span>
-                        <div id="nomeValue" class="info-value">{{ Auth::user()->nome_completo }}</div>
-                        <div class="edit-form" style="display: none;">
-                            <input type="text" id="nomeInput" name="nome_completo" placeholder="Digite seu nome completo" value="{{ Auth::user()->nome_completo }}">
-                            <span class="error" id="nomeError"></span>
-                        </div>
-                    </div>
-                    <div class="info-group" id="CPFGroup">
-                        <span class="info-label">CPF</span>
-                        <div id="CPFValue" class="info-value">{{ Auth::user()->CPF }}</div>
-                    </div>
-                    <div class="info-group" id="senhaAntigaGroup" style="display: none;">
-                        <span class="info-label">Senha Atual</span>
-                        <div class="edit-form" style="display: block;">
-                            <input type="password" id="senhaAntigaInput" name="senha_atual" placeholder="Digite sua senha atual">
-                            <span class="error" id="senhaAntigaError"></span>
-                        </div>
-                    </div>
-                    <div class="info-group">
-                        <span class="info-label">E-mail</span>
-                        <div id="emailValue" class="info-value">{{ Auth::user()->email }}</div>
-                        <div class="edit-form" style="display: none;">
-                            <input type="email" id="emailInput" name="email" placeholder="Digite seu e-mail" value="{{ Auth::user()->email }}">
-                            <span class="error" id="emailError"></span>
-                        </div>
-                    </div>
-                    <div class="info-group" id="senhaGroup" style="display: none;">
-                        <span class="info-label">Nova Senha</span>
-                        <div class="edit-form" style="display: block;">
-                            <input type="password" id="novaSenhaInput" name="nova_senha" placeholder="Digite sua nova senha">
-                            <span class="error" id="novaSenhaError"></span>
-                        </div>
-                    </div>
-                    <div class="info-group" id="senhaConfirmacaoGroup" style="display: none;">
-                        <span class="info-label">Confirmar Nova Senha</span>
-                        <div class="edit-form" style="display: block;">
-                            <input type="password" id="novaSenhaConfirmacaoInput" name="nova_senha_confirmation" placeholder="Confirme sua nova senha">
-                            <span class="error" id="novaSenhaConfirmacaoError"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="profile-actions">
-                    <button type="button" id="cancelButton" class="action-button cancel-button">Cancelar</button>
-                    <button type="submit" id="saveButton" class="action-button save-button">Salvar Alterações</button>
-                </div>
-            </form>
+            <button id="botaoEditar" class="btn btn-editar">Editar Perfil</button>
         </div>
+
+        <form id="formPerfil">
+            @csrf
+
+            <!-- Dados Pessoais -->
+            <div class="secao">
+                <h2 class="secao-titulo">Informações Pessoais</h2>
+                <div class="grid">
+                    <div class="campo">
+                        <label class="label">Nome Completo</label>
+                        <div id="valorNome" class="valor">{{ Auth::user()->nome_completo ?? '' }}</div>
+                        <div class="input-edicao" id="inputNome">
+                            <input type="text" name="nome_completo" value="{{ Auth::user()->nome_completo ?? '' }}" placeholder="Seu nome completo">
+                            <span class="erro" id="erroNome"></span>
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <label class="label">CPF</label>
+                        <div id="valorCPF" class="valor">{{ Auth::user()->CPF ?? '' }}</div>
+                        <div class="ajuda">CPF não pode ser alterado</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conta -->
+            <div class="secao">
+                <h2 class="secao-titulo">Conta</h2>
+                <div class="grid">
+                    <div class="campo">
+                        <label class="label">E-mail</label>
+                        <div id="valorEmail" class="valor">{{ Auth::user()->email ?? '' }}</div>
+                        <div class="input-edicao" id="inputEmail">
+                            <input type="email" name="email" value="{{ Auth::user()->email ?? '' }}" placeholder="seu@email.com">
+                            <span class="erro" id="erroEmail"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Senha (oculta até edição) -->
+            <div class="secao" id="secaoSenha" style="display: none;">
+                <h2 class="secao-titulo">Alterar Senha</h2>
+                <div class="grid">
+                    <div class="campo">
+                        <label class="label">Senha Atual</label>
+                        <div class="input-edicao mostrando">
+                            <input type="password" id="senhaAtual" name="senha_atual" placeholder="Para confirmar alterações">
+                            <span class="senha-toggle" onclick="alternarSenha('senhaAtual')">Mostrar</span>
+                            <span class="erro" id="erroSenhaAtual"></span>
+                            <div class="ajuda">Obrigatório para salvar</div>
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <label class="label">Nova Senha</label>
+                        <div class="input-edicao mostrando">
+                            <input type="password" id="novaSenha" name="nova_senha" placeholder="Opcional">
+                            <span class="senha-toggle" onclick="alternarSenha('novaSenha')">Mostrar</span>
+                            <div class="forca-senha" id="forcaSenha"></div>
+                            <span class="erro" id="erroNovaSenha"></span>
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <label class="label">Confirmar Nova Senha</label>
+                        <div class="input-edicao mostrando">
+                            <input type="password" id="confirmaSenha" name="nova_senha_confirmation" placeholder="Repita a nova senha">
+                            <span class="senha-toggle" onclick="alternarSenha('confirmaSenha')">Mostrar</span>
+                            <span class="erro" id="erroConfirma"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acoes">
+                <button type="button" id="botaoCancelar" class="btn btn-cancelar" style="display: none;">Cancelar</button>
+                <button type="submit" id="botaoSalvar" class="btn btn-salvar" style="display: none;">Salvar Alterações</button>
+            </div>
+        </form>
     </div>
 </div>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="carregando" id="carregando">
+    <div class="spinner"></div>
+</div>
 @endsection
+
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editButton = document.getElementById('editButton');
-        const cancelButton = document.getElementById('cancelButton');
-        const saveButton = document.getElementById('saveButton');
-        const profileForm = document.getElementById('profileForm');
-        const editForms = document.querySelectorAll('.edit-form');
-        const infoValues = document.querySelectorAll('.info-value');
-        const notification = document.getElementById('notification');
-        const errorFields = {
-            nome_completo: document.getElementById('nomeError'),
-            email: document.getElementById('emailError'),
-            senha_atual: document.getElementById('senhaAntigaError'),
-            nova_senha: document.getElementById('novaSenhaError'),
-            nova_senha_confirmation: document.getElementById('novaSenhaConfirmacaoError')
+    document.addEventListener('DOMContentLoaded', () => {
+        const botaoEditar = document.getElementById('botaoEditar');
+        const botaoCancelar = document.getElementById('botaoCancelar');
+        const botaoSalvar = document.getElementById('botaoSalvar');
+        const form = document.getElementById('formPerfil');
+        const modoEdicao = document.getElementById('modoEdicao');
+        const secaoSenha = document.getElementById('secaoSenha');
+
+        const campos = {
+            nome: { valor: 'valorNome', input: 'inputNome', erro: 'erroNome' },
+            email: { valor: 'valorEmail', input: 'inputEmail', erro: 'erroEmail' },
+            senhaAtual: { erro: 'erroSenhaAtual' },
+            novaSenha: { erro: 'erroNovaSenha' },
+            confirma: { erro: 'erroConfirma' }
         };
 
-        // Toggle edit mode
-        editButton.addEventListener('click', function() {
-            editForms.forEach(form => form.style.display = 'block');
-            infoValues.forEach(value => value.style.display = 'none');
-            document.getElementById('CPFGroup').style.display = 'none';
-            document.getElementById('senhaAntigaGroup').style.display = 'block';
-            document.getElementById('senhaGroup').style.display = 'block';
-            document.getElementById('senhaConfirmacaoGroup').style.display = 'block';
-            cancelButton.style.display = 'block';
-            saveButton.style.display = 'block';
-            editButton.style.display = 'none';
-            clearErrors();
+        // Mensagens de sessão
+        @if(session('success'))
+            mostrarToast('Sucesso', '{{ session('success') }}', 'sucesso');
+        @endif
+        @if($errors->any())
+            mostrarToast('Erro', '{{ $errors->first() }}', 'erro');
+        @endif
+
+        botaoEditar.addEventListener('click', () => {
+            entrarEdicao();
+            mostrarToast('Modo Edição', 'Altere os campos e salve.', 'aviso');
         });
 
-        // Cancel edit mode
-        cancelButton.addEventListener('click', function() {
-            editForms.forEach(form => form.style.display = 'none');
-            infoValues.forEach(value => value.style.display = 'block');
-            document.getElementById('CPFGroup').style.display = 'block';
-            document.getElementById('senhaAntigaGroup').style.display = 'none';
-            document.getElementById('senhaGroup').style.display = 'none';
-            document.getElementById('senhaConfirmacaoGroup').style.display = 'none';
-            cancelButton.style.display = 'none';
-            saveButton.style.display = 'none';
-            editButton.style.display = 'block';
-            clearErrors();
-            notification.classList.remove('show', 'success', 'error');
+        botaoCancelar.addEventListener('click', sairEdicao);
+
+        // Força da senha
+        document.getElementById('novaSenha').addEventListener('input', function() {
+            const forca = document.getElementById('forcaSenha');
+            const senha = this.value;
+            if (!senha) { forca.classList.remove('ativa'); return; }
+
+            let pontos = 0;
+            if (senha.length >= 8) pontos++;
+            if (/[a-z]/.test(senha)) pontos++;
+            if (/[A-Z]/.test(senha)) pontos++;
+            if (/\d/.test(senha)) pontos++;
+            if (/[\W_]/.test(senha)) pontos++;
+
+            forca.classList.add('ativa');
+            forca.classList.remove('fraca', 'media', 'forte');
+            if (pontos <= 2) forca.classList.add('fraca'), forca.innerHTML = 'Fraca';
+            else if (pontos <= 3) forca.classList.add('media'), forca.innerHTML = 'Média';
+            else forca.classList.add('forte'), forca.innerHTML = 'Forte';
         });
 
-        // Form submission
-        profileForm.addEventListener('submit', function(e) {
+        // Envio do formulário
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const newNome = document.getElementById('nomeInput').value;
-            const newEmail = document.getElementById('emailInput').value;
-            const senhaAntiga = document.getElementById('senhaAntigaInput').value;
-            const novaSenha = document.getElementById('novaSenhaInput').value;
-            const novaSenhaConfirmacao = document.getElementById('novaSenhaConfirmacaoInput').value;
+            limparErros();
 
-            // Client-side validation
-            clearErrors();
-            let hasError = false;
+            const dados = {
+                nome_completo: document.querySelector('[name="nome_completo"]').value.trim(),
+                email: document.querySelector('[name="email"]').value.trim(),
+                senha_atual: document.getElementById('senhaAtual').value,
+                nova_senha: document.getElementById('novaSenha').value,
+                nova_senha_confirmation: document.getElementById('confirmaSenha').value
+            };
 
-            if (!newNome) {
-                errorFields.nome_completo.textContent = 'O nome completo é obrigatório.';
-                hasError = true;
-            }
-            if (!newEmail) {
-                errorFields.email.textContent = 'O email é obrigatório.';
-                hasError = true;
-            } else if (!/\S+@\S+\.\S+/.test(newEmail)) {
-                errorFields.email.textContent = 'O email deve ser válido.';
-                hasError = true;
-            }
-            if (!senhaAntiga) {
-                errorFields.senha_atual.textContent = 'A senha atual é obrigatória.';
-                hasError = true;
-            }
-            if (novaSenha && novaSenha.length < 4) {
-                errorFields.nova_senha.textContent = 'A nova senha deve ter pelo menos 4 caracteres.';
-                hasError = true;
-            }
-            if (novaSenha !== novaSenhaConfirmacao) {
-                errorFields.nova_senha_confirmation.textContent = 'As novas senhas não coincidem.';
-                hasError = true;
-            }
+            let erros = false;
 
-            if (hasError) {
-                showNotification('Corrija os erros no formulário.', 'error');
+            if (!dados.nome_completo) { erro('nome', 'Nome é obrigatório'); erros = true; }
+            if (!dados.email) { erro('email', 'E-mail é obrigatório'); erros = true; }
+            else if (!/\S+@\S+\.\S+/.test(dados.email)) { erro('email', 'E-mail inválido'); erros = true; }
+            if (!dados.senha_atual) { erro('senhaAtual', 'Senha atual é obrigatória'); erros = true; }
+            if (dados.nova_senha && dados.nova_senha.length < 4) { erro('novaSenha', 'Mínimo 4 caracteres'); erros = true; }
+            if (dados.nova_senha !== dados.nova_senha_confirmation) { erro('confirma', 'Senhas não coincidem'); erros = true; }
+
+            if (erros) {
+                mostrarToast('Erro', 'Corrija os campos destacados.', 'erro');
                 return;
             }
 
-            // Submit to server
-            fetch('{{ route("profile.update") }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({
-                    nome_completo: newNome,
-                    email: newEmail,
-                    senha_atual: senhaAntiga,
-                    nova_senha: novaSenha,
-                    nova_senha_confirmation: novaSenhaConfirmacao
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(data => {
-                        throw new Error(data.message || 'Erro ao atualizar perfil!');
-                    });
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    showNotification(data.message, 'success');
-                    document.getElementById('nomeValue').textContent = newNome;
-                    document.getElementById('emailValue').textContent = newEmail;
-                    cancelButton.click();
-                }
-            })
-            .catch(error => {
-                showNotification(error.message, 'error');
-                console.error('Error:', error);
-            });
+            mostrarCarregando();
+            botaoSalvar.disabled = true;
+
+            try {
+                const res = await fetch('{{ route("profile.update") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                const json = await res.json();
+
+                if (!res.ok) throw new Error(json.message || 'Erro ao salvar');
+
+                document.getElementById('valorNome').textContent = dados.nome_completo;
+                document.getElementById('valorEmail').textContent = dados.email;
+
+                sairEdicao();
+                mostrarToast('Sucesso', json.message || 'Perfil atualizado!', 'sucesso');
+
+                document.getElementById('senhaAtual').value = '';
+                document.getElementById('novaSenha').value = '';
+                document.getElementById('confirmaSenha').value = '';
+            } catch (err) {
+                mostrarToast('Erro', err.message, 'erro');
+            } finally {
+                esconderCarregando();
+                botaoSalvar.disabled = false;
+            }
         });
 
-        function showNotification(message, type) {
-            notification.textContent = message;
-            notification.className = `notification ${type} show`;
-            setTimeout(() => notification.classList.remove('show'), 3000);
+        function entrarEdicao() {
+            document.querySelectorAll('.input-edicao').forEach(el => el.classList.add('mostrando'));
+            document.querySelectorAll('.valor').forEach(el => el.style.display = 'none');
+            secaoSenha.style.display = 'block';
+            botaoCancelar.style.display = 'block';
+            botaoSalvar.style.display = 'block';
+            botaoEditar.style.display = 'none';
+            modoEdicao.classList.add('ativo');
         }
 
-        function clearErrors() {
-            Object.values(errorFields).forEach(field => field.textContent = '');
+        function sairEdicao() {
+            document.querySelectorAll('.input-edicao').forEach(el => el.classList.remove('mostrando'));
+            document.querySelectorAll('.valor').forEach(el => el.style.display = 'flex');
+            secaoSenha.style.display = 'none';
+            botaoCancelar.style.display = 'none';
+            botaoSalvar.style.display = 'none';
+            botaoEditar.style.display = 'block';
+            modoEdicao.classList.remove('ativo');
+            limparErros();
+        }
+
+        function erro(campo, msg) {
+            const el = document.getElementById(campos[campo]?.erro || `erro${campo.charAt(0).toUpperCase() + campo.slice(1)}`);
+            if (el) {
+                el.textContent = msg;
+                el.classList.add('mostrando');
+            }
+        }
+
+        function limparErros() {
+            document.querySelectorAll('.erro').forEach(el => {
+                el.textContent = '';
+                el.classList.remove('mostrando');
+            });
+        }
+
+        function mostrarToast(titulo, msg, tipo) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${tipo}`;
+            toast.innerHTML = `
+                <span class="toast-icone">${tipo === 'sucesso' ? 'Check' : tipo === 'erro' ? 'Error' : 'Warning'}</span>
+                <div class="toast-texto">
+                    <div class="toast-titulo">${titulo}</div>
+                    <div class="toast-mensagem">${msg}</div>
+                </div>
+                <span class="toast-fechar" onclick="this.parentElement.remove()">×</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.add('mostrando'), 50);
+            setTimeout(() => toast.remove(), 5000);
+        }
+
+        function mostrarCarregando() { document.getElementById('carregando').classList.add('ativo'); }
+        function esconderCarregando() { document.getElementById('carregando').classList.remove('ativo'); }
+    });
+
+    function alternarSenha(id) {
+        const input = document.getElementById(id);
+        const botao = input.nextElementSibling;
+        if (input.type === 'password') {
+            input.type = 'text';
+            botao.textContent = 'Esconder';
+        } else {
+            input.type = 'password';
+            botao.textContent = 'Mostrar';
+        }
+    }
+
+    window.addEventListener('load', () => {
+        const cpf = document.getElementById('valorCPF').textContent;
+        if (cpf.length === 11) {
+            document.getElementById('valorCPF').textContent = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
         }
     });
 </script>
