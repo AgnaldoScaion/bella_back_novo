@@ -58,7 +58,7 @@ class RegisterController extends Controller
                 },
             ],
             'email' => 'required|email|max:100|unique:usuario,email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:4|confirmed',
         ], [
             'nome_completo.required' => 'O nome completo é obrigatório.',
             'CPF.required' => 'O CPF é obrigatório.',
