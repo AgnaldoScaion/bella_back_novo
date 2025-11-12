@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'mailersend'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
     |
     | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
     |            "postmark", "resend", "log", "array",
-    |            "failover", "roundrobin"
+    |            "failover", "roundrobin", "mailersend"
     |
     */
 
@@ -47,7 +47,7 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
-                'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
         ],
 
         'ses' => [
@@ -98,6 +98,15 @@ return [
             'retry_after' => 60,
         ],
 
+        // Adicionado: MailerSend
+        'mailersend' => [
+            'transport' => 'mailersend',
+            'api_key' => env('mlsn.ccbb4c1e02f5f494e343847d3f542f3ab50b1d828cfff2fc50a145e83d481178'),
+            // Configurações opcionais (se publicou o config)
+            // 'domain' => env('MAILERSEND_DOMAIN'),
+            // 'debug' => env('MAILERSEND_DEBUG', false),
+        ],
+
     ],
 
     /*
@@ -114,6 +123,25 @@ return [
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Markdown Mail Settings
+    |--------------------------------------------------------------------------
+    |
+    | If you are using Markdown based email rendering, you may configure your
+    | theme and component paths here, allowing you to customize the design
+    | of the emails. Or, you may simply stick with the Laravel defaults!
+    |
+    */
+
+    'markdown' => [
+        'theme' => 'default',
+
+        'paths' => [
+            resource_path('views/vendor/mail'),
+        ],
     ],
 
 ];

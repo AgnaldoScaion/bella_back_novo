@@ -455,6 +455,11 @@
                     {{ $errors->first('email') }}
                 </div>
             @endif
+            @if(session('success'))
+                <div class="notification success show">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="forgot-password-box">
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
