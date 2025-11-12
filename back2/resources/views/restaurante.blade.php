@@ -578,8 +578,23 @@
 @section('content')
     <main class="main-content">
         <!-- Breadcrumb -->
-        <div class="breadcrumb">
-            <a href="{{ route('destinos') }}">Voltar a seleção</a>
+        <div class="breadcrumb" style="margin-bottom: 1.5rem;">
+            <a href="{{ route('destinos') }}" style="
+                display: inline-flex;
+                align-items: center;
+                background: var(--primary-color, #5a8f3d);
+                color: #fff;
+                font-size: 1.15rem;
+                font-weight: bold;
+                border-radius: 8px;
+                padding: 0.7em 1.3em;
+                box-shadow: 0 2px 8px rgba(90,143,61,0.12);
+                text-decoration: none;
+                transition: background 0.2s;
+            " onmouseover="this.style.background='#41702b'" onmouseout="this.style.background='var(--primary-color, #5a8f3d)'">
+                <i class="fas fa-arrow-left" style="margin-right: 0.7em;"></i>
+                Voltar para seleção de destinos
+            </a>
         </div>
         <h1 class="page-title">Restaurantes</h1>
         <p class="page-subtitle">Descubra os melhores sabores locais e internacionais. Filtre por tipo de cozinha, preço e
