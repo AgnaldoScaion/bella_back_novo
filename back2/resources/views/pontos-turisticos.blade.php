@@ -1240,6 +1240,14 @@
 
         // Configura os eventos quando a página é carregada
         document.addEventListener('DOMContentLoaded', function () {
+            const chatButton = document.getElementById('chatButton');
+            const tutorialTooltip = document.getElementById('tutorialTooltip');
+            if (chatButton && tutorialTooltip) {
+                chatButton.addEventListener('click', function () {
+                    tutorialTooltip.style.display = 'none';
+                    sessionStorage.setItem('tutorialChatShown', 'true');
+                });
+            }
             // Configura os botões de filtro
             document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
             document.getElementById('btn-limpar').addEventListener('click', limparFiltros);

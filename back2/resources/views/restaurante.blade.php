@@ -1271,6 +1271,14 @@
 
         // Configura os eventos quando a página é carregada
         document.addEventListener('DOMContentLoaded', function () {
+            const chatButton = document.getElementById('chatButton');
+            const tutorialTooltip = document.getElementById('tutorialTooltip');
+            if (chatButton && tutorialTooltip) {
+                chatButton.addEventListener('click', function () {
+                    tutorialTooltip.style.display = 'none';
+                    sessionStorage.setItem('tutorialChatShown', 'true');
+                });
+            }
             // Exibe os restaurantes inicialmente
             exibirRestaurantes();
 

@@ -29,16 +29,30 @@ class ChatController extends Controller
     public function getMessages()
     {
         $userId = Auth::user()->id_usuario;
-        // Apaga histórico do usuário a cada acesso (F5)
         Message::where('user_id', $userId)->delete();
-        // Mensagem inicial tutorial do bot
+        $nome = Auth::user()->nome_completo ?? 'Viajante';
+        $hora = now()->format('H');
+        $saudacao = ($hora >= 6 && $hora < 12) ? 'Bom dia' : (($hora >= 12 && $hora < 18) ? 'Boa tarde' : 'Boa noite');
         $initialBot = [
             'id' => 0,
-            'text' => 'Olá! 👋 Eu sou sua assistente virtual. Para saber como usar o sistema, digite "tutorial" ou clique nos menus acima. Posso te ajudar com reservas, dicas e navegação!',
+            'text' => $saudacao . ', ' . $nome . '! 👋 Eu sou sua assistente virtual. Como posso ajudar? Veja sugestões abaixo ou digite sua dúvida.',
             'sender' => 'bot',
-            'time' => now()->format('H:i')
+            'time' => now()->format('H:i'),
+            'quickReplies' => [
+                'Quais destinos você recomenda?',
+                'Como faço uma reserva?',
+                'Quais pontos turísticos estão em alta?',
+                'Quero falar com um atendente'
+            ]
         ];
-        return response()->json([$initialBot]);
+        $tutorialBot = [
+            'id' => 1,
+            'text' => 'Tutorial rápido: 1️⃣ Escolha uma opção abaixo ou digite sua pergunta. 2️⃣ Você pode perguntar sobre destinos, reservas, pontos turísticos ou atendimento. 3️⃣ Para reservar, basta pedir ou clicar nos menus do site. Se quiser mais dicas, digite "tutorial" a qualquer momento. Se precisar de ajuda, digite "ajuda".',
+            'sender' => 'bot',
+            'time' => now()->addSeconds(2)->format('H:i'), // Simula delay de 2 segundos
+            'delay' => 2000 // ms, para frontend exibir como "escrevendo"
+        ];
+        return response()->json([$initialBot, $tutorialBot]);
     }
 
     public function sendMessage(Request $request)
@@ -76,38 +90,39 @@ class ChatController extends Controller
 
     private function generateBotResponse($userMessage)
     {
-        $lowercaseMessage = strtolower($userMessage);
-        if (str_contains($lowercaseMessage, 'olá') || str_contains($lowercaseMessage, 'oi')) {
-            return 'Olá! 👋 Eu sou sua assistente virtual. Se precisar de ajuda, basta digitar sua dúvida ou clicar nos botões do site. Posso te explicar como funciona cada parte!';
+        $msg = strtolower($userMessage);
+        // Sinônimos e frases
+        if (preg_match('/\b(olá|oi|opa|e aí|bom dia|boa tarde|boa noite)\b/', $msg)) {
+            return 'Olá! 👋 Como posso ajudar? Você pode perguntar sobre destinos, reservas ou pontos turísticos.';
         }
-        if (str_contains($lowercaseMessage, 'ajuda')) {
+        if (preg_match('/\b(ajuda|socorro|preciso de ajuda|me ajuda)\b/', $msg)) {
             return 'Claro! Para usar o sistema, clique nos menus de Destinos, Hotéis, Restaurantes ou Pontos Turísticos. Se quiser reservar, clique no botão de reserva. Qual parte você quer aprender?';
         }
-        if (str_contains($lowercaseMessage, 'como funciona') || str_contains($lowercaseMessage, 'tutorial')) {
-            return 'Tutorial rápido: 1️⃣ Clique no botão verde do chat no canto inferior direito para conversar comigo. 2️⃣ Use os menus para navegar. 3️⃣ Para reservar, escolha o local e clique em "Reservar". Se tiver dúvidas, me pergunte!';
+        if (preg_match('/\b(como funciona|tutorial|explica|ensina)\b/', $msg)) {
+            return 'Tutorial rápido: 1️⃣ Clique no botão do chat para conversar comigo. 2️⃣ Use os menus para navegar. 3️⃣ Para reservar, escolha o local e clique em "Reservar". Se tiver dúvidas, me pergunte!';
         }
-        if (str_contains($lowercaseMessage, 'destino')) {
-            return 'Destinos são lugares para viajar. Clique em "Destinos" no menu para ver opções. Se quiser dicas, me diga o tipo de viagem que procura!';
+        if (preg_match('/\b(destino|viagem|lugares|cidade)\b/', $msg)) {
+            return 'Temos ótimos destinos! Quer ver hotéis, restaurantes ou pontos turísticos? Me diga o tipo de viagem que procura.';
         }
-        if (str_contains($lowercaseMessage, 'hotel')) {
+        if (preg_match('/\b(hotel|hospedagem|pousada|alojamento)\b/', $msg)) {
             return 'Hotéis são opções de hospedagem. Clique em "Hotéis" para ver os disponíveis. Para reservar, clique no hotel desejado e depois em "Reservar".';
         }
-        if (str_contains($lowercaseMessage, 'restaurante')) {
+        if (preg_match('/\b(restaurante|comida|prato|culinária)\b/', $msg)) {
             return 'Restaurantes são lugares para comer. Clique em "Restaurantes" para ver opções. Se quiser sugestões de pratos, me pergunte!';
         }
-        if (str_contains($lowercaseMessage, 'ponto turístico')) {
+        if (preg_match('/\b(ponto turístico|atração|monumento|visita)\b/', $msg)) {
             return 'Pontos turísticos são locais famosos para visitar. Clique em "Pontos Turísticos" para ver os mais visitados. Se quiser dicas, só pedir!';
         }
-        if (str_contains($lowercaseMessage, 'reserva')) {
+        if (preg_match('/\b(reserva|reservar|agendar|booking)\b/', $msg)) {
             return 'Para fazer uma reserva, escolha o local desejado e clique em "Reservar". Se precisar de ajuda, me diga o local e a data.';
         }
-        if (str_contains($lowercaseMessage, 'dica')) {
+        if (preg_match('/\b(dica|sugestão|recomenda|indica)\b/', $msg)) {
             return 'Dica: Use os filtros do site para encontrar o que procura. Se quiser sugestões personalizadas, me conte o que você gosta!';
         }
-        if (str_contains($lowercaseMessage, 'obrigado') || str_contains($lowercaseMessage, 'valeu')) {
+        if (preg_match('/\b(obrigado|valeu|agradecido|thanks)\b/', $msg)) {
             return 'Por nada! Se precisar de mais alguma coisa, estou por aqui. 😊';
         }
-        // Resposta padrão didática
-        return 'Sou uma assistente virtual pronta para te ajudar! Para começar, clique no botão verde do chat no canto inferior direito. Digite sua dúvida ou escolha uma opção no menu. Se quiser um tutorial, digite "tutorial".';
+        // Fallback para perguntas desconhecidas
+        return 'Não entendi sua pergunta, mas posso te ajudar com destinos, reservas ou dúvidas sobre o site! Tente perguntar de outra forma ou clique em "Quero falar com um atendente".';
     }
 }
