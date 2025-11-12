@@ -577,25 +577,6 @@
 
 @section('content')
     <main class="main-content">
-        <!-- Breadcrumb -->
-        <div class="breadcrumb" style="margin-bottom: 1.5rem;">
-            <a href="{{ route('destinos') }}" style="
-                display: inline-flex;
-                align-items: center;
-                background: var(--primary-color, #5a8f3d);
-                color: #fff;
-                font-size: 1.15rem;
-                font-weight: bold;
-                border-radius: 8px;
-                padding: 0.7em 1.3em;
-                box-shadow: 0 2px 8px rgba(90,143,61,0.12);
-                text-decoration: none;
-                transition: background 0.2s;
-            " onmouseover="this.style.background='#41702b'" onmouseout="this.style.background='var(--primary-color, #5a8f3d)'">
-                <i class="fas fa-arrow-left" style="margin-right: 0.7em;"></i>
-                Voltar para seleção de destinos
-            </a>
-        </div>
         <h1 class="page-title">Restaurantes</h1>
         <p class="page-subtitle">Descubra os melhores sabores locais e internacionais. Filtre por tipo de cozinha, preço e
             avaliações para encontrar o restaurante perfeito para sua experiência gastronômica.</p>
@@ -669,6 +650,25 @@
         </div>
         <!-- Paginação -->
         <div class="paginacao" id="paginacao"></div>
+        <div style="margin: 2rem 0 1rem 0; text-align: center;">
+            <a href="{{ route('destinos') }}" style="
+                    display: inline-flex;
+                    align-items: center;
+                    background: #e6f0e6;
+                    color: #356a23;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    border-radius: 6px;
+                    padding: 0.45em 1em;
+                    box-shadow: 0 1px 4px rgba(53,106,35,0.08);
+                    text-decoration: none;
+                    border: 1px solid #b6d6b6;
+                    transition: background 0.2s;
+                " onmouseover="this.style.background='#d0e6d0'" onmouseout="this.style.background='#e6f0e6'">
+                <i class="fas fa-arrow-left" style="margin-right: 0.5em;"></i>
+                Voltar para seleção de destinos
+            </a>
+        </div>
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
     </main>
@@ -1098,28 +1098,28 @@
             const badgeText = restaurante.badge || (restaurante.promocao ? 'Promoção' : '');
 
             restauranteCard.innerHTML = `
-                            <div class="restaurante-img">
-                                <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
-                                ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
-                            </div>
-                            <div class="restaurante-content">
-                                <div class="restaurante-header">
-                                    <h3 class="restaurante-title">${restaurante.nome}</h3>
-                                    <div class="restaurante-rating">
-                                        <span class="star">★</span>${restaurante.avaliacao}
+                                <div class="restaurante-img">
+                                    <img src="${restaurante.imagem}" alt="${restaurante.nome}" onerror="this.src='https://via.placeholder.com/320x220/5a8f3d/ffffff?text=Restaurante'">
+                                    ${badgeText ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                                </div>
+                                <div class="restaurante-content">
+                                    <div class="restaurante-header">
+                                        <h3 class="restaurante-title">${restaurante.nome}</h3>
+                                        <div class="restaurante-rating">
+                                            <span class="star">★</span>${restaurante.avaliacao}
+                                        </div>
+                                    </div>
+                                    <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
+                                    <div class="restaurante-info">
+                                        <p><span>📍</span> ${restaurante.endereco}</p>
+                                        <p><span>⏰</span> ${restaurante.horario}</p>
+                                        <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
+                                    </div>
+                                    <div class="restaurante-footer">
+                                        <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
                                     </div>
                                 </div>
-                                <div class="restaurante-tipos">${restaurante.tipos.join(' • ')}</div>
-                                <div class="restaurante-info">
-                                    <p><span>📍</span> ${restaurante.endereco}</p>
-                                    <p><span>⏰</span> ${restaurante.horario}</p>
-                                    <p><span>💰</span> <span class="preco">${restaurante.precoTexto}</span> ${restaurante.preco}</p>
-                                </div>
-                                <div class="restaurante-footer">
-                                    <a href="/destinos/restaurantes/${restaurante.id}" class="btn-ver-mais">Ver Detalhes</a>
-                                </div>
-                            </div>
-                        `;
+                            `;
             return restauranteCard;
         }
 
@@ -1321,11 +1321,11 @@
             } catch (error) {
                 console.error('Erro ao carregar o mapa:', error);
                 document.getElementById('map').innerHTML = `
-                                <div style="text-align: center; padding: 20px; color: #666;">
-                                    <p>⚠️ Não foi possível carregar o mapa</p>
-                                    <p>Verifique sua conexão com a internet</p>
-                                </div>
-                            `;
+                                    <div style="text-align: center; padding: 20px; color: #666;">
+                                        <p>⚠️ Não foi possível carregar o mapa</p>
+                                        <p>Verifique sua conexão com a internet</p>
+                                    </div>
+                                `;
             }
         });
     </script>

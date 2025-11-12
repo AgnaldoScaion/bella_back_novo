@@ -621,24 +621,7 @@
 @section('content')
     <main class="main-content">
         <!-- Breadcrumb -->
-        <div class="breadcrumb" style="margin-bottom: 1.5rem;">
-            <a href="{{ route('destinos') }}" style="
-                display: inline-flex;
-                align-items: center;
-                background: var(--primary-color, #5a8f3d);
-                color: #fff;
-                font-size: 1.15rem;
-                font-weight: bold;
-                border-radius: 8px;
-                padding: 0.7em 1.3em;
-                box-shadow: 0 2px 8px rgba(90,143,61,0.12);
-                text-decoration: none;
-                transition: background 0.2s;
-            " onmouseover="this.style.background='#41702b'" onmouseout="this.style.background='var(--primary-color, #5a8f3d)'">
-                <i class="fas fa-arrow-left" style="margin-right: 0.7em;"></i>
-                Voltar para seleção de destinos
-            </a>
-        </div>
+        <!-- Botão Voltar para seleção de destinos será movido para baixo -->
         <h1 class="page-title">Hotéis</h1>
         <p class="page-subtitle">Encontre os melhores hotéis para sua estadia. Filtre por preço, localização e comodidades
             para uma experiência personalizada.</p>
@@ -712,6 +695,26 @@
         </div>
         <!-- Paginação -->
         <div class="paginacao" id="paginacao"></div>
+        <!-- Botão Voltar para seleção de destinos -->
+        <div style="margin: 2rem 0 1rem 0; text-align: center;">
+            <a href="{{ route('destinos') }}" style="
+                display: inline-flex;
+                align-items: center;
+                background: #e6f0e6;
+                color: #356a23;
+                font-size: 1rem;
+                font-weight: 500;
+                border-radius: 6px;
+                padding: 0.45em 1em;
+                box-shadow: 0 1px 4px rgba(53,106,35,0.08);
+                text-decoration: none;
+                border: 1px solid #b6d6b6;
+                transition: background 0.2s;
+            " onmouseover="this.style.background='#d0e6d0'" onmouseout="this.style.background='#e6f0e6'">
+                <i class="fas fa-arrow-left" style="margin-right: 0.5em;"></i>
+                Voltar para seleção de destinos
+            </a>
+        </div>
         <!-- Notificação -->
         <div id="notificacao" class="notificacao"><i class="fas fa-check-circle"></i><span></span></div>
     </main>
