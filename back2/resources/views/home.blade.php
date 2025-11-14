@@ -552,6 +552,53 @@
             animation: bounce 2s infinite;
         }
 
+        .step-guide {
+            border: 2px solid #A7D096 !important;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from {
+                box-shadow: 0 2px 12px #5a8f3d22,
+                    0 0 5px #A7D096,
+                    0 0 10px #A7D096,
+                    0 0 15px #5a8f3d;
+            }
+
+            to {
+                box-shadow: 0 2px 12px #5a8f3d22,
+                    0 0 10px #A7D096,
+                    0 0 20px #A7D096,
+                    0 0 30px #5a8f3d,
+                    0 0 40px #5a8f3d;
+            }
+        }
+
+        /* Neon Glow nos badges com texto pulsando */
+        .step-guide .badge-neon {
+            border: 1px solid #A7D096;
+            animation: badgeNeonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes badgeNeonGlow {
+            from {
+                background: #A7D096;
+                color: #000;
+                box-shadow: 0 0 3px #A7D096,
+                    0 0 6px #A7D096,
+                    0 0 9px #5a8f3d;
+            }
+
+            to {
+                background: #5a8f3d;
+                color: #fff;
+                box-shadow: 0 0 6px #A7D096,
+                    0 0 12px #A7D096,
+                    0 0 18px #5a8f3d,
+                    0 0 24px #5a8f3d;
+            }
+        }
+
         @keyframes bounce {
 
             0%,
@@ -665,14 +712,14 @@
                         Como explorar a nossa aplicação.</h3>
                     <ol style="padding-left: 1.2rem; color: #2d5016; font-size: 1.08rem;">
                         <li style="margin-bottom: 1rem;">
-                            <span style="font-weight: bold;">Menu Lateral:</span> Clique no <span
-                                style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">☰</span>
+                            <span style="font-weight: bold;">Menu Lateral:</span> Clique no <span class="badge-neon"
+                                style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold; display: inline-block;">☰</span>
                             icon (topo esquerdo) para abrir o menu lateral, para vizualizar algumas guias que possivelmente
                             deseja ao explorar o site.
                         </li>
                         <li style="margin-bottom: 1rem;">
-                            <span style="font-weight: bold;">Volte para aqui:</span> Clique em <span
-                                style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold;">Bella
+                            <span style="font-weight: bold;">Volte para aqui:</span> Clique em <span class="badge-neon"
+                                style="background: #A7D096; border-radius: 6px; padding: 2px 8px; font-weight: bold; display: inline-block;">Bella
                                 Avventura logo</span> que fica no meio do cabeçalho da pagina e flutuando para retornar a home
                             em qualquer pagina.
                         </li>

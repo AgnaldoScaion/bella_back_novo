@@ -97,9 +97,31 @@
         .destino-title { font-size: 1.4rem; font-weight: 700; color: var(--primary-light); margin-bottom: 0.8rem; }
         .destino-desc { font-size: 0.95rem; color: var(--text-medium); margin-bottom: 1.2rem; flex: 1; line-height: 1.5; }
 
-        .destino-stats { display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 1rem; }
-        .stat-value { font-size: 1.2rem; color: var(--primary-light); font-weight: 600; }
-        .stat-label { font-size: 0.85rem; color: var(--text-medium); }
+        .destino-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.08rem;
+            margin-bottom: 0.2rem;
+            background: #fff;
+            border-radius: 6px;
+            padding: 6px 12px;
+            box-shadow: 0 1px 4px rgba(45, 80, 22, 0.04);
+            border: 1px solid var(--border-color);
+        }
+        .stat-value {
+            color: var(--primary-light);
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-right: 4px;
+        }
+        .stat-label {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+        .destino-action .btn-destino {
+            margin-top: 0.5rem;
+        }
 
         .btn-destino {
             background: var(--accent-color); color: var(--text-dark); padding: 0.8rem 1.5rem; border: none;
@@ -225,9 +247,9 @@
                     <h3 class="destino-title">Hotéis</h3>
                     <p class="destino-desc">Encontre os melhores hotéis para sua estadia. Diferentes categorias, avaliações reais e preços acessíveis.</p>
                     <div class="destino-stats">
-                        <div class="destino-stat"><span class="stat-value">200+</span><span class="stat-label">Hotéis</span></div>
-                        <div class="destino-stat"><span class="stat-value">15.000+</span><span class="stat-label">Avaliações</span></div>
-                        <div class="destino-stat"><span class="stat-value">30+</span><span class="stat-label">Cidades</span></div>
+                        <div class="destino-stat"><span class="stat-value">20+</span><span class="stat-label">Hotéis</span></div>
+                        <div class="destino-stat"><span class="stat-value">210+</span><span class="stat-label">Avaliações</span></div>
+                        <div class="destino-stat"><span class="stat-value">5+</span><span class="stat-label">Cidades</span></div>
                     </div>
                     <div class="destino-action"><a href="{{ route('hoteis.alternative') }}" class="btn-destino">Explorar Hotéis</a></div>
                 </div>
@@ -242,9 +264,9 @@
                     <h3 class="destino-title">Restaurantes</h3>
                     <p class="destino-desc">Descubra a gastronomia local com os melhores restaurantes. Culinária variada e experiências inesquecíveis.</p>
                     <div class="destino-stats">
-                        <div class="destino-stat"><span class="stat-value">500+</span><span class="stat-label">Restaurantes</span></div>
-                        <div class="destino-stat"><span class="stat-value">25.000+</span><span class="stat-label">Avaliações</span></div>
-                        <div class="destino-stat"><span class="stat-value">50+</span><span class="stat-label">Cozinhas</span></div>
+                        <div class="destino-stat"><span class="stat-value">10+</span><span class="stat-label">Restaurantes</span></div>
+                        <div class="destino-stat"><span class="stat-value">120+</span><span class="stat-label">Avaliações</span></div>
+                        <div class="destino-stat"><span class="stat-value">5+</span><span class="stat-label">Cozinhas</span></div>
                     </div>
                     <div class="destino-action"><a href="{{ route('restaurantes.alternative') }}" class="btn-destino">Explorar Restaurantes</a></div>
                 </div>
@@ -259,9 +281,9 @@
                     <h3 class="destino-title">Pontos Turísticos</h3>
                     <p class="destino-desc">Conheça os pontos turísticos mais populares e os tesouros escondidos. Atrações para todos os gostos.</p>
                     <div class="destino-stats">
-                        <div class="destino-stat"><span class="stat-value">350+</span><span class="stat-label">Pontos</span></div>
-                        <div class="destino-stat"><span class="stat-value">18.000+</span><span class="stat-label">Avaliações</span></div>
-                        <div class="destino-stat"><span class="stat-value">40+</span><span class="stat-label">Categorias</span></div>
+                        <div class="destino-stat"><span class="stat-value">15+</span><span class="stat-label">Pontos</span></div>
+                        <div class="destino-stat"><span class="stat-value">100+</span><span class="stat-label">Avaliações</span></div>
+                        <div class="destino-stat"><span class="stat-value">3+</span><span class="stat-label">Categorias</span></div>
                     </div>
                     <div class="destino-action"><a href="{{ route('pontos-turisticos.alternative') }}" class="btn-destino">Explorar Pontos</a></div>
                 </div>
