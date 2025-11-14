@@ -10,33 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Mail\ReservaConfirmacao;
 
 class ReservaController extends Controller
-
-    /**
-     * Confirma a reserva via código inserido pelo usuário
-     */
-    public function confirmarPorCodigo(Request $request)
-    {
-        $request->validate([
-            'codigo_confirmacao' => 'required|string|max:20',
-        ]);
-
-        $codigo = $request->input('codigo_confirmacao');
-        $reserva = Reserva::where('codigo_confirmacao', $codigo)->first();
-
-        if (!$reserva) {
-            return back()->with('error', 'Código de confirmação inválido. Verifique o e-mail e tente novamente.');
-        }
-
-        if ($reserva->status === 'confirmada') {
-            return redirect()->route('home')->with('info', 'Esta reserva já foi confirmada anteriormente.');
-        }
-
-        $reserva->confirmar();
-        $reserva->hotel = $reserva->getHotelData();
-
-        return view('reservas.confirmada', compact('reserva'))
-            ->with('success', 'Reserva confirmada com sucesso!');
-    }
 {
     /**
      * Exibe o formulário de reserva
@@ -254,5 +227,32 @@ class ReservaController extends Controller
 
         return redirect()->route('reservas.minhas')
             ->with('success', 'Reserva cancelada com sucesso.');
+    }
+
+    /**
+     * Confirma a reserva via código inserido pelo usuário
+     */
+    public function confirmarPorCodigo(Request $request)
+    {
+        $request->validate([
+            'codigo_confirmacao' => 'required|string|max:20',
+        ]);
+
+        $codigo = $request->input('codigo_confirmacao');
+        $reserva = Reserva::where('codigo_confirmacao', $codigo)->first();
+
+        if (!$reserva) {
+            return back()->with('error', 'Código de confirmação inválido. Verifique o e-mail e tente novamente.');
+        }
+
+        if ($reserva->status === 'confirmada') {
+            return redirect()->route('home')->with('info', 'Esta reserva já foi confirmada anteriormente.');
+        }
+
+        $reserva->confirmar();
+        $reserva->hotel = $reserva->getHotelData();
+
+        return view('reservas.confirmada', compact('reserva'))
+            ->with('success', 'Reserva confirmada com sucesso!');
     }
 }
