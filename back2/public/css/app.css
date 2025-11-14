@@ -1,3 +1,86 @@
+/* Estilos para o formulário de redefinição de senha */
+.forgot-password-container {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    padding: 32px 24px;
+    max-width: 400px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.forgot-password-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+.forgot-password-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+.form-group label {
+    font-size: 1rem;
+    color: var(--text-medium);
+    margin-bottom: 6px;
+}
+.form-group input {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-small);
+    font-size: 1rem;
+    background: #f9faf9;
+    transition: border-color 0.2s;
+}
+.form-group input:focus {
+    border-color: var(--primary-light);
+    outline: none;
+}
+
+/* Botão igual ao da home */
+.submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-light) 100%);
+    color: var(--text-dark);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--border-radius-small);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+}
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+.submit-button:hover::before {
+    left: 100%;
+}
+.submit-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-strong);
+}
 @font-face {
     font-family: "GaramondBold";
     src: local("Garamond"), serif;

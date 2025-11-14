@@ -32,5 +32,30 @@ class ResetPasswordController extends Controller
     |
     */
 
-    // ...existing code...
+    /**
+     * Processa a redefinição de senha.
+     */
+    public function reset(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:4',
+        ]);
+
+        $status = app('auth.password')->reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->password = bcrypt($password);
+                $user->save();
+            }
+        );
+
+        if ($status ==
+            \Illuminate\Auth\Passwords\PasswordBroker::PASSWORD_RESET) {
+            return redirect()->route('login')->with('status', __($status));
+        } else {
+            return back()->withErrors(['email' => __($status)]);
+        }
+    }
 }

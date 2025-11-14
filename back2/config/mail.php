@@ -65,7 +65,7 @@ return [
         'resend' => [
             'transport' => 'resend',
         ],
-
+                'api_key' => env('mlsn.ccbb4c1e02f5f494e343847d3f542f3ab50b1d828cfff2fc50a145e83d481178'),
         'sendmail' => [
             'transport' => 'sendmail',
             'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
@@ -103,7 +103,7 @@ return [
             'transport' => 'mailersend',
             'api_key' => env('mlsn.ccbb4c1e02f5f494e343847d3f542f3ab50b1d828cfff2fc50a145e83d481178'),
             // Configurações opcionais (se publicou o config)
-            // 'domain' => env('MAILERSEND_DOMAIN'),
+             'domain' => env('test-dnvo4d98x5xg5r86.mlsender.net'),
             // 'debug' => env('MAILERSEND_DEBUG', false),
         ],
 
