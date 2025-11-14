@@ -58,6 +58,10 @@ Route::middleware('auth')->group(function () {
 
 // ========== ROTAS PÚBLICAS DE RESERVAS ==========
 Route::prefix('reservas')->group(function () {
+    Route::get('/confirmar-codigo', function() {
+        return view('reservas.confirmar-codigo');
+    })->name('reservas.confirmar-codigo.form');
+    Route::post('/confirmar-codigo', [ReservaController::class, 'confirmarPorCodigo'])->name('reservas.confirmar-codigo');
     Route::get('/sucesso/{id}', [ReservaController::class, 'sucesso'])->name('reservas.sucesso');
     Route::get('/confirmar/{codigo}', [ReservaController::class, 'confirmar'])->name('reservas.confirmar');
 });
