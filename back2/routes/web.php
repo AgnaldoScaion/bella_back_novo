@@ -58,6 +58,10 @@ Route::middleware('auth')->group(function () {
 
 // ========== ROTAS PÚBLICAS DE RESERVAS ==========
 Route::prefix('reservas')->group(function () {
+    Route::get('/confirmar-codigo', function() {
+        return view('reservas.confirmar-codigo');
+    })->name('reservas.confirmar-codigo.form');
+    Route::post('/confirmar-codigo', [ReservaController::class, 'confirmarPorCodigo'])->name('reservas.confirmar-codigo');
     Route::get('/sucesso/{id}', [ReservaController::class, 'sucesso'])->name('reservas.sucesso');
     Route::get('/confirmar/{codigo}', [ReservaController::class, 'confirmar'])->name('reservas.confirmar');
 });
@@ -76,7 +80,7 @@ Route::get('/profile', fn() => view('profile.show'))->name('profile.show');
 // Pontos Turísticos
 Route::prefix('destinos/pontos-turisticos')->group(function () {
     Route::get('/{id}', [PontoTuristicoController::class, 'show'])->name('pontos-turisticos.show');
-    
+
     $pontosTuristicos = [
         'beco-do-batman' => 'BecodoBatman',
         'cataratas-do-iguacu' => 'Cataratasdolguacu',
@@ -118,7 +122,7 @@ Route::get('/pontos-turisticos', fn() => view('pontos-turisticos'))->name('ponto
 // Hotéis
 Route::prefix('destinos/hoteis')->group(function () {
     Route::get('/{id}', [HotelController::class, 'show'])->name('hoteis.show');
-    
+
     $hoteis = [
         'atlantico-business-rj' => 'AtlanticoBussinesRJ',
         'atlantico-copacabana-rj' => 'AtlanticoCopacabanaRJ',
@@ -153,7 +157,7 @@ Route::get('/hoteis', fn() => view('hoteis'))->name('hoteis.alternative');
 Route::prefix('destinos/restaurantes')->group(function () {
     Route::get('/', fn() => view('restaurante'))->name('restaurantes.index');
     Route::get('/{id}', [RestauranteController::class, 'show'])->name('restaurantes.show');
-    
+
     $restaurantes = [
         'alameda' => 'Alameda',
         'bene-da-flauta' => 'BenédaFlauta',
@@ -190,3 +194,7 @@ Route::prefix('destinos/restaurantes')->group(function () {
     }
 });
 Route::get('/restaurantes', fn() => view('restaurante'))->name('restaurantes.alternative');
+
+// ========== ROTAS DE REDIFINIÇÃO DE SENHA ==========
+Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');

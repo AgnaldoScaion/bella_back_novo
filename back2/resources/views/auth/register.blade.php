@@ -12,7 +12,7 @@
 
         /* Variáveis CSS */
         :root {
-            --primary-color: #5a8f3d;
+            --primary-color: #5a8f3d;   
             --primary-green: #2d5016;
             --primary-light: #A7D096;
             --primary-bg: #f3f7f3;

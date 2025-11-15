@@ -66,7 +66,7 @@ class RegisterController extends Controller
             'email.email' => 'O email deve ser válido.',
             'email.unique' => 'Este email já está cadastrado.',
             'password.required' => 'A senha é obrigatória.',
-            'password.min' => 'A senha deve ter pelo menos 8 caracteres.',
+            'password.min' => 'A senha deve ter pelo menos 4 caracteres.',
             'password.confirmed' => 'As senhas não coincidem.',
         ]);
 

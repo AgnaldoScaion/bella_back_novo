@@ -1,0 +1,10 @@
+{
+    "require": {
+        "mailersend/laravel-driver": "^2.12"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

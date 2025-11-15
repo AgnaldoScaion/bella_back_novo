@@ -395,14 +395,20 @@ const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 let isOpen = false;
 chatToggle.addEventListener('click', () => {
-    isOpen = !isOpen;
-    chatPopup.style.display = isOpen ? 'block' : 'none';
-    chatIcon.classList.toggle('hidden');
-    closeIcon.classList.toggle('hidden');
-    if (isOpen) {
-        loadMessages();
-        setTimeout(() => messageInput.focus(), 200);
-    }
+  isOpen = !isOpen;
+  chatPopup.style.display = isOpen ? 'block' : 'none';
+  chatIcon.classList.toggle('hidden');
+  closeIcon.classList.toggle('hidden');
+  // Esconde tutorial ao abrir o chat
+  const tutorialTooltip = document.getElementById('tutorialTooltip');
+  if (tutorialTooltip) {
+    tutorialTooltip.style.display = 'none';
+    sessionStorage.setItem('tutorialChatShown', 'true');
+  }
+  if (isOpen) {
+    loadMessages();
+    setTimeout(() => messageInput.focus(), 200);
+  }
 });
 minimizeChat.addEventListener('click', () => {
     isOpen = false;

@@ -24,7 +24,7 @@
 <body class="bg-gray-100 min-h-screen p-8">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
         <h1 class="text-3xl font-bold text-gray-800 mb-4">Bem-vindo ao Chat Tecnológico</h1>
-        <p class="text-gray-600 mb-4">Esta é uma página de exemplo. Clique no botão flutuante no canto inferior direito para abrir o chat!</p>
+        <p class="text-gray-600 mb-4">Esta é uma página de exemplo. Clique no botão flutuante no canto inferior esquerdo para abrir o chat novamente!</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div class="bg-purple-50 p-6 rounded-lg">
                 <h3 class="text-xl font-semibold text-purple-800 mb-2">Chat em Popup</h3>
@@ -64,6 +64,7 @@
                 </button>
             </div>
             <div id="messagesArea" class="flex-1 overflow-y-auto px-4 py-4 space-y-3"></div>
+            <div id="quickReplies" class="flex flex-wrap gap-2 px-4 pb-2"></div>
             <div class="bg-slate-800/60 backdrop-blur-sm border-t border-slate-700/50 px-4 py-3">
                 <form id="chatForm" class="flex items-end gap-2">
                     <div class="flex-1 bg-slate-700/50 backdrop-blur-sm rounded-xl border border-slate-600/50 focus-within:border-purple-500/50 transition-colors">
@@ -79,8 +80,74 @@
         </div>
     </div>
     <script>
-        // ... JS do chat popup ...
-        // ...código já fornecido anteriormente...
+        // Inteligência aprimorada e jogada de cores
+        const messagesArea = document.getElementById('messagesArea');
+        const quickReplies = document.getElementById('quickReplies');
+        const chatForm = document.getElementById('chatForm');
+        const messageInput = document.getElementById('messageInput');
+
+        // Mensagem de boas-vindas
+        function showWelcome() {
+            addMessage('Olá! 👋 Eu sou sua assistente virtual. Como posso ajudar?', 'ai');
+            showQuickReplies([
+                'Quais destinos você recomenda?',
+                'Como faço uma reserva?',
+                'Quais pontos turísticos estão em alta?',
+                'Quero falar com um atendente'
+            ]);
+        }
+
+        // Adiciona mensagem ao chat
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = sender === 'ai'
+                ? 'bg-gradient-to-r from-purple-500/80 to-pink-500/80 text-white rounded-xl px-4 py-2 max-w-[80%] self-start shadow-md border border-purple-400 animate-fade-in'
+                : 'bg-white border border-pink-200 text-gray-800 rounded-xl px-4 py-2 max-w-[80%] self-end shadow-md animate-fade-in';
+            msgDiv.textContent = text;
+            messagesArea.appendChild(msgDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        // Sugestões rápidas
+        function showQuickReplies(replies) {
+            quickReplies.innerHTML = '';
+            replies.forEach(reply => {
+                const btn = document.createElement('button');
+                btn.className = 'px-3 py-1 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-lg shadow hover:from-purple-500 hover:to-pink-500 transition-all text-sm';
+                btn.textContent = reply;
+                btn.onclick = () => {
+                    messageInput.value = reply;
+                    chatForm.dispatchEvent(new Event('submit'));
+                };
+                quickReplies.appendChild(btn);
+            });
+        }
+
+        // Resposta automática por palavra-chave
+        function getAutoReply(text) {
+            text = text.toLowerCase();
+            if (text.includes('destino')) return 'Temos ótimos destinos! Quer ver hotéis, restaurantes ou pontos turísticos?';
+            if (text.includes('reserva')) return 'Para reservar, escolha o destino e clique em "Reservar". Precisa de ajuda?';
+            if (text.includes('ponto turístico')) return 'Os pontos turísticos mais visitados estão em destaque na página principal.';
+            if (text.includes('atendente')) return 'Um atendente humano irá te responder em breve.';
+            return 'Posso te ajudar com destinos, reservas ou dúvidas sobre o site!';
+        }
+
+        // Evento de envio de mensagem
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const text = messageInput.value.trim();
+            if (!text) return;
+            addMessage(text, 'user');
+            setTimeout(() => {
+                addMessage(getAutoReply(text), 'ai');
+            }, 600);
+            messageInput.value = '';
+            quickReplies.innerHTML = '';
+        });
+
+        // Inicia chat com boas-vindas
+        showWelcome();
     </script>
 </body>
 </html>

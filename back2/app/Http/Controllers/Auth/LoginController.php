@@ -51,24 +51,13 @@ class LoginController extends Controller
     public function forgotPassword(Request $request)
     {
         $request->validate([
-            'CPF' => 'required|string|exists:users,CPF',
+            'email' => 'required|email|exists:usuario,email',
         ]);
 
-        // Remove formatação do CPF
-        $cpf = preg_replace('/\D/', '', $request->CPF);
-
-        // Busca o usuário pelo CPF
-        $user = DB::table('users')->where('CPF', $cpf)->first();
-
-        if (!$user) {
-            return back()->withErrors(['CPF' => 'CPF não encontrado.']);
-        }
-
-        // Envia o link de redefinição de senha usando o e-mail do usuário
-        $status = Password::sendResetLink(['email' => $user->email]);
+        $status = Password::sendResetLink($request->only('email'));
 
         return $status === Password::RESET_LINK_SENT
             ? back()->with(['success' => 'Link de redefinição de senha enviado com sucesso.'])
-            : back()->withErrors(['CPF' => 'Não foi possível enviar o link de redefinição.']);
+            : back()->withErrors(['email' => 'Não foi possível enviar o link de redefinição.']);
     }
 }

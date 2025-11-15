@@ -585,8 +585,8 @@
 @section('content')
     <main class="main-content">
         <!-- Breadcrumb -->
-        <div class="breadcrumb">
-            <a href="{{ route('destinos') }}">Voltar a seleção</a>
+        <div class="breadcrumb" style="margin-bottom: 1.5rem;">
+            <!-- Botão Voltar para seleção de destinos será movido para baixo -->
         </div>
         <h1 class="page-title">Pontos Turísticos</h1>
         <p class="page-subtitle">Descubra os melhores pontos turísticos para sua visita. Filtre por tipo, localização e
@@ -662,6 +662,26 @@
 
         <!-- Paginação -->
         <div class="paginacao" id="paginacao"></div>
+        <!-- Botão Voltar para seleção de destinos -->
+        <div style="margin: 2rem 0 1rem 0; text-align: center;">
+            <a href="{{ route('destinos') }}" style="
+                display: inline-flex;
+                align-items: center;
+                background: #e6f0e6;
+                color: #356a23;
+                font-size: 1rem;
+                font-weight: 500;
+                border-radius: 6px;
+                padding: 0.45em 1em;
+                box-shadow: 0 1px 4px rgba(53,106,35,0.08);
+                text-decoration: none;
+                border: 1px solid #b6d6b6;
+                transition: background 0.2s;
+            " onmouseover="this.style.background='#d0e6d0'" onmouseout="this.style.background='#e6f0e6'">
+                <i class="fas fa-arrow-left" style="margin-right: 0.5em;"></i>
+                Voltar para seleção de destinos
+            </a>
+        </div>
 
 
         <!-- Notificação -->
@@ -1240,6 +1260,14 @@
 
         // Configura os eventos quando a página é carregada
         document.addEventListener('DOMContentLoaded', function () {
+            const chatButton = document.getElementById('chatButton');
+            const tutorialTooltip = document.getElementById('tutorialTooltip');
+            if (chatButton && tutorialTooltip) {
+                chatButton.addEventListener('click', function () {
+                    tutorialTooltip.style.display = 'none';
+                    sessionStorage.setItem('tutorialChatShown', 'true');
+                });
+            }
             // Configura os botões de filtro
             document.getElementById('btn-filtrar').addEventListener('click', aplicarFiltros);
             document.getElementById('btn-limpar').addEventListener('click', limparFiltros);
