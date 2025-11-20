@@ -757,39 +757,7 @@
         </div>
     </section>
 
-    <!-- Bonus System Section -->
-    <section class="section" id="bonus">
-        <div class="bonus-system">
-            <div class="how-it-works">
-                <h2 class="section-title">Sistema de Bonificação</h2>
 
-                <div class="formula-card">
-                    <i class="fas fa-calculator" style="margin-right: 0.5rem;"></i>
-                    Fórmula: (Avaliações × 5) + (Qualidade × 10) + (Engajamento × 3)
-                </div>
-
-                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-medium);">
-                    Seus pontos são calculados com base em:
-                </p>
-
-                <ul class="points-list">
-                    <li><strong>Avaliações:</strong> 5 pontos por cada avaliação completa</li>
-                    <li><strong>Qualidade:</strong> 10 pontos por nível (1-5) da sua avaliação</li>
-                    <li><strong>Engajamento:</strong> 3 pontos por nível (1-5) de detalhes fornecidos</li>
-                </ul>
-
-                <div class="example-card">
-                    <p><strong>Exemplo prático:</strong></p>
-                    <p>5 avaliações com qualidade 4 e engajamento 3:</p>
-                    <p
-                        style="font-family: monospace; background: var(--text-light); padding: 1rem; border-radius: 4px; margin-top: 1rem;">
-                        (5 × 5) + (4 × 10) + (3 × 3) = 25 + 40 + 9 = <strong style="color: var(--primary-color);">74
-                            pontos</strong>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 @endsection
 
 @section('scripts')
