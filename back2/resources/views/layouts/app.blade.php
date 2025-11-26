@@ -121,27 +121,6 @@
         @media (max-width: 480px) {
             .main-navbar { height: 48px; }
         }
-        /* Animação menu hamburguer global */
-        .menu-icon {
-            font-size: 32px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #2d5016;
-            background: rgba(255, 255, 255, 0.35);
-            width: 56px;
-            height: 56px;
-            padding: 0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(90,143,61,0.07);
-        }
-        .menu-icon:hover {
-            background: rgba(255, 255, 255, 0.5);
-            transform: scale(1.08) rotate(90deg);
-            color: #5a8f3d;
-        }
         .wrapper {
             display: flex;
             flex-direction: column;
@@ -246,24 +225,6 @@
             background-position: center;
         }
 
-        /* Overlay para menu */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -288,43 +249,115 @@
             <div class="navbar-right">
                 <!-- Dropdown do usuário no desktop -->
                 @auth
-                    <div class="user-dropdown desktop-only">
-                        <span class="user-name" onclick="toggleUserDropdown()">
-                            <i class="fas fa-user-circle"></i>
-                            {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email ?? 'Usuário' }}
-                            <i class="fas fa-caret-down"></i>
-                        </span>
-                        <div class="dropdown-menu" id="userDropdownMenu">
-                            <a href="{{ route('profile.show') }}">Meu Perfil</a>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
-                        </div>
-                    </div>
-                    <!-- Badge de reservas pendentes -->
-                    @php
-                        $reservasPendentes = \App\Models\Reserva::where('user_id', Auth::id())
-                            ->where('status', 'pendente')
-                            ->count();
-                    @endphp
-                    @if($reservasPendentes > 0)
-                        <a href="{{ route('reservas.minhas') }}" class="badge-pendentes desktop-only">
-                            <span>{{ $reservasPendentes }} {{ $reservasPendentes == 1 ? 'reserva pendente' : 'reservas pendentes' }}</span>
-                        </a>
-                    @endif
+                    <span class="user-name" onclick="openUserMenu()">
+                        <i class="fas fa-user-circle"></i>
+                        {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email ?? 'Usuário' }}
+                        <i class="fas fa-bars"></i>
+                    </span>
                 @else
                     <a href="{{ route('login') }}" class="desktop-only">Entrar</a>
                 @endauth
+                        <!-- Menu hamburguer lateral do usuário -->
+                        @auth
+                        <div id="userMenuOverlay" class="user-menu-overlay" onclick="closeUserMenu()"></div>
+                        <aside id="userMenu" class="user-menu">
+                            <div class="user-menu-header">
+                                <i class="fas fa-user-circle"></i>
+                                <span>{{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email ?? 'Usuário' }}</span>
+                            </div>
+                            <nav class="user-menu-links">
+                                <a href="{{ route('profile.show') }}"><i class="fas fa-user"></i> Meu Perfil</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                            </nav>
+                        </aside>
+                        @endauth
+                    <style>
+                        .user-name {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            font-weight: 600;
+                            color: #2d5016;
+                            background: #fff;
+                            border-radius: 12px;
+                            padding: 8px 16px;
+                            box-shadow: 0 2px 8px rgba(90,143,61,0.07);
+                            cursor: pointer;
+                            transition: background 0.2s;
+                        }
+                        .user-name:hover {
+                            background: #e8f5e9;
+                        }
+                        .user-menu-overlay {
+                            display: none;
+                            position: fixed;
+                            top: 0; left: 0; right: 0; bottom: 0;
+                            background: rgba(0,0,0,0.3);
+                            z-index: 1200;
+                        }
+                        .user-menu {
+                            display: none;
+                            position: fixed;
+                            top: 0; right: 0;
+                            width: 270px;
+                            height: 100vh;
+                            background: #fff;
+                            box-shadow: -2px 0 16px rgba(45,80,22,0.10);
+                            z-index: 1300;
+                            transform: translateX(100%);
+                            transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+                            padding: 0;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                        .user-menu.open {
+                            display: flex;
+                            transform: translateX(0);
+                        }
+                        .user-menu-header {
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 32px 24px 18px 24px;
+                            font-size: 1.1rem;
+                            font-weight: 700;
+                            color: #2d5016;
+                            border-bottom: 1px solid #e5f2e5;
+                        }
+                        .user-menu-header i {
+                            font-size: 2.2rem;
+                        }
+                        .user-menu-links {
+                            display: flex;
+                            flex-direction: column;
+                            padding: 24px;
+                            gap: 18px;
+                        }
+                        .user-menu-links a {
+                            color: #2d5016;
+                            text-decoration: none;
+                            font-size: 1.08rem;
+                            font-weight: 500;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            padding: 10px 0;
+                            border-radius: 8px;
+                            transition: background 0.2s;
+                        }
+                        .user-menu-links a:hover {
+                            background: #e8f5e9;
+                        }
+                        @media (max-width: 600px) {
+                            .user-menu { width: 90vw; min-width: 180px; }
+                        }
+                    </style>
                 <!-- Menu hamburguer só no mobile -->
                 <span class="menu-icon mobile-only" onclick="toggleMenu()">☰</span>
             </div>
         </nav>
 
-        <!-- Menu -->
-        @if(Auth::check())
-            @include('components.menu-logado')
-        @else
-            @include('components.menu-nao-logado')
-        @endif
 
         <!-- Notificação Global -->
         <div id="notification"
@@ -364,6 +397,15 @@
     </div>
 
     <script>
+        // Menu hamburguer lateral do usuário
+        function openUserMenu() {
+            document.getElementById('userMenu').classList.add('open');
+            document.getElementById('userMenuOverlay').style.display = 'block';
+        }
+        function closeUserMenu() {
+            document.getElementById('userMenu').classList.remove('open');
+            document.getElementById('userMenuOverlay').style.display = 'none';
+        }
         // Sistema avançado de carregamento de imagens com retry
         function initImageLoadingSystem() {
             // Configuração
