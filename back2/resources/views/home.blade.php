@@ -164,7 +164,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;

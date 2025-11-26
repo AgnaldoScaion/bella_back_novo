@@ -3,7 +3,7 @@
         <!-- Logo/Brand -->
         <div class="navbar-brand">
             <a href="{{ route('home') }}">
-                <span class="brand-icon"></span>
+                <img src="https://raw.githubusercontent.com/AgnaldoScaion/bella_back_novo/main/back2/images/Bellaaventura.png" alt="BellaAventura Logo" class="brand-icon" style="height:32px;width:auto;">
                 <span class="brand-name">BellaAventura</span>
             </a>
         </div>

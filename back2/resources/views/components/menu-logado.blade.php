@@ -3,8 +3,9 @@
         <!-- Logo/Brand -->
         <div class="navbar-brand">
             <a href="{{ route('home') }}">
-                <span class="brand-icon">✈️</span>
-                <span class="brand-name">TravelApp</span>
+                <img src="https://raw.githubusercontent.com/AgnaldoScaion/bella_back_novo/main/back2/images/Bellaaventura.png"
+                    alt="BellaAventura Logo" class="brand-icon" style="height:32px;width:auto;">
+                <span class="brand-name">BellaAventura</span>
             </a>
         </div>
 
@@ -25,33 +26,35 @@
                     </div>
                     <span class="user-name">{{ Auth::user()->name }}</span>
                     <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </button>
 
                 <div class="dropdown-menu" id="userDropdown">
                     <a href="{{ route('profile.show') }}" class="dropdown-item">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
                         </svg>
                         Meu Perfil
                     </a>
                     <a href="{{ route('termos') }}" class="dropdown-item">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
                         </svg>
                         Termos
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}"
-                       class="dropdown-item logout-item"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                            <polyline points="16 17 21 12 16 7"/>
-                            <line x1="21" y1="12" x2="9" y2="12"/>
+                    <a href="{{ route('logout') }}" class="dropdown-item logout-item"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
                         </svg>
                         Sair
                     </a>
@@ -91,9 +94,8 @@
             <li><a href="{{ route('termos') }}">Termos</a></li>
             <li class="mobile-divider"></li>
             <li>
-                <a href="{{ route('logout') }}"
-                   class="mobile-logout"
-                   onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                <a href="{{ route('logout') }}" class="mobile-logout"
+                    onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
                     Sair
                 </a>
                 <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -155,9 +157,12 @@
     }
 
     @keyframes float {
-        0%, 100% {
+
+        0%,
+        100% {
             transform: translateY(0px);
         }
+
         50% {
             transform: translateY(-5px);
         }
@@ -450,14 +455,37 @@
         transform: translateY(0);
     }
 
-    .navbar-mobile.active li:nth-child(1) { transition-delay: 0.1s; }
-    .navbar-mobile.active li:nth-child(2) { transition-delay: 0.15s; }
-    .navbar-mobile.active li:nth-child(3) { transition-delay: 0.2s; }
-    .navbar-mobile.active li:nth-child(4) { transition-delay: 0.25s; }
-    .navbar-mobile.active li:nth-child(5) { transition-delay: 0.3s; }
-    .navbar-mobile.active li:nth-child(6) { transition-delay: 0.35s; }
-    .navbar-mobile.active li:nth-child(7) { transition-delay: 0.4s; }
-    .navbar-mobile.active li:nth-child(8) { transition-delay: 0.45s; }
+    .navbar-mobile.active li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .navbar-mobile.active li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    .navbar-mobile.active li:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    .navbar-mobile.active li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    .navbar-mobile.active li:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    .navbar-mobile.active li:nth-child(6) {
+        transition-delay: 0.35s;
+    }
+
+    .navbar-mobile.active li:nth-child(7) {
+        transition-delay: 0.4s;
+    }
+
+    .navbar-mobile.active li:nth-child(8) {
+        transition-delay: 0.45s;
+    }
 
     .navbar-mobile a {
         display: block;
@@ -497,6 +525,7 @@
 
     /* Responsividade */
     @media (max-width: 992px) {
+
         .navbar-menu,
         .navbar-user {
             display: none;
@@ -561,7 +590,7 @@
     const navbarMobile = document.getElementById('navbarMobile');
 
     if (navbarToggle && navbarMobile) {
-        navbarToggle.addEventListener('click', function() {
+        navbarToggle.addEventListener('click', function () {
             this.classList.toggle('active');
             navbarMobile.classList.toggle('active');
         });
@@ -569,14 +598,14 @@
         // Fechar menu ao clicar em um link
         const mobileLinks = navbarMobile.querySelectorAll('a');
         mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 navbarToggle.classList.remove('active');
                 navbarMobile.classList.remove('active');
             });
         });
 
         // Fechar menu ao clicar fora
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const isClickInside = navbarToggle.contains(event.target) || navbarMobile.contains(event.target);
             if (!isClickInside && navbarMobile.classList.contains('active')) {
                 navbarToggle.classList.remove('active');
@@ -586,18 +615,19 @@
     }
 
     // Dropdown do usuário (Desktop)
+
     const userMenuBtn = document.getElementById('userMenuBtn');
     const userDropdown = document.getElementById('userDropdown');
 
     if (userMenuBtn && userDropdown) {
-        userMenuBtn.addEventListener('click', function(e) {
+        userMenuBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             this.classList.toggle('active');
             userDropdown.classList.toggle('active');
         });
 
         // Fechar dropdown ao clicar fora
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (!userMenuBtn.contains(event.target) && !userDropdown.contains(event.target)) {
                 userMenuBtn.classList.remove('active');
                 userDropdown.classList.remove('active');
