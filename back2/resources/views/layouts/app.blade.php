@@ -13,6 +13,43 @@
 
     <!-- Estilos globais para layout e notificações -->
     <style>
+        /* ===== PADRONIZAÇÃO GLOBAL DE FONTES ===== */
+        :root {
+            --font-main: 'Inter', sans-serif;
+            --font-heading: 'GaramondBold', 'Garamond', serif;
+            --font-size-base: 1rem;
+            --font-size-title: 1.5rem;
+            --font-size-subtitle: 1.15rem;
+            --font-weight-base: 400;
+            --font-weight-title: 700;
+        }
+
+        html, body {
+            font-family: var(--font-main);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-base);
+            color: #222;
+            background: #f3f7f3;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: var(--font-weight-title);
+            margin-bottom: 0.5em;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.7rem; }
+        h3 { font-size: var(--font-size-title); }
+        h4 { font-size: 1.15rem; }
+        h5, h6 { font-size: 1rem; }
+
+        p, li, span, label, input, button, a {
+            font-family: var(--font-main);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-base);
+        }
+
         /* Animação menu hamburguer global */
         .menu-icon {
             font-size: 32px;
