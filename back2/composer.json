@@ -54,15 +54,32 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "setup": [
-            "@composer install --optimize-autoloader",
+            "@composer install --optimize-autoloader --no-dev --prefer-dist",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi",
-            "@php artisan optimize:clear"
+            "@php artisan storage:link --ansi",
+            "@php artisan optimize:clear",
+            "@php artisan migrate --graceful --ansi",
+            "echo 'Setup básico concluído! Use `composer setup:full` para seed + ide-helper'"
+        ],
+        "setup-dev": [
+            "@composer install --optimize-autoloader --prefer-dist",
+            "@php artisan key:generate --ansi",
+            "@php artisan storage:link --ansi",
+            "@php artisan optimize:clear",
+            "@php artisan migrate",
+            "@php artisan db:seed --class=Database\\Seeders\\DatabaseSeeder || echo 'Nenhum seeder padrão encontrado'",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:models --nowrite",
+            "@php artisan ide-helper:meta",
+            "echo 'Ambiente de desenvolvimento pronto!'"
         ],
         "setup-full": [
-            "@setup",
-            "@php artisan migrate --force",
-            "@php artisan db:seed"
+            "@setup:dev",
+            "@php artisan passport:install --force || echo 'Passport não está instalado'",
+            "@php artisan telescope:install || echo 'Telescope não está instalado'",
+            "@php artisan horizon:install || echo 'Horizon não instalado'",
+            "echo 'Setup completo! Tudo pronto para produção ou desenvolvimento pesado.'"
         ],
         "serve": [
             "Composer\\Config::disableProcessTimeout",
