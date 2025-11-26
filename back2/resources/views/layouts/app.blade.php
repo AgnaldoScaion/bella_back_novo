@@ -13,114 +13,6 @@
 
     <!-- Estilos globais para layout e notificações -->
     <style>
-        /* Navbar principal */
-        .main-navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(90,143,61,0.07);
-            padding: 0 32px;
-            height: 64px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .navbar-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        .navbar-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2d5016;
-            letter-spacing: 1px;
-        }
-        .navbar-center a, .navbar-right a {
-            margin: 0 10px;
-            color: #2d5016;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: color 0.2s;
-        }
-        .navbar-center a:hover, .navbar-right a:hover {
-            color: #5a8f3d;
-        }
-        .navbar-center {
-            display: flex;
-            align-items: center;
-        }
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .user-dropdown {
-            position: relative;
-            cursor: pointer;
-        }
-        .user-name {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-            color: #2d5016;
-        }
-        .user-name i {
-            font-size: 1.2em;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 120%;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(90,143,61,0.13);
-            border-radius: 10px;
-            min-width: 160px;
-            padding: 10px 0;
-            z-index: 200;
-        }
-        .dropdown-menu a {
-            display: block;
-            padding: 10px 20px;
-            color: #2d5016;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .dropdown-menu a:hover {
-            background: #e8f5e9;
-        }
-        .user-dropdown.open .dropdown-menu {
-            display: block;
-        }
-        .badge-pendentes {
-            background: #ff6b6b;
-            color: #fff;
-            border-radius: 12px;
-            padding: 2px 10px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-left: 8px;
-        }
-        /* Mobile/desktop visibility */
-        .mobile-only { display: none !important; }
-        .desktop-only { display: flex !important; }
-        @media (max-width: 900px) {
-            .main-navbar { padding: 0 10px; }
-        }
-        @media (max-width: 768px) {
-            .main-navbar { height: 56px; }
-            .navbar-title { display: none; }
-            .navbar-center, .navbar-right .desktop-only { display: none !important; }
-            .mobile-only { display: inline-flex !important; }
-        }
-        @media (max-width: 480px) {
-            .main-navbar { height: 48px; }
-        }
         /* Animação menu hamburguer global */
         .menu-icon {
             font-size: 32px;
@@ -270,54 +162,40 @@
 
 <body>
     <div class="wrapper">
-        <!-- Navbar Desktop/Mobile -->
-        <nav class="main-navbar">
-            <div class="navbar-left">
-                <a href="{{ route('home') }}" class="navbar-logo">
-                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating" style="height:38px;vertical-align:middle;">
-                    <span class="navbar-title">Bella Avventura</span>
-                </a>
-            </div>
-            <div class="navbar-center desktop-only">
-                <a href="{{ route('destinos') }}">Destinos</a>
+        <!-- Header Superior -->
+        <div class="top-header">
+            <div class="menu-icon">☰</div>
+            <div class="user-header">
+                <span>👤</span>
                 @auth
-                    <a href="{{ route('reservas.minhas') }}">Minhas Reservas</a>
-                @endauth
-                <a href="{{ route('sobre-nos') }}">Sobre nós</a>
-            </div>
-            <div class="navbar-right">
-                <!-- Dropdown do usuário no desktop -->
-                @auth
-                    <div class="user-dropdown desktop-only">
-                        <span class="user-name" onclick="toggleUserDropdown()">
-                            <i class="fas fa-user-circle"></i>
-                            {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email ?? 'Usuário' }}
-                            <i class="fas fa-caret-down"></i>
-                        </span>
-                        <div class="dropdown-menu" id="userDropdownMenu">
-                            <a href="{{ route('profile.show') }}">Meu Perfil</a>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
-                        </div>
-                    </div>
-                    <!-- Badge de reservas pendentes -->
+                    {{ Auth::user()->nome_perfil ?? Auth::user()->nome_completo ?? Auth::user()->email ?? 'Usuário' }}
                     @php
                         $reservasPendentes = \App\Models\Reserva::where('user_id', Auth::id())
                             ->where('status', 'pendente')
                             ->count();
                     @endphp
                     @if($reservasPendentes > 0)
-                        <a href="{{ route('reservas.minhas') }}" class="badge-pendentes desktop-only">
-                            <span>{{ $reservasPendentes }} {{ $reservasPendentes == 1 ? 'reserva pendente' : 'reservas pendentes' }}</span>
+                        <a href="{{ route('reservas.minhas') }}" style="margin-left: 10px; text-decoration: none;">
+                            <span style="background: #ff6b6b; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+                                {{ $reservasPendentes }} {{ $reservasPendentes == 1 ? 'reserva pendente' : 'reservas pendentes' }}
+                            </span>
                         </a>
                     @endif
                 @else
-                    <a href="{{ route('login') }}" class="desktop-only">Entrar</a>
+                    Visitante
                 @endauth
-                <!-- Menu hamburguer só no mobile -->
-                <span class="menu-icon mobile-only" onclick="toggleMenu()">☰</span>
             </div>
-        </nav>
+        </div>
+
+        <!-- Logo -->
+        <div class="header">
+            <div class="header-img">
+                <a href="{{ route('home') }}">
+                    <img src="https://i.ibb.co/Q7T008b1/image.png" alt="Logo" class="floating"
+                         onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRTBFMEUwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZDNzU3RCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJlbGxhIEF2dmVudHVyYTwvdGV4dD48L3N2Zz4='"/>
+                </a>
+            </div>
+        </div>
 
         <!-- Menu -->
         @if(Auth::check())
