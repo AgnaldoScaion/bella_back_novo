@@ -736,23 +736,22 @@
 
     <!-- Features Section -->
     <section class="section" id="features">
-        <h2 class="section-title">Como o Bella Avventura funciona</h2>
+        <h2 class="section-title">O que você pode fazer no Bella Avventura</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <i class="fas fa-map-marker-alt feature-icon"></i>
-                <h3>Descubra locais próximos</h3>
-                <p>Nosso sistema mostra automaticamente os melhores restaurantes e pontos turísticos próximos ao seu hotel.
-                </p>
+                <i class="fas fa-hotel feature-icon"></i>
+                <h3>Reservas de Hotéis Online</h3>
+                <p>Encontre, compare e reserve hotéis de forma rápida, com confirmação por código enviado por e-mail.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-star feature-icon"></i>
-                <h3>Avalie e ganhe pontos</h3>
-                <p>Acumule pontos com suas avaliações que podem ser convertidos em descontos exclusivos.</p>
+                <i class="fas fa-envelope-open-text feature-icon"></i>
+                <h3>Recuperação de Senha e Confirmação</h3>
+                <p>Recupere sua senha e confirme reservas com segurança, usando links e códigos enviados para seu e-mail.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-share-alt feature-icon"></i>
-                <h3>Compartilhe experiências</h3>
-                <p>Ajude outros viajantes compartilhando suas avaliações e descobertas.</p>
+                <i class="fas fa-comments feature-icon"></i>
+                <h3>Feedback e Suporte</h3>
+                <p>Envie avaliações, compartilhe experiências e tire dúvidas direto pelo chat integrado ao sistema.</p>
             </div>
         </div>
     </section>
