@@ -59,8 +59,7 @@
             "@php artisan key:generate --ansi",
             "@php artisan storage:link --ansi",
             "@php artisan optimize:clear",
-            "@php artisan migrate --graceful --ansi",
-            "echo 'Setup básico concluído! Use `composer setup:full` para seed + ide-helper'"
+            "@php artisan migrate --graceful --ansi"
         ],
         "setup-dev": [
             "@composer install --optimize-autoloader --prefer-dist",
